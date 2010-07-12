@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8"?><gmi:MI_Metadata xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns:eum="http://www.eumetsat.int/2008/gmi" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="VMAP0" uuid="US_NGA_VPF_VMAP0" xsi:schemaLocation="http://www.isotc211.org/2005/gmd ../schemas/apiso/apiso.xsd" xsi:type="gmi:MI_Metadata_Type">
+	         <gmd:fileIdentifier>
+            <gco:CharacterString>EO_EUM_DAT_NOAA_FAN</gco:CharacterString>
+         </gmd:fileIdentifier>
+         <gmd:hierarchyLevel>
+                    <gmd:MD_ScopeCode codeList="MD_ScopeCode" codeListValue="series"/>
+             </gmd:hierarchyLevel>
+             
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>theme.par.Land</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>SBA.Disasters</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>SBA.Health</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>SBA.Energy</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>SBA.Climate</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>SBA.Ecosystems</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>SBA.Agriculture</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>SBA.Biodiversity</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>dis.EUMETCast</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>dis.EUMETCast-Europe</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>dis.EUMETCast-Africa</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>dis.EUMETCast-Americas</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>theme.par.Fire</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>theme.par.Observation</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:contact>
+		            <gmd:CI_ResponsibleParty>
+			               <gmd:role>
+				                  <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+			               </gmd:role>
+		            </gmd:CI_ResponsibleParty>
+	         </gmd:contact>
+	         <gmd:dateStamp>
+		            <gco:Date>2009-12-03</gco:Date>
+	         </gmd:dateStamp>
+	         <gmd:metadataStandardName>
+		            <gco:CharacterString>ISO19115</gco:CharacterString>
+	         </gmd:metadataStandardName>
+	         <gmd:metadataStandardVersion>
+		            <gco:CharacterString>2003/Cor.1:2006</gco:CharacterString>
+	         </gmd:metadataStandardVersion>
+	
+	         <gmd:identificationInfo>
+		            <gmd:MD_DataIdentification>
+			               <gmd:citation>
+				                  <gmd:CI_Citation>
+					                     <gmd:title>
+						                        <gco:CharacterString>Fire Detection ASCII - NOAA - South America</gco:CharacterString>
+					                     </gmd:title>
+					                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     <gmd:alternateTitle>
+                        <gco:CharacterString>FAN</gco:CharacterString>
+                     </gmd:alternateTitle>
+                     <gmd:date>
+						                        <gmd:CI_Date>
+							                           <gmd:date>
+								                              <gco:Date>2009-12-03</gco:Date>
+							                           </gmd:date>
+							                           <gmd:dateType>
+								                              <gmd:CI_DateTypeCode codeList="CI_DateTypeCode" codeListValue="creation"/>
+							                           </gmd:dateType>
+						                        </gmd:CI_Date>
+					                     </gmd:date>
+				                     <gmd:date>
+                        <gmd:CI_Date>
+                           <gmd:date>
+                              <gco:Date>2010-04-19</gco:Date>
+                           </gmd:date>
+                           <gmd:dateType>
+                              <gmd:CI_DateTypeCode codeList="CI_DateTypeCode" codeListValue="revision"/>
+                           </gmd:dateType>
+                        </gmd:CI_Date>
+                     </gmd:date>
+                     <gmd:date>
+                        <gmd:CI_Date>
+                           <gmd:date>
+                              <gco:Date>2009-12-03</gco:Date>
+                           </gmd:date>
+                           <gmd:dateType>
+                              <gmd:CI_DateTypeCode codeList="CI_DateTypeCode" codeListValue="publication"/>
+                           </gmd:dateType>
+                        </gmd:CI_Date>
+                     </gmd:date>
+                     <gmd:identifier>
+                        <gmd:MD_Identifier>
+                           <gmd:code>
+                              <gco:CharacterString>EO:EUM:DAT:NOAA:FAN</gco:CharacterString>
+                           </gmd:code>
+                        </gmd:MD_Identifier>
+                     </gmd:identifier>
+                     
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       <gmd:citedResponsibleParty>
+                        <gmd:CI_ResponsibleParty>
+                           <gmd:contactInfo>
+                              <gmd:CI_Contact>
+                                 <gmd:onlineResource>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>http://sigma.cptec.inpe.br/queimadas/</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:name>
+                                          <gco:CharacterString>CPTEC</gco:CharacterString>
+                                       </gmd:name>
+                                       <gmd:function>
+                                          <gmd:CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="information"/>
+                                       </gmd:function>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onlineResource>
+                              </gmd:CI_Contact>
+                           </gmd:contactInfo>
+                           <gmd:role>
+                              <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+                           </gmd:role>
+                        </gmd:CI_ResponsibleParty>
+                     </gmd:citedResponsibleParty>
+                     <gmd:citedResponsibleParty>
+                        <gmd:CI_ResponsibleParty>
+                           <gmd:contactInfo>
+                              <gmd:CI_Contact>
+                                 <gmd:onlineResource>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>http://www.devcocast.eu</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:name>
+                                          <gco:CharacterString>DevCoCast</gco:CharacterString>
+                                       </gmd:name>
+                                       <gmd:function>
+                                          <gmd:CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="information"/>
+                                       </gmd:function>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onlineResource>
+                              </gmd:CI_Contact>
+                           </gmd:contactInfo>
+                           <gmd:role>
+                              <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+                           </gmd:role>
+                        </gmd:CI_ResponsibleParty>
+                     </gmd:citedResponsibleParty>
+                     <gmd:citedResponsibleParty>
+                        <gmd:CI_ResponsibleParty>
+                           <gmd:contactInfo>
+                              <gmd:CI_Contact>
+                                 <gmd:onlineResource>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>http://www.inpe.br</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:name>
+                                          <gco:CharacterString>INPE</gco:CharacterString>
+                                       </gmd:name>
+                                       <gmd:function>
+                                          <gmd:CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="information"/>
+                                       </gmd:function>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onlineResource>
+                              </gmd:CI_Contact>
+                           </gmd:contactInfo>
+                           <gmd:role>
+                              <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+                           </gmd:role>
+                        </gmd:CI_ResponsibleParty>
+                     </gmd:citedResponsibleParty>
+                  </gmd:CI_Citation>
+			               </gmd:citation>
+			               <gmd:abstract>
+				                  <gco:CharacterString>A DevCoCast product, the Fire Detection ASCII files consist of the set of geographical coordinates of each fire spot, identified on NOAA-AVHRR.</gco:CharacterString>
+			               </gmd:abstract>
+			               <gmd:pointOfContact>
+                  <gmd:CI_ResponsibleParty>
+                     <gmd:individualName>
+                        <gco:CharacterString>National Institute for Space Research</gco:CharacterString>
+                     </gmd:individualName>
+                     <gmd:organisationName>
+                        <gco:CharacterString>INPE/CPTEC</gco:CharacterString>
+                     </gmd:organisationName>
+                     <gmd:contactInfo>
+                        <gmd:CI_Contact>
+                           <gmd:phone>
+                              <gmd:CI_Telephone>
+                                 <gmd:voice>
+                                    <gco:CharacterString>+ 55 12 3186-9291</gco:CharacterString>
+                                 </gmd:voice>
+                                 <gmd:facsimile>
+                                    <gco:CharacterString>+ 55 12 3186-9291</gco:CharacterString>
+                                 </gmd:facsimile>
+                              </gmd:CI_Telephone>
+                           </gmd:phone>
+                           <gmd:address>
+                              <gmd:CI_Address>
+                                 <gmd:deliveryPoint>
+                                    <gco:CharacterString>Km, 040 Rodovia Presidente Dutra</gco:CharacterString>
+                                 </gmd:deliveryPoint>
+                                 <gmd:city>
+                                    <gco:CharacterString>12630-000 Cachoeira Paulista (SP)</gco:CharacterString>
+                                 </gmd:city>
+                                 <gmd:administrativeArea>
+                                    <gco:CharacterString>Cachoeira Paulista, SP</gco:CharacterString>
+                                 </gmd:administrativeArea>
+                                 <gmd:country>
+                                    <gco:CharacterString>Brazil</gco:CharacterString>
+                                 </gmd:country>
+                                 <gmd:electronicMailAddress>
+                                    <gco:CharacterString>atusdsa@cptec.inpe.br</gco:CharacterString>
+                                 </gmd:electronicMailAddress>
+                              </gmd:CI_Address>
+                           </gmd:address>
+                        </gmd:CI_Contact>
+                     </gmd:contactInfo>
+                     <gmd:role>
+                        <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="originator"/>
+                     </gmd:role>
+                  </gmd:CI_ResponsibleParty>
+               </gmd:pointOfContact>
+               <gmd:graphicOverview>
+                  <gmd:MD_BrowseGraphic>
+                     <gmd:fileName>
+                        <gco:CharacterString>/smartEditor/preview/Fire_risk.jpg</gco:CharacterString>
+                     </gmd:fileName>
+                  </gmd:MD_BrowseGraphic>
+               </gmd:graphicOverview>
+               <gmd:descriptiveKeywords>
+                  <gmd:MD_Keywords>
+                     <gmd:keyword>
+                        <gco:CharacterString>Land</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeList="MD_KeywordTypeCode" codeListValue="discipline"/>
+                     </gmd:type>
+                  </gmd:MD_Keywords>
+               </gmd:descriptiveKeywords>
+               <gmd:descriptiveKeywords>
+                  <gmd:MD_Keywords>
+                     <gmd:keyword>
+                        <gco:CharacterString>Land</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:keyword>
+                        <gco:CharacterString>Fire</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:keyword>
+                        <gco:CharacterString>Observation</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeList="MD_KeywordTypeCode" codeListValue="theme"/>
+                     </gmd:type>
+                  </gmd:MD_Keywords>
+               </gmd:descriptiveKeywords>
+               <gmd:descriptiveKeywords>
+                  <gmd:MD_Keywords>
+                     <gmd:keyword>
+                        <gco:CharacterString>EUMETCast</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:keyword>
+                        <gco:CharacterString>EUMETCast-Europe</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:keyword>
+                        <gco:CharacterString>EUMETCast-Africa</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:keyword>
+                        <gco:CharacterString>EUMETCast-Americas</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeList="MD_KeywordTypeCode" codeListValue="place"/>
+                     </gmd:type>
+                  </gmd:MD_Keywords>
+               </gmd:descriptiveKeywords>
+               <gmd:descriptiveKeywords>
+                  <gmd:MD_Keywords>
+                     <gmd:keyword>
+                        <gco:CharacterString>Disasters</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:keyword>
+                        <gco:CharacterString>Health</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:keyword>
+                        <gco:CharacterString>Energy</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:keyword>
+                        <gco:CharacterString>Climate</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:keyword>
+                        <gco:CharacterString>Ecosystems</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:keyword>
+                        <gco:CharacterString>Agriculture</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:keyword>
+                        <gco:CharacterString>Biodiversity</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeList="MD_KeywordTypeCode" codeListValue="socialBenefitArea"/>
+                     </gmd:type>
+                  </gmd:MD_Keywords>
+               </gmd:descriptiveKeywords>
+               <gmd:resourceConstraints>
+                  <gmd:MD_LegalConstraints>
+                     <gmd:useLimitation>
+                        <gco:CharacterString>Permission to use, copy and distribution of products requested only for educational purposes, research and recreation. Products supplied may not be used for publication in newspapers and magazines, or other commercial purposes of any kind, unless the user has a written permission from CPTEC/INPE.</gco:CharacterString>
+                     </gmd:useLimitation>
+                     <gmd:useConstraints>
+                        <gmd:MD_RestrictionCode codeList="MD_RestrictionCode" codeListValue="copyright"/>
+                     </gmd:useConstraints>
+                  </gmd:MD_LegalConstraints>
+               </gmd:resourceConstraints>
+               <gmd:spatialResolution>
+                  <gmd:MD_Resolution>
+                     <gmd:equivalentScale>
+                        <gmd:MD_RepresentativeFraction>
+                           <gmd:denominator>
+                              <gco:Integer>15</gco:Integer>
+                           </gmd:denominator>
+                        </gmd:MD_RepresentativeFraction>
+                     </gmd:equivalentScale>
+                  </gmd:MD_Resolution>
+               </gmd:spatialResolution>
+               <gmd:language>
+				                  <gco:CharacterString>eng</gco:CharacterString>
+			               </gmd:language>
+		               <gmd:characterSet>
+                  <gmd:MD_CharacterSetCode codeList="MD_CharacterSetCode" codeListValue="utf8"/>
+               </gmd:characterSet>
+               <gmd:topicCategory>
+                  <gmd:MD_TopicCategoryCode>environment</gmd:MD_TopicCategoryCode>
+               </gmd:topicCategory>
+               <gmd:topicCategory>
+                  <gmd:MD_TopicCategoryCode>farming</gmd:MD_TopicCategoryCode>
+               </gmd:topicCategory>
+               <gmd:extent>
+                  <gmd:EX_Extent>
+                     <gmd:geographicElement>
+                        <gmd:EX_GeographicBoundingBox xsi:type="gmd:EX_GeographicBoundingBox_Type">
+                           <gmd:westBoundLongitude>
+                              <gco:Decimal>-82.0</gco:Decimal>
+                           </gmd:westBoundLongitude>
+                           <gmd:eastBoundLongitude>
+                              <gco:Decimal>-34.0</gco:Decimal>
+                           </gmd:eastBoundLongitude>
+                           <gmd:southBoundLatitude>
+                              <gco:Decimal>-55.0</gco:Decimal>
+                           </gmd:southBoundLatitude>
+                           <gmd:northBoundLatitude>
+                              <gco:Decimal>10.0</gco:Decimal>
+                           </gmd:northBoundLatitude>
+                        </gmd:EX_GeographicBoundingBox>
+                     </gmd:geographicElement>
+                  </gmd:EX_Extent>
+               </gmd:extent>
+               <gmd:extent>
+                  <gmd:EX_Extent>
+                     <gmd:geographicElement>
+                        <gmd:EX_GeographicDescription>
+                           <gmd:geographicIdentifier>
+                              <gmd:MD_Identifier>
+                                 <gmd:code>
+                                    <gco:CharacterString>South America</gco:CharacterString>
+                                 </gmd:code>
+                              </gmd:MD_Identifier>
+                           </gmd:geographicIdentifier>
+                        </gmd:EX_GeographicDescription>
+                     </gmd:geographicElement>
+                  </gmd:EX_Extent>
+               </gmd:extent>
+            </gmd:MD_DataIdentification>
+	         </gmd:identificationInfo>    
+         <gmd:distributionInfo>
+            <gmd:MD_Distribution>
+               <gmd:distributor>
+                  <eum:MD_EUMDistributor xsi:type="eum:MD_EUMDistributor_Type">
+                     <gmd:distributorContact>
+                        <gmd:CI_ResponsibleParty>
+                           <gmd:individualName>
+                              <gco:CharacterString>National Institute for Space Research</gco:CharacterString>
+                           </gmd:individualName>
+                           <gmd:organisationName>
+                              <gco:CharacterString>INPE/CPTEC</gco:CharacterString>
+                           </gmd:organisationName>
+                           <gmd:contactInfo>
+                              <gmd:CI_Contact>
+                                 <gmd:phone>
+                                    <gmd:CI_Telephone>
+                                       <gmd:voice>
+                                          <gco:CharacterString>+ 55 12 3186-9291</gco:CharacterString>
+                                       </gmd:voice>
+                                       <gmd:facsimile>
+                                          <gco:CharacterString>+ 55 12 3186-9291</gco:CharacterString>
+                                       </gmd:facsimile>
+                                    </gmd:CI_Telephone>
+                                 </gmd:phone>
+                                 <gmd:address>
+                                    <gmd:CI_Address>
+                                       <gmd:deliveryPoint>
+                                          <gco:CharacterString>Km, 040 Rodovia Presidente Dutra</gco:CharacterString>
+                                       </gmd:deliveryPoint>
+                                       <gmd:city>
+                                          <gco:CharacterString>12630-000 Cachoeira Paulista (SP)</gco:CharacterString>
+                                       </gmd:city>
+                                       <gmd:administrativeArea>
+                                          <gco:CharacterString>Cachoeira Paulista, SP</gco:CharacterString>
+                                       </gmd:administrativeArea>
+                                       <gmd:country>
+                                          <gco:CharacterString>Brazil</gco:CharacterString>
+                                       </gmd:country>
+                                       <gmd:electronicMailAddress>
+                                          <gco:CharacterString>atusdsa@cptec.inpe.br</gco:CharacterString>
+                                       </gmd:electronicMailAddress>
+                                    </gmd:CI_Address>
+                                 </gmd:address>
+                              </gmd:CI_Contact>
+                           </gmd:contactInfo>
+                           <gmd:role>
+                              <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="originator"/>
+                           </gmd:role>
+                        </gmd:CI_ResponsibleParty>
+                     </gmd:distributorContact>
+                     
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       <eum:digitalTransfers>
+                        <eum:MD_EUMDigitalTransfer>
+                           <eum:availability>
+                              <eum:MD_EUMDigitalTransferOptions>
+                                 <gmd:onLine>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>http://eoportal.eumetsat.int/userMgmt</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:protocol>
+                                          <gco:CharacterString>http</gco:CharacterString>
+                                       </gmd:protocol>
+                                       <gmd:name>
+                                          <gco:CharacterString>EO Portal Registration</gco:CharacterString>
+                                       </gmd:name>
+                                       <gmd:function>
+                                          <gmd:CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="order"/>
+                                       </gmd:function>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onLine>
+                                 <gmd:onLine>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>http://www.eumetsat.int/Home/Main/What_We_Do/EUMETCast/Reception_Station_Set-up/index.htm?l=en</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:protocol>
+                                          <gco:CharacterString>http</gco:CharacterString>
+                                       </gmd:protocol>
+                                       <gmd:name>
+                                          <gco:CharacterString>Reception Station Set-up</gco:CharacterString>
+                                       </gmd:name>
+                                       <gmd:function>
+                                          <gmd:CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="order"/>
+                                       </gmd:function>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onLine>
+                                 <eum:availability>
+                                    <gco:CharacterString>EUMETCast,EUMETCast-Africa,EUMETCast-Europe,EUMETCast-Americas</gco:CharacterString>
+                                 </eum:availability>
+                                 <eum:aggregateIdentifier>
+                                    <gco:CharacterString/>
+                                 </eum:aggregateIdentifier>
+                                 <eum:eumetcastChannels>
+                                    <gco:CharacterString>DEVCOCAST-1</gco:CharacterString>
+                                 </eum:eumetcastChannels>
+                              </eum:MD_EUMDigitalTransferOptions>
+                           </eum:availability>
+                           <eum:format>
+                              <eum:MD_EUMFormat>
+                                 <gmd:name>
+                                    <gco:CharacterString>Shape file</gco:CharacterString>
+                                 </gmd:name>
+                                 <gmd:version>
+                                    <gco:CharacterString/>
+                                 </gmd:version>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>INPE_FAN_YYYYMMDDhhmm.shp</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:averageFileSizeUnits>
+                                    <gco:CharacterString>KB</gco:CharacterString>
+                                 </eum:averageFileSizeUnits>
+                                 <eum:averageFileSize>
+                                    <gco:Real>10.0</gco:Real>
+                                 </eum:averageFileSize>
+                                 <eum:frequency>
+                                    <gco:CharacterString>2 (per day)</gco:CharacterString>
+                                 </eum:frequency>
+                              </eum:MD_EUMFormat>
+                           </eum:format>
+                        </eum:MD_EUMDigitalTransfer>
+                     </eum:digitalTransfers>
+                  </eum:MD_EUMDistributor>
+               </gmd:distributor>
+            </gmd:MD_Distribution>
+         </gmd:distributionInfo>
+         <gmi:acquisitionInformation>
+            <gmi:MI_AcquisitionInformation>
+               <gmi:platform>
+                  <eum:MI_EUMPlatform>
+                     <gmi:identifier>
+                        <gmd:MD_Identifier>
+                           <gmd:code>
+                              <gco:CharacterString>NOAA</gco:CharacterString>
+                           </gmd:code>
+                        </gmd:MD_Identifier>
+                     </gmi:identifier>
+                     <gmi:description>
+                        <gco:CharacterString/>
+                     </gmi:description>
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     <gmi:instrument>
+                        <gmi:MI_Instrument>
+                           <gmi:citation>
+                              <gmd:CI_Citation>
+                                 <gmd:title/>
+                                 <gmd:date/>
+                                 <gmd:identifier>
+                                    <gmd:MD_Identifier>
+                                       <gmd:code>
+                                          <gco:CharacterString>AVHRR</gco:CharacterString>
+                                       </gmd:code>
+                                    </gmd:MD_Identifier>
+                                 </gmd:identifier>
+                              </gmd:CI_Citation>
+                           </gmi:citation>
+                           <gmi:type>
+                              <gmi:MI_SensorTypeCode id="radiometer"/>
+                           </gmi:type>
+                        </gmi:MI_Instrument>
+                     </gmi:instrument>
+                     <eum:orbitType>
+                        <eum:CI_OrbitTypeCode codeList="CI_OrbitTypeCode" codeListValue="LEO"/>
+                     </eum:orbitType>
+                  </eum:MI_EUMPlatform>
+               </gmi:platform>
+            </gmi:MI_AcquisitionInformation>
+         </gmi:acquisitionInformation>
+      </gmi:MI_Metadata>

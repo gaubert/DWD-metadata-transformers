@@ -1,0 +1,845 @@
+<?xml version="1.0" encoding="UTF-8"?><gmi:MI_Metadata xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns:eum="http://www.eumetsat.int/2008/gmi" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="VMAP0" uuid="US_NGA_VPF_VMAP0" xsi:schemaLocation="http://www.isotc211.org/2005/gmd ../schemas/apiso/apiso.xsd" xsi:type="gmi:MI_Metadata_Type">
+	         <gmd:fileIdentifier>
+            <gco:CharacterString>EO_EUM_DAT_NOAA_ETR</gco:CharacterString>
+         </gmd:fileIdentifier>
+         <gmd:hierarchyLevel>
+                    <gmd:MD_ScopeCode codeList="MD_ScopeCode" codeListValue="series"/>
+             </gmd:hierarchyLevel>
+             
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>sat.NOAA</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>theme.par.Land</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>theme.par.Vegetation</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>SBA.Agriculture</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>SBA.Biodiversity</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>SBA.Ecosystems</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>dis.EUMETCast</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>dis.EUMETCast-Europe</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>dis.EUMETCast-Africa</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>dis.EUMETCast-Americas</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:contact>
+		            <gmd:CI_ResponsibleParty>
+			               <gmd:role>
+				                  <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+			               </gmd:role>
+		            </gmd:CI_ResponsibleParty>
+	         </gmd:contact>
+	         <gmd:dateStamp>
+		            <gco:Date>2010-03-09</gco:Date>
+	         </gmd:dateStamp>
+	         <gmd:metadataStandardName>
+		            <gco:CharacterString>ISO19115</gco:CharacterString>
+	         </gmd:metadataStandardName>
+	         <gmd:metadataStandardVersion>
+		            <gco:CharacterString>2003/Cor.1:2006</gco:CharacterString>
+	         </gmd:metadataStandardVersion>
+	
+	         <gmd:identificationInfo>
+		            <gmd:MD_DataIdentification>
+			               <gmd:citation>
+				                  <gmd:CI_Citation>
+					                     <gmd:title>
+						                        <gco:CharacterString>Real Evapotranspiration - South America</gco:CharacterString>
+					                     </gmd:title>
+					                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     <gmd:alternateTitle>
+                        <gco:CharacterString>ETR</gco:CharacterString>
+                     </gmd:alternateTitle>
+                     <gmd:date>
+						                        <gmd:CI_Date>
+							                           <gmd:date>
+								                              <gco:Date>2010-03-09</gco:Date>
+							                           </gmd:date>
+							                           <gmd:dateType>
+								                              <gmd:CI_DateTypeCode codeList="CI_DateTypeCode" codeListValue="creation"/>
+							                           </gmd:dateType>
+						                        </gmd:CI_Date>
+					                     </gmd:date>
+				                     <gmd:date>
+                        <gmd:CI_Date>
+                           <gmd:date>
+                              <gco:Date>2010-03-09</gco:Date>
+                           </gmd:date>
+                           <gmd:dateType>
+                              <gmd:CI_DateTypeCode codeList="CI_DateTypeCode" codeListValue="revision"/>
+                           </gmd:dateType>
+                        </gmd:CI_Date>
+                     </gmd:date>
+                     <gmd:date>
+                        <gmd:CI_Date>
+                           <gmd:date>
+                              <gco:Date>2010-03-09</gco:Date>
+                           </gmd:date>
+                           <gmd:dateType>
+                              <gmd:CI_DateTypeCode codeList="CI_DateTypeCode" codeListValue="publication"/>
+                           </gmd:dateType>
+                        </gmd:CI_Date>
+                     </gmd:date>
+                     <gmd:identifier>
+                        <gmd:MD_Identifier>
+                           <gmd:code>
+                              <gco:CharacterString>EO:EUM:DAT:NOAA:ETR</gco:CharacterString>
+                           </gmd:code>
+                        </gmd:MD_Identifier>
+                     </gmd:identifier>
+                                       
+                     
+                     
+                     
+                                       
+                     
+                     
+                     
+                                       
+                     
+                     
+                     
+                                       
+                     
+                     
+                     
+                                       
+                     
+                     
+                     
+                                       
+                     
+                     
+                     
+                                       
+                     
+                     
+                     
+                                       
+                     
+                     
+                     
+                                       
+                     
+                     
+                     
+                                       
+                     
+                     
+                     
+                                       
+                     
+                     
+                     
+                     
+                                       
+                     
+                     
+                     
+                     
+                                       
+                     
+                     
+                     
+                     
+                                       
+                     
+                     
+                     
+                     
+                                       
+                     
+                     
+                     
+                     
+                                       <gmd:citedResponsibleParty>
+                        <gmd:CI_ResponsibleParty>
+                           <gmd:contactInfo>
+                              <gmd:CI_Contact>
+                                 <gmd:onlineResource>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>http://www.evapotranspiracion.org.ar/</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:name>
+                                          <gco:CharacterString>Evapotranspiracion.org.ar</gco:CharacterString>
+                                       </gmd:name>
+                                       <gmd:function>
+                                          <gmd:CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="information"/>
+                                       </gmd:function>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onlineResource>
+                              </gmd:CI_Contact>
+                           </gmd:contactInfo>
+                           <gmd:role>
+                              <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+                           </gmd:role>
+                        </gmd:CI_ResponsibleParty>
+                     </gmd:citedResponsibleParty>
+                     <gmd:citedResponsibleParty>
+                        <gmd:CI_ResponsibleParty>
+                           <gmd:contactInfo>
+                              <gmd:CI_Contact>
+                                 <gmd:onlineResource>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>http://www.evapotranspiracion.org.ar/conceptos/significado.htm</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:name>
+                                          <gco:CharacterString>Significado de la Evapotranspiración Real (ETR)</gco:CharacterString>
+                                       </gmd:name>
+                                       <gmd:function>
+                                          <gmd:CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="information"/>
+                                       </gmd:function>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onlineResource>
+                              </gmd:CI_Contact>
+                           </gmd:contactInfo>
+                           <gmd:role>
+                              <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+                           </gmd:role>
+                        </gmd:CI_ResponsibleParty>
+                     </gmd:citedResponsibleParty>
+                     <gmd:citedResponsibleParty>
+                        <gmd:CI_ResponsibleParty>
+                           <gmd:contactInfo>
+                              <gmd:CI_Contact>
+                                 <gmd:onlineResource>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>http://www.evapotranspiracion.org.ar/conceptos/utilizacion.htm</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:name>
+                                          <gco:CharacterString>Utilización de la Evapotranspiración Real (ETR)</gco:CharacterString>
+                                       </gmd:name>
+                                       <gmd:function>
+                                          <gmd:CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="information"/>
+                                       </gmd:function>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onlineResource>
+                              </gmd:CI_Contact>
+                           </gmd:contactInfo>
+                           <gmd:role>
+                              <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+                           </gmd:role>
+                        </gmd:CI_ResponsibleParty>
+                     </gmd:citedResponsibleParty>
+                     <gmd:citedResponsibleParty>
+                        <gmd:CI_ResponsibleParty>
+                           <gmd:contactInfo>
+                              <gmd:CI_Contact>
+                                 <gmd:onlineResource>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>http://www.evapotranspiracion.org.ar/conceptos/calculo.htm</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:name>
+                                          <gco:CharacterString>Método de Cálculo</gco:CharacterString>
+                                       </gmd:name>
+                                       <gmd:function>
+                                          <gmd:CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="information"/>
+                                       </gmd:function>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onlineResource>
+                              </gmd:CI_Contact>
+                           </gmd:contactInfo>
+                           <gmd:role>
+                              <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+                           </gmd:role>
+                        </gmd:CI_ResponsibleParty>
+                     </gmd:citedResponsibleParty>
+                     <gmd:citedResponsibleParty>
+                        <gmd:CI_ResponsibleParty>
+                           <gmd:contactInfo>
+                              <gmd:CI_Contact>
+                                 <gmd:onlineResource>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>http://www.devcocast.eu</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:name>
+                                          <gco:CharacterString>DevCoCast</gco:CharacterString>
+                                       </gmd:name>
+                                       <gmd:function>
+                                          <gmd:CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="information"/>
+                                       </gmd:function>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onlineResource>
+                              </gmd:CI_Contact>
+                           </gmd:contactInfo>
+                           <gmd:role>
+                              <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+                           </gmd:role>
+                        </gmd:CI_ResponsibleParty>
+                     </gmd:citedResponsibleParty>
+                  </gmd:CI_Citation>
+			               </gmd:citation>
+			               <gmd:abstract>
+				                  <gco:CharacterString>A DevCoCast product, the ETR represents the amount of water, in mm/day, which is effectively evaporated from the ground surface and transpirated by the vegetation coverage. ETR values for each image pixel are calculated weekly from the best daily Normalized Difference Vegetation Index (NDVI) and surface temperature (Ts) images, as ETR = (-88.34 + 1.77 * Ts + 286.4 * NDVI) / 30</gco:CharacterString>
+			               </gmd:abstract>
+			               <gmd:pointOfContact>
+                  <gmd:CI_ResponsibleParty>
+                     <gmd:individualName>
+                        <gco:CharacterString>Instituto Nacional de Tecnologi­a Agropecuaria</gco:CharacterString>
+                     </gmd:individualName>
+                     <gmd:organisationName>
+                        <gco:CharacterString>INTA</gco:CharacterString>
+                     </gmd:organisationName>
+                     <gmd:contactInfo>
+                        <gmd:CI_Contact>
+                           <gmd:phone>
+                              <gmd:CI_Telephone>
+                                 <gmd:voice>
+                                    <gco:CharacterString>(54-11) 4621 - 1684 / 0125 / 1463 / 5663</gco:CharacterString>
+                                 </gmd:voice>
+                                 <gmd:facsimile>
+                                    <gco:CharacterString>(54-11) 4621 - 1684 / 0125 / 1463 / 5663</gco:CharacterString>
+                                 </gmd:facsimile>
+                              </gmd:CI_Telephone>
+                           </gmd:phone>
+                           <gmd:address>
+                              <gmd:CI_Address>
+                                 <gmd:deliveryPoint>
+                                    <gco:CharacterString>N. Repeto and De Los Reseros SN (1712)</gco:CharacterString>
+                                 </gmd:deliveryPoint>
+                                 <gmd:city>
+                                    <gco:CharacterString>Hurlingham</gco:CharacterString>
+                                 </gmd:city>
+                                 <gmd:administrativeArea>
+                                    <gco:CharacterString>Buenos Aires</gco:CharacterString>
+                                 </gmd:administrativeArea>
+                                 <gmd:country>
+                                    <gco:CharacterString>Argentina</gco:CharacterString>
+                                 </gmd:country>
+                                 <gmd:electronicMailAddress>
+                                    <gco:CharacterString>Poricchio@cnia.inta.gov.ar</gco:CharacterString>
+                                 </gmd:electronicMailAddress>
+                              </gmd:CI_Address>
+                           </gmd:address>
+                        </gmd:CI_Contact>
+                     </gmd:contactInfo>
+                     <gmd:role>
+                        <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="originator"/>
+                     </gmd:role>
+                  </gmd:CI_ResponsibleParty>
+               </gmd:pointOfContact>
+               <gmd:graphicOverview>
+                  <gmd:MD_BrowseGraphic>
+                     <gmd:fileName>
+                        <gco:CharacterString>/smartEditor/preview/mapa.jpg</gco:CharacterString>
+                     </gmd:fileName>
+                  </gmd:MD_BrowseGraphic>
+               </gmd:graphicOverview>
+               <gmd:descriptiveKeywords>
+                  <gmd:MD_Keywords>
+                     <gmd:keyword>
+                        <gco:CharacterString>Land</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeList="MD_KeywordTypeCode" codeListValue="discipline"/>
+                     </gmd:type>
+                  </gmd:MD_Keywords>
+               </gmd:descriptiveKeywords>
+               <gmd:descriptiveKeywords>
+                  <gmd:MD_Keywords>
+                     <gmd:keyword>
+                        <gco:CharacterString>Agriculture</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:keyword>
+                        <gco:CharacterString>Biodiversity</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:keyword>
+                        <gco:CharacterString>Ecosystems</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeList="MD_KeywordTypeCode" codeListValue="socialBenefitArea"/>
+                     </gmd:type>
+                  </gmd:MD_Keywords>
+               </gmd:descriptiveKeywords>
+               <gmd:resourceConstraints>
+                  <gmd:MD_LegalConstraints>
+                     <gmd:useLimitation>
+                        <gco:CharacterString>Can be used free-of-charge, but may not be (re-)sold. Please acknowledge INTA in publications
+</gco:CharacterString>
+                     </gmd:useLimitation>
+                  </gmd:MD_LegalConstraints>
+               </gmd:resourceConstraints>
+               <gmd:spatialResolution>
+                  <gmd:MD_Resolution>
+                     <gmd:equivalentScale>
+                        <gmd:MD_RepresentativeFraction>
+                           <gmd:denominator>
+                              <gco:Integer>1</gco:Integer>
+                           </gmd:denominator>
+                        </gmd:MD_RepresentativeFraction>
+                     </gmd:equivalentScale>
+                  </gmd:MD_Resolution>
+               </gmd:spatialResolution>
+               <gmd:language>
+				                  <gco:CharacterString>eng</gco:CharacterString>
+			               </gmd:language>
+		               <gmd:characterSet>
+                  <gmd:MD_CharacterSetCode codeList="MD_CharacterSetCode" codeListValue="utf8"/>
+               </gmd:characterSet>
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               <gmd:topicCategory>
+                  <gmd:MD_TopicCategoryCode>biota</gmd:MD_TopicCategoryCode>
+               </gmd:topicCategory>
+               <gmd:topicCategory>
+                  <gmd:MD_TopicCategoryCode>environment</gmd:MD_TopicCategoryCode>
+               </gmd:topicCategory>
+               <gmd:extent>
+                  <gmd:EX_Extent>
+                     <gmd:geographicElement>
+                        <gmd:EX_GeographicBoundingBox xsi:type="gmd:EX_GeographicBoundingBox_Type">
+                           <gmd:westBoundLongitude>
+                              <gco:Decimal>-66.1</gco:Decimal>
+                           </gmd:westBoundLongitude>
+                           <gmd:eastBoundLongitude>
+                              <gco:Decimal>-54.8</gco:Decimal>
+                           </gmd:eastBoundLongitude>
+                           <gmd:southBoundLatitude>
+                              <gco:Decimal>-41.1</gco:Decimal>
+                           </gmd:southBoundLatitude>
+                           <gmd:northBoundLatitude>
+                              <gco:Decimal>-27.3</gco:Decimal>
+                           </gmd:northBoundLatitude>
+                        </gmd:EX_GeographicBoundingBox>
+                     </gmd:geographicElement>
+                  </gmd:EX_Extent>
+               </gmd:extent>
+                           <gmd:extent>
+                  <gmd:EX_Extent>
+                     <gmd:geographicElement>
+                        <gmd:EX_GeographicDescription>
+                           <gmd:geographicIdentifier>
+                              <gmd:MD_Identifier>
+                                 <gmd:code>
+                                    <gco:CharacterString>South America (Argentina)</gco:CharacterString>
+                                 </gmd:code>
+                              </gmd:MD_Identifier>
+                           </gmd:geographicIdentifier>
+                        </gmd:EX_GeographicDescription>
+                     </gmd:geographicElement>
+                  </gmd:EX_Extent>
+               </gmd:extent>
+            </gmd:MD_DataIdentification>
+	         </gmd:identificationInfo>    
+         <gmd:distributionInfo>
+            <gmd:MD_Distribution>
+               <gmd:distributor>
+                  <eum:MD_EUMDistributor xsi:type="eum:MD_EUMDistributor_Type">
+                     <gmd:distributorContact>
+                        <gmd:CI_ResponsibleParty>
+                           <gmd:individualName>
+                              <gco:CharacterString>Instituto Nacional de TecnologÃ­a Agropecuaria</gco:CharacterString>
+                           </gmd:individualName>
+                           <gmd:organisationName>
+                              <gco:CharacterString>INTA</gco:CharacterString>
+                           </gmd:organisationName>
+                           <gmd:contactInfo>
+                              <gmd:CI_Contact>
+                                 <gmd:phone>
+                                    <gmd:CI_Telephone>
+                                       <gmd:voice>
+                                          <gco:CharacterString>(54-11) 4621 - 1684 / 0125 / 1463 / 5663</gco:CharacterString>
+                                       </gmd:voice>
+                                       <gmd:facsimile>
+                                          <gco:CharacterString>(54-11) 4621 - 1684 / 0125 / 1463 / 5663</gco:CharacterString>
+                                       </gmd:facsimile>
+                                    </gmd:CI_Telephone>
+                                 </gmd:phone>
+                                 <gmd:address>
+                                    <gmd:CI_Address>
+                                       <gmd:deliveryPoint>
+                                          <gco:CharacterString>N. Repeto and De Los Reseros SN (1712)</gco:CharacterString>
+                                       </gmd:deliveryPoint>
+                                       <gmd:city>
+                                          <gco:CharacterString>Hurlingham</gco:CharacterString>
+                                       </gmd:city>
+                                       <gmd:administrativeArea>
+                                          <gco:CharacterString>Buenos Aires</gco:CharacterString>
+                                       </gmd:administrativeArea>
+                                       <gmd:country>
+                                          <gco:CharacterString>Argentina</gco:CharacterString>
+                                       </gmd:country>
+                                       <gmd:electronicMailAddress>
+                                          <gco:CharacterString>Poricchio@cnia.inta.gov.ar</gco:CharacterString>
+                                       </gmd:electronicMailAddress>
+                                    </gmd:CI_Address>
+                                 </gmd:address>
+                              </gmd:CI_Contact>
+                           </gmd:contactInfo>
+                           <gmd:role>
+                              <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="originator"/>
+                           </gmd:role>
+                        </gmd:CI_ResponsibleParty>
+                     </gmd:distributorContact>
+                     
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       <eum:digitalTransfers>
+                        <eum:MD_EUMDigitalTransfer>
+                           <eum:availability>
+                              <eum:MD_EUMDigitalTransferOptions>
+                                 <gmd:onLine>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>http://eoportal.eumetsat.int/userMgmt</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:protocol>
+                                          <gco:CharacterString>http</gco:CharacterString>
+                                       </gmd:protocol>
+                                       <gmd:name>
+                                          <gco:CharacterString>EO Portal Registration</gco:CharacterString>
+                                       </gmd:name>
+                                       <gmd:function>
+                                          <gmd:CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="order"/>
+                                       </gmd:function>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onLine>
+                                 <gmd:onLine>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>http://www.eumetsat.int/Home/Main/What_We_Do/EUMETCast/Reception_Station_Set-up/index.htm?l=en</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:protocol>
+                                          <gco:CharacterString>http</gco:CharacterString>
+                                       </gmd:protocol>
+                                       <gmd:name>
+                                          <gco:CharacterString>Reception Station Set-up</gco:CharacterString>
+                                       </gmd:name>
+                                       <gmd:function>
+                                          <gmd:CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="order"/>
+                                       </gmd:function>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onLine>
+                                 <eum:availability>
+                                    <gco:CharacterString>EUMETCast-Africa,EUMETCast-Europe,EUMETCast-Americas</gco:CharacterString>
+                                 </eum:availability>
+                                 <eum:aggregateIdentifier>
+                                    <gco:CharacterString/>
+                                 </eum:aggregateIdentifier>
+                                 <eum:eumetcastChannels>
+                                    <gco:CharacterString>DEVCOCAST-1</gco:CharacterString>
+                                 </eum:eumetcastChannels>
+                              </eum:MD_EUMDigitalTransferOptions>
+                           </eum:availability>
+                           <eum:format>
+                              <eum:MD_EUMFormat>
+                                 <gmd:name>
+                                    <gco:CharacterString>GIF</gco:CharacterString>
+                                 </gmd:name>
+                                 <gmd:version>
+                                    <gco:CharacterString/>
+                                 </gmd:version>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>INTA_NOAA_AVHRR_Evapotranspiration_201003-1.gif</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:averageFileSizeUnits>
+                                    <gco:CharacterString>KB</gco:CharacterString>
+                                 </eum:averageFileSizeUnits>
+                                 <eum:averageFileSize>
+                                    <gco:Real>300.0</gco:Real>
+                                 </eum:averageFileSize>
+                                 <eum:frequency>
+                                    <gco:CharacterString>3 (per month)</gco:CharacterString>
+                                 </eum:frequency>
+                              </eum:MD_EUMFormat>
+                           </eum:format>
+                        </eum:MD_EUMDigitalTransfer>
+                     </eum:digitalTransfers>
+                  </eum:MD_EUMDistributor>
+               </gmd:distributor>
+            </gmd:MD_Distribution>
+         </gmd:distributionInfo>
+         <gmi:acquisitionInformation>
+            <gmi:MI_AcquisitionInformation>
+               <gmi:platform>
+                  <eum:MI_EUMPlatform>
+                     <gmi:identifier>
+                        <gmd:MD_Identifier>
+                           <gmd:code>
+                              <gco:CharacterString>NOAA</gco:CharacterString>
+                           </gmd:code>
+                        </gmd:MD_Identifier>
+                     </gmi:identifier>
+                     <gmi:description>
+                        <gco:CharacterString/>
+                     </gmi:description>
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     <gmi:instrument>
+                        <gmi:MI_Instrument>
+                           <gmi:citation>
+                              <gmd:CI_Citation>
+                                 <gmd:title/>
+                                 <gmd:date/>
+                                 <gmd:identifier>
+                                    <gmd:MD_Identifier>
+                                       <gmd:code>
+                                          <gco:CharacterString>AVHRR</gco:CharacterString>
+                                       </gmd:code>
+                                    </gmd:MD_Identifier>
+                                 </gmd:identifier>
+                              </gmd:CI_Citation>
+                           </gmi:citation>
+                           <gmi:type>
+                              <gmi:MI_SensorTypeCode id="radiometer"/>
+                           </gmi:type>
+                        </gmi:MI_Instrument>
+                     </gmi:instrument>
+                     <eum:orbitType>
+                        <eum:CI_OrbitTypeCode codeList="CI_OrbitTypeCode" codeListValue="LEO"/>
+                     </eum:orbitType>
+                  </eum:MI_EUMPlatform>
+               </gmi:platform>
+            </gmi:MI_AcquisitionInformation>
+         </gmi:acquisitionInformation>
+      </gmi:MI_Metadata>

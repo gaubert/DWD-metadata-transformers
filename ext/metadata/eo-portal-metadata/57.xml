@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="UTF-8"?><gmi:MI_Metadata xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns="http://www.isotc211.org/2005/gmd" xmlns:date="http://exslt.org/dates-and-times" xmlns:eum="http://www.eumetsat.int/2008/gmi" xmlns:fn="http://www.w3.org/TR/xpath-functions" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gml="http://www.opengis.net/gml" xmlns:str="http://exslt.org/strings" xmlns:xdt="http://www.w3.org/2005/02/xpath-datatypes" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="gmi:MI_Metadata_Type">
+         <fileIdentifier>
+            <gco:CharacterString>EO_EUM_DAT_MSG_FRP</gco:CharacterString>
+         </fileIdentifier>
+         <language>
+            <gco:CharacterString>eng</gco:CharacterString>
+         </language>
+         <hierarchyLevel>
+            <MD_ScopeCode codeList="./resources/codeList.xml#MD_ScopeCode" codeListValue="series"/>
+         </hierarchyLevel>
+
+
+
+
+
+
+
+
+
+
+
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         <hierarchyLevelName>
+            <gco:CharacterString>sat.MSG1</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>sat.MSG2</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>theme.par.Fire</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>theme.par.Land</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>theme.par.GEONETCast</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>SBA.Climate</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>SBA.Disasters</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>dis.SAFArchive&amp;FTP</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>dis.EUMETCast-Europe</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>dis.EUMETCast-Africa</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>dis.EUMETCast-Americas</gco:CharacterString>
+         </hierarchyLevelName>
+         <contact>
+            <CI_ResponsibleParty>
+
+               <organisationName>
+                  <gco:CharacterString>LSA SAF</gco:CharacterString>
+               </organisationName>
+               <contactInfo>
+                  <CI_Contact>
+                     <address>
+                        <CI_Address>
+                           <deliveryPoint>
+                              <gco:CharacterString>Rua C ao Aeroporto</gco:CharacterString>
+                           </deliveryPoint>
+                           <city>
+                              <gco:CharacterString>Lisboa</gco:CharacterString>
+                           </city>
+                           <administrativeArea>
+                              <gco:CharacterString>Instituto de Meteorologia</gco:CharacterString>
+                           </administrativeArea>
+                           <postalCode>
+                              <gco:CharacterString>1749-077</gco:CharacterString>
+                           </postalCode>
+                           <country>
+                              <gco:CharacterString>Portugal</gco:CharacterString>
+                           </country>
+                           <electronicMailAddress>
+                              <gco:CharacterString>helpdesk.landsaf@meteo.pt</gco:CharacterString>
+                           </electronicMailAddress>
+                        </CI_Address>
+                     </address>
+                     <onlineResource>
+                        <CI_OnlineResource>
+                           <linkage>
+                              <URL>http://landsaf.meteo.pt</URL>
+                           </linkage>
+                           <protocol>
+                              <gco:CharacterString>http</gco:CharacterString>
+                           </protocol>
+                        </CI_OnlineResource>
+                     </onlineResource>
+                  </CI_Contact>
+               </contactInfo>
+               <role>
+                  <CI_RoleCode codeList="./resources/codeList.xml#CI_RoleCode" codeListValue="owner"/>
+               </role>
+            </CI_ResponsibleParty>
+         </contact>
+         <dateStamp>
+            <gco:Date>2009-08-31</gco:Date>
+         </dateStamp>
+         <metadataStandardName>
+            <gco:CharacterString>ISO19115</gco:CharacterString>
+         </metadataStandardName>
+         <metadataStandardVersion>
+            <gco:CharacterString>2003/Cor.1:2006</gco:CharacterString>
+         </metadataStandardVersion>
+         <identificationInfo>
+            <MD_DataIdentification>
+               <citation>
+                  <CI_Citation>
+                     <title>
+                        <gco:CharacterString>Fire Radiative Power Pixel - MSG</gco:CharacterString>
+                     </title>
+
+
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     <alternateTitle>
+                        <gco:CharacterString>FRP</gco:CharacterString>
+                     </alternateTitle>
+                     <alternateTitle>
+                        <gco:CharacterString>LSAFRP</gco:CharacterString>
+                     </alternateTitle>
+                     <date>
+                        <CI_Date>
+                           <date>
+                              <gco:Date>2009-03-23</gco:Date>
+                           </date>
+                           <dateType>
+                              <CI_DateTypeCode codeList="./resources/codeList.xml#CI_DateTypeCode" codeListValue="creation"/>
+                           </dateType>
+                        </CI_Date>
+                     </date>
+                     <date>
+                        <CI_Date>
+                           <date>
+                              <gco:Date>2009-10-12</gco:Date>
+                           </date>
+                           <dateType>
+                              <CI_DateTypeCode codeList="./resources/codeList.xml#CI_DateTypeCode" codeListValue="revision"/>
+                           </dateType>
+                        </CI_Date>
+                     </date>
+                     <date>
+                        <CI_Date>
+                           <date>
+                              <gco:Date>2009-04-23</gco:Date>
+                           </date>
+                           <dateType>
+                              <CI_DateTypeCode codeList="./resources/codeList.xml#CI_DateTypeCode" codeListValue="publication"/>
+                           </dateType>
+                        </CI_Date>
+                     </date>
+                     <identifier>
+                        <MD_Identifier>
+                           <code>
+                              <gco:CharacterString>EO:EUM:DAT:MSG:FRP</gco:CharacterString>
+                           </code>
+                        </MD_Identifier>
+                     </identifier>
+
+
+                     
+                     
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                     
+                                       <citedResponsibleParty>
+                        <CI_ResponsibleParty>
+                           <contactInfo>
+                              <CI_Contact>
+                                 <onlineResource>
+                                    <CI_OnlineResource>
+                                       <linkage>
+                                          <URL>http://www.eumetsat.int/Home/Main/What_We_Do/SAFs/Projects/SP_1124291903709?l=en</URL>
+                                       </linkage>
+                                       <name>
+                                          <gco:CharacterString>EUMETSAT_LSA_SAF_page</gco:CharacterString>
+                                       </name>
+                                       <function>
+                                          <CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="information"/>
+                                       </function>
+                                    </CI_OnlineResource>
+                                 </onlineResource>
+                              </CI_Contact>
+                           </contactInfo>
+                           <role>
+                              <CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+                           </role>
+                        </CI_ResponsibleParty>
+                     </citedResponsibleParty>
+                     <citedResponsibleParty>
+                        <CI_ResponsibleParty>
+                           <contactInfo>
+                              <CI_Contact>
+                                 <onlineResource>
+                                    <CI_OnlineResource>
+                                       <linkage>
+                                          <URL>http://landsaf.meteo.pt/</URL>
+                                       </linkage>
+                                       <name>
+                                          <gco:CharacterString>LSA_SAF</gco:CharacterString>
+                                       </name>
+                                       <function>
+                                          <CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="information"/>
+                                       </function>
+                                    </CI_OnlineResource>
+                                 </onlineResource>
+                              </CI_Contact>
+                           </contactInfo>
+                           <role>
+                              <CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+                           </role>
+                        </CI_ResponsibleParty>
+                     </citedResponsibleParty>
+                     <citedResponsibleParty>
+                        <CI_ResponsibleParty>
+                           <contactInfo>
+                              <CI_Contact>
+                                 <onlineResource>
+                                    <CI_OnlineResource>
+                                       <linkage>
+                                          <URL>http://landsaf.meteo.pt/GetDocument.do?id=269</URL>
+                                       </linkage>
+                                       <name>
+                                          <gco:CharacterString>Product User Manual</gco:CharacterString>
+                                       </name>
+                                       <function>
+                                          <CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="information"/>
+                                       </function>
+                                    </CI_OnlineResource>
+                                 </onlineResource>
+                              </CI_Contact>
+                           </contactInfo>
+                           <role>
+                              <CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+                           </role>
+                        </CI_ResponsibleParty>
+                     </citedResponsibleParty>
+                  </CI_Citation>
+               </citation>
+               <abstract>
+                  <gco:CharacterString>The Fire Radiative Power product (FRP, in megawatts) provides information on the measured radiant heat output of detected fires. It has been demonstrated in small-scale experimental fires that the amount of radiant heat energy liberated per unit time (the Fire Radiative Power) is related to the rate at which fuel is being consumed. This is a direct result of the combustion process, whereby carbon-based fuel is oxidised to CO2 with the release of a certain heat yield. Therefore, measuring this FRP and integrating it over the lifetime of the fire provides an estimate of the total Fire Radiative Energy (FRE), which for wildfires should be proportional to the total mass of fuel biomass combusted. Geostationary observations allow high temporal frequency FRP measurements, and thus a much-improved ability to estimate FRE via temporal integration when compared to the far less-frequent observations made from systems in low-Earth orbit. The FRP product is derived every 15 min at the native SEVIRI pixel resolution. The disseminated product includes for each processed pixel, the FRP (MW), the corresponding uncertainty in the FRP retrieval based on the variability of the background radiance estimation, and a confidence measure (representing the level of confidence that the observation is indeed a true fire). Applications: The FRP product is intended to support emerging operational atmosphere and climate-related applications, such as Air quality forecasting, Carbon cycle assessment and modelling, and Fire activity models.</gco:CharacterString>
+               </abstract>
+               <status>
+                  <MD_ProgressCode codeList="./resources/codeList.xml#CI_OrbitTypeCode" codeListValue="Operational"/>
+               </status>
+               <pointOfContact>
+                  <CI_ResponsibleParty>
+                     <individualName>
+                        <gco:CharacterString>SAF on Land Surface Analysis</gco:CharacterString>
+                     </individualName>
+                     <organisationName>
+                        <gco:CharacterString>LSA SAF</gco:CharacterString>
+                     </organisationName>
+                     <contactInfo>
+                        <CI_Contact>
+
+                           <address>
+                              <CI_Address>
+                                 <deliveryPoint>
+                                    <gco:CharacterString>Rua C ao Aeroporto</gco:CharacterString>
+                                 </deliveryPoint>
+                                 <city>
+                                    <gco:CharacterString>Lisboa</gco:CharacterString>
+                                 </city>
+                                 <administrativeArea>
+                                    <gco:CharacterString>Instituto de Meteorologia</gco:CharacterString>
+                                 </administrativeArea>
+                                 <postalCode>
+                                    <gco:CharacterString>1749-077</gco:CharacterString>
+                                 </postalCode>
+                                 <country>
+                                    <gco:CharacterString>Portugal</gco:CharacterString>
+                                 </country>
+                                 <electronicMailAddress>
+                                    <gco:CharacterString>helpdesk.landsaf@meteo.pt</gco:CharacterString>
+                                 </electronicMailAddress>
+                              </CI_Address>
+                           </address>
+                           <onlineResource>
+                              <CI_OnlineResource>
+                                 <linkage>
+                                    <URL>http://landsaf.meteo.pt</URL>
+                                 </linkage>
+                                 <protocol>
+                                    <gco:CharacterString>http</gco:CharacterString>
+                                 </protocol>
+                              </CI_OnlineResource>
+                           </onlineResource>
+                        </CI_Contact>
+                     </contactInfo>
+                     <role>
+                        <CI_RoleCode codeList="./resources/codeList.xml#CI_RoleCode" codeListValue="originator"/>
+                     </role>
+                  </CI_ResponsibleParty>
+               </pointOfContact>
+
+               <graphicOverview>
+                  <MD_BrowseGraphic>
+                     <fileName>
+                        <gco:CharacterString>/smartEditor/preview/LSA_FRP_Pixel.jpg</gco:CharacterString>
+                     </fileName>
+                  </MD_BrowseGraphic>
+               </graphicOverview>
+               <descriptiveKeywords>
+                  <MD_Keywords>
+                     <keyword>
+                        <gco:CharacterString>Climate</gco:CharacterString>
+                     </keyword>
+                     <keyword>
+                        <gco:CharacterString>Disasters</gco:CharacterString>
+                     </keyword>
+                     <type>
+                        <MD_KeywordTypeCode codeList="http://metadata.dgiwg.org/codelistRegistry?MD_KeywordTypeCode" codeListValue="socialBenefitArea"/>
+                     </type>
+                  </MD_Keywords>
+               </descriptiveKeywords>
+               <descriptiveKeywords>
+                  <MD_Keywords>
+                     <keyword>
+                        <gco:CharacterString>Land</gco:CharacterString>
+                     </keyword>
+                     <type>
+                        <MD_KeywordTypeCode codeList="http://metadata.dgiwg.org/codelistRegistry?MD_KeywordTypeCode" codeListValue="theme"/>
+                     </type>
+                  </MD_Keywords>
+               </descriptiveKeywords>
+               <descriptiveKeywords>
+                  <MD_Keywords>
+                     <keyword>
+                        <gco:CharacterString>Land</gco:CharacterString>
+                     </keyword>
+                     <type>
+                        <MD_KeywordTypeCode codeList="http://metadata.dgiwg.org/codelistRegistry?MD_KeywordTypeCode" codeListValue="discipline"/>
+                     </type>
+                  </MD_Keywords>
+               </descriptiveKeywords>
+
+
+               <resourceConstraints>
+                  <MD_LegalConstraints>
+                     <useConstraints>
+                        <MD_RestrictionCode codeList="http://metadata.dgiwg.org/codelistRegistry?MD_RestrictionCode" codeListValue="copyright"/>
+                     </useConstraints>
+                  </MD_LegalConstraints>
+               </resourceConstraints>
+               <spatialRepresentationType>
+                  <MD_SpatialRepresentationTypeCode codeList="MD_SpatialRepresentationTypeCode" codeListValue="grid"/>
+               </spatialRepresentationType>
+
+               <language>
+                  <gco:CharacterString>eng</gco:CharacterString>
+               </language>
+               <characterSet>
+                  <MD_CharacterSetCode codeList="/resources/codeList.xml#CI_CharacterSetCode" codeListValue="utf8"/>
+               </characterSet>
+
+               
+               
+               
+               
+               
+               
+               <topicCategory>
+                  <MD_TopicCategoryCode>climatologyMeteorologyAtmosphere</MD_TopicCategoryCode>
+               </topicCategory>
+               <extent>
+                  <EX_Extent>
+                     <geographicElement>
+                        <EX_GeographicDescription>
+                           <geographicIdentifier>
+                              <MD_Identifier>
+                                 <code>
+                                    <gco:CharacterString>Europe, North Africa, South Africa, South America</gco:CharacterString>
+                                 </code>
+                              </MD_Identifier>
+                           </geographicIdentifier>
+                        </EX_GeographicDescription>
+                     </geographicElement>
+                  </EX_Extent>
+               </extent>
+               <extent>
+                  <EX_Extent>
+                     <geographicElement>
+                        <EX_GeographicBoundingBox>
+                           <westBoundLongitude>
+                              <gco:Decimal>-90.0</gco:Decimal>
+                           </westBoundLongitude>
+                           <eastBoundLongitude>
+                              <gco:Decimal>90.0</gco:Decimal>
+                           </eastBoundLongitude>
+                           <southBoundLatitude>
+                              <gco:Decimal>-40.0</gco:Decimal>
+                           </southBoundLatitude>
+                           <northBoundLatitude>
+                              <gco:Decimal>90.0</gco:Decimal>
+                           </northBoundLatitude>
+                        </EX_GeographicBoundingBox>
+                     </geographicElement>
+                  </EX_Extent>
+               </extent>
+
+                           <extent>
+                  <EX_Extent>
+                     <temporalElement>
+                        <EX_TemporalExtent>
+                           <extent>
+                              <gml:TimePeriod gml:id="IDd8380356-4b8c-4c53-a072-629a4689043f" xsi:type="gml:TimePeriodType">
+                                 <gml:beginPosition>2009-09-17</gml:beginPosition>
+                                 <gml:endPosition/>
+                              </gml:TimePeriod>
+                           </extent>
+                        </EX_TemporalExtent>
+                     </temporalElement>
+                  </EX_Extent>
+               </extent>
+            </MD_DataIdentification>
+         </identificationInfo>
+         <contentInfo>
+            <gmi:MI_CoverageDescription>
+               <attributeDescription>
+                  <gco:RecordType/>
+               </attributeDescription>
+               <contentType>
+                  <MD_CoverageContentTypeCode codeList="./resources/codeList.xml#CI_ContentTypeCode" codeListValue=""/>
+               </contentType>
+            </gmi:MI_CoverageDescription>
+         </contentInfo>
+         <distributionInfo>
+            <MD_Distribution>
+               <distributor>
+                  <eum:MD_EUMDistributor>
+                     <distributorContact>
+                        <CI_ResponsibleParty>
+
+                           <organisationName>
+                              <gco:CharacterString>LSA SAF</gco:CharacterString>
+                           </organisationName>
+                           <contactInfo>
+                              <CI_Contact>
+                                 <address>
+                                    <CI_Address>
+                                       <deliveryPoint>
+                                          <gco:CharacterString>Rua C ao Aeroporto</gco:CharacterString>
+                                       </deliveryPoint>
+                                       <city>
+                                          <gco:CharacterString>Lisboa</gco:CharacterString>
+                                       </city>
+                                       <administrativeArea>
+                                          <gco:CharacterString>Instituto de Meteorologia</gco:CharacterString>
+                                       </administrativeArea>
+                                       <postalCode>
+                                          <gco:CharacterString>1749-077</gco:CharacterString>
+                                       </postalCode>
+                                       <country>
+                                          <gco:CharacterString>Portugal</gco:CharacterString>
+                                       </country>
+                                       <electronicMailAddress>
+                                          <gco:CharacterString>helpdesk.landsaf@meteo.pt</gco:CharacterString>
+                                       </electronicMailAddress>
+                                    </CI_Address>
+                                 </address>
+                                 <onlineResource>
+                                    <CI_OnlineResource>
+                                       <linkage>
+                                          <URL>http://landsaf.meteo.pt</URL>
+                                       </linkage>
+                                       <protocol>
+                                          <gco:CharacterString>http</gco:CharacterString>
+                                       </protocol>
+                                    </CI_OnlineResource>
+                                 </onlineResource>
+                              </CI_Contact>
+                           </contactInfo>
+                           <role>
+                              <CI_RoleCode codeList="./resources/codeList.xml#CI_RoleCode" codeListValue="owner"/>
+                           </role>
+                        </CI_ResponsibleParty>
+                     </distributorContact>
+
+
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       <eum:digitalTransfers>
+                        <eum:MD_EUMDigitalTransfer>
+                           <eum:availability>
+                              <eum:MD_EUMDigitalTransferOptions>
+                                 <onLine>
+                                    <CI_OnlineResource>
+                                       <linkage>
+                                          <URL>http://landsaf.meteo.pt</URL>
+                                       </linkage>
+                                       <protocol>
+                                          <gco:CharacterString>http</gco:CharacterString>
+                                       </protocol>
+                                       <name>
+                                          <gco:CharacterString>LSA_SAF_Archive_and_FTP</gco:CharacterString>
+                                       </name>
+                                       <function>
+                                          <CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="order"/>
+                                       </function>
+                                    </CI_OnlineResource>
+                                 </onLine>
+                                 <eum:availability>
+                                    <gco:CharacterString>SAF Archive &amp; FTP</gco:CharacterString>
+                                 </eum:availability>
+                                 <eum:aggregateIdentifier>
+                                    <gco:CharacterString/>
+                                 </eum:aggregateIdentifier>
+                                 <eum:eumetcastChannels>
+                                    <gco:CharacterString/>
+                                 </eum:eumetcastChannels>
+                              </eum:MD_EUMDigitalTransferOptions>
+                           </eum:availability>
+                           <eum:format>
+                              <eum:MD_EUMFormat>
+                                 <name>
+                                    <gco:CharacterString>HDF5</gco:CharacterString>
+                                 </name>
+                                 <version>
+                                    <gco:CharacterString/>
+                                 </version>
+                                 <eum:averageFileSizeUnits>
+                                    <gco:CharacterString>MB</gco:CharacterString>
+                                 </eum:averageFileSizeUnits>
+                                 <eum:averageFileSize>
+                                    <gco:Real>1.0</gco:Real>
+                                 </eum:averageFileSize>
+                                 <eum:frequency>
+                                    <gco:CharacterString>96 (per day)</gco:CharacterString>
+                                 </eum:frequency>
+                              </eum:MD_EUMFormat>
+                           </eum:format>
+                        </eum:MD_EUMDigitalTransfer>
+                     </eum:digitalTransfers>
+                     <eum:digitalTransfers>
+                        <eum:MD_EUMDigitalTransfer>
+                           <eum:availability>
+                              <eum:MD_EUMDigitalTransferOptions>
+                                 <onLine>
+                                    <CI_OnlineResource>
+                                       <linkage>
+                                          <URL>http://eoportal.eumetsat.int/userMgmt</URL>
+                                       </linkage>
+                                       <protocol>
+                                          <gco:CharacterString>http</gco:CharacterString>
+                                       </protocol>
+                                       <name>
+                                          <gco:CharacterString>EO Portal Registration</gco:CharacterString>
+                                       </name>
+                                       <function>
+                                          <CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="order"/>
+                                       </function>
+                                    </CI_OnlineResource>
+                                 </onLine>
+                                 <onLine>
+                                    <CI_OnlineResource>
+                                       <linkage>
+                                          <URL>http://www.eumetsat.int/Home/Main/What_We_Do/EUMETCast/Reception_Station_Set-up/index.htm?l=en</URL>
+                                       </linkage>
+                                       <protocol>
+                                          <gco:CharacterString>http</gco:CharacterString>
+                                       </protocol>
+                                       <name>
+                                          <gco:CharacterString>Reception Station Set-up</gco:CharacterString>
+                                       </name>
+                                       <function>
+                                          <CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="order"/>
+                                       </function>
+                                    </CI_OnlineResource>
+                                 </onLine>
+                                 <eum:availability>
+                                    <gco:CharacterString>EUMETCast-Africa,EUMETCast-Europe,EUMETCast-Americas</gco:CharacterString>
+                                 </eum:availability>
+                                 <eum:aggregateIdentifier>
+                                    <gco:CharacterString/>
+                                 </eum:aggregateIdentifier>
+                                 <eum:eumetcastChannels>
+                                    <gco:CharacterString>SAF-Europe, SAF-Africa, SAF-Americas</gco:CharacterString>
+                                 </eum:eumetcastChannels>
+                              </eum:MD_EUMDigitalTransferOptions>
+                           </eum:availability>
+                           <eum:format>
+                              <eum:MD_EUMFormat>
+                                 <name>
+                                    <gco:CharacterString>HDF5</gco:CharacterString>
+                                 </name>
+                                 <version>
+                                    <gco:CharacterString/>
+                                 </version>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>S-LSA_-HDF5_LSASAF_MSG_FRP-PIXEL-ListProduct_Eur o_200808270015.bz2</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>S-LSA_-HDF5_LSASAF_MSG_FRP-PIXEL-ListProduct_SAm e_200808270015.bz2</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>S-LSA_-HDF5_LSASAF_MSG_FRP-PIXEL-ListProduct_SAf r_200808270015.bz2</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>S-LSA_-HDF5_LSASAF_MSG_FRP-PIXEL-ListProduct_NAf r_200808270015.bz2</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>S-LSA_-HDF5_LSASAF_MSG_FRP-PIXEL-QualityProduct_ Euro_200808270015.bz2</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>S-LSA_-HDF5_LSASAF_MSG_FRP-PIXEL-QualityProduct_ SAme_200808270015.bz2</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>S-LSA_-HDF5_LSASAF_MSG_FRP-PIXEL-QualityProduct_ SAfr_200808270015.bz2</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>S-LSA_-HDF5_LSASAF_MSG_FRP-PIXEL-QualityProduct_ NAfr_200808270015.bz2</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:averageFileSizeUnits>
+                                    <gco:CharacterString>MB</gco:CharacterString>
+                                 </eum:averageFileSizeUnits>
+                                 <eum:averageFileSize>
+                                    <gco:Real>1.0</gco:Real>
+                                 </eum:averageFileSize>
+                                 <eum:frequency>
+                                    <gco:CharacterString>96 (per day)</gco:CharacterString>
+                                 </eum:frequency>
+                              </eum:MD_EUMFormat>
+                           </eum:format>
+                        </eum:MD_EUMDigitalTransfer>
+                     </eum:digitalTransfers>
+                     <eum:digitalTransfers>
+                        <eum:MD_EUMDigitalTransfer>
+                           <eum:availability>
+                              <eum:MD_EUMDigitalTransferOptions>
+                                 <onLine>
+                                    <CI_OnlineResource>
+                                       <linkage>
+                                          <URL>http://archive.eumetsat.int/umarf/Jnlp?acronym=LSAFRP</URL>
+                                       </linkage>
+                                       <protocol>
+                                          <gco:CharacterString>http</gco:CharacterString>
+                                       </protocol>
+                                       <name>
+                                          <gco:CharacterString>EUMETSAT Data Centre</gco:CharacterString>
+                                       </name>
+                                       <function>
+                                          <CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="order"/>
+                                       </function>
+                                    </CI_OnlineResource>
+                                 </onLine>
+                                 <eum:availability>
+                                    <gco:CharacterString>EUMETSAT Data Centre</gco:CharacterString>
+                                 </eum:availability>
+                                 <eum:aggregateIdentifier>
+                                    <gco:CharacterString/>
+                                 </eum:aggregateIdentifier>
+                                 <eum:eumetcastChannels>
+                                    <gco:CharacterString/>
+                                 </eum:eumetcastChannels>
+                              </eum:MD_EUMDigitalTransferOptions>
+                           </eum:availability>
+                           <eum:format>
+                              <eum:MD_EUMFormat>
+                                 <name>
+                                    <gco:CharacterString>HDF5</gco:CharacterString>
+                                 </name>
+                                 <version>
+                                    <gco:CharacterString/>
+                                 </version>
+                                 <eum:averageFileSizeUnits>
+                                    <gco:CharacterString>MB</gco:CharacterString>
+                                 </eum:averageFileSizeUnits>
+                                 <eum:averageFileSize>
+                                    <gco:Real>5.0</gco:Real>
+                                 </eum:averageFileSize>
+                                 <eum:frequency>
+                                    <gco:CharacterString>96 (per day)</gco:CharacterString>
+                                 </eum:frequency>
+                              </eum:MD_EUMFormat>
+                           </eum:format>
+                        </eum:MD_EUMDigitalTransfer>
+                     </eum:digitalTransfers>
+                  </eum:MD_EUMDistributor>
+               </distributor>
+            </MD_Distribution>
+         </distributionInfo>
+         <gmi:acquisitionInformation>
+            <gmi:MI_AcquisitionInformation>
+               <gmi:platform>
+                  <eum:MI_EUMPlatform>
+                     <gmi:identifier>
+                        <MD_Identifier>
+                           <code>
+                              <gco:CharacterString>MSG</gco:CharacterString>
+                           </code>
+                        </MD_Identifier>
+                     </gmi:identifier>
+                     <gmi:description>
+                        <gco:CharacterString>Meteosat Second Generation(Meteosat-8 - Meteosat-9)</gco:CharacterString>
+                     </gmi:description>
+
+                     
+                     
+                     
+                     
+                     
+                     
+                     <gmi:instrument>
+                        <gmi:MI_Instrument>
+                           <gmi:citation>
+                              <CI_Citation>
+                                 <title/>
+                                 <date/>
+                                 <identifier>
+                                    <MD_Identifier>
+                                       <code>
+                                          <gco:CharacterString>SEVIRI</gco:CharacterString>
+                                       </code>
+                                    </MD_Identifier>
+                                 </identifier>
+                              </CI_Citation>
+                           </gmi:citation>
+                           <gmi:type>
+                              <gmi:MI_SensorTypeCode id="optical"/>
+                           </gmi:type>
+                        </gmi:MI_Instrument>
+                     </gmi:instrument>
+                     <eum:orbitType>
+                        <eum:CI_OrbitTypeCode codeList="./resources/codeList.xml#CI_OrbitTypeCode" codeListValue="GEO"/>
+                     </eum:orbitType>
+                  </eum:MI_EUMPlatform>
+               </gmi:platform>
+            </gmi:MI_AcquisitionInformation>
+         </gmi:acquisitionInformation>
+      </gmi:MI_Metadata>

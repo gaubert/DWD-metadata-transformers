@@ -1,0 +1,981 @@
+<?xml version="1.0" encoding="UTF-8"?><gmi:MI_Metadata xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns:eum="http://www.eumetsat.int/2008/gmi" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="VMAP0" uuid="US_NGA_VPF_VMAP0" xsi:schemaLocation="http://www.isotc211.org/2005/gmd ../schemas/apiso/apiso.xsd" xsi:type="gmi:MI_Metadata_Type">
+	         <gmd:fileIdentifier>
+            <gco:CharacterString>EO_EUM_DAT_MULT_GBLSIT</gco:CharacterString>
+         </gmd:fileIdentifier>
+         <gmd:hierarchyLevel>
+                    <gmd:MD_ScopeCode codeList="MD_ScopeCode" codeListValue="series"/>
+             </gmd:hierarchyLevel>
+             
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>sat.DMSP</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>sat.DMSP.SSM/I</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>theme.par.Snow_and_Ice</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>theme.par.Marine</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>theme.par.GEONETCast</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>SBA.Water</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>SBA.Climate</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>dis.SAFArchive&amp;FTP</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>dis.EUMETCast-Europe</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:hierarchyLevelName>
+            <gco:CharacterString>dis.EUMETCast-Africa</gco:CharacterString>
+         </gmd:hierarchyLevelName>
+         <gmd:contact>
+		            <gmd:CI_ResponsibleParty>
+			               <gmd:role>
+				                  <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+			               </gmd:role>
+		            </gmd:CI_ResponsibleParty>
+	         </gmd:contact>
+	         <gmd:dateStamp>
+		            <gco:Date>2009-03-23</gco:Date>
+	         </gmd:dateStamp>
+	         <gmd:metadataStandardName>
+		            <gco:CharacterString>ISO19115</gco:CharacterString>
+	         </gmd:metadataStandardName>
+	         <gmd:metadataStandardVersion>
+		            <gco:CharacterString>2003/Cor.1:2006</gco:CharacterString>
+	         </gmd:metadataStandardVersion>
+	
+	         <gmd:identificationInfo>
+		            <gmd:MD_DataIdentification>
+			               <gmd:citation>
+				                  <gmd:CI_Citation>
+					                     <gmd:title>
+						                        <gco:CharacterString>Global Sea Ice Type - Multimission</gco:CharacterString>
+					                     </gmd:title>
+					                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     <gmd:alternateTitle>
+                        <gco:CharacterString>GBLSIT</gco:CharacterString>
+                     </gmd:alternateTitle>
+                     <gmd:alternateTitle>
+                        <gco:CharacterString>OSITYGB</gco:CharacterString>
+                     </gmd:alternateTitle>
+                     <gmd:date>
+						                        <gmd:CI_Date>
+							                           <gmd:date>
+								                              <gco:Date>2009-03-23</gco:Date>
+							                           </gmd:date>
+							                           <gmd:dateType>
+								                              <gmd:CI_DateTypeCode codeList="CI_DateTypeCode" codeListValue="creation"/>
+							                           </gmd:dateType>
+						                        </gmd:CI_Date>
+					                     </gmd:date>
+				                     <gmd:date>
+                        <gmd:CI_Date>
+                           <gmd:date>
+                              <gco:Date>2010-07-06</gco:Date>
+                           </gmd:date>
+                           <gmd:dateType>
+                              <gmd:CI_DateTypeCode codeList="CI_DateTypeCode" codeListValue="revision"/>
+                           </gmd:dateType>
+                        </gmd:CI_Date>
+                     </gmd:date>
+                     <gmd:date>
+                        <gmd:CI_Date>
+                           <gmd:date>
+                              <gco:Date>2009-04-23</gco:Date>
+                           </gmd:date>
+                           <gmd:dateType>
+                              <gmd:CI_DateTypeCode codeList="CI_DateTypeCode" codeListValue="publication"/>
+                           </gmd:dateType>
+                        </gmd:CI_Date>
+                     </gmd:date>
+                     <gmd:identifier>
+                        <gmd:MD_Identifier>
+                           <gmd:code>
+                              <gco:CharacterString>EO:EUM:DAT:MULT:GBLSIT</gco:CharacterString>
+                           </gmd:code>
+                        </gmd:MD_Identifier>
+                     </gmd:identifier>
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       <gmd:citedResponsibleParty>
+                        <gmd:CI_ResponsibleParty>
+                           <gmd:contactInfo>
+                              <gmd:CI_Contact>
+                                 <gmd:onlineResource>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>http://www.eumetsat.int/Home/Main/What_We_Do/SAFs/Projects/SP_1124286934190?l=en</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:name>
+                                          <gco:CharacterString>EUMETSAT_OSI_SAF_page</gco:CharacterString>
+                                       </gmd:name>
+                                       <gmd:function>
+                                          <gmd:CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="information"/>
+                                       </gmd:function>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onlineResource>
+                              </gmd:CI_Contact>
+                           </gmd:contactInfo>
+                           <gmd:role>
+                              <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+                           </gmd:role>
+                        </gmd:CI_ResponsibleParty>
+                     </gmd:citedResponsibleParty>
+                     <gmd:citedResponsibleParty>
+                        <gmd:CI_ResponsibleParty>
+                           <gmd:contactInfo>
+                              <gmd:CI_Contact>
+                                 <gmd:onlineResource>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>http://www.osi-saf.org/index.php</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:name>
+                                          <gco:CharacterString>OSI_SAF</gco:CharacterString>
+                                       </gmd:name>
+                                       <gmd:function>
+                                          <gmd:CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="information"/>
+                                       </gmd:function>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onlineResource>
+                              </gmd:CI_Contact>
+                           </gmd:contactInfo>
+                           <gmd:role>
+                              <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+                           </gmd:role>
+                        </gmd:CI_ResponsibleParty>
+                     </gmd:citedResponsibleParty>
+                  </gmd:CI_Citation>
+			               </gmd:citation>
+			               <gmd:abstract>
+				                  <gco:CharacterString>The sea ice products have been developed to be derived from passive microwave, active microwave and optical sensors, using multi sensor methods with a Bayesian approach to combine different instruments and sensors. At present only SSM/I data from three channels is used operationally.They consist of Sea Ice Edge (closed ice/open ice/open water), Sea Ice Concentration (%) and Sea Ice Type (multi-year/first-year).</gco:CharacterString>
+			               </gmd:abstract>
+			               <gmd:status>
+                  <gmd:MD_ProgressCode codeList="MD_ProgressCode" codeListValue="Operational"/>
+               </gmd:status>
+               <gmd:pointOfContact>
+                  <gmd:CI_ResponsibleParty>
+                     <gmd:individualName>
+                        <gco:CharacterString>SAF on Ocean and Sea Ice</gco:CharacterString>
+                     </gmd:individualName>
+                     <gmd:organisationName>
+                        <gco:CharacterString>OSI SAF</gco:CharacterString>
+                     </gmd:organisationName>
+                     <gmd:contactInfo>
+                        <gmd:CI_Contact>
+                           <gmd:address>
+                              <gmd:CI_Address>
+                                 <gmd:deliveryPoint>
+                                    <gco:CharacterString>Avenue de Lorraine</gco:CharacterString>
+                                 </gmd:deliveryPoint>
+                                 <gmd:city>
+                                    <gco:CharacterString>22307  Lannion Cedex</gco:CharacterString>
+                                 </gmd:city>
+                                 <gmd:administrativeArea>
+                                    <gco:CharacterString>Meteo France Centre de Meterologie Spatiale</gco:CharacterString>
+                                 </gmd:administrativeArea>
+                                 <gmd:postalCode>
+                                    <gco:CharacterString>BP 50747</gco:CharacterString>
+                                 </gmd:postalCode>
+                                 <gmd:country>
+                                    <gco:CharacterString>France</gco:CharacterString>
+                                 </gmd:country>
+                                 <gmd:electronicMailAddress>
+                                    <gco:CharacterString>osi-saf.manager@meteo.fr</gco:CharacterString>
+                                 </gmd:electronicMailAddress>
+                              </gmd:CI_Address>
+                           </gmd:address>
+                        </gmd:CI_Contact>
+                     </gmd:contactInfo>
+                     <gmd:role>
+                        <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="originator"/>
+                     </gmd:role>
+                  </gmd:CI_ResponsibleParty>
+               </gmd:pointOfContact>
+               <gmd:descriptiveKeywords>
+                  <gmd:MD_Keywords>
+                     <gmd:keyword>
+                        <gco:CharacterString>Marine</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeList="MD_KeywordTypeCode" codeListValue="discipline"/>
+                     </gmd:type>
+                  </gmd:MD_Keywords>
+               </gmd:descriptiveKeywords>
+               <gmd:descriptiveKeywords>
+                  <gmd:MD_Keywords>
+                     <gmd:keyword>
+                        <gco:CharacterString>water</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:keyword>
+                        <gco:CharacterString>climate</gco:CharacterString>
+                     </gmd:keyword>
+                     <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeList="MD_KeywordTypeCode" codeListValue="socialBenefitArea"/>
+                     </gmd:type>
+                  </gmd:MD_Keywords>
+               </gmd:descriptiveKeywords>
+               <gmd:resourceConstraints>
+                  <gmd:MD_LegalConstraints>
+                     <gmd:useConstraints>
+                        <gmd:MD_RestrictionCode codeList="MD_RestrictionCode" codeListValue="copyright"/>
+                     </gmd:useConstraints>
+                  </gmd:MD_LegalConstraints>
+               </gmd:resourceConstraints>
+               <gmd:language>
+				                  <gco:CharacterString>eng</gco:CharacterString>
+			               </gmd:language>
+		               <gmd:characterSet>
+                  <gmd:MD_CharacterSetCode codeList="MD_CharacterSetCode" codeListValue="utf8"/>
+               </gmd:characterSet>
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               <gmd:topicCategory>
+                  <gmd:MD_TopicCategoryCode>oceans</gmd:MD_TopicCategoryCode>
+               </gmd:topicCategory>
+               <gmd:extent>
+                  <gmd:EX_Extent>
+                     <gmd:geographicElement>
+                        <gmd:EX_GeographicBoundingBox xsi:type="gmd:EX_GeographicBoundingBox_Type">
+                           <gmd:westBoundLongitude>
+                              <gco:Decimal>-180.0</gco:Decimal>
+                           </gmd:westBoundLongitude>
+                           <gmd:eastBoundLongitude>
+                              <gco:Decimal>180.0</gco:Decimal>
+                           </gmd:eastBoundLongitude>
+                           <gmd:southBoundLatitude>
+                              <gco:Decimal>-90.0</gco:Decimal>
+                           </gmd:southBoundLatitude>
+                           <gmd:northBoundLatitude>
+                              <gco:Decimal>90.0</gco:Decimal>
+                           </gmd:northBoundLatitude>
+                        </gmd:EX_GeographicBoundingBox>
+                     </gmd:geographicElement>
+                  </gmd:EX_Extent>
+               </gmd:extent>
+               <gmd:extent>
+                  <gmd:EX_Extent>
+                     <gmd:geographicElement>
+                        <gmd:EX_GeographicDescription>
+                           <gmd:geographicIdentifier>
+                              <gmd:MD_Identifier>
+                                 <gmd:code>
+                                    <gco:CharacterString>High Latitudes</gco:CharacterString>
+                                 </gmd:code>
+                              </gmd:MD_Identifier>
+                           </gmd:geographicIdentifier>
+                        </gmd:EX_GeographicDescription>
+                     </gmd:geographicElement>
+                  </gmd:EX_Extent>
+               </gmd:extent>
+               
+                           <gmd:extent>
+                  <gmd:EX_Extent>
+                     <gmd:temporalElement>
+                        <gmd:EX_TemporalExtent>
+                           <gmd:extent>
+                              <gml:TimePeriod xmlns:gml="http://www.opengis.net/gml" gml:id="ID7f6eda70-f539-4960-b6f3-50b0aca52675" xsi:type="gml:TimePeriodType">
+                                 <gml:beginPosition>2006-01-26</gml:beginPosition>
+                                 <gml:endPosition/>
+                              </gml:TimePeriod>
+                           </gmd:extent>
+                        </gmd:EX_TemporalExtent>
+                     </gmd:temporalElement>
+                  </gmd:EX_Extent>
+               </gmd:extent>
+            </gmd:MD_DataIdentification>
+	         </gmd:identificationInfo>    
+         <gmd:distributionInfo>
+            <gmd:MD_Distribution>
+               <gmd:distributor>
+                  <eum:MD_EUMDistributor>
+                     <gmd:distributorContact>
+                        <gmd:CI_ResponsibleParty>
+                           <gmd:role>
+                              <gmd:CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+                           </gmd:role>
+                        </gmd:CI_ResponsibleParty>
+                     </gmd:distributorContact>
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       <eum:digitalTransfers>
+                        <eum:MD_EUMDigitalTransfer>
+                           <eum:availability>
+                              <eum:MD_EUMDigitalTransferOptions>
+                                 <gmd:onLine>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>http://www.osi-saf.org</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:protocol>
+                                          <gco:CharacterString>http</gco:CharacterString>
+                                       </gmd:protocol>
+                                       <gmd:name>
+                                          <gco:CharacterString>OSI SAF Archive and FTP</gco:CharacterString>
+                                       </gmd:name>
+                                       <gmd:function>
+                                          <gmd:CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="order"/>
+                                       </gmd:function>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onLine>
+                                 <eum:availability>
+                                    <gco:CharacterString>SAF Archive &amp; FTP</gco:CharacterString>
+                                 </eum:availability>
+                                 <eum:aggregateIdentifier>
+                                    <gco:CharacterString/>
+                                 </eum:aggregateIdentifier>
+                                 <eum:eumetcastChannels>
+                                    <gco:CharacterString/>
+                                 </eum:eumetcastChannels>
+                              </eum:MD_EUMDigitalTransferOptions>
+                           </eum:availability>
+                           <eum:format>
+                              <eum:MD_EUMFormat>
+                                 <gmd:name>
+                                    <gco:CharacterString>GRIB, NetCDF, HDF</gco:CharacterString>
+                                 </gmd:name>
+                                 <gmd:version>
+                                    <gco:CharacterString/>
+                                 </gmd:version>
+                                 <eum:averageFileSize>
+                                    <gco:Real>0.0</gco:Real>
+                                 </eum:averageFileSize>
+                                 <eum:frequency>
+                                    <gco:CharacterString>1 (per day)</gco:CharacterString>
+                                 </eum:frequency>
+                              </eum:MD_EUMFormat>
+                           </eum:format>
+                        </eum:MD_EUMDigitalTransfer>
+                     </eum:digitalTransfers>
+                     <eum:digitalTransfers>
+                        <eum:MD_EUMDigitalTransfer>
+                           <eum:availability>
+                              <eum:MD_EUMDigitalTransferOptions>
+                                 <gmd:onLine>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>http://eoportal.eumetsat.int/userMgmt</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:protocol>
+                                          <gco:CharacterString>http</gco:CharacterString>
+                                       </gmd:protocol>
+                                       <gmd:name>
+                                          <gco:CharacterString>EO Portal Registration</gco:CharacterString>
+                                       </gmd:name>
+                                       <gmd:function>
+                                          <gmd:CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="order"/>
+                                       </gmd:function>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onLine>
+                                 <gmd:onLine>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>http://www.eumetsat.int/Home/Main/What_We_Do/EUMETCast/Reception_Station_Set-up/index.htm?l=en</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:protocol>
+                                          <gco:CharacterString>http</gco:CharacterString>
+                                       </gmd:protocol>
+                                       <gmd:name>
+                                          <gco:CharacterString>Reception Station Set-up</gco:CharacterString>
+                                       </gmd:name>
+                                       <gmd:function>
+                                          <gmd:CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="order"/>
+                                       </gmd:function>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onLine>
+                                 <eum:availability>
+                                    <gco:CharacterString>EUMETCast-Africa,EUMETCast-Europe,EUMETCast-Americas</gco:CharacterString>
+                                 </eum:availability>
+                                 <eum:aggregateIdentifier>
+                                    <gco:CharacterString/>
+                                 </eum:aggregateIdentifier>
+                                 <eum:eumetcastChannels>
+                                    <gco:CharacterString>SAF-Global</gco:CharacterString>
+                                 </eum:eumetcastChannels>
+                              </eum:MD_EUMDigitalTransferOptions>
+                           </eum:availability>
+                           <eum:format>
+                              <eum:MD_EUMFormat>
+                                 <gmd:name>
+                                    <gco:CharacterString>GRIB (gzip, size including the Quality flag)</gco:CharacterString>
+                                 </gmd:name>
+                                 <gmd:version>
+                                    <gco:CharacterString/>
+                                 </gmd:version>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>S-OSI_-NOR_-MULT-GL_NH_TYPE_Q-200611141200Z.grb.gz</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>S-OSI_-NOR_-MULT-GL_NH_TYPE__-200611141200Z.grb.gz</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:averageFileSizeUnits>
+                                    <gco:CharacterString>Kb</gco:CharacterString>
+                                 </eum:averageFileSizeUnits>
+                                 <eum:averageFileSize>
+                                    <gco:Real>100.0</gco:Real>
+                                 </eum:averageFileSize>
+                                 <eum:frequency>
+                                    <gco:CharacterString>1 (per day)</gco:CharacterString>
+                                 </eum:frequency>
+                              </eum:MD_EUMFormat>
+                           </eum:format>
+                           <eum:format>
+                              <eum:MD_EUMFormat>
+                                 <gmd:name>
+                                    <gco:CharacterString>GRIB (gzip, size including the Quality flag)</gco:CharacterString>
+                                 </gmd:name>
+                                 <gmd:version>
+                                    <gco:CharacterString/>
+                                 </gmd:version>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>S-OSI_-NOR_-MULT-GL_SH_TYPE_Q-200611141200Z.grb.gz</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>S-OSI_-NOR_-MULT-GL_SH_TYPE__-200611141200Z.grb.gz</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:averageFileSizeUnits>
+                                    <gco:CharacterString>Kb</gco:CharacterString>
+                                 </eum:averageFileSizeUnits>
+                                 <eum:averageFileSize>
+                                    <gco:Real>56.0</gco:Real>
+                                 </eum:averageFileSize>
+                                 <eum:frequency>
+                                    <gco:CharacterString>1 (per day)</gco:CharacterString>
+                                 </eum:frequency>
+                              </eum:MD_EUMFormat>
+                           </eum:format>
+                        </eum:MD_EUMDigitalTransfer>
+                     </eum:digitalTransfers>
+                     <eum:digitalTransfers>
+                        <eum:MD_EUMDigitalTransfer>
+                           <eum:availability>
+                              <eum:MD_EUMDigitalTransferOptions>
+                                 <gmd:onLine>
+                                    <gmd:CI_OnlineResource>
+                                       <gmd:linkage>
+                                          <gmd:URL>http://archive.eumetsat.int/umarf/Jnlp?acronym=OSIEDGB</gmd:URL>
+                                       </gmd:linkage>
+                                       <gmd:protocol>
+                                          <gco:CharacterString>http</gco:CharacterString>
+                                       </gmd:protocol>
+                                       <gmd:name>
+                                          <gco:CharacterString>EUMETSAT Data Centre</gco:CharacterString>
+                                       </gmd:name>
+                                       <gmd:function>
+                                          <gmd:CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="order"/>
+                                       </gmd:function>
+                                    </gmd:CI_OnlineResource>
+                                 </gmd:onLine>
+                                 <eum:availability>
+                                    <gco:CharacterString>EUMETSAT Data Centre</gco:CharacterString>
+                                 </eum:availability>
+                                 <eum:aggregateIdentifier>
+                                    <gco:CharacterString/>
+                                 </eum:aggregateIdentifier>
+                                 <eum:eumetcastChannels>
+                                    <gco:CharacterString/>
+                                 </eum:eumetcastChannels>
+                              </eum:MD_EUMDigitalTransferOptions>
+                           </eum:availability>
+                           <eum:format>
+                              <eum:MD_EUMFormat>
+                                 <gmd:name>
+                                    <gco:CharacterString>GRIB (gzip, size including the Quality flag)</gco:CharacterString>
+                                 </gmd:name>
+                                 <gmd:version>
+                                    <gco:CharacterString/>
+                                 </gmd:version>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>S-OSI_-NOR_-MULT-GL_NH_TYPE_Q-200611141200Z.grb.gz</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>S-OSI_-NOR_-MULT-GL_NH_TYPE__-200611141200Z.grb.gz</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:averageFileSizeUnits>
+                                    <gco:CharacterString>Kb</gco:CharacterString>
+                                 </eum:averageFileSizeUnits>
+                                 <eum:averageFileSize>
+                                    <gco:Real>100.0</gco:Real>
+                                 </eum:averageFileSize>
+                                 <eum:frequency>
+                                    <gco:CharacterString>1 (per day)</gco:CharacterString>
+                                 </eum:frequency>
+                              </eum:MD_EUMFormat>
+                           </eum:format>
+                           <eum:format>
+                              <eum:MD_EUMFormat>
+                                 <gmd:name>
+                                    <gco:CharacterString>GRIB (gzip, size including the Quality flag)</gco:CharacterString>
+                                 </gmd:name>
+                                 <gmd:version>
+                                    <gco:CharacterString/>
+                                 </gmd:version>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>S-OSI_-NOR_-MULT-GL_SH_TYPE_Q-200611141200Z.grb.gz</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>S-OSI_-NOR_-MULT-GL_SH_TYPE__-200611141200Z.grb.gz</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:averageFileSizeUnits>
+                                    <gco:CharacterString>Kb</gco:CharacterString>
+                                 </eum:averageFileSizeUnits>
+                                 <eum:averageFileSize>
+                                    <gco:Real>56.0</gco:Real>
+                                 </eum:averageFileSize>
+                                 <eum:frequency>
+                                    <gco:CharacterString>1 (per day)</gco:CharacterString>
+                                 </eum:frequency>
+                              </eum:MD_EUMFormat>
+                           </eum:format>
+                        </eum:MD_EUMDigitalTransfer>
+                     </eum:digitalTransfers>
+                  </eum:MD_EUMDistributor>
+               </gmd:distributor>
+            </gmd:MD_Distribution>
+         </gmd:distributionInfo>
+         <gmi:acquisitionInformation>
+            <gmi:MI_AcquisitionInformation>
+               <gmi:platform>
+                  <eum:MI_EUMPlatform>
+                     <gmi:identifier>
+                        <gmd:MD_Identifier>
+                           <gmd:code>
+                              <gco:CharacterString>DMSP</gco:CharacterString>
+                           </gmd:code>
+                        </gmd:MD_Identifier>
+                     </gmi:identifier>
+                     <gmi:description>
+                        <gco:CharacterString/>
+                     </gmi:description>
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     <gmi:instrument>
+                        <gmi:MI_Instrument>
+                           <gmi:citation>
+                              <gmd:CI_Citation>
+                                 <gmd:title/>
+                                 <gmd:date/>
+                                 <gmd:identifier>
+                                    <gmd:MD_Identifier>
+                                       <gmd:code>
+                                          <gco:CharacterString>SSM/I</gco:CharacterString>
+                                       </gmd:code>
+                                    </gmd:MD_Identifier>
+                                 </gmd:identifier>
+                              </gmd:CI_Citation>
+                           </gmi:citation>
+                           <gmi:type>
+                              <gmi:MI_SensorTypeCode id="imager"/>
+                           </gmi:type>
+                        </gmi:MI_Instrument>
+                     </gmi:instrument>
+                     <eum:orbitType>
+                        <eum:CI_OrbitTypeCode codeList="CI_OrbitTypeCode" codeListValue="LEO"/>
+                     </eum:orbitType>
+                  </eum:MI_EUMPlatform>
+               </gmi:platform>
+            </gmi:MI_AcquisitionInformation>
+         </gmi:acquisitionInformation>
+      </gmi:MI_Metadata>

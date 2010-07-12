@@ -1,0 +1,1057 @@
+<?xml version="1.0" encoding="UTF-8"?><gmi:MI_Metadata xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns="http://www.isotc211.org/2005/gmd" xmlns:date="http://exslt.org/dates-and-times" xmlns:eum="http://www.eumetsat.int/2008/gmi" xmlns:fn="http://www.w3.org/TR/xpath-functions" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gml="http://www.opengis.net/gml" xmlns:str="http://exslt.org/strings" xmlns:xdt="http://www.w3.org/2005/02/xpath-datatypes" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="gmi:MI_Metadata_Type">
+         <fileIdentifier>
+            <gco:CharacterString>EO_EUM_DAT_MULT_GMC</gco:CharacterString>
+         </fileIdentifier>
+         <language>
+            <gco:CharacterString>eng</gco:CharacterString>
+         </language>
+         <hierarchyLevel>
+            <MD_ScopeCode codeList="./resources/codeList.xml#MD_ScopeCode" codeListValue="series"/>
+         </hierarchyLevel>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         <hierarchyLevelName>
+            <gco:CharacterString>sat.MSG2</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>sat.GOES</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>theme.par.Cloud</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>theme.par.Observation</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>theme.par.Satellite_Data</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>SBA.Agriculture</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>SBA.Climate</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>SBA.Disasters</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>SBA.Energy</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>SBA.Weather</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>dis.GEONETCast-Americas</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>dis.EUMETCast</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>dis.EUMETCast-Europe</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>dis.EUMETCast-Africa</gco:CharacterString>
+         </hierarchyLevelName>
+         <hierarchyLevelName>
+            <gco:CharacterString>dis.EUMETCast-Americas</gco:CharacterString>
+         </hierarchyLevelName>
+         <contact>
+            <CI_ResponsibleParty>
+
+               <organisationName>
+                  <gco:CharacterString>INPE/CPTEC</gco:CharacterString>
+               </organisationName>
+               <contactInfo>
+                  <CI_Contact>
+                     <address>
+                        <CI_Address>
+                           <deliveryPoint>
+                              <gco:CharacterString>Rodovia Presidente Dutra</gco:CharacterString>
+                           </deliveryPoint>
+                           <city>
+                              <gco:CharacterString>Cachoeira Paulista, SP</gco:CharacterString>
+                           </city>
+                           <administrativeArea>
+                              <gco:CharacterString>Km40, SP-RJ</gco:CharacterString>
+                           </administrativeArea>
+                           <postalCode>
+                              <gco:CharacterString>12630-000</gco:CharacterString>
+                           </postalCode>
+                           <country>
+                              <gco:CharacterString>Brazil</gco:CharacterString>
+                           </country>
+                           <electronicMailAddress>
+                              <gco:CharacterString>atendimento@cptec.inpe.br</gco:CharacterString>
+                           </electronicMailAddress>
+                        </CI_Address>
+                     </address>
+                     <onlineResource>
+                        <CI_OnlineResource>
+                           <linkage>
+                              <URL>http://www.cptec.inpe.br</URL>
+                           </linkage>
+                           <protocol>
+                              <gco:CharacterString>http</gco:CharacterString>
+                           </protocol>
+                        </CI_OnlineResource>
+                     </onlineResource>
+                  </CI_Contact>
+               </contactInfo>
+               <role>
+                  <CI_RoleCode codeList="./resources/codeList.xml#CI_RoleCode" codeListValue="owner"/>
+               </role>
+            </CI_ResponsibleParty>
+         </contact>
+         <dateStamp>
+            <gco:Date>2009-08-31</gco:Date>
+         </dateStamp>
+         <metadataStandardName>
+            <gco:CharacterString>ISO19115</gco:CharacterString>
+         </metadataStandardName>
+         <metadataStandardVersion>
+            <gco:CharacterString>2003/Cor.1:2006</gco:CharacterString>
+         </metadataStandardVersion>
+         <identificationInfo>
+            <MD_DataIdentification>
+               <citation>
+                  <CI_Citation>
+                     <title>
+                        <gco:CharacterString>Composites - GOES-MSG - Africa, South America</gco:CharacterString>
+                     </title>
+
+
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     <alternateTitle>
+                        <gco:CharacterString>GMC</gco:CharacterString>
+                     </alternateTitle>
+                     <date>
+                        <CI_Date>
+                           <date>
+                              <gco:Date>2009-07-30</gco:Date>
+                           </date>
+                           <dateType>
+                              <CI_DateTypeCode codeList="./resources/codeList.xml#CI_DateTypeCode" codeListValue="creation"/>
+                           </dateType>
+                        </CI_Date>
+                     </date>
+                     <date>
+                        <CI_Date>
+                           <date>
+                              <gco:Date>2010-04-19</gco:Date>
+                           </date>
+                           <dateType>
+                              <CI_DateTypeCode codeList="./resources/codeList.xml#CI_DateTypeCode" codeListValue="revision"/>
+                           </dateType>
+                        </CI_Date>
+                     </date>
+                     <date>
+                        <CI_Date>
+                           <date>
+                              <gco:Date>2009-07-30</gco:Date>
+                           </date>
+                           <dateType>
+                              <CI_DateTypeCode codeList="./resources/codeList.xml#CI_DateTypeCode" codeListValue="publication"/>
+                           </dateType>
+                        </CI_Date>
+                     </date>
+                     <identifier>
+                        <MD_Identifier>
+                           <code>
+                              <gco:CharacterString>EO:EUM:DAT:MULT:GMC</gco:CharacterString>
+                           </code>
+                        </MD_Identifier>
+                     </identifier>
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       
+                     
+                     
+                                       <citedResponsibleParty>
+                        <CI_ResponsibleParty>
+                           <contactInfo>
+                              <CI_Contact>
+                                 <onlineResource>
+                                    <CI_OnlineResource>
+                                       <linkage>
+                                          <URL>http://satelite.cptec.inpe.br/home/</URL>
+                                       </linkage>
+                                       <name>
+                                          <gco:CharacterString>CPTEC</gco:CharacterString>
+                                       </name>
+                                       <function>
+                                          <CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="information"/>
+                                       </function>
+                                    </CI_OnlineResource>
+                                 </onlineResource>
+                              </CI_Contact>
+                           </contactInfo>
+                           <role>
+                              <CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+                           </role>
+                        </CI_ResponsibleParty>
+                     </citedResponsibleParty>
+                     <citedResponsibleParty>
+                        <CI_ResponsibleParty>
+                           <contactInfo>
+                              <CI_Contact>
+                                 <onlineResource>
+                                    <CI_OnlineResource>
+                                       <linkage>
+                                          <URL>http://www.devcocast.eu</URL>
+                                       </linkage>
+                                       <name>
+                                          <gco:CharacterString>DevCoCast</gco:CharacterString>
+                                       </name>
+                                       <function>
+                                          <CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="information"/>
+                                       </function>
+                                    </CI_OnlineResource>
+                                 </onlineResource>
+                              </CI_Contact>
+                           </contactInfo>
+                           <role>
+                              <CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+                           </role>
+                        </CI_ResponsibleParty>
+                     </citedResponsibleParty>
+                     <citedResponsibleParty>
+                        <CI_ResponsibleParty>
+                           <contactInfo>
+                              <CI_Contact>
+                                 <onlineResource>
+                                    <CI_OnlineResource>
+                                       <linkage>
+                                          <URL>http://www.inpe.br</URL>
+                                       </linkage>
+                                       <name>
+                                          <gco:CharacterString>INPE</gco:CharacterString>
+                                       </name>
+                                       <function>
+                                          <CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="information"/>
+                                       </function>
+                                    </CI_OnlineResource>
+                                 </onlineResource>
+                              </CI_Contact>
+                           </contactInfo>
+                           <role>
+                              <CI_RoleCode codeList="CI_RoleCode" codeListValue="author"/>
+                           </role>
+                        </CI_ResponsibleParty>
+                     </citedResponsibleParty>
+                  </CI_Citation>
+               </citation>
+               <abstract>
+                  <gco:CharacterString>A DevCoCast product, GOES/MSG Composite is a product created by composing the GOES-12 IR images with MSG IR images, every 15 minutes. Every 3 hours, the composite will be derived from the full disk of GOES and full disk of MSG, in the 13-North to 50-South Latitude; 85-West to 55-East Longitude region, encompassing South America and Africa.</gco:CharacterString>
+               </abstract>
+
+               <pointOfContact>
+                  <CI_ResponsibleParty>
+                     <individualName>
+                        <gco:CharacterString>National Institute for Space Research</gco:CharacterString>
+                     </individualName>
+                     <organisationName>
+                        <gco:CharacterString>INPE/CPTEC</gco:CharacterString>
+                     </organisationName>
+                     <contactInfo>
+                        <CI_Contact>
+                           <phone>
+                              <CI_Telephone>
+                                 <voice>
+                                    <gco:CharacterString>+ 55 12 3186-9291</gco:CharacterString>
+                                 </voice>
+                                 <facsimile>
+                                    <gco:CharacterString>+ 55 12 3186-9291</gco:CharacterString>
+                                 </facsimile>
+                              </CI_Telephone>
+                           </phone>
+                           <address>
+                              <CI_Address>
+                                 <deliveryPoint>
+                                    <gco:CharacterString>Km, 040 Rodovia Presidente Dutra</gco:CharacterString>
+                                 </deliveryPoint>
+                                 <city>
+                                    <gco:CharacterString>12630-000 Cachoeira Paulista (SP)</gco:CharacterString>
+                                 </city>
+                                 <administrativeArea>
+                                    <gco:CharacterString>Cachoeira Paulista, SP</gco:CharacterString>
+                                 </administrativeArea>
+                                 <postalCode>
+                                    <gco:CharacterString>12630-000</gco:CharacterString>
+                                 </postalCode>
+                                 <country>
+                                    <gco:CharacterString>Brazil</gco:CharacterString>
+                                 </country>
+                                 <electronicMailAddress>
+                                    <gco:CharacterString>atusdsa@cptec.inpe.br</gco:CharacterString>
+                                 </electronicMailAddress>
+                              </CI_Address>
+                           </address>
+                           <onlineResource>
+                              <CI_OnlineResource>
+                                 <linkage>
+                                    <URL>http://www.cptec.inpe.br</URL>
+                                 </linkage>
+                                 <protocol>
+                                    <gco:CharacterString>http</gco:CharacterString>
+                                 </protocol>
+                              </CI_OnlineResource>
+                           </onlineResource>
+                        </CI_Contact>
+                     </contactInfo>
+                     <role>
+                        <CI_RoleCode codeList="./resources/codeList.xml#CI_RoleCode" codeListValue="originator"/>
+                     </role>
+                  </CI_ResponsibleParty>
+               </pointOfContact>
+
+               <graphicOverview>
+                  <MD_BrowseGraphic>
+                     <fileName>
+                        <gco:CharacterString>/smartEditor/preview/GMC.jpg</gco:CharacterString>
+                     </fileName>
+                  </MD_BrowseGraphic>
+               </graphicOverview>
+               <descriptiveKeywords>
+                  <MD_Keywords>
+                     <keyword>
+                        <gco:CharacterString>Agriculture</gco:CharacterString>
+                     </keyword>
+                     <keyword>
+                        <gco:CharacterString>Climate</gco:CharacterString>
+                     </keyword>
+                     <keyword>
+                        <gco:CharacterString>Disaster</gco:CharacterString>
+                     </keyword>
+                     <keyword>
+                        <gco:CharacterString>Energy</gco:CharacterString>
+                     </keyword>
+                     <keyword>
+                        <gco:CharacterString>Water</gco:CharacterString>
+                     </keyword>
+                     <keyword>
+                        <gco:CharacterString>Weather</gco:CharacterString>
+                     </keyword>
+                     <type>
+                        <MD_KeywordTypeCode codeList="http://metadata.dgiwg.org/codelistRegistry?MD_KeywordTypeCode" codeListValue="socialBenefitArea"/>
+                     </type>
+                  </MD_Keywords>
+               </descriptiveKeywords>
+               <descriptiveKeywords>
+                  <MD_Keywords>
+                     <keyword>
+                        <gco:CharacterString>Satellite_data</gco:CharacterString>
+                     </keyword>
+                     <keyword>
+                        <gco:CharacterString>Cloud</gco:CharacterString>
+                     </keyword>
+                     <keyword>
+                        <gco:CharacterString>Observation</gco:CharacterString>
+                     </keyword>
+                     <type>
+                        <MD_KeywordTypeCode codeList="http://metadata.dgiwg.org/codelistRegistry?MD_KeywordTypeCode" codeListValue="theme"/>
+                     </type>
+                  </MD_Keywords>
+               </descriptiveKeywords>
+               <descriptiveKeywords>
+                  <MD_Keywords>
+                     <keyword>
+                        <gco:CharacterString>Satellite_data</gco:CharacterString>
+                     </keyword>
+                     <type>
+                        <MD_KeywordTypeCode codeList="http://metadata.dgiwg.org/codelistRegistry?MD_KeywordTypeCode" codeListValue="discipline"/>
+                     </type>
+                  </MD_Keywords>
+               </descriptiveKeywords>
+
+
+
+               <descriptiveKeywords>
+                  <MD_Keywords>
+                     <keyword>
+                        <gco:CharacterString>GEONETCast-Americas</gco:CharacterString>
+                     </keyword>
+                     <keyword>
+                        <gco:CharacterString>EUMETCast</gco:CharacterString>
+                     </keyword>
+                     <keyword>
+                        <gco:CharacterString>EUMETCast-Europe</gco:CharacterString>
+                     </keyword>
+                     <keyword>
+                        <gco:CharacterString>EUMETCast-Africa</gco:CharacterString>
+                     </keyword>
+                     <keyword>
+                        <gco:CharacterString>EUMETCast-Americas</gco:CharacterString>
+                     </keyword>
+                     <type>
+                        <MD_KeywordTypeCode codeList="MD_KeywordTypeCode" codeListValue="place"/>
+                     </type>
+                  </MD_Keywords>
+               </descriptiveKeywords>
+               <resourceConstraints>
+                  <MD_LegalConstraints>
+                     <useLimitation>
+                        <gco:CharacterString>Permission to use, copy and distribution of products requested only for educational purposes, research and recreation. Products supplied may not be used for publication in newspapers and magazines, or other commercial purposes of any kind, unless the user has a written permission from CPTEC/INPE.</gco:CharacterString>
+                     </useLimitation>
+                     <useConstraints>
+                        <MD_RestrictionCode codeList="MD_RestrictionCode" codeListValue="copyright"/>
+                     </useConstraints>
+                  </MD_LegalConstraints>
+               </resourceConstraints>
+
+               <spatialResolution>
+                  <MD_Resolution>
+                     <equivalentScale>
+                        <MD_RepresentativeFraction>
+                           <denominator>
+                              <gco:Integer>14</gco:Integer>
+                           </denominator>
+                        </MD_RepresentativeFraction>
+                     </equivalentScale>
+                  </MD_Resolution>
+               </spatialResolution>
+               <language>
+                  <gco:CharacterString>eng</gco:CharacterString>
+               </language>
+               <characterSet>
+                  <MD_CharacterSetCode codeList="/resources/codeList.xml#CI_CharacterSetCode" codeListValue="utf8"/>
+               </characterSet>
+
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               <topicCategory>
+                  <MD_TopicCategoryCode>climatologyMeteorologyAtmosphere</MD_TopicCategoryCode>
+               </topicCategory>
+               <extent>
+                  <EX_Extent>
+                     <geographicElement>
+                        <EX_GeographicDescription>
+                           <geographicIdentifier>
+                              <MD_Identifier>
+                                 <code>
+                                    <gco:CharacterString>Africa and South America</gco:CharacterString>
+                                 </code>
+                              </MD_Identifier>
+                           </geographicIdentifier>
+                        </EX_GeographicDescription>
+                     </geographicElement>
+                  </EX_Extent>
+               </extent>
+               <extent>
+                  <EX_Extent>
+                     <geographicElement>
+                        <EX_GeographicBoundingBox>
+                           <westBoundLongitude>
+                              <gco:Decimal>-100.0</gco:Decimal>
+                           </westBoundLongitude>
+                           <eastBoundLongitude>
+                              <gco:Decimal>55.0</gco:Decimal>
+                           </eastBoundLongitude>
+                           <southBoundLatitude>
+                              <gco:Decimal>-50.0</gco:Decimal>
+                           </southBoundLatitude>
+                           <northBoundLatitude>
+                              <gco:Decimal>13.0</gco:Decimal>
+                           </northBoundLatitude>
+                        </EX_GeographicBoundingBox>
+                     </geographicElement>
+                  </EX_Extent>
+               </extent>
+
+            </MD_DataIdentification>
+         </identificationInfo>
+         <contentInfo>
+            <gmi:MI_CoverageDescription>
+               <attributeDescription>
+                  <gco:RecordType/>
+               </attributeDescription>
+               <contentType>
+                  <MD_CoverageContentTypeCode codeList="./resources/codeList.xml#CI_ContentTypeCode" codeListValue=""/>
+               </contentType>
+            </gmi:MI_CoverageDescription>
+         </contentInfo>
+         <distributionInfo>
+            <MD_Distribution>
+               <distributor>
+                  <eum:MD_EUMDistributor>
+                     <distributorContact>
+                        <CI_ResponsibleParty>
+
+                           <individualName>
+                              <gco:CharacterString>National Institute for Space Research</gco:CharacterString>
+                           </individualName>
+                           <organisationName>
+                              <gco:CharacterString>INPE/CPTEC</gco:CharacterString>
+                           </organisationName>
+                           <contactInfo>
+                              <CI_Contact>
+                                 <phone>
+                                    <CI_Telephone>
+                                       <voice>
+                                          <gco:CharacterString>+ 55 12 3186-9291</gco:CharacterString>
+                                       </voice>
+                                       <facsimile>
+                                          <gco:CharacterString>+ 55 12 3186-9291</gco:CharacterString>
+                                       </facsimile>
+                                    </CI_Telephone>
+                                 </phone>
+                                 <address>
+                                    <CI_Address>
+                                       <deliveryPoint>
+                                          <gco:CharacterString>Km, 040 Rodovia Presidente Dutra</gco:CharacterString>
+                                       </deliveryPoint>
+                                       <city>
+                                          <gco:CharacterString>12630-000 Cachoeira Paulista (SP)</gco:CharacterString>
+                                       </city>
+                                       <administrativeArea>
+                                          <gco:CharacterString>Cachoeira Paulista, SP</gco:CharacterString>
+                                       </administrativeArea>
+                                       <postalCode>
+                                          <gco:CharacterString>12630-000</gco:CharacterString>
+                                       </postalCode>
+                                       <country>
+                                          <gco:CharacterString>Brazil</gco:CharacterString>
+                                       </country>
+                                       <electronicMailAddress>
+                                          <gco:CharacterString>atusdsa@cptec.inpe.br</gco:CharacterString>
+                                       </electronicMailAddress>
+                                    </CI_Address>
+                                 </address>
+                                 <onlineResource>
+                                    <CI_OnlineResource>
+                                       <linkage>
+                                          <URL>http://www.cptec.inpe.br</URL>
+                                       </linkage>
+                                       <protocol>
+                                          <gco:CharacterString>http</gco:CharacterString>
+                                       </protocol>
+                                    </CI_OnlineResource>
+                                 </onlineResource>
+                              </CI_Contact>
+                           </contactInfo>
+                           <role>
+                              <CI_RoleCode codeList="./resources/codeList.xml#CI_RoleCode" codeListValue="originator"/>
+                           </role>
+                        </CI_ResponsibleParty>
+                     </distributorContact>
+
+                     
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       
+                     
+                                       <eum:digitalTransfers>
+                        <eum:MD_EUMDigitalTransfer>
+                           <eum:availability>
+                              <eum:MD_EUMDigitalTransferOptions>
+                                 <onLine>
+                                    <CI_OnlineResource>
+                                       <linkage>
+                                          <URL>http://www.geonetcastamericas.noaa.gov/</URL>
+                                       </linkage>
+                                       <protocol>
+                                          <gco:CharacterString>http</gco:CharacterString>
+                                       </protocol>
+                                       <name>
+                                          <gco:CharacterString>GEONETCast-Americas</gco:CharacterString>
+                                       </name>
+                                       <function>
+                                          <CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="order"/>
+                                       </function>
+                                    </CI_OnlineResource>
+                                 </onLine>
+                                 <eum:availability>
+                                    <gco:CharacterString>GEONETCast-Americas</gco:CharacterString>
+                                 </eum:availability>
+                                 <eum:aggregateIdentifier>
+                                    <gco:CharacterString/>
+                                 </eum:aggregateIdentifier>
+                                 <eum:eumetcastChannels>
+                                    <gco:CharacterString/>
+                                 </eum:eumetcastChannels>
+                              </eum:MD_EUMDigitalTransferOptions>
+                           </eum:availability>
+                           <eum:format>
+                              <eum:MD_EUMFormat>
+                                 <name>
+                                    <gco:CharacterString>GEOTIFF</gco:CharacterString>
+                                 </name>
+                                 <version>
+                                    <gco:CharacterString/>
+                                 </version>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>INPE_GMC_YYYYMMDDhhmm.tif</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:averageFileSizeUnits>
+                                    <gco:CharacterString>KB</gco:CharacterString>
+                                 </eum:averageFileSizeUnits>
+                                 <eum:averageFileSize>
+                                    <gco:Real>400.0</gco:Real>
+                                 </eum:averageFileSize>
+                                 <eum:frequency>
+                                    <gco:CharacterString>96 (per day)</gco:CharacterString>
+                                 </eum:frequency>
+                              </eum:MD_EUMFormat>
+                           </eum:format>
+                        </eum:MD_EUMDigitalTransfer>
+                     </eum:digitalTransfers>
+                     <eum:digitalTransfers>
+                        <eum:MD_EUMDigitalTransfer>
+                           <eum:availability>
+                              <eum:MD_EUMDigitalTransferOptions>
+                                 <onLine>
+                                    <CI_OnlineResource>
+                                       <linkage>
+                                          <URL>http://eoportal.eumetsat.int/userMgmt</URL>
+                                       </linkage>
+                                       <protocol>
+                                          <gco:CharacterString>http</gco:CharacterString>
+                                       </protocol>
+                                       <name>
+                                          <gco:CharacterString>EO Portal Registration</gco:CharacterString>
+                                       </name>
+                                       <function>
+                                          <CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="order"/>
+                                       </function>
+                                    </CI_OnlineResource>
+                                 </onLine>
+                                 <onLine>
+                                    <CI_OnlineResource>
+                                       <linkage>
+                                          <URL>http://www.eumetsat.int/Home/Main/What_We_Do/EUMETCast/Reception_Station_Set-up/index.htm?l=en</URL>
+                                       </linkage>
+                                       <protocol>
+                                          <gco:CharacterString>http</gco:CharacterString>
+                                       </protocol>
+                                       <name>
+                                          <gco:CharacterString>Reception Station Set-up</gco:CharacterString>
+                                       </name>
+                                       <function>
+                                          <CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="order"/>
+                                       </function>
+                                    </CI_OnlineResource>
+                                 </onLine>
+                                 <eum:availability>
+                                    <gco:CharacterString>EUMETCast,EUMETCast-Africa,EUMETCast-Europe,EUMETCast-Americas</gco:CharacterString>
+                                 </eum:availability>
+                                 <eum:aggregateIdentifier>
+                                    <gco:CharacterString/>
+                                 </eum:aggregateIdentifier>
+                                 <eum:eumetcastChannels>
+                                    <gco:CharacterString>DEVCOCAST-1</gco:CharacterString>
+                                 </eum:eumetcastChannels>
+                              </eum:MD_EUMDigitalTransferOptions>
+                           </eum:availability>
+                           <eum:format>
+                              <eum:MD_EUMFormat>
+                                 <name>
+                                    <gco:CharacterString>GEOTIFF</gco:CharacterString>
+                                 </name>
+                                 <version>
+                                    <gco:CharacterString/>
+                                 </version>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>INPE_GMC_YYYYMMDDhhmm.tif</gco:CharacterString>
+                                 </eum:typicalFilename>
+                                 <eum:averageFileSizeUnits>
+                                    <gco:CharacterString>KB</gco:CharacterString>
+                                 </eum:averageFileSizeUnits>
+                                 <eum:averageFileSize>
+                                    <gco:Real>400.0</gco:Real>
+                                 </eum:averageFileSize>
+                                 <eum:frequency>
+                                    <gco:CharacterString>96 (per day)</gco:CharacterString>
+                                 </eum:frequency>
+                              </eum:MD_EUMFormat>
+                           </eum:format>
+                        </eum:MD_EUMDigitalTransfer>
+                     </eum:digitalTransfers>
+                  </eum:MD_EUMDistributor>
+               </distributor>
+            </MD_Distribution>
+         </distributionInfo>
+         <gmi:acquisitionInformation>
+            <gmi:MI_AcquisitionInformation>
+               <gmi:platform>
+                  <eum:MI_EUMPlatform>
+                     <gmi:identifier>
+                        <MD_Identifier>
+                           <code>
+                              <gco:CharacterString>GOES,MSG</gco:CharacterString>
+                           </code>
+                        </MD_Identifier>
+                     </gmi:identifier>
+                     <gmi:description>
+                        <gco:CharacterString/>
+                     </gmi:description>
+
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     <gmi:instrument>
+                        <gmi:MI_Instrument>
+                           <gmi:citation>
+                              <CI_Citation>
+                                 <title/>
+                                 <date/>
+                                 <identifier>
+                                    <MD_Identifier>
+                                       <code>
+                                          <gco:CharacterString>SEVIRI</gco:CharacterString>
+                                       </code>
+                                    </MD_Identifier>
+                                 </identifier>
+                              </CI_Citation>
+                           </gmi:citation>
+                           <gmi:type>
+                              <gmi:MI_SensorTypeCode id="optical"/>
+                           </gmi:type>
+                        </gmi:MI_Instrument>
+                     </gmi:instrument>
+                     <gmi:instrument>
+                        <gmi:MI_Instrument>
+                           <gmi:citation>
+                              <CI_Citation>
+                                 <title/>
+                                 <date/>
+                                 <identifier>
+                                    <MD_Identifier>
+                                       <code>
+                                          <gco:CharacterString>GOES Imager</gco:CharacterString>
+                                       </code>
+                                    </MD_Identifier>
+                                 </identifier>
+                              </CI_Citation>
+                           </gmi:citation>
+                           <gmi:type>
+                              <gmi:MI_SensorTypeCode id="radiometer"/>
+                           </gmi:type>
+                        </gmi:MI_Instrument>
+                     </gmi:instrument>
+                     <eum:orbitType>
+                        <eum:CI_OrbitTypeCode codeList="./resources/codeList.xml#CI_OrbitTypeCode" codeListValue="GEO"/>
+                     </eum:orbitType>
+                  </eum:MI_EUMPlatform>
+               </gmi:platform>
+            </gmi:MI_AcquisitionInformation>
+         </gmi:acquisitionInformation>
+      </gmi:MI_Metadata>
