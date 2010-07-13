@@ -1,13 +1,21 @@
 package org.eumetsat.dcpc.md.test;
 
+import java.awt.print.Printable;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
 
-import org.eumetsat.dcpc.commons.xml.XmlPrettyPrinter;
+import org.eumetsat.dcpc.commons.Checksummer;
+import org.eumetsat.dcpc.commons.DateFormatter;
+import org.eumetsat.dcpc.commons.XmlPrettyPrinter;
 import org.eumetsat.dcpc.md.export.ApplyXslt;
+import org.eumetsat.dcpc.md.export.MetadataExporter;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -15,13 +23,8 @@ import junit.framework.TestCase;
 
 public class ExportTest extends TestCase
 {
-    public final static String TEST_DIR = "H:/Dev/ecli-workspace/DWD-metadata-transformers/src/test/resources"; ;
-
-    public void testSimple()
-    {
-        System.out.println("Hello world");
-    }
-
+    public final static String TEST_DIR = "H:/Dev/ecli-workspace/DWD-metadata-transformers/src/test/resources";
+    
     public void ztestUniqueFile()
     {
         String dirPath = TEST_DIR + File.separatorChar + "uniqueXML";
@@ -59,26 +62,81 @@ public class ExportTest extends TestCase
         catch (Exception e)
         {
            e.printStackTrace();
-           fail("Received Exception " + e);
+           fail("See Exception Stack Trace");
         }
     }
     
-    public void testPrettyPrintFile()
+    /* working pretty print test */
+    public void ztestPrettyPrintFile()
     {
-        String dirPath  = TEST_DIR + File.separatorChar + "uniqueXML";
-        String filePath = dirPath + File.separatorChar + "10.xml";
+        String dirPath          = TEST_DIR + File.separatorChar + "uniqueXML";
+        String filePath         = dirPath  + File.separatorChar + "10.xml";
+        String expectedFilePath = TEST_DIR + File.separatorChar + "testPrettyPrint" + File.separatorChar + "expectedPrettyPrintXML.xml";
         
         try
         {
+            // pretty print
             String result = XmlPrettyPrinter.prettyPrintAsString(filePath);
             
-            System.out.println(result);
+            // get the expected result
+            byte[] buffer = new byte[(int) new File(expectedFilePath).length()];
+            BufferedInputStream f = new BufferedInputStream(new FileInputStream(expectedFilePath));
+            f.read(buffer);
+            
+            String expectedXML = new String(buffer,"UTF-8");
+            
+            //assertEquals(expectedXML, result);
             
         }
         catch (Exception e)
         {
             e.printStackTrace();
             fail("See Exception Stack Trace");
+        }
+    }
+    
+    /**
+     * test MD5 generation
+     */
+    public void ztestMD5()
+    {
+        String toHash    = "This is the string to hash";
+        String expectMD5 = "599932288f3e3a4c377cdd6b3cb68ea0";
+        
+        ByteArrayInputStream BIn;
+        try
+        {
+            BIn = new ByteArrayInputStream(toHash.getBytes("UTF-8"));
+            
+            String checksum = Checksummer.doMD5Checksum(BIn);
+            
+            assertEquals("the 2 checksum are not the same", expectMD5, checksum);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            fail("See Exception Stack Trace");
+        }
+        
+    }
+    
+    public void ztestDateFormatting()
+    {
+        Date date = new Date();
+        System.out.println(DateFormatter.dateToString(date));
+    }
+    
+    public void testMetadataExporter()
+    {
+        String releaseDBPath = "H:/ReleasesDB";
+        try
+        {
+            MetadataExporter exporter = new MetadataExporter(releaseDBPath);
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 }

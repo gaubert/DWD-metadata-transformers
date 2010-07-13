@@ -1,4 +1,4 @@
-package org.eumetsat.dcpc.commons.xml;
+package org.eumetsat.dcpc.commons;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -48,7 +48,7 @@ public class XmlPrettyPrinter
      * @throws Exception if the source file doesn't exist 
      *                   or if there is problem while doing the XML transformation
      */
-    public static OutputStream prettyPrintString (String aFilePath, OutputStream aOut) throws Exception
+    public static OutputStream prettyPrint(String aFilePath, OutputStream aOut) throws Exception
     {
         FileInputStream in = new FileInputStream(aFilePath);
         
@@ -59,6 +59,12 @@ public class XmlPrettyPrinter
         return aOut;
     }
     
+    /**
+     * internal method doing the xml transformation
+     * @param doc
+     * @param out
+     * @throws Exception
+     */
     private static void serialize(Document doc, OutputStream out) throws Exception
     {
 
@@ -83,8 +89,8 @@ public class XmlPrettyPrinter
         }
     }
 
-    private static org.w3c.dom.Document loadXMLFrom(String xml)
-            throws org.xml.sax.SAXException, java.io.IOException
+    @SuppressWarnings("unused")
+    private static org.w3c.dom.Document loadXMLFrom(String xml) throws org.xml.sax.SAXException, java.io.IOException
     {
         return loadXMLFrom(new java.io.ByteArrayInputStream(xml.getBytes()));
     }
