@@ -1,6 +1,4 @@
 package org.eumetsat.dcpc.md.test;
-
-import java.awt.print.Printable;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -16,14 +14,20 @@ import org.eumetsat.dcpc.commons.DateFormatter;
 import org.eumetsat.dcpc.commons.XmlPrettyPrinter;
 import org.eumetsat.dcpc.md.export.ApplyXslt;
 import org.eumetsat.dcpc.md.export.MetadataExporter;
+import org.eumetsat.dcpc.md.export.Release;
+import org.eumetsat.dcpc.md.export.ReleaseDatabase;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import junit.framework.TestCase;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ExportTest extends TestCase
 {
     public final static String TEST_DIR = "H:/Dev/ecli-workspace/DWD-metadata-transformers/src/test/resources";
+    public final static Logger logger = LoggerFactory.getLogger(ExportTest.class);
     
     public void ztestUniqueFile()
     {
@@ -126,12 +130,13 @@ public class ExportTest extends TestCase
         System.out.println(DateFormatter.dateToString(date));
     }
     
-    public void testMetadataExporter()
+    public void ztestMetadataExporter()
     {
         String releaseDBPath = "H:/ReleasesDB";
         try
         {
             MetadataExporter exporter = new MetadataExporter(releaseDBPath);
+            
         }
         catch (IOException e)
         {
@@ -139,4 +144,46 @@ public class ExportTest extends TestCase
             e.printStackTrace();
         }
     }
+    
+    public void testCreateGetAndDeleteRelease()
+    {
+        String releaseDBPath = "H:/ReleasesDB";
+        try
+        {
+            ReleaseDatabase  releaseDB = new ReleaseDatabase(releaseDBPath);
+            
+            // create a new Release
+            Release theNewRelease      = releaseDB.createRelease();
+            
+            // get the new Release
+            Release theGottenRelease      = releaseDB.getRelease(theNewRelease.getName());
+            
+            assertEquals("the 2 releases are not the same: ", theNewRelease, theGottenRelease);
+            
+            // Force a Reload
+            releaseDB.reloadDB();
+            
+            // get nb of Releases and it should be 1;
+            assertEquals("At this point we should have 1 release", 1, releaseDB.getNbOfReleases());
+            
+            // delete the new Release
+            releaseDB.deleteRelease(theNewRelease);
+            
+            // Force a Reload
+            releaseDB.reloadDB();
+            
+            // get nb of Releases and it should be 1;
+            assertEquals("At this point we should have 0 release", 0, releaseDB.getNbOfReleases());
+            
+            
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            fail("See Exception Stack Trace");
+            
+        }
+    }
+    
+    
 }

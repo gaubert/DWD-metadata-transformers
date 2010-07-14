@@ -6,26 +6,47 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+
+import org.eumetsat.dcpc.commons.DateFormatter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ReleaseDatabase
 {
+    public final static Logger logger = LoggerFactory.getLogger(ReleaseDatabase.class);
+    
+    
     protected String m_ReleaseDBRootDirPath;
     protected File   m_RDBRootDir;
     
-    protected ArrayList<File> m_Releases; 
+    // Releases list
+    protected ArrayList<Release>       m_Releases = new ArrayList<Release>();
+    // Release index
+    protected HashMap<String, Release> m_RIndex   = new HashMap<String, Release>();
     
-    public ReleaseDatabase(String aReleaseDBRootDirPath) throws IOException
+    public ReleaseDatabase(String aReleaseDBRootDirPath) throws Exception
     {
        m_ReleaseDBRootDirPath = aReleaseDBRootDirPath; 
         
-       loadDB();
+       _loadDB();
+    }
+    
+    /**
+     * Force a DB reload from disk
+     * @throws Exception 
+     */
+    public void reloadDB() throws Exception
+    {
+        this._loadDB();
     }
     
     /**
      * check that the releaseDB Root dir exists and is the DB root dir
      * @throws FileNotFoundException 
      */
-    private void loadDB() throws IOException
+    private void _loadDB() throws Exception
     {
         m_RDBRootDir = new File(m_ReleaseDBRootDirPath);
         
@@ -39,8 +60,14 @@ public class ReleaseDatabase
             throw new IOException(m_ReleaseDBRootDirPath + " should be a directory");
         }
         
+        // purge list of Releases and this index
+        m_Releases.clear();
+        m_RIndex.clear();
+        
         // load Releases    
         File[] files = m_RDBRootDir.listFiles();
+               
+        logger.info("Loaded {} Release dirs", files.length);
         
         // sort by name ascending
         Arrays.sort(files, new Comparator<File>()
@@ -51,8 +78,58 @@ public class ReleaseDatabase
             } 
         });
         
-        // store them in an arrayList
-        m_Releases = new ArrayList<File>(Arrays.asList(files));
+        Release aRelease = null;
+        // Create release list and its index
+        for (File file : files)
+        {
+            aRelease = new Release(file);
+            m_Releases.add(aRelease);
+            m_RIndex.put(aRelease.getName(), aRelease);
+        }  
+    }
+    
+    public int getNbOfReleases()
+    {
+        return this.m_Releases.size();
+    }
+    
+    /**
+     * Return the release provided the given name
+     * @param aReleaseName
+     * @return return the release if it exists otherwise return null
+     */
+    public Release getRelease(String aReleaseName)
+    {
+        return this.m_RIndex.get(aReleaseName);
+    }
+    
+    /**
+     * Create a Release
+     * @return a Release
+     * @throws Exception Fatal Exception in case of issue
+     */
+    public Release createRelease() throws Exception
+    {
+        // get now date
+        Date date = new Date();
+        File theReleaseFile   = new File(this.m_ReleaseDBRootDirPath + File.separator + DateFormatter.dateToString(date));
+        Release theNewRelease = Release.createRelease(theReleaseFile);
+        // add the new Release in the list of R and in its associated index
+        this.m_Releases.add(theNewRelease);
+        this.m_RIndex.put(theNewRelease.getName(), theNewRelease);
         
+        return theNewRelease;
+    }
+    
+    /**
+     * Remove the given Release from the database
+     * @param aRelease
+     */
+    public void deleteRelease(Release aRelease)
+    {
+       Release.deleteRelease(aRelease); 
+       // remove Release from index and list
+       this.m_Releases.remove(aRelease);
+       this.m_RIndex.remove(aRelease.getName());
     }
 }
