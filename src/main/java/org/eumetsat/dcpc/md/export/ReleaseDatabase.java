@@ -104,6 +104,38 @@ public class ReleaseDatabase
     }
     
     /**
+     * Return the latest release if there is one otherwise null
+     * @return the latest release or null
+     */
+    public Release getLatestRelease()
+    {
+       return (this.m_Releases.size() > 0) ? this.m_Releases.get(this.m_Releases.size()-1) : null; 
+    }
+    
+    /**
+     * Return the previous release of the passed one.
+     * @param aOfThisRelease
+     * @return the previous release otherwise null if there is no previous one
+     * @throws Exception if the passed Release is not in the Database
+     */
+    public Release getPreviousRelease(Release aOfThisRelease) throws Exception
+    {
+        int index = m_Releases.indexOf(aOfThisRelease);
+        
+        if (index == -1)
+            throw new Exception("Release " + aOfThisRelease + " is not in the ReleaseDB");
+        
+        if (index == 0)
+        {
+            return null;
+        }
+        else
+        {
+            return m_Releases.get(index -1 );
+        }
+    }
+    
+    /**
      * Create a Release
      * @return a Release
      * @throws Exception Fatal Exception in case of issue

@@ -22,17 +22,12 @@
 
 package org.eumetsat.dcpc.md.export;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-
+import java.io.FileOutputStream;
 import java.io.FilenameFilter;
-
-import net.sf.saxon.s9api.Processor;
-import net.sf.saxon.s9api.SaxonApiException;
-import net.sf.saxon.s9api.Serializer;
-import net.sf.saxon.s9api.XdmNode;
-import net.sf.saxon.s9api.XsltCompiler;
-import net.sf.saxon.s9api.XsltExecutable;
-import net.sf.saxon.s9api.XsltTransformer;
+import java.io.OutputStream;
 
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -43,6 +38,19 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.eumetsat.dcpc.commons.FileSystem;
+import org.eumetsat.dcpc.commons.XmlPrettyPrinter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.sf.saxon.s9api.Processor;
+import net.sf.saxon.s9api.SaxonApiException;
+import net.sf.saxon.s9api.Serializer;
+import net.sf.saxon.s9api.XdmNode;
+import net.sf.saxon.s9api.XsltCompiler;
+import net.sf.saxon.s9api.XsltExecutable;
+import net.sf.saxon.s9api.XsltTransformer;
+
 //-----------------------------------------------
 //Class:            ApplyXslt
 //-----------------------------------------------
@@ -52,6 +60,8 @@ import javax.xml.transform.stream.StreamSource;
  */
 public class ApplyXslt
 {
+    protected final static Logger   logger  = LoggerFactory.getLogger(ApplyXslt.class);
+
     // List of XML metadata files within the input directory
     private File[]    oListFiles      = null;
     
@@ -119,18 +129,19 @@ public class ApplyXslt
      * 1.0 and creates the output dir, where the results of the transformation
      * are stored.
      * 
-     * @param  a_DirToProcess the directory to process
+     * @param  aDirToProcess the directory to process
+     * @param  aPrettyPrint prettyPrint the XML
      * @throws Exception 
      */
-    public void processFiles(File a_DirToProcess) throws Exception
+    public void processFiles(File aDirToProcess, boolean aPrettyPrint) throws Exception
     {
         // Create if it doesn't exist
-        if (! a_DirToProcess.exists())
+        if (! aDirToProcess.exists())
         {
-           throw new Exception("Error: " + a_DirToProcess + " doesn't exist");
+           throw new Exception("Error: " + aDirToProcess + " doesn't exist");
         }
         
-        File[] files2Process = a_DirToProcess.listFiles(new FilenameFilter() {
+        File[] files2Process = aDirToProcess.listFiles(new FilenameFilter() {
             public boolean accept(File dir, String name)
             {
                 return name.endsWith(".xml");
@@ -145,22 +156,28 @@ public class ApplyXslt
         
         // create an instance of TransformerFactory
         TransformerFactory transFact = TransformerFactory.newInstance();
-
         Transformer trans;
+        
         try
         {
             trans = transFact.newTransformer(xsltSource);
             int cpt = 0;
             for (File file : files2Process)
             {
-                transformFile(file, trans, this.m_OutputDir);
+                if (aPrettyPrint)
+                {
+                   transformAndPrettyPrintFile(file, trans, this.m_OutputDir);
+                }
+                else
+                {
+                    transformFile(file, trans, this.m_OutputDir);
+                }
                 cpt++;
                 System.out.print(".");
                 if ((cpt % 80) == 0)
                 {
                     System.out.println();
-                }
-                
+                } 
             }
         }
         catch (TransformerConfigurationException e)
@@ -233,14 +250,13 @@ public class ApplyXslt
      * @throws SaxonApiException
      *             when there is an exception
      */
-    private void transformFile(File inputFile, Transformer xsltTransformer,
-            File outputDir) throws TransformerException
+    private void transformFile(File inputFile, Transformer xsltTransformer, File outputDir) throws TransformerException
     {
         Source xmlSource = new StreamSource(inputFile);
         String outputFileName = outputDir.getPath() + File.separator + this.m_Prefix + inputFile.getName();
 
         Result result = new StreamResult(new File(outputFileName));
-
+        
         try
         {
             xsltTransformer.transform(xmlSource, result);
@@ -252,6 +268,36 @@ public class ApplyXslt
         }
 
     }
+    
+    //ByteArrayOutputStream stream = new ByteArrayOutputStream();
+    //stream.toString("UTF-8");
+    
+    
+    private void transformAndPrettyPrintFile(File inputFile, Transformer xsltTransformer, File outputDir) throws Exception
+    {
+        Source xmlSource          = new StreamSource(inputFile);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        String outputFileName     = outputDir.getPath() + File.separator + this.m_Prefix + inputFile.getName();
+        
+        Result result = new StreamResult(out);
+        
+        try
+        {
+            xsltTransformer.transform(xmlSource, result);
+            
+            FileOutputStream oFile = new FileOutputStream(outputFileName);
+            
+            XmlPrettyPrinter.prettyPrint(new ByteArrayInputStream(out.toByteArray()), oFile);
+            
+        }
+        catch (Exception e)
+        {
+            logger.error("Failed transforming " + inputFile.getName());
+            throw e;
+        }
+
+    }
+    
 
     /**
      * Takes the input file, transforms it applying the XSLT 2.0 and stores the

@@ -16,6 +16,7 @@ import org.eumetsat.dcpc.md.export.ApplyXslt;
 import org.eumetsat.dcpc.md.export.MetadataExporter;
 import org.eumetsat.dcpc.md.export.Release;
 import org.eumetsat.dcpc.md.export.ReleaseDatabase;
+import org.eumetsat.dcpc.md.export.RenameMetadataFiles;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -36,6 +37,7 @@ public class ExportTest extends TestCase
 
         File dir = new File(dirPath);
         File xsltFile = new File(filePath);
+        
         try
         {
             if (!dir.exists())
@@ -58,7 +60,7 @@ public class ExportTest extends TestCase
             }
 
             ApplyXslt transformer = new ApplyXslt(xsltFile, new File("H:/Dev/ecli-workspace/DWD-metadata-transformers/src/test/resources/uniqueXML"),"transformed_");
-            transformer.processFiles(dir);
+            transformer.processFiles(dir, true);
             System.out.println();
             System.out.println("Process finished.");
 
@@ -132,20 +134,40 @@ public class ExportTest extends TestCase
     
     public void ztestMetadataExporter()
     {
-        String releaseDBPath = "H:/ReleasesDB";
+        String releaseDBPath      = "H:/ReleasesDB";
+        String workingDir         = "H:/WorkingDir";
+        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/xslt/eum2isoapFull_v3.xsl";
+        String metadataSourcePath = TEST_DIR + File.separatorChar + "uniqueXML";
+        
         try
         {
-            MetadataExporter exporter = new MetadataExporter(releaseDBPath);
+            MetadataExporter exporter = new MetadataExporter(xsltFile, releaseDBPath, workingDir);
+            
+            exporter.createExport(metadataSourcePath);
             
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
     
-    public void testCreateGetAndDeleteRelease()
+    public void testXPath()
+    {
+        try
+        {
+            RenameMetadataFiles.getName(new File("H:/10.xml"));
+        }
+        catch (Exception e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+    }
+    
+    public void ztestCreateGetAndDeleteRelease()
     {
         String releaseDBPath = "H:/ReleasesDB";
         try

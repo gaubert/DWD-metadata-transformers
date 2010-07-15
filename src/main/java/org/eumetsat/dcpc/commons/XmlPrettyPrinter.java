@@ -2,6 +2,7 @@ package org.eumetsat.dcpc.commons;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 import javax.xml.transform.OutputKeys;
@@ -53,6 +54,23 @@ public class XmlPrettyPrinter
         FileInputStream in = new FileInputStream(aFilePath);
         
         Document doc = XmlPrettyPrinter.loadXMLFrom(in);
+            
+        XmlPrettyPrinter.serialize(doc, aOut);
+            
+        return aOut;
+    }
+    
+    /**
+     * Pretty Print the XML as an OutputStream
+     * @param aIn InputStream
+     * @param aOut OutputStream
+     * @return the passed OutputStream filled
+     * @throws Exception if the source file doesn't exist 
+     *                   or if there is problem while doing the XML transformation
+     */
+    public static OutputStream prettyPrint(InputStream aIn, OutputStream aOut) throws Exception
+    {
+        Document doc = XmlPrettyPrinter.loadXMLFrom(aIn);
             
         XmlPrettyPrinter.serialize(doc, aOut);
             

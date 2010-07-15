@@ -25,10 +25,28 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
+import javax.xml.XMLConstants;
+import javax.xml.namespace.NamespaceContext;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
+
+import org.eumetsat.dcpc.commons.xml.SimpleNamespaceContext;
+import org.eumetsat.dcpc.commons.xml.XPathExtractor;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 //-----------------------------------------------
 //Class:            RenameMetadataFiles
@@ -44,7 +62,22 @@ public class RenameMetadataFiles
     private File[] oListFiles      = null;
     // string path of the inputDirectory
     private String strInputDirPath = null;
-
+    
+    private static final SimpleNamespaceContext ms_NamespaceContext = new SimpleNamespaceContext();
+    
+    // TODO To be put in a configuration file with the namespaces
+    private static final String XPathExprStr = "gmd:MD_Metadata/gmd:fileIdentifier/gco:CharacterString";
+    
+    static
+    {
+        ms_NamespaceContext.addNamespace("gmd", "http://www.isotc211.org/2005/gmd");
+        ms_NamespaceContext.addNamespace("gco", "http://www.isotc211.org/2005/gco");
+        ms_NamespaceContext.addNamespace("gmi", "http://www.isotc211.org/2005/gmi");
+        ms_NamespaceContext.addNamespace("gml", "http://www.opengis.net/gml");
+        ms_NamespaceContext.addNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+        
+    }
+    
     /**
      * Create a new object of <code>RenameMetadataFiles</code> class, and
      * extract the list of XML files at the input directory
@@ -89,75 +122,25 @@ public class RenameMetadataFiles
             }
         }
     }
-
-    /**
-     * Parses the XML file for getting the value of the
-     * <code>fileIdentifier</code> element.
-     * 
-     * @param file
-     *            XML file to parse
-     * @param xmlInFactory
-     *            Factory to get instances of XMLStreamReaders
-     * @return The string value of the <code>fileIdentifier</code> or
-     *         <code>null</code> if the value cannot be extracted
-     */
-    private String extractName(File file, XMLInputFactory xmlInFactory)
-    {
-        String extractedName = null;
-        // System.out.println("Extractig name from " + file.toString());
-
-        try
-        {
-            // it is needed the 'inputStream' var to be able to close the file
-            // afterwards, otherwise the renaming fails...
-            FileInputStream inputStream = new FileInputStream(file);
-            XMLStreamReader reader = xmlInFactory
-                    .createXMLStreamReader(inputStream);
-            boolean found = false;
-
-            while (!found && (reader.hasNext()))
-            {
-                int event = reader.next();
-                if (event == XMLStreamReader.START_ELEMENT)
-                {
-                    if (reader.getLocalName()
-                            .equalsIgnoreCase("fileIdentifier"))
-                    {
-                        // read the next element, <gco:CharacterString>
-                        reader.nextTag();
-                        if (reader.getLocalName().equalsIgnoreCase(
-                                "CharacterString"))
-                        {
-                            extractedName = reader.getElementText();
-                            found = true;
-                        }
-                        else
-                        {
-                            System.out.println("Wrong element read: "
-                                    + extractedName);
-                        }
-                    }
-                }
-            }
-            reader.close();
-            inputStream.close();
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-            extractedName = null;
-        }
-        catch (XMLStreamException e)
-        {
-            e.printStackTrace();
-            extractedName = null;
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-            extractedName = null;
-        }
-        return extractedName;
+    
+    public static String extractName(File aFile) throws Exception
+    {        
+        XPathExtractor xpathExtractor = new XPathExtractor();
+        
+        SimpleNamespaceContext ns = xpathExtractor.getNewNamespaceContext();
+        ns.addNamespace("gmd", "http://www.isotc211.org/2005/gmd");
+        ns.addNamespace("gco", "http://www.isotc211.org/2005/gco");
+        ns.addNamespace("gmi", "http://www.isotc211.org/2005/gmi");
+        ns.addNamespace("gml", "http://www.opengis.net/gml");
+        ns.addNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+        
+        xpathExtractor.setXPathExpression("gmd:MD_Metadata/gmd:fileIdentifier/gco:CharacterString", ns);
+        
+        String result = xpathExtractor.evaluateAsString(new File("H:/10.xml"));
+        
+        System.out.println(result);
+        
+        return result;
     }
 
     /**

@@ -75,6 +75,31 @@ public class FileSystem
     }
     
     /**
+     * Create TempDirectory in the given root dir
+     * @param aRootDir if null then use the default temp dir
+     * @return the created temp dir
+     * @throws IOException
+     */
+    public static File createTempDirectory(File aRootDir) throws IOException
+    {
+        final File temp;
+    
+        temp = File.createTempFile("temp-", Long.toString(System.nanoTime()), aRootDir);
+    
+        if(!(temp.delete()))
+        {
+            throw new IOException("Could not delete temp file: " + temp.getAbsolutePath());
+        }
+    
+        if(!(temp.mkdir()))
+        {
+            throw new IOException("Could not create temp directory: " + temp.getAbsolutePath());
+        }
+    
+        return (temp);
+    }
+    
+    /**
      * CreateDir if necessary (error if dir cannot be created)
      * @param aFile
      * @throws IOException
