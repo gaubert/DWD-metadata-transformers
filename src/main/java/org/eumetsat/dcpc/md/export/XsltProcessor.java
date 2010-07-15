@@ -27,7 +27,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
-import java.io.OutputStream;
 
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -38,11 +37,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.eumetsat.dcpc.commons.FileSystem;
-import org.eumetsat.dcpc.commons.XmlPrettyPrinter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.SaxonApiException;
 import net.sf.saxon.s9api.Serializer;
@@ -51,6 +45,10 @@ import net.sf.saxon.s9api.XsltCompiler;
 import net.sf.saxon.s9api.XsltExecutable;
 import net.sf.saxon.s9api.XsltTransformer;
 
+import org.eumetsat.dcpc.commons.XmlPrettyPrinter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 //-----------------------------------------------
 //Class:            ApplyXslt
 //-----------------------------------------------
@@ -58,9 +56,9 @@ import net.sf.saxon.s9api.XsltTransformer;
  * Apply the XSLT stylesheet given as command line argument to all the XML files
  * stored at the input directory given as command line argument.
  */
-public class ApplyXslt
+public class XsltProcessor
 {
-    protected final static Logger   logger  = LoggerFactory.getLogger(ApplyXslt.class);
+    protected final static Logger   logger  = LoggerFactory.getLogger(XsltProcessor.class);
 
     // List of XML metadata files within the input directory
     private File[]    oListFiles      = null;
@@ -88,7 +86,7 @@ public class ApplyXslt
      * @param a_XsltFile The XSLT file used for the transformation
      * @param a_OutputDir The output directory where the results files are written
      */
-    public ApplyXslt(File a_XsltFile, File a_OutputDir) throws Exception
+    public XsltProcessor(File a_XsltFile, File a_OutputDir) throws Exception
     {
         this(a_XsltFile, a_OutputDir, "");
     }
@@ -101,7 +99,7 @@ public class ApplyXslt
      * @param a_OutputDir The output directory where the results files are written
      * @param a_OutputFilePrefix Prefix that will be applied to all output files
      */
-    public ApplyXslt(File a_XsltFile, File a_OutputDir, String a_OutputFilePrefix) throws Exception
+    public XsltProcessor(File a_XsltFile, File a_OutputDir, String a_OutputFilePrefix) throws Exception
     {
         this.m_Prefix = a_OutputFilePrefix;
         
@@ -344,7 +342,7 @@ public class ApplyXslt
         if (args == null || args.length != 2 || (args[0].equalsIgnoreCase(""))
                 && (args[1].equalsIgnoreCase("")))
         {
-            System.out.println("Usage: " + ApplyXslt.class.getName()
+            System.out.println("Usage: " + XsltProcessor.class.getName()
                     + " <input dir> <XSLT file>");
             System.exit(1);
         }

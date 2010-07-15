@@ -21,32 +21,10 @@
 package org.eumetsat.dcpc.md.export;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import javax.xml.XMLConstants;
-import javax.xml.namespace.NamespaceContext;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
 
 import org.eumetsat.dcpc.commons.xml.SimpleNamespaceContext;
 import org.eumetsat.dcpc.commons.xml.XPathExtractor;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 
 //-----------------------------------------------
 //Class:            RenameMetadataFiles
@@ -56,7 +34,7 @@ import org.w3c.dom.NodeList;
  * - It extracts the string value at the <code><fileIdentifier></code> element<br>
  * - It renames the file to the string value and <code>.xml</code> extension.
  */
-public class RenameMetadataFiles
+public class MetadataFileRenamer
 {
     // list of XML metadata files within the input directory
     private File[] oListFiles      = null;
@@ -66,7 +44,7 @@ public class RenameMetadataFiles
     private static final SimpleNamespaceContext ms_NamespaceContext = new SimpleNamespaceContext();
     
     // TODO To be put in a configuration file with the namespaces
-    private static final String XPathExprStr = "gmd:MD_Metadata/gmd:fileIdentifier/gco:CharacterString";
+    private static final String ms_XPathExprStr = "gmd:MD_Metadata/gmd:fileIdentifier/gco:CharacterString";
     
     static
     {
@@ -85,7 +63,7 @@ public class RenameMetadataFiles
      * @param inputDir
      *            The input directory where the metadata files are stored.
      */
-    public RenameMetadataFiles(File inputDir)
+    public MetadataFileRenamer(File inputDir)
     {
         this.strInputDirPath = inputDir.getPath();
         this.oListFiles = inputDir.listFiles(new FilenameFilter() {
@@ -100,45 +78,42 @@ public class RenameMetadataFiles
     /**
      * Iterates through the list of files, parses it with XMLparser and rename
      * it as of <code><fileIdenfitifier></code> element.
+     * @throws Exception 
      */
-    private void processFiles()
+    public void processFiles() throws Exception
     {
         String fileName = null;
         File newFile = null;
-        XMLInputFactory xmlInFactory = XMLInputFactory.newInstance();
-
-        for (int i = 0; i < this.oListFiles.length; i++)
+        
+        for (File file : this.oListFiles)
         {
-            fileName = extractName(this.oListFiles[i], xmlInFactory);
-            // System.out.println("Extracted name: " + fileName);
+            fileName = this.extractName(file);
+            System.out.println("Extracted name: " + fileName);
 
             if (fileName != null)
             {
-                newFile = new File(this.strInputDirPath + File.separator
-                        + fileName + ".xml");
+                newFile = new File(this.strInputDirPath + File.separator + fileName + ".xml");
                 System.out.println("new File: " + newFile.toString());
-                boolean success = this.oListFiles[i].renameTo(newFile);
+                boolean success = file.renameTo(newFile);
                 System.out.println("Renaming has successed... " + success);
             }
         }
     }
     
-    public static String extractName(File aFile) throws Exception
+    public String extractName(File aFile) throws Exception
     {        
+        
+        // preconditions
+        if (aFile == null)
+            throw new Exception("Error invalid File");
+        
         XPathExtractor xpathExtractor = new XPathExtractor();
         
-        SimpleNamespaceContext ns = xpathExtractor.getNewNamespaceContext();
-        ns.addNamespace("gmd", "http://www.isotc211.org/2005/gmd");
-        ns.addNamespace("gco", "http://www.isotc211.org/2005/gco");
-        ns.addNamespace("gmi", "http://www.isotc211.org/2005/gmi");
-        ns.addNamespace("gml", "http://www.opengis.net/gml");
-        ns.addNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+        xpathExtractor.setXPathExpression(ms_XPathExprStr, ms_NamespaceContext);
         
-        xpathExtractor.setXPathExpression("gmd:MD_Metadata/gmd:fileIdentifier/gco:CharacterString", ns);
+        String result = xpathExtractor.evaluateAsString(aFile);
         
-        String result = xpathExtractor.evaluateAsString(new File("H:/10.xml"));
-        
-        System.out.println(result);
+        System.out.println("Result =[" + result + "]");
         
         return result;
     }
@@ -155,7 +130,7 @@ public class RenameMetadataFiles
 
         if (args == null || args.length <= 0 || args[0].equalsIgnoreCase(""))
         {
-            System.out.println("Usage: " + RenameMetadataFiles.class.getName()
+            System.out.println("Usage: " + MetadataFileRenamer.class.getName()
                     + " <input dir>");
             System.exit(1);
         }
@@ -165,7 +140,7 @@ public class RenameMetadataFiles
             File inputDir = new File(args[0]);
             if (inputDir.isDirectory())
             {
-                RenameMetadataFiles renameMD = new RenameMetadataFiles(inputDir);
+                MetadataFileRenamer renameMD = new MetadataFileRenamer(inputDir);
                 renameMD.processFiles();
             }
             else

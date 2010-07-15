@@ -12,11 +12,11 @@ import java.util.Date;
 import org.eumetsat.dcpc.commons.Checksummer;
 import org.eumetsat.dcpc.commons.DateFormatter;
 import org.eumetsat.dcpc.commons.XmlPrettyPrinter;
-import org.eumetsat.dcpc.md.export.ApplyXslt;
+import org.eumetsat.dcpc.md.export.XsltProcessor;
 import org.eumetsat.dcpc.md.export.MetadataExporter;
 import org.eumetsat.dcpc.md.export.Release;
 import org.eumetsat.dcpc.md.export.ReleaseDatabase;
-import org.eumetsat.dcpc.md.export.RenameMetadataFiles;
+import org.eumetsat.dcpc.md.export.MetadataFileRenamer;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -59,7 +59,7 @@ public class ExportTest extends TestCase
                         "The file %s doesn't exist%n", xsltFile));
             }
 
-            ApplyXslt transformer = new ApplyXslt(xsltFile, new File("H:/Dev/ecli-workspace/DWD-metadata-transformers/src/test/resources/uniqueXML"),"transformed_");
+            XsltProcessor transformer = new XsltProcessor(xsltFile, new File("H:/Dev/ecli-workspace/DWD-metadata-transformers/src/test/resources/uniqueXML"),"transformed_");
             transformer.processFiles(dir, true);
             System.out.println();
             System.out.println("Process finished.");
@@ -132,19 +132,21 @@ public class ExportTest extends TestCase
         System.out.println(DateFormatter.dateToString(date));
     }
     
-    public void ztestMetadataExporter()
+    public void testMetadataExporter()
     {
         String releaseDBPath      = "H:/ReleasesDB";
         String workingDir         = "H:/WorkingDir";
         String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/xslt/eum2isoapFull_v3.xsl";
-        String metadataSourcePath = TEST_DIR + File.separatorChar + "uniqueXML";
+        //String metadataSourcePath = TEST_DIR + File.separatorChar + "uniqueXML";
+        String metadataSourcePath = TEST_DIR + File.separatorChar + "multipleXMLs";
+        
+        //String metadataSourcePath = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/metadata/eo-portal-metadata";
         
         try
         {
             MetadataExporter exporter = new MetadataExporter(xsltFile, releaseDBPath, workingDir);
             
-            exporter.createExport(metadataSourcePath);
-            
+            exporter.createExport(metadataSourcePath);  
         }
         catch (Exception e)
         {
@@ -153,11 +155,11 @@ public class ExportTest extends TestCase
         }
     }
     
-    public void testXPath()
+    public void ztestXPath()
     {
         try
         {
-            RenameMetadataFiles.getName(new File("H:/10.xml"));
+            MetadataFileRenamer rn = new MetadataFileRenamer(null);
         }
         catch (Exception e)
         {

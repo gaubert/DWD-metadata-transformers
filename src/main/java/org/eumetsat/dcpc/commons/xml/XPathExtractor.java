@@ -1,12 +1,10 @@
 package org.eumetsat.dcpc.commons.xml;
 
 import java.io.File;
-import java.io.IOException;
 
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -14,11 +12,10 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
+import org.w3c.dom.Node;
 
 public class XPathExtractor
 {
-    private static final SimpleNamespaceContext ms_NamespaceContext = new SimpleNamespaceContext();
     private XPathExpression _XPathExpr;
     
     private DocumentBuilderFactory _domFactory;
@@ -47,7 +44,7 @@ public class XPathExtractor
     /**
      * Evaluate Expression on the given XML file
      * @param aFile
-     * @return the result as a String
+     * @return the result as a String or null if nothing as been found
      * @throws Exception
      */
     public String evaluateAsString(File aXmlFile) throws Exception
@@ -56,8 +53,9 @@ public class XPathExtractor
         
         Document doc = builder.parse(aXmlFile);
         
-        String result = (String) _XPathExpr.evaluate(doc, XPathConstants.STRING);
+        Object result =  this._XPathExpr.evaluate(doc, XPathConstants.NODE);
         
-        return result;
+        return (result != null) ? ((Node) result).getTextContent() : null;
+        
     }
 }

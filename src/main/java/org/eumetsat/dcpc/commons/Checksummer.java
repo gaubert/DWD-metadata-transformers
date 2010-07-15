@@ -1,7 +1,14 @@
 package org.eumetsat.dcpc.commons;
 
 import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.util.Formatter;
@@ -14,6 +21,15 @@ import java.util.Formatter;
 public class Checksummer
 {
     private static MessageDigest MD5 = null;
+
+    private static String byteArray2Hex(byte[] hash) 
+    {
+        Formatter formatter = new Formatter();
+        for (byte b : hash) {
+            formatter.format("%02x", b);
+        }
+        return formatter.toString();
+    }
 
     /**
      * perform a MD5 checksum of the given input stream
@@ -42,13 +58,16 @@ public class Checksummer
 
         return byteArray2Hex(hash); 
     }
+    
+    public static void doMD5Checksum(InputStream aIn, OutputStream aOut) throws Exception 
+    {
+        aOut.write(doMD5Checksum(aIn).getBytes("UTF-8"));
+    }
 
-    private static String byteArray2Hex(byte[] hash) {
-        Formatter formatter = new Formatter();
-        for (byte b : hash) {
-            formatter.format("%02x", b);
-        }
-        return formatter.toString();
+    
+    public static void doMD5Checksum(File aInputFile, File aOutputFile) throws Exception
+    {
+        doMD5Checksum(new FileInputStream(aInputFile), new FileOutputStream(aOutputFile));
     }
 
 }

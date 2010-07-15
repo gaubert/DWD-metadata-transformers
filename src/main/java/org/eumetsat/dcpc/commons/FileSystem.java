@@ -80,11 +80,11 @@ public class FileSystem
      * @return the created temp dir
      * @throws IOException
      */
-    public static File createTempDirectory(File aRootDir) throws IOException
+    public static File createTempDirectory(String aPrefix, File aRootDir) throws IOException
     {
         final File temp;
     
-        temp = File.createTempFile("temp-", Long.toString(System.nanoTime()), aRootDir);
+        temp = File.createTempFile(aPrefix, Long.toString(System.nanoTime()), aRootDir);
     
         if(!(temp.delete()))
         {
