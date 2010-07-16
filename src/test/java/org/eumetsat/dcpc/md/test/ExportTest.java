@@ -29,49 +29,7 @@ public class ExportTest extends TestCase
 {
     public final static String TEST_DIR = "H:/Dev/ecli-workspace/DWD-metadata-transformers/src/test/resources";
     public final static Logger logger = LoggerFactory.getLogger(ExportTest.class);
-    
-    public void ztestUniqueFile()
-    {
-        String dirPath = TEST_DIR + File.separatorChar + "uniqueXML";
-        String filePath = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/xslt/eum2isoapFull_v3.xsl";
-
-        File dir = new File(dirPath);
-        File xsltFile = new File(filePath);
-        
-        try
-        {
-            if (!dir.exists())
-            {
-
-                throw new Exception(String.format(
-                        "Directory %s doesn't exist%n", dirPath));
-
-            }
-            else if (!dir.isDirectory())
-            {
-                throw new Exception(String.format(
-                        "%s should be a directory %n", dirPath));
-            }
-
-            if (!xsltFile.exists())
-            {
-                throw new Exception(String.format(
-                        "The file %s doesn't exist%n", xsltFile));
-            }
-
-            XsltProcessor transformer = new XsltProcessor(xsltFile, new File("H:/Dev/ecli-workspace/DWD-metadata-transformers/src/test/resources/uniqueXML"),"transformed_");
-            transformer.processFiles(dir, true);
-            System.out.println();
-            System.out.println("Process finished.");
-
-        }
-        catch (Exception e)
-        {
-           e.printStackTrace();
-           fail("See Exception Stack Trace");
-        }
-    }
-    
+       
     /* working pretty print test */
     public void ztestPrettyPrintFile()
     {
@@ -126,35 +84,6 @@ public class ExportTest extends TestCase
         
     }
     
-    public void ztestDateFormatting()
-    {
-        Date date = new Date();
-        System.out.println(DateFormatter.dateToString(date));
-    }
-    
-    public void ztestMetadataExporter()
-    {
-        String releaseDBPath      = "H:/ReleasesDB";
-        String workingDir         = "H:/WorkingDir";
-        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/xslt/eum2isoapFull_v3.xsl";
-        //String metadataSourcePath = TEST_DIR + File.separatorChar + "uniqueXML";
-        String metadataSourcePath = TEST_DIR + File.separatorChar + "R1";
-        
-        //metadataSourcePath = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/metadata/eo-portal-metadata";
-        
-        try
-        {
-            MetadataExporter exporter = new MetadataExporter(xsltFile, releaseDBPath, workingDir);
-            
-            exporter.createExport(metadataSourcePath);  
-        }
-        catch (Exception e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-    
     public void testScenario1()
     {
         String releaseDBPath      = "H:/ReleasesDB";
@@ -174,7 +103,7 @@ public class ExportTest extends TestCase
             ReleaseDatabase db = exporter.getReleaseDatabase();
             
             // clean DB at the beginning of the scenario
-            db.eraseReleaseDatabase();
+            //db.eraseReleaseDatabase();
             
             System.out.println("********** Create Export from R1: (add 10 files) **********");
             
@@ -238,7 +167,7 @@ public class ExportTest extends TestCase
             
             System.out.println("********** Create Export from R6: (delete 10 files to empty DB) **********");
             
-            // put back 5 original files. Result is 5 new files and a modified one : 6 files in results and EO_EUM_DAT_MULT_MAPSSI.xml is modified again
+            //delete 10 files
             exporter.createExport(R6);  
             
             // Check that this is correct
@@ -247,8 +176,6 @@ public class ExportTest extends TestCase
             // check that 10 files have been deleted
             assertEquals("Should have been deleting 10 files. Check the ReleaseDB content that is in " + releaseDBPath, 10, latestRelease.getDeltaDeletedFilenames().size());
             
-            
-
         }
         catch (Exception e)
         {
@@ -257,45 +184,52 @@ public class ExportTest extends TestCase
         }
     }
     
-    public void ztestCreateGetAndDeleteRelease()
+    public void testLargeScaleScenario()
     {
-        String releaseDBPath = "H:/ReleasesDB";
+        String releaseDBPath      = "H:/ReleasesDB";
+        String workingDir         = "H:/WorkingDir";
+        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/xslt/eum2isoapFull_v3.xsl";
+        String source             = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/metadata/eo-portal-metadata";
+        String empty              = TEST_DIR + File.separatorChar + "scenario-2" + File.separatorChar + "empty";
+        
+        
         try
-        {
-            ReleaseDatabase  releaseDB = new ReleaseDatabase(releaseDBPath);
+        {         
+            MetadataExporter exporter = new MetadataExporter(xsltFile, releaseDBPath, workingDir);
             
-            // create a new Release
-            Release theNewRelease      = releaseDB.createRelease();
+            ReleaseDatabase db = exporter.getReleaseDatabase();
             
-            // get the new Release
-            Release theGottenRelease      = releaseDB.getRelease(theNewRelease.getName());
+            // clean DB at the beginning of the scenario
+            System.gc();
+            System.out.println("********** ERASE ****************");
+            db.eraseReleaseDatabase();
+            System.gc();
             
-            assertEquals("the 2 releases are not the same: ", theNewRelease, theGottenRelease);
+            System.out.println("********** Create Export from eo portal source (359 files) **********");
             
-            // Force a Reload
-            releaseDB.reloadDB();
+            exporter.createExport(source);  
             
-            // get nb of Releases and it should be 1;
-            assertEquals("At this point we should have 1 release", 1, releaseDB.getNbOfReleases());
+            // Check that this is correct
+            Release latestRelease = db.getLatestRelease();
             
-            // delete the new Release
-            releaseDB.deleteRelease(theNewRelease);
+            // We should have 10 files
+            assertEquals("Should have 359 files in Delta. Check the ReleaseDB content that is in " + releaseDBPath, 359, latestRelease.getDeltaXmlFilenames().size());
             
-            // Force a Reload
-            releaseDB.reloadDB();
+            System.out.println("********** Create Second Export (empty database) **********");
             
-            // get nb of Releases and it should be 1;
-            assertEquals("At this point we should have 0 release", 0, releaseDB.getNbOfReleases());
+            exporter.createExport(empty);  
             
+            // Check that this is correct
+            latestRelease = db.getLatestRelease();
             
-        }
+            // We should have 359 files deleted
+            assertEquals("Should have 359 files in Delta. Check the ReleaseDB content that is in " + releaseDBPath, 359, latestRelease.getDeltaDeletedFilenames().size());
+            
+        }  
         catch (Exception e)
         {
             e.printStackTrace();
             fail("See Exception Stack Trace");
-            
         }
-    }
-    
-    
+    } 
 }

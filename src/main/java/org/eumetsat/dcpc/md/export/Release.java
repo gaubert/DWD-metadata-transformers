@@ -68,9 +68,9 @@ public class Release
        return release;
    }
    
-   public static void deleteRelease(Release aRelease)
+   public static void deleteRelease(Release aRelease) throws IOException
    {
-       FileSystem.deleteDirs(aRelease.getRootDir());
+       FileUtils.deleteDirectory(aRelease.getRootDir());
    }
    
    /**
