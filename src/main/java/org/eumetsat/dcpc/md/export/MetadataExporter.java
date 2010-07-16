@@ -52,6 +52,15 @@ public class MetadataExporter
     }
     
     /**
+     * return the ReleaseDB
+     * @return
+     */
+    public ReleaseDatabase getReleaseDatabase()
+    {
+        return this.m_ReleaseDB;
+    }
+    
+    /**
      * 
      * @param aMetadataSourcePath
      * @throws Exception 
@@ -167,7 +176,6 @@ public class MetadataExporter
         {
             // Copy XML into Delta/Result
             tempRelease.addInDeltaResult(aTempXmlDir);
-            tempRelease.addInDeltaMD5s(aTempMD5Dir);
         }
         else
         {
@@ -228,7 +236,6 @@ public class MetadataExporter
             {
                 //add files in Results and there MD5s in MD5
                 tempRelease.addFileInDeltaResult(new File(aTempXmlDir + File.separator + name + ".xml"));
-                tempRelease.addFileInDeltaMD5s(new File(aTempMD5Dir + File.separator + name + ".md5"));
             }
             
             // add files in deleted

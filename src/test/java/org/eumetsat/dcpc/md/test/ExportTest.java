@@ -132,7 +132,7 @@ public class ExportTest extends TestCase
         System.out.println(DateFormatter.dateToString(date));
     }
     
-    public void testMetadataExporter()
+    public void ztestMetadataExporter()
     {
         String releaseDBPath      = "H:/ReleasesDB";
         String workingDir         = "H:/WorkingDir";
@@ -155,18 +155,106 @@ public class ExportTest extends TestCase
         }
     }
     
-    public void ztestXPath()
+    public void testScenario1()
     {
+        String releaseDBPath      = "H:/ReleasesDB";
+        String workingDir         = "H:/WorkingDir";
+        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/xslt/eum2isoapFull_v3.xsl";
+        String R1 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R1";
+        String R2 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R2";
+        String R3 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R3";
+        String R4 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R4";
+        String R5 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R5";
+        String R6 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R6";
+        
         try
-        {
-            MetadataFileRenamer rn = new MetadataFileRenamer(null);
+        {         
+            MetadataExporter exporter = new MetadataExporter(xsltFile, releaseDBPath, workingDir);
+            
+            ReleaseDatabase db = exporter.getReleaseDatabase();
+            
+            // clean DB at the beginning of the scenario
+            db.eraseReleaseDatabase();
+            
+            System.out.println("********** Create Export from R1: (add 10 files) **********");
+            
+            exporter.createExport(R1);  
+            
+            // Check that this is correct
+            Release latestRelease = db.getLatestRelease();
+            
+            // We should have 10 files
+            assertEquals("Should have 10 files in Delta. Check the ReleaseDB content that is in " + releaseDBPath, 10, latestRelease.getDeltaXmlFilenames().size());
+            
+            System.out.println("********** Create Export from R2: (delete 5 files) **********");
+            
+            // delete 5 files
+            exporter.createExport(R2);  
+            
+            // Check that this is correct
+            latestRelease = db.getLatestRelease();
+            
+            // check that 5 files have been deleted
+            assertEquals("Should have been deleting 5 files. Check the ReleaseDB content that is in " + releaseDBPath, 5, latestRelease.getDeltaDeletedFilenames().size());
+            
+            System.out.println("********** Create Export from R3: (modify 1 file) **********");
+            
+            // modify a file
+            exporter.createExport(R3);  
+            
+            // Check that this is correct
+            latestRelease = db.getLatestRelease();
+            
+            // check that 1 files have been deleted
+            assertEquals("Should have 1 file in the Delta. Check the ReleaseDB content that is in " + releaseDBPath, 1, latestRelease.getDeltaXmlFilenames().size());
+            
+            assertEquals("Bad name. Check the ReleaseDB content that is in " + releaseDBPath, "EO_EUM_DAT_MULT_MAPSSI.xml", (String) latestRelease.getDeltaXmlFilenames().get(0));
+            
+            System.out.println("********** Create Export from R4: (add 5 files, modify 1) **********");
+            
+            // put back 5 original files. Result is 5 new files and a modified one : 6 files in results and EO_EUM_DAT_MULT_MAPSSI.xml is modified again
+            exporter.createExport(R4);  
+            
+            // Check that this is correct
+            latestRelease = db.getLatestRelease();
+            
+            // check that 6 new files have been added
+            assertEquals("Should have 6 files in the Delta. Check the ReleaseDB content that is in " + releaseDBPath, 6, latestRelease.getDeltaXmlFilenames().size());
+            
+            // check that "EO_EUM_DAT_MULT_MAPSSI.xml" is in the list of modified files
+            assertTrue("Delta should contain EO_EUM_DAT_MULT_MAPSSI.xml as it has been modified" , latestRelease.getDeltaXmlFilenames().contains("EO_EUM_DAT_MULT_MAPSSI.xml"));
+            
+            System.out.println("********** Create Export from R5: (no changes) **********");
+            
+            // put back 5 original files. Result is 5 new files and a modified one : 6 files in results and EO_EUM_DAT_MULT_MAPSSI.xml is modified again
+            exporter.createExport(R5);  
+            
+            // Check that this is correct
+            Release previous  = latestRelease;
+            Release unchanged = db.getLatestRelease();
+            
+            // check that 6 new files have been added
+            assertEquals("Should have 0 files in the Delta. Check the ReleaseDB content that is in " + releaseDBPath, unchanged, previous);
+            
+            System.out.println("********** Create Export from R6: (delete 10 files to empty DB) **********");
+            
+            // put back 5 original files. Result is 5 new files and a modified one : 6 files in results and EO_EUM_DAT_MULT_MAPSSI.xml is modified again
+            exporter.createExport(R6);  
+            
+            // Check that this is correct
+            latestRelease = db.getLatestRelease();
+            
+            // check that 10 files have been deleted
+            assertEquals("Should have been deleting 10 files. Check the ReleaseDB content that is in " + releaseDBPath, 10, latestRelease.getDeltaDeletedFilenames().size());
+            
+            
+
         }
         catch (Exception e)
         {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
     }
     
     public void ztestCreateGetAndDeleteRelease()

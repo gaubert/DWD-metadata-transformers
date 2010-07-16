@@ -22,11 +22,12 @@ package org.eumetsat.dcpc.md.export;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.eumetsat.dcpc.commons.xml.SimpleNamespaceContext;
 import org.eumetsat.dcpc.commons.xml.XPathExtractor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 //-----------------------------------------------
 //Class:            RenameMetadataFiles
@@ -37,11 +38,8 @@ import org.eumetsat.dcpc.commons.xml.XPathExtractor;
  * - It renames the file to the string value and <code>.xml</code> extension.
  */
 public class MetadataFileRenamer
-{
-    // list of XML metadata files within the input directory
-    private File[] oListFiles      = null;
-    // string path of the inputDirectory
-    private String strInputDirPath = null;
+{  
+    public final static Logger logger = LoggerFactory.getLogger(MetadataFileRenamer.class);
     
     private static final SimpleNamespaceContext ms_NamespaceContext = new SimpleNamespaceContext();
     
@@ -57,6 +55,11 @@ public class MetadataFileRenamer
         ms_NamespaceContext.addNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
         
     }
+    
+    // list of XML metadata files within the input directory
+    private File[] oListFiles      = null;
+    // string path of the inputDirectory
+    private String strInputDirPath = null;
     
     /**
      * Create a new object of <code>RenameMetadataFiles</code> class, and
@@ -74,7 +77,7 @@ public class MetadataFileRenamer
                 return name.endsWith(".xml");
             }
         });
-        System.out.println("Found " + this.oListFiles.length + " XML files.");
+        logger.info("{} files to rename ", this.oListFiles.length);
     }
 
     /**

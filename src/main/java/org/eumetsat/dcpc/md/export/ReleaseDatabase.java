@@ -16,8 +16,6 @@ import org.slf4j.LoggerFactory;
 public class ReleaseDatabase
 {
     public final static Logger logger = LoggerFactory.getLogger(ReleaseDatabase.class);
-    
-    
     protected String m_ReleaseDBRootDirPath;
     protected File   m_RDBRootDir;
     
@@ -136,15 +134,48 @@ public class ReleaseDatabase
     }
     
     /**
+     * Generate a new Release name and check that it doesn't exist in the DB
+     * @param aReleaseDBTopDir topDir of the ReleaseDatabase
+     * @return the full path within the given ReleaseDatabase
+  * @throws Exception 
+     */
+    public static synchronized String inquireNewReleasePathIn(String aReleaseDBTopDir) throws Exception
+    {
+        int cpt = 0;
+        
+        while (true)
+        {
+            
+            String inDBReleaseName = aReleaseDBTopDir + File.separator + DateFormatter.dateToString(new Date());
+            
+            cpt++;
+            
+            if (cpt >= 5)
+            {
+                throw new Exception("Cannot generate a unique with the ReleaseDatabase defined under " + aReleaseDBTopDir);
+            }
+            
+            if (! new File(inDBReleaseName).exists())
+            {
+               return inDBReleaseName;   
+            }
+            else
+            {
+                //Sleep one second
+                Thread.sleep(1000);
+            }
+        }
+    }
+    
+    /**
      * Create a Release
      * @return a Release
      * @throws Exception Fatal Exception in case of issue
      */
     public Release createRelease() throws Exception
     {
-        // get now date
-        Date date = new Date();
-        File theReleaseFile   = new File(this.m_ReleaseDBRootDirPath + File.separator + DateFormatter.dateToString(date));
+        
+        File theReleaseFile   = new File(ReleaseDatabase.inquireNewReleasePathIn(this.m_ReleaseDBRootDirPath));
         Release theNewRelease = Release.createRelease(theReleaseFile);
         // add the new Release in the list of R and in its associated index
         this.m_Releases.add(theNewRelease);
@@ -161,7 +192,7 @@ public class ReleaseDatabase
      */
     public Release add(Release aRelease) throws Exception
     {
-        File inDBReleaseName = new File(this.m_ReleaseDBRootDirPath + File.separator + DateFormatter.dateToString(new Date()));
+        File inDBReleaseName = new File(ReleaseDatabase.inquireNewReleasePathIn(this.m_ReleaseDBRootDirPath));
         
         if (! aRelease.getRootDir().renameTo(inDBReleaseName) )
            throw new Exception("Error could not add the Release" + aRelease.getName() + " in the Database");
@@ -185,5 +216,26 @@ public class ReleaseDatabase
        // remove Release from index and list
        this.m_Releases.remove(aRelease);
        this.m_RIndex.remove(aRelease.getName());
+    }
+    
+    /** 
+     * Wipeout the ReleaseDatabase. Use this method wisely !!.
+     * @throws Exception 
+     * 
+     */
+    public void eraseReleaseDatabase() throws Exception
+    {
+        try
+        {
+            for (Release  release : this.m_Releases)
+            {
+                Release.deleteRelease(release); 
+            }
+        }
+        finally
+        {
+           // Reload DB 
+           this.reloadDB();
+        }
     }
 }

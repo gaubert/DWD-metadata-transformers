@@ -146,9 +146,9 @@ public class XsltProcessor
             }
         });
         
-        System.out.println("Found " + files2Process.length + " XML files to process.");
+        logger.debug("Found {} XML files to process.", files2Process.length);
      
-        System.out.println("Transform files using XSLT 1.0.");
+        logger.debug("Transform files using XSLT 1.0.");
         
         Source xsltSource = new StreamSource(this.m_XsltFile);
         
