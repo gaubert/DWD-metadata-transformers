@@ -154,6 +154,28 @@ public class ReleaseDatabase
     }
     
     /**
+     * Add the new Release in DB
+     * @param aRelease
+     * @return
+     * @throws Exception 
+     */
+    public Release add(Release aRelease) throws Exception
+    {
+        File inDBReleaseName = new File(this.m_ReleaseDBRootDirPath + File.separator + DateFormatter.dateToString(new Date()));
+        
+        if (! aRelease.getRootDir().renameTo(inDBReleaseName) )
+           throw new Exception("Error could not add the Release" + aRelease.getName() + " in the Database");
+        
+        // add the new Release in the list of R and in its associated index
+        Release inDBRelease = new Release(inDBReleaseName);
+        
+        this.m_Releases.add(inDBRelease);
+        this.m_RIndex.put(inDBRelease.getName(), inDBRelease);
+        
+        return inDBRelease;
+    }
+    
+    /**
      * Remove the given Release from the database
      * @param aRelease
      */

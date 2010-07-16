@@ -1,10 +1,9 @@
 package org.eumetsat.dcpc.md.export;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.RandomAccessFile;
 import java.util.HashMap;
 
 import org.apache.commons.io.FileUtils;
@@ -29,7 +28,9 @@ public class Release
    public final static String SRC_XMLS  = SOURCE + File.separator + XML_FILES;
    public final static String SRC_MD5S  = SOURCE + File.separator + MD5_FILES;
    public final static String RESULT    = DELTA  + File.separator + "RESULT";
-   public final static String DELTA_MD5S = DELTA  + File.separator + MD5_FILES;
+   public final static String DELTA_MD5S = DELTA + File.separator + MD5_FILES;
+   
+   public final static String DELETED   = RESULT + File.separator + "deleted";
    
    protected File m_ReleaseTopDir;
    protected File m_Delta;
@@ -38,6 +39,9 @@ public class Release
    protected File m_SrcMd5s;
    protected File m_Result;
    protected File m_DeltaMd5s;
+   
+   // Deleted file
+   protected File m_Deleted;
    
    
    /** 
@@ -93,10 +97,18 @@ public class Release
            throw new Exception("Error. " + m_ReleaseTopDir + " doesn't seem to be a Release directory as it doesn't contain " + MD5_FILES + " ," + XML_FILES + " and" + DELTA);
        }
        
-       m_Delta     = new File(this.m_ReleaseTopDir + File.separator + DELTA);
+       
+       // preload src info
        m_Src       = new File(this.m_ReleaseTopDir + File.separator + SOURCE);
+       m_SrcMd5s   = new File(this.m_ReleaseTopDir + File.separator + SRC_MD5S);
+       m_SrcXmls   = new File(this.m_ReleaseTopDir + File.separator + SRC_XMLS);
+       
+       // preload delta info
+       m_Delta     = new File(this.m_ReleaseTopDir + File.separator + DELTA);
        m_Result    = new File(this.m_ReleaseTopDir + File.separator + RESULT);
        m_DeltaMd5s = new File(this.m_ReleaseTopDir + File.separator + DELTA_MD5S);
+       
+       m_Deleted   = new File(this.m_ReleaseTopDir + File.separator + DELETED);
        
    }
    
@@ -115,19 +127,61 @@ public class Release
        FileUtils.copyDirectory(aXmlDir, this.m_SrcXmls, false);
    }
    
+   /**
+    * Add all files contained in aMD5Dir into SRC MD5s
+    * @param aMD5Dir
+    * @throws IOException
+    */
    public void addInSrcMD5s(File aMD5Dir) throws IOException
    {
        FileUtils.copyDirectory(aMD5Dir, this.m_SrcMd5s, false);
    }
    
+   /**
+    * Add all files contained in aDir into Delta Result
+    * @param aDir
+    * @throws IOException
+    */
    public void addInDeltaResult(File aDir) throws IOException
    {
        FileUtils.copyDirectory(aDir, this.m_Result, false);
    }
    
+   /**
+    * Add a unique file in Delta Result
+    * @param aFile
+    * @throws IOException
+    */
    public void addFileInDeltaResult(File aFile) throws IOException
    {
-       FileUtils.copyFileToDirectory(aFile, this.m_Result, false);
+       FileUtils.copyFileToDirectory(aFile, this.m_Result, true);
+   }
+   
+   /**
+    * Add all files contained in aDir into Delta Result
+    * @param aDir
+    * @throws IOException
+    */
+   public void addInDeltaMD5s(File aDir) throws IOException
+   {
+       FileUtils.copyDirectory(aDir, this.m_DeltaMd5s, true);
+   }
+   
+   /**
+    * Add a unique file in Delta MD5s
+    * @param aFile
+    * @throws IOException
+    */
+   public void addFileInDeltaMD5s(File aFile) throws IOException
+   {
+       FileUtils.copyFileToDirectory(aFile, this.m_DeltaMd5s, false);
+   }
+   
+   public void flagAsDeleted(String aFileName) throws Exception
+   {
+       RandomAccessFile deleted = new RandomAccessFile(m_Deleted, "rwd");
+       deleted.writeBytes(aFileName);
+       deleted.close();
    }
    
    /**
@@ -143,17 +197,17 @@ public class Release
        String relevant_files[] = this.m_DeltaMd5s.list(new FilenameFilter() {
            public boolean accept(File dir, String name)
            {
-               return name.endsWith(".xml");
+               return name.endsWith(".md5");
            }
        });
        
        File       md5F = null;
        String key      = null;
        String val      = null;
-       for (String filepath : relevant_files)
+       for (String filename : relevant_files)
        {
-          md5F = new File(filepath);
-          key  = FilenameUtils.getBaseName(filepath);
+          md5F = new File(this.m_DeltaMd5s.getAbsolutePath() + File.separator + filename);
+          key  = FilenameUtils.getBaseName(filename);
           val  = FileUtils.readFileToString(md5F);
           
           hMap.put(key, val);
@@ -162,17 +216,57 @@ public class Release
        return hMap;
    }
    
-   
-   
-   public ArrayList<?> getXmls()
+   /**
+    * Return the SrcMD5s info in a workable data structure.
+    * A HashMap<filename,MD5>
+    * @return the hashMap<filename,MD5>
+    */
+   public HashMap<String,String> getSrcMD5s() throws Exception
    {
-       return null;
-   }
-   
-   public void getDelta()
-   {
+       HashMap<String, String> hMap = new HashMap<String,String>();
        
+       // get list of MD5 files
+       String relevant_files[] = this.m_SrcMd5s.list(new FilenameFilter() {
+           public boolean accept(File dir, String name)
+           {
+               return name.endsWith(".md5");
+           }
+       });
+       
+       File   md5F     = null;
+       String key      = null;
+       String val      = null;
+       
+       for (String filename : relevant_files)
+       {
+          md5F = new File(this.m_SrcMd5s.getAbsolutePath() + File.separator + filename);
+          key  = FilenameUtils.getBaseName(filename);
+          val  = FileUtils.readFileToString(md5F);
+          
+          hMap.put(key, val);
+       }
+       
+       return hMap;
    }
+   
+   /**
+    * Check if there is a Delta. If no Delta, this is an empty Release
+    * @return true if there is a Delta, false otherwise
+    */
+   public boolean hasADelta()
+   {
+       // get list of MD5 files
+       String relevant_files[] = this.m_Result.list(new FilenameFilter() {
+           public boolean accept(File dir, String name)
+           {
+               // xml file or deleted
+               return name.endsWith(".xml") || name.equals("deleted");
+           }
+       });
+       
+       return (relevant_files.length > 0) ? true : false;
+   }
+   
    
    public File getRootDir()
    {

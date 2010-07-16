@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.eumetsat.dcpc.commons.Checksummer;
 import org.eumetsat.dcpc.commons.FileSystem;
@@ -82,9 +81,13 @@ public class MetadataExporter
             calculateMD5s(xmlDir, MD5Dir);
             
             // calculate Delta from previous Release
-            calculateDelta(xmlDir, MD5Dir);
+            Release newRelease = calculateDelta(xmlDir, MD5Dir);
             
-            // move in ReleaseDB
+            // move in ReleaseDB if non empty
+            if (newRelease.hasADelta())
+            {
+                this.m_ReleaseDB.add(newRelease);
+            }
             
             // expose Delta
         } 
@@ -123,32 +126,38 @@ public class MetadataExporter
     }
     
     
-    public void calculateDelta(File aTempXmlDir, File aTempMD5Dir) throws Exception
+    /**
+     * generate the delta dataset that will be exported to the GISC
+     * @param aTempXmlDir
+     * @param aTempMD5Dir
+     * @throws Exception
+     */
+    public Release calculateDelta(File aTempXmlDir, File aTempMD5Dir) throws Exception
     {
         // create a temp release
         File releaseTempDir   = FileSystem.createTempDirectory("release-", this.m_WorkingDir);
         
         Release tempRelease   = Release.createRelease(releaseTempDir);
         
-        
         Release latestRelease = m_ReleaseDB.getLatestRelease();
+        
+        // copy the SOURCE Part of Release
+        tempRelease.addInSrcMD5s(aTempMD5Dir);
+        tempRelease.addInSrcXmls(aTempXmlDir);
         
         // No previous Release so all origin XML files go into Delta Result and
         // there are no deleted files
         if (latestRelease == null)
         {
-            // Copy XML and MD5 in SRC
-            tempRelease.addInSrcMD5s(aTempMD5Dir);
-            tempRelease.addInSrcXmls(aTempXmlDir);
-            
             // Copy XML into Delta/Result
             tempRelease.addInDeltaResult(aTempXmlDir);
+            tempRelease.addInDeltaMD5s(aTempMD5Dir);
         }
         else
         {
             // get list of previous MD5s and the list of current MD5s
             HashMap<String,String> prev = latestRelease.getDeltaMD5s();
-            HashMap<String,String> curr = tempRelease.getDeltaMD5s();
+            HashMap<String,String> curr = tempRelease.getSrcMD5s();
             
             Set<String> currSet = new HashSet<String>();
             Set<String> deletedSet = new HashSet<String>();
@@ -177,13 +186,19 @@ public class MetadataExporter
                {
                   deletedSet.add(key);   
                }
-               else if (!prev.get(key).equals(curr.get(key))) 
+               else 
                {
-                  // md5 different so the file has been updated
-                  
-                  // add in newSet and remove from currSet
-                  newSet.add(key);
-                  currSet.remove(key);
+                   if (!prev.get(key).equals(curr.get(key))) 
+                   {
+                      // md5 different so the file has been updated
+                      
+                      // add in newSet 
+                      newSet.add(key);
+                      
+                   }
+                   
+                   // remove from currSet in any case
+                   currSet.remove(key);
                }
             }
             
@@ -194,12 +209,18 @@ public class MetadataExporter
           
             for (String name : newSet)
             {
-                tempRelease.addFileInDeltaResult(new File(aTempXmlDir + File.pathSeparator + name + ".xml"));
+                //add files in Results and there MD5s in MD5
+                tempRelease.addFileInDeltaResult(new File(aTempXmlDir + File.separator + name + ".xml"));
+                tempRelease.addFileInDeltaMD5s(new File(aTempMD5Dir + File.separator + name + ".md5"));
             }
             
-            // create delete file
-                   
-            
+            // add files in deleted
+            for (String name : deletedSet)
+            {
+                tempRelease.flagAsDeleted(name + ".xml");
+            }
         }
+        
+        return tempRelease;
     }
 }

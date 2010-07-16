@@ -140,7 +140,7 @@ public class ExportTest extends TestCase
         //String metadataSourcePath = TEST_DIR + File.separatorChar + "uniqueXML";
         String metadataSourcePath = TEST_DIR + File.separatorChar + "multipleXMLs";
         
-        //String metadataSourcePath = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/metadata/eo-portal-metadata";
+        metadataSourcePath = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/metadata/eo-portal-metadata";
         
         try
         {

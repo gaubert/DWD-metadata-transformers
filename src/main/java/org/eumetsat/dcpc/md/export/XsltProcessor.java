@@ -187,7 +187,6 @@ public class XsltProcessor
         {
             e.printStackTrace();
         }
-       
     }
 
     /**
@@ -287,11 +286,16 @@ public class XsltProcessor
             
             XmlPrettyPrinter.prettyPrint(new ByteArrayInputStream(out.toByteArray()), oFile);
             
+            oFile.close();
         }
         catch (Exception e)
         {
             logger.error("Failed transforming " + inputFile.getName());
             throw e;
+        }
+        finally
+        {
+            out.close();
         }
 
     }

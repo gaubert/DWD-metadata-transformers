@@ -37,6 +37,8 @@ public class XmlPrettyPrinter
         ByteArrayOutputStream out = new ByteArrayOutputStream();
             
         XmlPrettyPrinter.serialize(doc, out);
+        
+        in.close();
             
         return out.toString();
     }
@@ -56,6 +58,8 @@ public class XmlPrettyPrinter
         Document doc = XmlPrettyPrinter.loadXMLFrom(in);
             
         XmlPrettyPrinter.serialize(doc, aOut);
+        
+        in.close();
             
         return aOut;
     }
@@ -105,12 +109,6 @@ public class XmlPrettyPrinter
 
             throw new RuntimeException(e);
         }
-    }
-
-    @SuppressWarnings("unused")
-    private static org.w3c.dom.Document loadXMLFrom(String xml) throws org.xml.sax.SAXException, java.io.IOException
-    {
-        return loadXMLFrom(new java.io.ByteArrayInputStream(xml.getBytes()));
     }
 
     private static org.w3c.dom.Document loadXMLFrom(java.io.InputStream is)

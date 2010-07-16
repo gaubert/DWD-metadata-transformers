@@ -22,7 +22,9 @@ package org.eumetsat.dcpc.md.export;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 
+import org.apache.commons.io.FileUtils;
 import org.eumetsat.dcpc.commons.xml.SimpleNamespaceContext;
 import org.eumetsat.dcpc.commons.xml.XPathExtractor;
 
@@ -76,7 +78,7 @@ public class MetadataFileRenamer
     }
 
     /**
-     * Iterates through the list of files, parses it with XMLparser and rename
+     * Iterates through the list of files, get name with XPath and rename
      * it as of <code><fileIdenfitifier></code> element.
      * @throws Exception 
      */
@@ -94,8 +96,37 @@ public class MetadataFileRenamer
             {
                 newFile = new File(this.strInputDirPath + File.separator + fileName + ".xml");
                 System.out.println("new File: " + newFile.toString());
-                boolean success = file.renameTo(newFile);
-                System.out.println("Renaming has successed... " + success);
+                //FileUtils.moveFile(file, newFile);
+                int tries = 0;
+                boolean valid = false;
+                while (!valid)
+                {
+                    try
+                    {
+                       FileUtils.moveFile(file, newFile);
+                       
+                       valid = true;
+                    }
+                    catch(IOException ioE)
+                    {
+                       System.out.println("While moving file got " + ioE);
+                       tries++;
+                       if (tries >= 3)
+                       {
+                           throw ioE;
+                       }
+                       else
+                       {
+                           System.out.println("Sleep 5 sec and retry delete");
+                           String oldF = file.getAbsolutePath();
+                           String nF   = file.getAbsolutePath();
+                           
+                           System.gc();
+                       }
+                    }
+                }
+                //boolean success = file.renameTo(newFile);
+                //System.out.println("Renaming has successed... " + success);
             }
         }
     }
