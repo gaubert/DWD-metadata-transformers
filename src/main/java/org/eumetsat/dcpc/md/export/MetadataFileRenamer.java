@@ -90,43 +90,14 @@ public class MetadataFileRenamer
         for (File file : this.oListFiles)
         {
             fileName = this.extractName(file);
-            System.out.println("Extracted name: " + fileName);
+            //System.out.println("Extracted name: " + fileName);
 
             if (fileName != null)
             {
                 newFile = new File(this.strInputDirPath + File.separator + fileName + ".xml");
-                System.out.println("new File: " + newFile.toString());
-                //FileUtils.moveFile(file, newFile);
-                int tries = 0;
-                boolean valid = false;
-                while (!valid)
-                {
-                    try
-                    {
-                       FileUtils.moveFile(file, newFile);
-                       
-                       valid = true;
-                    }
-                    catch(IOException ioE)
-                    {
-                       System.out.println("While moving file got " + ioE);
-                       tries++;
-                       if (tries >= 3)
-                       {
-                           throw ioE;
-                       }
-                       else
-                       {
-                           System.out.println("Sleep 5 sec and retry delete");
-                           String oldF = file.getAbsolutePath();
-                           String nF   = file.getAbsolutePath();
-                           
-                           System.gc();
-                       }
-                    }
-                }
-                //boolean success = file.renameTo(newFile);
-                //System.out.println("Renaming has successed... " + success);
+                //System.out.println("new File: " + newFile.toString());
+                
+                FileUtils.moveFile(file, newFile);          
             }
         }
     }
@@ -143,8 +114,6 @@ public class MetadataFileRenamer
         xpathExtractor.setXPathExpression(ms_XPathExprStr, ms_NamespaceContext);
         
         String result = xpathExtractor.evaluateAsString(aFile);
-        
-        System.out.println("Result =[" + result + "]");
         
         return result;
     }

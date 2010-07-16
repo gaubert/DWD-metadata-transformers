@@ -138,9 +138,9 @@ public class ExportTest extends TestCase
         String workingDir         = "H:/WorkingDir";
         String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/xslt/eum2isoapFull_v3.xsl";
         //String metadataSourcePath = TEST_DIR + File.separatorChar + "uniqueXML";
-        String metadataSourcePath = TEST_DIR + File.separatorChar + "multipleXMLs";
+        String metadataSourcePath = TEST_DIR + File.separatorChar + "R1";
         
-        metadataSourcePath = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/metadata/eo-portal-metadata";
+        //metadataSourcePath = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/metadata/eo-portal-metadata";
         
         try
         {

@@ -180,7 +180,10 @@ public class Release
    public void flagAsDeleted(String aFileName) throws Exception
    {
        RandomAccessFile deleted = new RandomAccessFile(m_Deleted, "rwd");
-       deleted.writeBytes(aFileName);
+       // Seek to end of file
+       deleted.seek(m_Deleted.length());
+
+       deleted.writeBytes(aFileName + "\n");
        deleted.close();
    }
    

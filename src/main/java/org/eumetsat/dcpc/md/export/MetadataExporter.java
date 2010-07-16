@@ -10,6 +10,8 @@ import java.util.Set;
 import org.apache.commons.io.FilenameUtils;
 import org.eumetsat.dcpc.commons.Checksummer;
 import org.eumetsat.dcpc.commons.FileSystem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -23,7 +25,10 @@ public class MetadataExporter
     protected File m_WorkingDir;
     protected File m_XsltFilePath;
     
-    protected static final boolean TEMP_DIR_DELETION_ON = false;
+    public final static Logger logger = LoggerFactory.getLogger(ReleaseDatabase.class);
+    
+    
+    protected static final boolean TEMP_DIR_DELETION_ON = true;
     
     /**
      * Constructor
@@ -64,30 +69,41 @@ public class MetadataExporter
             FileSystem.createDirs(xmlDir);
             FileSystem.createDirs(MD5Dir);
             
+            logger.info("********* Do XSLT Transformations *********");
+            
             // do the transformations
             XsltProcessor xsltTransformer = new XsltProcessor(this.m_XsltFilePath, xmlDir);
             
             // do xslt transformation
             xsltTransformer.processFiles(new File(aMetadataSourcePath), prettyPrint);
             
+            logger.info("********* Rename Files *********");
             // rename files
             MetadataFileRenamer rn = new MetadataFileRenamer(xmlDir);
             
             rn.processFiles();
             
-            System.out.println("Calculate MD5s");
+            logger.info("********* Calculate MD5s *********");
             
             // calculate MD5s
             calculateMD5s(xmlDir, MD5Dir);
+            
+            logger.info("********* Calculate Delta *********");
             
             // calculate Delta from previous Release
             Release newRelease = calculateDelta(xmlDir, MD5Dir);
             
             // move in ReleaseDB if non empty
             if (newRelease.hasADelta())
-            {
+            {   
+                logger.info("********* Create New Release *********");
                 this.m_ReleaseDB.add(newRelease);
             }
+            else
+            {
+                logger.info("********* No New Release *********");
+            }
+            
             
             // expose Delta
         } 
@@ -156,7 +172,7 @@ public class MetadataExporter
         else
         {
             // get list of previous MD5s and the list of current MD5s
-            HashMap<String,String> prev = latestRelease.getDeltaMD5s();
+            HashMap<String,String> prev = latestRelease.getSrcMD5s();
             HashMap<String,String> curr = tempRelease.getSrcMD5s();
             
             Set<String> currSet = new HashSet<String>();
@@ -191,6 +207,7 @@ public class MetadataExporter
                    if (!prev.get(key).equals(curr.get(key))) 
                    {
                       // md5 different so the file has been updated
+                      logger.info("MD5 Differents for {}. old:[{}], new:[{}]", new String[] {key, prev.get(key), curr.get(key)});
                       
                       // add in newSet 
                       newSet.add(key);

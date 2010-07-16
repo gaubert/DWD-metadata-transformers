@@ -187,6 +187,10 @@ public class XsltProcessor
         {
             e.printStackTrace();
         }
+        finally
+        {
+            System.out.println();
+        }
     }
 
     /**
