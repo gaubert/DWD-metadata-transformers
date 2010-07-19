@@ -121,6 +121,61 @@ public class XsltProcessor
             }
         }
     }
+    
+    /**
+     * Iterates through the list of files, transforms them with the given XSLT
+     * 1.0 and creates the output dir, where the results of the transformation
+     * are stored.
+     * 
+     * @param  aDirToProcess the directory to process
+     * @param  aPrettyPrint prettyPrint the XML
+     * @throws Exception 
+     */
+    public void processFile(File aFile2Process, boolean aPrettyPrint) throws Exception
+    {
+        // Create if it doesn't exist
+        if (! aFile2Process.exists())
+        {
+           throw new Exception("Error: " + aFile2Process + " doesn't exist");
+        }
+       
+        logger.debug("Transform files using XSLT 1.0.");
+        
+        Source xsltSource = new StreamSource(this.m_XsltFile);
+        
+        // create an instance of TransformerFactory
+        TransformerFactory transFact = TransformerFactory.newInstance();
+        Transformer trans;
+        
+        try
+        {
+            trans = transFact.newTransformer(xsltSource);
+            int cpt = 0;
+            
+            if (aPrettyPrint)
+            {
+               transformAndPrettyPrintFile(aFile2Process, trans, this.m_OutputDir);
+            }
+            else
+            {
+                transformFile(aFile2Process, trans, this.m_OutputDir);
+            }
+                
+        }
+        catch (TransformerConfigurationException e)
+        {
+            System.out.println("Error, see exception");
+            e.printStackTrace();
+        }
+        catch (TransformerException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            System.out.println();
+        }
+    }
 
     /**
      * Iterates through the list of files, transforms them with the given XSLT

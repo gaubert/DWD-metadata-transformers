@@ -10,6 +10,7 @@ import org.eumetsat.dcpc.commons.Checksummer;
 import org.eumetsat.dcpc.md.export.MetadataExporter;
 import org.eumetsat.dcpc.md.export.Release;
 import org.eumetsat.dcpc.md.export.ReleaseDatabase;
+import org.eumetsat.dcpc.md.export.XsltProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,33 +18,31 @@ public class MetadataExporterValidationSuite extends TestCase
 {
     public final static String TEST_DIR = "H:/Dev/ecli-workspace/DWD-metadata-transformers/src/test/resources";
     public final static Logger logger = LoggerFactory.getLogger(MetadataExporterValidationSuite.class);
-       
-    /**
-     * test MD5 generation
-     */
-    public void ztestMD5()
+    
+    public void testXSLTTransformation()
     {
-        String toHash    = "This is the string to hash";
-        String expectMD5 = "599932288f3e3a4c377cdd6b3cb68ea0";
+        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/xslt/eum2isoapFull_v3.xsl";
+        String file2Transform     = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/metadata/eo-portal-metadata/1.xml";
+        String outputDir          = "H:";
         
-        ByteArrayInputStream BIn;
+        // do the transformations
+        XsltProcessor xsltTransformer;
         try
         {
-            BIn = new ByteArrayInputStream(toHash.getBytes("UTF-8"));
-            
-            String checksum = Checksummer.doMD5Checksum(BIn);
-            
-            assertEquals("the 2 checksum are not the same", expectMD5, checksum);
+            xsltTransformer = new XsltProcessor(new File(xsltFile), new File(outputDir));
+        
+        
+            // do xslt transformation
+            xsltTransformer.processFile(new File(file2Transform), true);
         }
         catch (Exception e)
         {
+            // TODO Auto-generated catch block
             e.printStackTrace();
-            fail("See Exception Stack Trace");
         }
-        
     }
     
-    public void testScenario1()
+    public void ztestScenario1()
     {
         String releaseDBPath      = "H:/ReleasesDB";
         String workingDir         = "H:/WorkingDir";

@@ -3,10 +3,11 @@
 	<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no"/>
 	<!-- map MD_Metadata, different namespace and child element order -->
 	<xsl:template match="gmi:MI_Metadata">
-		<gmd:MD_Metadata xmlns="http://www.isotc211.org/2005/gmd">
-			<xsl:attribute name="xsi:schemaLocation"><xsl:value-of select="'http://www.isotc211.org/2005/gmd http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd'"/></xsl:attribute>
-			<xsl:apply-templates select="@*|node()"/>			
-		</gmd:MD_Metadata>
+	<gmd:MD_Metadata xmlns="http://www.isotc211.org/2005/gmd">
+		<xsl:attribute name="xsi:schemaLocation"><xsl:value-of select="'http://www.isotc211.org/2005/gmd http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd'"/></xsl:attribute>
+		<gmd:hierarchyLevelName><gco:CharacterString>Observation_Sat</gco:CharacterString></gmd:hierarchyLevelName>
+		<xsl:apply-templates select="@*|node()"/>		
+	</gmd:MD_Metadata>
 	</xsl:template>
 	<xsl:template match="gmd:contentInfo">
 	</xsl:template>
@@ -17,6 +18,10 @@
 	</xsl:template>
 	<xsl:template match="gmi:acquisitionInformation">
 	</xsl:template>
+	<xsl:template match="gmd:fileIdentifier/gco:CharacterString">
+	    <xsl:element name="gco:{local-name()}">urn:x-wmo:md:int.eumetsat::<xsl:value-of select="normalize-space(.)"/></xsl:element>
+	</xsl:template>
+	<gmd:hierarchyLevelName>Observation_Sat</gmd:hierarchyLevelName>
 	<xsl:template match="*">
 		<xsl:choose>
 			<xsl:when test="contains(name(), ':')">
