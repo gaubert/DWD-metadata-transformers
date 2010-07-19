@@ -64,7 +64,17 @@ public class Checksummer
     
     public static void doMD5Checksum(File aInputFile, File aOutputFile) throws Exception
     {
-        doMD5Checksum(new FileInputStream(aInputFile), new FileOutputStream(aOutputFile));
+        FileOutputStream out = new FileOutputStream(aOutputFile);
+        FileInputStream  in  = new FileInputStream(aInputFile);
+        try
+        {
+           doMD5Checksum(in, out);
+        }
+        finally
+        {        
+           out.close();
+           in.close();
+        }
     }
 
 }

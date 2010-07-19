@@ -28,7 +28,7 @@ public class MetadataExporter
     public final static Logger logger = LoggerFactory.getLogger(ReleaseDatabase.class);
     
     
-    protected static final boolean TEMP_DIR_DELETION_ON = true;
+    protected static final boolean TEMP_DIR_DELETION_ON = false;
     
     /**
      * Constructor
@@ -67,13 +67,15 @@ public class MetadataExporter
      */
     public void createExport(String aMetadataSourcePath) throws Exception
     {
-        File tempDir        = FileSystem.createTempDirectory("temp-", this.m_WorkingDir);
+        File topTempDir     = FileSystem.createTempDirectory("temp-", this.m_WorkingDir);
+        
         boolean prettyPrint = true;
         
         try
         {
-            File xmlDir = new File(tempDir.getAbsolutePath() + File.separator + Release.XML_FILES);
-            File MD5Dir = new File(tempDir.getAbsolutePath() + File.separator + Release.MD5_FILES);
+            File tempDir = new File(topTempDir + File.separator + "temp");
+            File xmlDir  = new File(tempDir.getAbsolutePath() + File.separator + Release.XML_FILES);
+            File MD5Dir  = new File(tempDir.getAbsolutePath() + File.separator + Release.MD5_FILES);
             
             FileSystem.createDirs(xmlDir);
             FileSystem.createDirs(MD5Dir);
@@ -100,7 +102,7 @@ public class MetadataExporter
             logger.info("********* Calculate Delta *********");
             
             // calculate Delta from previous Release
-            Release newRelease = calculateDelta(xmlDir, MD5Dir);
+            Release newRelease = calculateDelta(topTempDir, xmlDir, MD5Dir);
             
             // move in ReleaseDB if non empty
             if (newRelease.hasADelta())
@@ -118,9 +120,10 @@ public class MetadataExporter
         } 
         finally
         {
+            
             // delete the temporary directory in any case 
             if (TEMP_DIR_DELETION_ON)
-                FileSystem.deleteDirs(tempDir);
+                FileSystem.deleteDirs(topTempDir);
         }
     }
     
@@ -157,10 +160,10 @@ public class MetadataExporter
      * @param aTempMD5Dir
      * @throws Exception
      */
-    public Release calculateDelta(File aTempXmlDir, File aTempMD5Dir) throws Exception
+    public Release calculateDelta(File aTopTempDir, File aTempXmlDir, File aTempMD5Dir) throws Exception
     {
         // create a temp release
-        File releaseTempDir   = FileSystem.createTempDirectory("release-", this.m_WorkingDir);
+        File releaseTempDir   = FileSystem.createTempDirectory("release-", aTopTempDir);
         
         Release tempRelease   = Release.createRelease(releaseTempDir);
         

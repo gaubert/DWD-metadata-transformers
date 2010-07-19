@@ -62,7 +62,7 @@ public class MetadataExporterValidationSuite extends TestCase
             ReleaseDatabase db = exporter.getReleaseDatabase();
             
             // clean DB at the beginning of the scenario
-            //db.eraseReleaseDatabase();
+            db.eraseReleaseDatabase();
             
             System.out.println("********** Create Export from R1: (add 10 files) **********");
             
@@ -135,7 +135,7 @@ public class MetadataExporterValidationSuite extends TestCase
             // check that 10 files have been deleted
             assertEquals("Should have been deleting 10 files. Check the ReleaseDB content that is in " + releaseDBPath, 10, latestRelease.getDeltaDeletedFilenames().size());
             
-            db.eraseReleaseDatabase();
+            //db.eraseReleaseDatabase();
         }
         catch (Exception e)
         {
@@ -144,7 +144,7 @@ public class MetadataExporterValidationSuite extends TestCase
         }
     }
     
-    public void testLargeScaleScenario()
+    public void ztestLargeScaleScenario()
     {
         String releaseDBPath      = "H:/ReleasesDB";
         String workingDir         = "H:/WorkingDir";
@@ -160,10 +160,8 @@ public class MetadataExporterValidationSuite extends TestCase
             ReleaseDatabase db = exporter.getReleaseDatabase();
             
             // clean DB at the beginning of the scenario
-            System.gc();
             System.out.println("********** ERASE ****************");
             db.eraseReleaseDatabase();
-            System.gc();
             
             System.out.println("********** Create Export from eo portal source (359 files) **********");
             
@@ -185,6 +183,7 @@ public class MetadataExporterValidationSuite extends TestCase
             // We should have 359 files deleted
             assertEquals("Should have 359 files in Delta. Check the ReleaseDB content that is in " + releaseDBPath, 359, latestRelease.getDeltaDeletedFilenames().size());
             
+            db.eraseReleaseDatabase();
         }  
         catch (Exception e)
         {

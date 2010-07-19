@@ -6,10 +6,12 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.eumetsat.dcpc.commons.DateFormatter;
 import org.eumetsat.dcpc.commons.FileSystem;
 
 /**
@@ -31,7 +33,10 @@ public class Release
    public final static String SRC_MD5S  = SOURCE + File.separator + MD5_FILES;
    public final static String RESULT    = DELTA  + File.separator + "RESULT";
  
-   public final static String DELETED   = RESULT + File.separator + "deleted";
+   public final static String DELETED_PREFIX = "deleted.EUMETSAT.";
+   // DELETED Path
+   public final static String DELETED   = RESULT + File.separator + DELETED_PREFIX;
+   public final static String DELETED_SUFFIX   = ".txt";
    
    protected File m_ReleaseTopDir;
    protected File m_Delta;
@@ -105,8 +110,41 @@ public class Release
        m_Delta     = new File(this.m_ReleaseTopDir + File.separator + DELTA);
        m_Result    = new File(this.m_ReleaseTopDir + File.separator + RESULT);
        
-       m_Deleted   = new File(this.m_ReleaseTopDir + File.separator + DELETED);
+       m_Deleted   = getDeletedFile();
        
+   }
+   
+   /**
+    * load the deleted file if it exists or create a new filename if necessary
+    * @return the deleted file
+ * @throws Exception 
+    */
+   private File getDeletedFile() throws Exception
+   {
+       File deleted = null;
+       String relevant_files[] = this.m_Result.list(new FilenameFilter() {
+           public boolean accept(File dir, String name)
+           {
+               return name.startsWith(DELETED_PREFIX);
+           }
+       });
+        
+       if (relevant_files.length > 1)
+       {
+           throw new Exception("Error more than one deleted file in " + this.m_Result);
+       }
+       
+       else if (relevant_files.length == 0)
+       {
+          deleted = new File(this.m_ReleaseTopDir + File.separator + DELETED + DateFormatter.dateToString(new Date(), DateFormatter.ms_DELETEDATEFORMAT) + DELETED_SUFFIX );
+       }
+       else
+       {
+          // there is one file
+          deleted = new File(this.m_ReleaseTopDir + File.separator + RESULT + File.separator + relevant_files[0]);   
+       }
+       
+       return deleted;
    }
    
    public String getName()
@@ -208,7 +246,7 @@ public class Release
            public boolean accept(File dir, String name)
            {
                // xml file or deleted
-               return name.endsWith(".xml") || name.equals("deleted");
+               return name.endsWith(".xml") || name.startsWith(DELETED_PREFIX);
            }
        });
        

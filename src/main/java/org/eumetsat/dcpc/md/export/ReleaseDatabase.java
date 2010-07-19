@@ -146,7 +146,7 @@ public class ReleaseDatabase
         while (true)
         {
             
-            String inDBReleaseName = aReleaseDBTopDir + File.separator + DateFormatter.dateToString(new Date());
+            String inDBReleaseName = aReleaseDBTopDir + File.separator + DateFormatter.dateToString(new Date(), DateFormatter.ms_RELEASEDATEFORMAT);
             
             cpt++;
             
@@ -230,7 +230,7 @@ public class ReleaseDatabase
         {
             // Because fd are not always released immediatly on windows
             // to be safe call the garbage collector
-            System.gc();
+            //System.gc();
             
             for (Release  release : this.m_Releases)
             {
