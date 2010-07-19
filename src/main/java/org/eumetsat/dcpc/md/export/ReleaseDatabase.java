@@ -209,8 +209,9 @@ public class ReleaseDatabase
     /**
      * Remove the given Release from the database
      * @param aRelease
+     * @throws IOException 
      */
-    public void deleteRelease(Release aRelease)
+    public void deleteRelease(Release aRelease) throws IOException
     {
        Release.deleteRelease(aRelease); 
        // remove Release from index and list
@@ -227,6 +228,10 @@ public class ReleaseDatabase
     {
         try
         {
+            // Because fd are not always released immediatly on windows
+            // to be safe call the garbage collector
+            System.gc();
+            
             for (Release  release : this.m_Releases)
             {
                 Release.deleteRelease(release); 

@@ -6,12 +6,10 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.eumetsat.dcpc.commons.DateFormatter;
 import org.eumetsat.dcpc.commons.FileSystem;
 
 /**
@@ -239,10 +237,18 @@ public class Release
        {
            String line = null;
            RandomAccessFile deletedF = new RandomAccessFile(m_Deleted, "r");  
-           while ( (line = deletedF.readLine()) != null)
+           try
            {
-               result.add(line);
+               while ( (line = deletedF.readLine()) != null)
+               {
+                   result.add(line);
+               }
            }
+           finally
+           {
+               deletedF.close();
+           }
+           
        }
        
        return result;

@@ -1,64 +1,23 @@
 package org.eumetsat.dcpc.md.test;
-import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 import org.eumetsat.dcpc.commons.Checksummer;
-import org.eumetsat.dcpc.commons.DateFormatter;
-import org.eumetsat.dcpc.commons.XmlPrettyPrinter;
-import org.eumetsat.dcpc.md.export.XsltProcessor;
 import org.eumetsat.dcpc.md.export.MetadataExporter;
 import org.eumetsat.dcpc.md.export.Release;
 import org.eumetsat.dcpc.md.export.ReleaseDatabase;
-import org.eumetsat.dcpc.md.export.MetadataFileRenamer;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-
-import junit.framework.TestCase;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ExportTest extends TestCase
+public class MetadataExporterValidationSuite extends TestCase
 {
     public final static String TEST_DIR = "H:/Dev/ecli-workspace/DWD-metadata-transformers/src/test/resources";
-    public final static Logger logger = LoggerFactory.getLogger(ExportTest.class);
+    public final static Logger logger = LoggerFactory.getLogger(MetadataExporterValidationSuite.class);
        
-    /* working pretty print test */
-    public void ztestPrettyPrintFile()
-    {
-        String dirPath          = TEST_DIR + File.separatorChar + "uniqueXML";
-        String filePath         = dirPath  + File.separatorChar + "10.xml";
-        String expectedFilePath = TEST_DIR + File.separatorChar + "testPrettyPrint" + File.separatorChar + "expectedPrettyPrintXML.xml";
-        
-        try
-        {
-            // pretty print
-            String result = XmlPrettyPrinter.prettyPrintAsString(filePath);
-            
-            // get the expected result
-            byte[] buffer = new byte[(int) new File(expectedFilePath).length()];
-            BufferedInputStream f = new BufferedInputStream(new FileInputStream(expectedFilePath));
-            f.read(buffer);
-            
-            String expectedXML = new String(buffer,"UTF-8");
-            
-            //assertEquals(expectedXML, result);
-            
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail("See Exception Stack Trace");
-        }
-    }
-    
     /**
      * test MD5 generation
      */
@@ -176,6 +135,7 @@ public class ExportTest extends TestCase
             // check that 10 files have been deleted
             assertEquals("Should have been deleting 10 files. Check the ReleaseDB content that is in " + releaseDBPath, 10, latestRelease.getDeltaDeletedFilenames().size());
             
+            db.eraseReleaseDatabase();
         }
         catch (Exception e)
         {
@@ -231,5 +191,17 @@ public class ExportTest extends TestCase
             e.printStackTrace();
             fail("See Exception Stack Trace");
         }
-    } 
+    }
+    
+    public static Test suite() 
+    {
+       return new TestSuite(MetadataExporterValidationSuite.class);
+    }
+          
+    
+    public static void main(String[] args) throws Exception 
+    {
+          junit.textui.TestRunner.run(suite());
+    }
+          
 }
