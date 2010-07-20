@@ -10,6 +10,7 @@ import java.util.Set;
 import org.apache.commons.io.FilenameUtils;
 import org.eumetsat.dcpc.commons.Checksummer;
 import org.eumetsat.dcpc.commons.FileSystem;
+import org.eumetsat.dcpc.commons.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -183,8 +184,8 @@ public class MetadataExporter
         else
         {
             // get list of previous MD5s and the list of current MD5s
-            HashMap<String,String> prev = latestRelease.getSrcMD5s();
-            HashMap<String,String> curr = tempRelease.getSrcMD5s();
+            HashMap<String,Pair<String,String>>  prev = latestRelease.getSrcMD5s();
+            HashMap<String,Pair<String,String>>  curr = tempRelease.getSrcMD5s();
             
             Set<String> currSet = new HashSet<String>();
             Set<String> deletedSet = new HashSet<String>();
@@ -204,8 +205,8 @@ public class MetadataExporter
              *    newSet.add(currSet);
              */
               
-             // copy curr keys in currSet
-             currSet.addAll(curr.keySet());
+            // copy curr keys in currSet
+            currSet.addAll(curr.keySet());
              
             for (String key : prev.keySet())
             {
@@ -218,7 +219,7 @@ public class MetadataExporter
                    if (!prev.get(key).equals(curr.get(key))) 
                    {
                       // md5 different so the file has been updated
-                      logger.info("MD5 Differents for {}. old:[{}], new:[{}]", new String[] {key, prev.get(key), curr.get(key)});
+                      logger.info("MD5 Differents for {}. old:[{}], new:[{}]", new String[] {key, prev.get(key).getKey(), curr.get(key).getKey()});
                       
                       // add in newSet 
                       newSet.add(key);
@@ -233,18 +234,22 @@ public class MetadataExporter
             // elems left in currSet are new and need to be added to newSet
             newSet.addAll(currSet);
             
+            String basename;
             // copy newSet in Delta/Files
-          
             for (String name : newSet)
             {
-                //add files in Results and there MD5s in MD5
-                tempRelease.addFileInDeltaResult(new File(aTempXmlDir + File.separator + name + ".xml"));
+                //add files in Results and their MD5s in MD5
+                
+                // get the basename from curr HashMap
+                basename = curr.get(name).getValue();
+                
+                tempRelease.addFileInDeltaResult(new File(aTempXmlDir + File.separator + basename + ".xml"));
             }
             
             // add files in deleted
             for (String name : deletedSet)
             {
-                tempRelease.flagAsDeleted(name + ".xml");
+                tempRelease.flagAsDeleted(name);
             }
         }
         

@@ -13,6 +13,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.eumetsat.dcpc.commons.DateFormatter;
 import org.eumetsat.dcpc.commons.FileSystem;
+import org.eumetsat.dcpc.commons.Pair;
 
 /**
  * Represent a Release
@@ -192,24 +193,24 @@ public class Release
        FileUtils.copyFileToDirectory(aFile, this.m_Result, true);
    }
    
-   public void flagAsDeleted(String aFileName) throws Exception
+   public void flagAsDeleted(String aFileIdentifier) throws Exception
    {
        RandomAccessFile deleted = new RandomAccessFile(m_Deleted, "rwd");
        // Seek to end of file
        deleted.seek(m_Deleted.length());
 
-       deleted.writeBytes(aFileName + "\n");
+       deleted.writeBytes(aFileIdentifier + "\n");
        deleted.close();
    }
      
    /**
     * Return the SrcMD5s info in a workable data structure.
     * A HashMap<filename,MD5>
-    * @return the hashMap<filename,MD5>
+    * @return the hashMap<EOPortal-fileIdentifier,Pair(MD5,MD5FileBasename)>
     */
-   public HashMap<String,String> getSrcMD5s() throws Exception
+   public HashMap<String,Pair<String,String>> getSrcMD5s() throws Exception
    {
-       HashMap<String, String> hMap = new HashMap<String,String>();
+       HashMap<String, Pair<String,String>> hMap = new HashMap<String, Pair<String, String> >();
        
        // get list of MD5 files
        String relevant_files[] = this.m_SrcMd5s.list(new FilenameFilter() {
@@ -221,15 +222,13 @@ public class Release
        
        File   md5F     = null;
        String key      = null;
-       String val      = null;
        
        for (String filename : relevant_files)
        {
           md5F = new File(this.m_SrcMd5s.getAbsolutePath() + File.separator + filename);
-          key  = FilenameUtils.getBaseName(filename);
-          val  = FileUtils.readFileToString(md5F);
+          key  = MetadataFileRenamer.extractFileIdentifierFromWMOFilename(filename);
           
-          hMap.put(key, val);
+          hMap.put(key, new Pair<String, String>(FileUtils.readFileToString(md5F),FilenameUtils.getBaseName(filename)));
        }
        
        return hMap;
@@ -241,7 +240,7 @@ public class Release
     */
    public boolean hasADelta()
    {
-       // get list of MD5 files
+       // get list of files in the delta dir
        String relevant_files[] = this.m_Result.list(new FilenameFilter() {
            public boolean accept(File dir, String name)
            {

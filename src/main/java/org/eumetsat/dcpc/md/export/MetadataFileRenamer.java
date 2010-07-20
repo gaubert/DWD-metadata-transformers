@@ -22,8 +22,10 @@ package org.eumetsat.dcpc.md.export;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
+import org.eumetsat.dcpc.commons.DateFormatter;
 import org.eumetsat.dcpc.commons.xml.SimpleNamespaceContext;
 import org.eumetsat.dcpc.commons.xml.XPathExtractor;
 import org.slf4j.Logger;
@@ -44,8 +46,10 @@ public class MetadataFileRenamer
     private static final SimpleNamespaceContext ms_NamespaceContext = new SimpleNamespaceContext();
     
     // TODO To be put in a configuration file with the namespaces
-    private static final String ms_XPathExprStr = "gmd:MD_Metadata/gmd:fileIdentifier/gco:CharacterString";
+    private static final String ms_XPathGetName = "gmd:MD_Metadata/gmd:fileIdentifier/gco:CharacterString";
     
+    private static final String ms_XPathGetDate = "gmd:MD_Metadata/gmd:dateStamp/gco:Date";
+   
     static
     {
         ms_NamespaceContext.addNamespace("gmd", "http://www.isotc211.org/2005/gmd");
@@ -87,17 +91,21 @@ public class MetadataFileRenamer
      */
     public void processFiles() throws Exception
     {
-        String fileName = null;
-        File newFile = null;
+        String mdName = null;
+        File   newFile  = null;
+        Date   modDate  = null; 
         
         for (File file : this.oListFiles)
         {
-            fileName = this.extractName(file);
+            mdName = this.extractNameFromXML(file);
+            modDate  = this.extractDate(file);
+            
             //System.out.println("Extracted name: " + fileName);
 
-            if (fileName != null)
-            {
-                newFile = new File(this.strInputDirPath + File.separator + fileName + ".xml");
+            if (mdName != null)
+            { 
+                // follow this filename pattern Z_EO_EUM_DAT_MSG_HRSEVIRI_C_EUMS_20090831000000.xml
+                newFile = new File(this.strInputDirPath + File.separator + "Z_" + mdName + "_C_EUMS_" + DateFormatter.dateToString(modDate, DateFormatter.ms_DELETEDATEFORMAT) + ".xml");
                 //System.out.println("new File: " + newFile.toString());
                 
                 FileUtils.moveFile(file, newFile);          
@@ -105,7 +113,13 @@ public class MetadataFileRenamer
         }
     }
     
-    public String extractName(File aFile) throws Exception
+    /**
+     * Get the metadata name without the wmo URI stuff
+     * @param aFile
+     * @return the string 
+     * @throws Exception
+     */
+    public String extractNameFromXML(File aFile) throws Exception
     {        
         
         // preconditions
@@ -114,11 +128,58 @@ public class MetadataFileRenamer
         
         XPathExtractor xpathExtractor = new XPathExtractor();
         
-        xpathExtractor.setXPathExpression(ms_XPathExprStr, ms_NamespaceContext);
+        xpathExtractor.setXPathExpression(ms_XPathGetName, ms_NamespaceContext);
         
         String result = xpathExtractor.evaluateAsString(aFile);
         
-        return result;
+        String [] strs = result.split("::");
+        
+        //should have 2 elements in the list otherwise error;
+        
+        if (strs.length != 2)
+        {
+            throw new Exception("Error. Cannot properly extract the EUMETSAT identifier from " + result);
+        }
+        
+        return strs[1];
+    }
+     
+    /**
+     * Return the EOPortalFileIdentifier from a WMOFilename
+     * @param aWMOFilename
+     * @return
+     * @throws Exception
+     */
+    public static String extractFileIdentifierFromWMOFilename(String aWMOFilename) throws Exception
+    {
+        String[] dummys = aWMOFilename.split("_C_EUMS");
+        if (dummys.length != 2)
+        {
+            throw new Exception("Error cannot extract the EOPortal fileIdentifier from " + aWMOFilename + ". aWMOFilename.split(\"C_EUMS\") = " + ((dummys.length != 0) ? dummys : "null") );
+        }
+        
+        return dummys[0].substring(2);
+    }
+    
+    /**
+     * Get the Metadata Date
+     * @param aFile
+     * @return
+     * @throws Exception
+     */
+    public Date extractDate(File aFile) throws Exception
+    {         
+        // preconditions
+        if (aFile == null)
+            throw new Exception("Error invalid File");
+        
+        XPathExtractor xpathExtractor = new XPathExtractor();
+        
+        xpathExtractor.setXPathExpression(ms_XPathGetDate, ms_NamespaceContext);
+        
+        String result = xpathExtractor.evaluateAsString(aFile);
+        
+        return DateFormatter.createDate(result, DateFormatter.ms_MDDATEFORMAT);     
     }
 
     /**

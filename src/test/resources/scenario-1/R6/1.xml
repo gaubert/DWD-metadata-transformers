@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><gmi:MI_Metadata xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns="http://www.isotc211.org/2005/gmd" xmlns:date="http://exslt.org/dates-and-times" xmlns:eum="http://www.eumetsat.int/2008/gmi" xmlns:fn="http://www.w3.org/TR/xpath-functions" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gml="http://www.opengis.net/gml" xmlns:str="http://exslt.org/strings" xmlns:xdt="http://www.w3.org/2005/02/xpath-datatypes" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="gmi:MI_Metadata_Type">
          <fileIdentifier>
-            <gco:CharacterString>EO_EUM_DAT_MULT_MAPSSI</gco:CharacterString>
+            <gco:CharacterString>EO_EUM_DAT_GOES_GWW</gco:CharacterString>
          </fileIdentifier>
          <language>
             <gco:CharacterString>eng</gco:CharacterString>
@@ -22,8 +22,114 @@
 
 
 
-
-
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
          
          
          
@@ -41,37 +147,28 @@
          
          
          <hierarchyLevelName>
-            <gco:CharacterString>sat.GOES</gco:CharacterString>
+            <gco:CharacterString>theme.par.Cloud</gco:CharacterString>
          </hierarchyLevelName>
          <hierarchyLevelName>
-            <gco:CharacterString>sat.GOES.SEVIRI</gco:CharacterString>
+            <gco:CharacterString>theme.par.Observation</gco:CharacterString>
          </hierarchyLevelName>
          <hierarchyLevelName>
-            <gco:CharacterString>sat.NOAA</gco:CharacterString>
+            <gco:CharacterString>theme.par.Satellite_Data</gco:CharacterString>
          </hierarchyLevelName>
          <hierarchyLevelName>
-            <gco:CharacterString>sat.NOAA.SEVIRI</gco:CharacterString>
+            <gco:CharacterString>theme.par.Land</gco:CharacterString>
          </hierarchyLevelName>
          <hierarchyLevelName>
-            <gco:CharacterString>sat.METEOSAT</gco:CharacterString>
+            <gco:CharacterString>SBA.Agriculture</gco:CharacterString>
          </hierarchyLevelName>
          <hierarchyLevelName>
-            <gco:CharacterString>sat.METEOSAT.SEVIRI</gco:CharacterString>
+            <gco:CharacterString>SBA.Climate</gco:CharacterString>
          </hierarchyLevelName>
          <hierarchyLevelName>
-            <gco:CharacterString>sat.MSG1</gco:CharacterString>
+            <gco:CharacterString>SBA.Disaster</gco:CharacterString>
          </hierarchyLevelName>
          <hierarchyLevelName>
-            <gco:CharacterString>sat.MSG2</gco:CharacterString>
-         </hierarchyLevelName>
-         <hierarchyLevelName>
-            <gco:CharacterString>theme.par.Radiation</gco:CharacterString>
-         </hierarchyLevelName>
-         <hierarchyLevelName>
-            <gco:CharacterString>theme.par.Marine</gco:CharacterString>
-         </hierarchyLevelName>
-         <hierarchyLevelName>
-            <gco:CharacterString>theme.par.GEONETCast</gco:CharacterString>
+            <gco:CharacterString>SBA.Ecosystems</gco:CharacterString>
          </hierarchyLevelName>
          <hierarchyLevelName>
             <gco:CharacterString>SBA.Water</gco:CharacterString>
@@ -80,48 +177,45 @@
             <gco:CharacterString>SBA.Weather</gco:CharacterString>
          </hierarchyLevelName>
          <hierarchyLevelName>
-            <gco:CharacterString>dis.SAFArchive&amp;FTP</gco:CharacterString>
+            <gco:CharacterString>dis.GEONETCast-Americas</gco:CharacterString>
          </hierarchyLevelName>
          <hierarchyLevelName>
-            <gco:CharacterString>dis.EUMETCast-Europe</gco:CharacterString>
-         </hierarchyLevelName>
-         <hierarchyLevelName>
-            <gco:CharacterString>dis.EUMETCast-Africa</gco:CharacterString>
+            <gco:CharacterString>sat.GOES</gco:CharacterString>
          </hierarchyLevelName>
          <contact>
             <CI_ResponsibleParty>
 
                <organisationName>
-                  <gco:CharacterString>OSI SAF</gco:CharacterString>
+                  <gco:CharacterString>INPE/CPTEC</gco:CharacterString>
                </organisationName>
                <contactInfo>
                   <CI_Contact>
                      <address>
                         <CI_Address>
                            <deliveryPoint>
-                              <gco:CharacterString>Avenue de Lorraine, BP 50747</gco:CharacterString>
+                              <gco:CharacterString>Rodovia Presidente Dutra</gco:CharacterString>
                            </deliveryPoint>
                            <city>
-                              <gco:CharacterString>Lannion Cedex</gco:CharacterString>
+                              <gco:CharacterString>Cachoeira Paulista, SP</gco:CharacterString>
                            </city>
                            <administrativeArea>
-                              <gco:CharacterString>Meteo France Centre de Meterologie Spatiale</gco:CharacterString>
+                              <gco:CharacterString>Km40, SP-RJ</gco:CharacterString>
                            </administrativeArea>
                            <postalCode>
-                              <gco:CharacterString>22307</gco:CharacterString>
+                              <gco:CharacterString>12630-000</gco:CharacterString>
                            </postalCode>
                            <country>
-                              <gco:CharacterString>France</gco:CharacterString>
+                              <gco:CharacterString>Brazil</gco:CharacterString>
                            </country>
                            <electronicMailAddress>
-                              <gco:CharacterString>osi-saf.manager@meteo.fr</gco:CharacterString>
+                              <gco:CharacterString>atendimento@cptec.inpe.br</gco:CharacterString>
                            </electronicMailAddress>
                         </CI_Address>
                      </address>
                      <onlineResource>
                         <CI_OnlineResource>
                            <linkage>
-                              <URL>http://www.osi-saf.org</URL>
+                              <URL>http://www.cptec.inpe.br</URL>
                            </linkage>
                            <protocol>
                               <gco:CharacterString>http</gco:CharacterString>
@@ -136,7 +230,7 @@
             </CI_ResponsibleParty>
          </contact>
          <dateStamp>
-            <gco:Date>2009-09-01</gco:Date>
+            <gco:Date>2010-05-12</gco:Date>
          </dateStamp>
          <metadataStandardName>
             <gco:CharacterString>ISO19115</gco:CharacterString>
@@ -149,18 +243,26 @@
                <citation>
                   <CI_Citation>
                      <title>
-                        <gco:CharacterString>Merged Atlantic Product Surface Solar Irradiance - Multimission</gco:CharacterString>
+                        <gco:CharacterString>Wind Chart Water Vapour - GOES - South America</gco:CharacterString>
                      </title>
 
 
                      
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
                      <alternateTitle>
-                        <gco:CharacterString>MAPSSI</gco:CharacterString>
+                        <gco:CharacterString>GWW</gco:CharacterString>
                      </alternateTitle>
                      <date>
                         <CI_Date>
                            <date>
-                              <gco:Date>2009-03-23</gco:Date>
+                              <gco:Date>2010-05-12</gco:Date>
                            </date>
                            <dateType>
                               <CI_DateTypeCode codeList="./resources/codeList.xml#CI_DateTypeCode" codeListValue="creation"/>
@@ -170,7 +272,7 @@
                      <date>
                         <CI_Date>
                            <date>
-                              <gco:Date>2009-05-26</gco:Date>
+                              <gco:Date>2010-05-12</gco:Date>
                            </date>
                            <dateType>
                               <CI_DateTypeCode codeList="./resources/codeList.xml#CI_DateTypeCode" codeListValue="revision"/>
@@ -180,7 +282,7 @@
                      <date>
                         <CI_Date>
                            <date>
-                              <gco:Date>2009-04-23</gco:Date>
+                              <gco:Date>2010-05-12</gco:Date>
                            </date>
                            <dateType>
                               <CI_DateTypeCode codeList="./resources/codeList.xml#CI_DateTypeCode" codeListValue="publication"/>
@@ -190,14 +292,19 @@
                      <identifier>
                         <MD_Identifier>
                            <code>
-                              <gco:CharacterString>EO:EUM:DAT:MULT:MAPSSI</gco:CharacterString>
+                              <gco:CharacterString>EO:EUM:DAT:GOES:GWW</gco:CharacterString>
                            </code>
                         </MD_Identifier>
                      </identifier>
-
-
                      
-                     
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
                                        <citedResponsibleParty>
                         <CI_ResponsibleParty>
                            <contactInfo>
@@ -205,10 +312,10 @@
                                  <onlineResource>
                                     <CI_OnlineResource>
                                        <linkage>
-                                          <URL>http://www.eumetsat.int/Home/Main/What_We_Do/SAFs/Projects/SP_1124286934190?l=en</URL>
+                                          <URL>http://satelite.cptec.inpe.br/vento/</URL>
                                        </linkage>
                                        <name>
-                                          <gco:CharacterString>EUMETSAT_OSI_SAF_page</gco:CharacterString>
+                                          <gco:CharacterString>Product Page</gco:CharacterString>
                                        </name>
                                        <function>
                                           <CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="information"/>
@@ -229,10 +336,10 @@
                                  <onlineResource>
                                     <CI_OnlineResource>
                                        <linkage>
-                                          <URL>http://www.osi-saf.org/index.php</URL>
+                                          <URL>http://satelite.cptec.inpe.br/vento/docs/9thIWW-CPTEC-INPE_GOES-10_AMVs.pdf</URL>
                                        </linkage>
                                        <name>
-                                          <gco:CharacterString>OSI_SAF</gco:CharacterString>
+                                          <gco:CharacterString>CPTEC / INPE operational GOES-10 Atmospheric Motion Vectors</gco:CharacterString>
                                        </name>
                                        <function>
                                           <CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="information"/>
@@ -249,48 +356,55 @@
                   </CI_Citation>
                </citation>
                <abstract>
-                  <gco:CharacterString>Estimation of the solar irradiance reaching the Earth surface , derived from the geostationary satellites data (GOES and MSG). The daily Merged Atlantic Product SSI values are mean values over the considered period of time, 24 hours. SSI values are expressed in tenths of W/m2.</gco:CharacterString>
+                  <gco:CharacterString>These models use the visible (0,5µm), near infrared (3,9µm), water vapor (WV - 6,7µm) and infrared (IR-10,2µm) channels. Visible and near infrared  Cloud Drift Winds (CDW) models are used to estimate winds in lower atmospheric levels while the IR and WV models are used to estimate wind in the low, middle and high levels(100-400/401-700/701-100hPa). Using GOES-10 INPE/CPTEC began to produce operationally cloud drift wind, each 15 minutes, for the four channels described above.</gco:CharacterString>
                </abstract>
-               <status>
-                  <MD_ProgressCode codeList="./resources/codeList.xml#CI_OrbitTypeCode" codeListValue="Operational"/>
-               </status>
+
                <pointOfContact>
                   <CI_ResponsibleParty>
                      <individualName>
-                        <gco:CharacterString>SAF on Ocean and Sea Ice</gco:CharacterString>
+                        <gco:CharacterString>National Institute for Space Research</gco:CharacterString>
                      </individualName>
                      <organisationName>
-                        <gco:CharacterString>OSI SAF</gco:CharacterString>
+                        <gco:CharacterString>INPE/CPTEC</gco:CharacterString>
                      </organisationName>
                      <contactInfo>
                         <CI_Contact>
-
+                           <phone>
+                              <CI_Telephone>
+                                 <voice>
+                                    <gco:CharacterString>+ 55 12 3186-9291</gco:CharacterString>
+                                 </voice>
+                                 <facsimile>
+                                    <gco:CharacterString>+ 55 12 3186-9291</gco:CharacterString>
+                                 </facsimile>
+                              </CI_Telephone>
+                           </phone>
                            <address>
                               <CI_Address>
                                  <deliveryPoint>
-                                    <gco:CharacterString>Avenue de Lorraine, BP 50747</gco:CharacterString>
+                                    <gco:CharacterString>Km, 040 Rodovia Presidente Dutra</gco:CharacterString>
                                  </deliveryPoint>
                                  <city>
-                                    <gco:CharacterString>Lannion Cedex</gco:CharacterString>
+                                    <gco:CharacterString>12630-000 Cachoeira Paulista (SP)</gco:CharacterString>
                                  </city>
                                  <administrativeArea>
-                                    <gco:CharacterString>Meteo France Centre de Meterologie Spatiale</gco:CharacterString>
+                                    <gco:CharacterString>Cachoeira Paulista, SP</gco:CharacterString>
                                  </administrativeArea>
                                  <postalCode>
-                                    <gco:CharacterString>22307</gco:CharacterString>
+                                    <gco:CharacterString>12630-000</gco:CharacterString>
                                  </postalCode>
                                  <country>
-                                    <gco:CharacterString>France</gco:CharacterString>
+                                    <gco:CharacterString>Brazil</gco:CharacterString>
                                  </country>
                                  <electronicMailAddress>
-                                    <gco:CharacterString>osi-saf.manager@meteo.fr</gco:CharacterString>
+                                    <gco:CharacterString>cesar.mello@cptec.inpe.br</gco:CharacterString>
                                  </electronicMailAddress>
                               </CI_Address>
                            </address>
                            <onlineResource>
                               <CI_OnlineResource>
                                  <linkage>
-                                    <URL>http://www.osi-saf.org</URL>
+                                    <URL>http://www.cptec.inpe.br</URL>
                                  </linkage>
                                  <protocol>
                                     <gco:CharacterString>http</gco:CharacterString>
@@ -305,8 +419,27 @@
                   </CI_ResponsibleParty>
                </pointOfContact>
 
+               <graphicOverview>
+                  <MD_BrowseGraphic>
+                     <fileName>
+                        <gco:CharacterString>/smartEditor/preview/GWW.jpg</gco:CharacterString>
+                     </fileName>
+                  </MD_BrowseGraphic>
+               </graphicOverview>
                <descriptiveKeywords>
                   <MD_Keywords>
+                     <keyword>
+                        <gco:CharacterString>Agriculture</gco:CharacterString>
+                     </keyword>
+                     <keyword>
+                        <gco:CharacterString>Climate</gco:CharacterString>
+                     </keyword>
+                     <keyword>
+                        <gco:CharacterString>Disaster</gco:CharacterString>
+                     </keyword>
+                     <keyword>
+                        <gco:CharacterString>Ecosystems</gco:CharacterString>
+                     </keyword>
                      <keyword>
                         <gco:CharacterString>Water</gco:CharacterString>
                      </keyword>
@@ -321,7 +454,16 @@
                <descriptiveKeywords>
                   <MD_Keywords>
                      <keyword>
-                        <gco:CharacterString>Marine</gco:CharacterString>
+                        <gco:CharacterString>Land</gco:CharacterString>
+                     </keyword>
+                     <keyword>
+                        <gco:CharacterString>Cloud</gco:CharacterString>
+                     </keyword>
+                     <keyword>
+                        <gco:CharacterString>Observation</gco:CharacterString>
+                     </keyword>
+                     <keyword>
+                        <gco:CharacterString>Satellite_Data</gco:CharacterString>
                      </keyword>
                      <type>
                         <MD_KeywordTypeCode codeList="http://metadata.dgiwg.org/codelistRegistry?MD_KeywordTypeCode" codeListValue="theme"/>
@@ -331,8 +473,9 @@
                <descriptiveKeywords>
                   <MD_Keywords>
                      <keyword>
-                        <gco:CharacterString>Marine</gco:CharacterString>
+                        <gco:CharacterString>Land</gco:CharacterString>
                      </keyword>
+                     
                      <type>
                         <MD_KeywordTypeCode codeList="http://metadata.dgiwg.org/codelistRegistry?MD_KeywordTypeCode" codeListValue="discipline"/>
                      </type>
@@ -340,6 +483,16 @@
                </descriptiveKeywords>
 
 
+               <descriptiveKeywords>
+                  <MD_Keywords>
+                     <keyword>
+                        <gco:CharacterString>GEONETCast-Americas</gco:CharacterString>
+                     </keyword>
+                     <type>
+                        <MD_KeywordTypeCode codeList="MD_KeywordTypeCode" codeListValue="place"/>
+                     </type>
+                  </MD_Keywords>
+               </descriptiveKeywords>
                <resourceConstraints>
                   <MD_LegalConstraints>
                      <useConstraints>
@@ -359,6 +512,14 @@
                </characterSet>
 
                
+               
+               
+               
+               
+               
+               
+               
+               
                <topicCategory>
                   <MD_TopicCategoryCode>climatologyMeteorologyAtmosphere</MD_TopicCategoryCode>
                </topicCategory>
@@ -369,7 +530,7 @@
                            <geographicIdentifier>
                               <MD_Identifier>
                                  <code>
-                                    <gco:CharacterString>LML (Low and Mid Latitudes)</gco:CharacterString>
+                                    <gco:CharacterString>South America</gco:CharacterString>
                                  </code>
                               </MD_Identifier>
                            </geographicIdentifier>
@@ -385,32 +546,19 @@
                               <gco:Decimal>-100.0</gco:Decimal>
                            </westBoundLongitude>
                            <eastBoundLongitude>
-                              <gco:Decimal>45.0</gco:Decimal>
+                              <gco:Decimal>-20</gco:Decimal>
                            </eastBoundLongitude>
                            <southBoundLatitude>
-                              <gco:Decimal>-60.0</gco:Decimal>
+                              <gco:Decimal>-70</gco:Decimal>
                            </southBoundLatitude>
                            <northBoundLatitude>
-                              <gco:Decimal>89.9</gco:Decimal>
+                              <gco:Decimal>12.5</gco:Decimal>
                            </northBoundLatitude>
                         </EX_GeographicBoundingBox>
                      </geographicElement>
                   </EX_Extent>
                </extent>
-               <extent>
-                  <EX_Extent>
-                     <temporalElement>
-                        <EX_TemporalExtent>
-                           <extent>
-                              <gml:TimePeriod gml:id="ID0006">
-                                 <gml:beginPosition>2005-03-01</gml:beginPosition>
-                                 <gml:endPosition/>
-                              </gml:TimePeriod>
-                           </extent>
-                        </EX_TemporalExtent>
-                     </temporalElement>
-                  </EX_Extent>
-               </extent>
+
             </MD_DataIdentification>
          </identificationInfo>
          <contentInfo>
@@ -430,37 +578,50 @@
                      <distributorContact>
                         <CI_ResponsibleParty>
 
+                           <individualName>
+                              <gco:CharacterString>National Institute for Space Research</gco:CharacterString>
+                           </individualName>
                            <organisationName>
-                              <gco:CharacterString>OSI SAF</gco:CharacterString>
+                              <gco:CharacterString>INPE/CPTEC</gco:CharacterString>
                            </organisationName>
                            <contactInfo>
                               <CI_Contact>
+                                 <phone>
+                                    <CI_Telephone>
+                                       <voice>
+                                          <gco:CharacterString>+ 55 12 3186-9291</gco:CharacterString>
+                                       </voice>
+                                       <facsimile>
+                                          <gco:CharacterString>+ 55 12 3186-9291</gco:CharacterString>
+                                       </facsimile>
+                                    </CI_Telephone>
+                                 </phone>
                                  <address>
                                     <CI_Address>
                                        <deliveryPoint>
-                                          <gco:CharacterString>Avenue de Lorraine, BP 50747</gco:CharacterString>
+                                          <gco:CharacterString>Km, 040 Rodovia Presidente Dutra</gco:CharacterString>
                                        </deliveryPoint>
                                        <city>
-                                          <gco:CharacterString>Lannion Cedex</gco:CharacterString>
+                                          <gco:CharacterString>12630-000 Cachoeira Paulista (SP)</gco:CharacterString>
                                        </city>
                                        <administrativeArea>
-                                          <gco:CharacterString>Meteo France Centre de Meterologie Spatiale</gco:CharacterString>
+                                          <gco:CharacterString>Cachoeira Paulista, SP</gco:CharacterString>
                                        </administrativeArea>
                                        <postalCode>
-                                          <gco:CharacterString>22307</gco:CharacterString>
+                                          <gco:CharacterString>12630-000</gco:CharacterString>
                                        </postalCode>
                                        <country>
-                                          <gco:CharacterString>France</gco:CharacterString>
+                                          <gco:CharacterString>Brazil</gco:CharacterString>
                                        </country>
                                        <electronicMailAddress>
-                                          <gco:CharacterString>osi-saf.manager@meteo.fr</gco:CharacterString>
+                                          <gco:CharacterString>cesar.mello@cptec.inpe.br</gco:CharacterString>
                                        </electronicMailAddress>
                                     </CI_Address>
                                  </address>
                                  <onlineResource>
                                     <CI_OnlineResource>
                                        <linkage>
-                                          <URL>http://www.osi-saf.org</URL>
+                                          <URL>http://www.cptec.inpe.br</URL>
                                        </linkage>
                                        <protocol>
                                           <gco:CharacterString>http</gco:CharacterString>
@@ -470,14 +631,20 @@
                               </CI_Contact>
                            </contactInfo>
                            <role>
-                              <CI_RoleCode codeList="./resources/codeList.xml#CI_RoleCode" codeListValue="owner"/>
+                              <CI_RoleCode codeList="./resources/codeList.xml#CI_RoleCode" codeListValue="originator"/>
                            </role>
                         </CI_ResponsibleParty>
                      </distributorContact>
 
-
                      
-                     
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
                                        <eum:digitalTransfers>
                         <eum:MD_EUMDigitalTransfer>
                            <eum:availability>
@@ -485,13 +652,13 @@
                                  <onLine>
                                     <CI_OnlineResource>
                                        <linkage>
-                                          <URL>http://www.osi-saf.org</URL>
+                                          <URL>http://www.geonetcastamericas.noaa.gov/</URL>
                                        </linkage>
                                        <protocol>
                                           <gco:CharacterString>http</gco:CharacterString>
                                        </protocol>
                                        <name>
-                                          <gco:CharacterString>OSI_SAF_Archive_and_FTP</gco:CharacterString>
+                                          <gco:CharacterString>GEONETCast-Americas</gco:CharacterString>
                                        </name>
                                        <function>
                                           <CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="order"/>
@@ -499,7 +666,7 @@
                                     </CI_OnlineResource>
                                  </onLine>
                                  <eum:availability>
-                                    <gco:CharacterString>SAF Archive &amp; FTP</gco:CharacterString>
+                                    <gco:CharacterString>GEONETCast-Americas</gco:CharacterString>
                                  </eum:availability>
                                  <eum:aggregateIdentifier>
                                     <gco:CharacterString/>
@@ -512,94 +679,23 @@
                            <eum:format>
                               <eum:MD_EUMFormat>
                                  <name>
-                                    <gco:CharacterString>GRIB</gco:CharacterString>
+                                    <gco:CharacterString>JPEG</gco:CharacterString>
                                  </name>
                                  <version>
                                     <gco:CharacterString/>
                                  </version>
+                                 <eum:typicalFilename>
+                                    <gco:CharacterString>INPE_GWW_ YYYYMMDDHHMM.jpg</gco:CharacterString>
+                                 </eum:typicalFilename>
                                  <eum:averageFileSizeUnits>
-                                    <gco:CharacterString>Mb;</gco:CharacterString>
+                                    <gco:CharacterString>KB</gco:CharacterString>
                                  </eum:averageFileSizeUnits>
                                  <eum:averageFileSize>
-                                    <gco:Real>3.1</gco:Real>
+                                    <gco:Real>900.0</gco:Real>
                                  </eum:averageFileSize>
                                  <eum:frequency>
-                                    <gco:CharacterString>1 (per day)</gco:CharacterString>
+                                    <gco:CharacterString>24 (per day)</gco:CharacterString>
                                  </eum:frequency>
-                              </eum:MD_EUMFormat>
-                           </eum:format>
-                        </eum:MD_EUMDigitalTransfer>
-                     </eum:digitalTransfers>
-                     <eum:digitalTransfers>
-                        <eum:MD_EUMDigitalTransfer>
-                           <eum:availability>
-                              <eum:MD_EUMDigitalTransferOptions>
-                                 <onLine>
-                                    <CI_OnlineResource>
-                                       <linkage>
-                                          <URL>http://eoportal.eumetsat.int/userMgmt</URL>
-                                       </linkage>
-                                       <protocol>
-                                          <gco:CharacterString>http</gco:CharacterString>
-                                       </protocol>
-                                       <name>
-                                          <gco:CharacterString>EO Portal Registration</gco:CharacterString>
-                                       </name>
-                                       <function>
-                                          <CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="order"/>
-                                       </function>
-                                    </CI_OnlineResource>
-                                 </onLine>
-                                 <onLine>
-                                    <CI_OnlineResource>
-                                       <linkage>
-                                          <URL>http://www.eumetsat.int/Home/Main/What_We_Do/EUMETCast/Reception_Station_Set-up/index.htm?l=en</URL>
-                                       </linkage>
-                                       <protocol>
-                                          <gco:CharacterString>http</gco:CharacterString>
-                                       </protocol>
-                                       <name>
-                                          <gco:CharacterString>Reception Station Set-up</gco:CharacterString>
-                                       </name>
-                                       <function>
-                                          <CI_OnLineFunctionCode codeList="CI_OnLineFunctionCode" codeListValue="order"/>
-                                       </function>
-                                    </CI_OnlineResource>
-                                 </onLine>
-                                 <eum:availability>
-                                    <gco:CharacterString>EUMETCast-Africa,EUMETCast-Europe,EUMETCast-Americas</gco:CharacterString>
-                                 </eum:availability>
-                                 <eum:aggregateIdentifier>
-                                    <gco:CharacterString/>
-                                 </eum:aggregateIdentifier>
-                                 <eum:eumetcastChannels>
-                                    <gco:CharacterString>SAF-Global</gco:CharacterString>
-                                 </eum:eumetcastChannels>
-                              </eum:MD_EUMDigitalTransferOptions>
-                           </eum:availability>
-                           <eum:format>
-                              <eum:MD_EUMFormat>
-                                 <name>
-                                    <gco:CharacterString>GRIB</gco:CharacterString>
-                                 </name>
-                                 <version>
-                                    <gco:CharacterString/>
-                                 </version>
-                                 <eum:typicalFilename>
-                                    <gco:CharacterString>S-OSI_-FRA_-MULT-MAPSSI_GINF_-200611142330Z.txt. gz</gco:CharacterString>
-                                 </eum:typicalFilename>
-                                 <eum:typicalFilename>
-                                    <gco:CharacterString>S-OSI_-FRA_-MULT-MAPSSI_QUAL_-200611142330Z.grb. gz</gco:CharacterString>
-                                 </eum:typicalFilename>
-                                 <eum:typicalFilename>
-                                    <gco:CharacterString>S-OSI_-FRA_-MULT-MAPSSI_FIELD-200611142330Z.grb. gz</gco:CharacterString>
-                                 </eum:typicalFilename>
-                                 <eum:averageFileSizeUnits>
-                                    <gco:CharacterString>Mb;</gco:CharacterString>
-                                 </eum:averageFileSizeUnits>
-                                 <eum:averageFileSize>
-                                    <gco:Real>3.1</gco:Real>
-                                 </eum:averageFileSize>
                               </eum:MD_EUMFormat>
                            </eum:format>
                         </eum:MD_EUMDigitalTransfer>
@@ -615,14 +711,22 @@
                      <gmi:identifier>
                         <MD_Identifier>
                            <code>
-                              <gco:CharacterString>GOES,NOAA,Meteosat,MSG</gco:CharacterString>
+                              <gco:CharacterString>GOES</gco:CharacterString>
                            </code>
                         </MD_Identifier>
                      </gmi:identifier>
                      <gmi:description>
-                        <gco:CharacterString>GOES, NOAA, Meteosat, MSG</gco:CharacterString>
+                        <gco:CharacterString/>
                      </gmi:description>
 
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
                      
                      <gmi:instrument>
                         <gmi:MI_Instrument>
@@ -633,7 +737,7 @@
                                  <identifier>
                                     <MD_Identifier>
                                        <code>
-                                          <gco:CharacterString>SEVIRI</gco:CharacterString>
+                                          <gco:CharacterString>GOES I-M Imager</gco:CharacterString>
                                        </code>
                                     </MD_Identifier>
                                  </identifier>

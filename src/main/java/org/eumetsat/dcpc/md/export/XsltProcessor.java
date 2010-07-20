@@ -150,8 +150,7 @@ public class XsltProcessor
         try
         {
             trans = transFact.newTransformer(xsltSource);
-            int cpt = 0;
-            
+           
             if (aPrettyPrint)
             {
                transformAndPrettyPrintFile(aFile2Process, trans, this.m_OutputDir);

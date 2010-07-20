@@ -9,7 +9,9 @@ import java.util.HashMap;
 public class DateFormatter
 {
     public final static String            ms_RELEASEDATEFORMAT     = "yyyy-MM-dd'T'HH'h'mm'm'ss's'";   
-    public final static String            ms_DELETEDATEFORMAT      = "yyyyMMddHHhmmss";
+    public final static String            ms_DELETEDATEFORMAT      = "yyyyMMddHHmmss";
+    public final static String            ms_MDDATEFORMAT          = "yyyy-MM-dd"; 
+    
     private final static FieldPosition    ms_FieldPosition         = new FieldPosition(0);
     
     private final static HashMap<String,SimpleDateFormat> ms_Formats = new HashMap<String,SimpleDateFormat>();
@@ -18,6 +20,7 @@ public class DateFormatter
     {
         ms_Formats.put(ms_RELEASEDATEFORMAT, new SimpleDateFormat(ms_RELEASEDATEFORMAT) );
         ms_Formats.put(ms_DELETEDATEFORMAT, new SimpleDateFormat(ms_DELETEDATEFORMAT) );
+        ms_Formats.put(ms_MDDATEFORMAT, new SimpleDateFormat(ms_MDDATEFORMAT) );
     }
     
     public static Date createDate(String aStringDate, String aFormat) throws Exception
