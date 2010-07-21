@@ -16,78 +16,91 @@ import org.w3c.dom.Document;
 
 /**
  * XMLPrettyPrinter
+ * 
  * @author guillaume.aubert@eumetsat.int
- *
+ * 
  */
 public class XmlPrettyPrinter
 {
     /**
      * Pretty Print the XML.
+     * 
      * @param aFilePath
      * @return the XML document as a String
-     * @throws Exception if the source file doesn't exist 
-     *                   or if there is problem while doing the XML transformation
+     * @throws Exception
+     *             if the source file doesn't exist or if there is problem while
+     *             doing the XML transformation
      */
     public static String prettyPrintAsString(String aFilePath) throws Exception
     {
         FileInputStream in = new FileInputStream(aFilePath);
-        
+
         Document doc = XmlPrettyPrinter.loadXMLFrom(in);
-            
+
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-            
+
         XmlPrettyPrinter.serialize(doc, out);
-        
+
         in.close();
-            
+
         return out.toString();
     }
-    
+
     /**
      * Pretty Print the XML as an OutputStream
+     * 
      * @param aFilePath
      * @param aOut
      * @return the passed OutputStream filled
-     * @throws Exception if the source file doesn't exist 
-     *                   or if there is problem while doing the XML transformation
+     * @throws Exception
+     *             if the source file doesn't exist or if there is problem while
+     *             doing the XML transformation
      */
-    public static OutputStream prettyPrint(String aFilePath, OutputStream aOut) throws Exception
+    public static OutputStream prettyPrint(String aFilePath, OutputStream aOut)
+            throws Exception
     {
         FileInputStream in = new FileInputStream(aFilePath);
-        
+
         Document doc = XmlPrettyPrinter.loadXMLFrom(in);
-            
+
         XmlPrettyPrinter.serialize(doc, aOut);
-        
+
         in.close();
-            
+
         return aOut;
     }
-    
+
     /**
      * Pretty Print the XML as an OutputStream
-     * @param aIn InputStream
-     * @param aOut OutputStream
+     * 
+     * @param aIn
+     *            InputStream
+     * @param aOut
+     *            OutputStream
      * @return the passed OutputStream filled
-     * @throws Exception if the source file doesn't exist 
-     *                   or if there is problem while doing the XML transformation
+     * @throws Exception
+     *             if the source file doesn't exist or if there is problem while
+     *             doing the XML transformation
      */
-    public static OutputStream prettyPrint(InputStream aIn, OutputStream aOut) throws Exception
+    public static OutputStream prettyPrint(InputStream aIn, OutputStream aOut)
+            throws Exception
     {
         Document doc = XmlPrettyPrinter.loadXMLFrom(aIn);
-            
+
         XmlPrettyPrinter.serialize(doc, aOut);
-            
+
         return aOut;
     }
-    
+
     /**
      * internal method doing the xml transformation
+     * 
      * @param doc
      * @param out
      * @throws Exception
      */
-    private static void serialize(Document doc, OutputStream out) throws Exception
+    private static void serialize(Document doc, OutputStream out)
+            throws Exception
     {
 
         TransformerFactory tfactory = TransformerFactory.newInstance();

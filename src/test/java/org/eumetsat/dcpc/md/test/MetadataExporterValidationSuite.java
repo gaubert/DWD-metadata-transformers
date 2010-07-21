@@ -25,7 +25,7 @@ public class MetadataExporterValidationSuite extends TestCase
     public final static String TEST_DIR = "H:/Dev/ecli-workspace/DWD-metadata-transformers/src/test/resources";
     public final static Logger logger = LoggerFactory.getLogger(MetadataExporterValidationSuite.class);
     
-    public void testXSLTTransformation()
+    public void ztestXSLTTransformation()
     {
         String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/xslt/eum2isoapFull_v4.xsl";
         String file2Transform     = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/metadata/eo-portal-metadata/1.xml";
@@ -56,7 +56,7 @@ public class MetadataExporterValidationSuite extends TestCase
             VTDGen vg = new VTDGen();
             if (vg.parseFile("H:/Z_EO_EUM_DAT_GOES_GWW_C_EUMS_20100512000000.xml", true)){
                 VTDNav vn = vg.getNav();
-                File fo = new File("H:/newpo.xml");
+                File fo = new File("H:/Z_EO_EUM_DAT_GOES_GWW_C_EUMS_20100512000000.xml");
                 FileOutputStream fos = new FileOutputStream(fo);
                 AutoPilot ap = new AutoPilot(vn);
                 
@@ -86,7 +86,7 @@ public class MetadataExporterValidationSuite extends TestCase
              }
     }
     
-    public void ztestScenario1()
+    public void testScenario1()
     {
         String releaseDBPath      = "H:/ReleasesDB";
         String workingDir         = "H:/WorkingDir";
@@ -106,7 +106,7 @@ public class MetadataExporterValidationSuite extends TestCase
             ReleaseDatabase db = exporter.getReleaseDatabase();
             
             // clean DB at the beginning of the scenario
-            db.eraseReleaseDatabase();
+            //db.eraseReleaseDatabase();
             
             System.out.println("********** Create Export from R1: (add 10 files) **********");
             
@@ -140,7 +140,7 @@ public class MetadataExporterValidationSuite extends TestCase
             // check that 1 files have been deleted
             assertEquals("Should have 1 file in the Delta. Check the ReleaseDB content that is in " + releaseDBPath, 1, latestRelease.getDeltaXmlFilenames().size());
             
-            assertEquals("Bad name. Check the ReleaseDB content that is in " + releaseDBPath, "Z_EO_EUM_DAT_MULT_MAPSSI_C_EUMS_20090831000000.xml", (String) latestRelease.getDeltaXmlFilenames().get(0));
+            assertTrue("Bad name (expect something like Z_EO_EUM_DAT_MULT_MAPSSI_C_EUMS_CurrentDate.xml). Check the ReleaseDB content that is in " + releaseDBPath, ((String) latestRelease.getDeltaXmlFilenames().get(0)).startsWith("Z_EO_EUM_DAT_MULT_MAPSSI_C_EUMS_"));
             
             System.out.println("********** Create Export from R4: (add 5 files, modify 1) **********");
             
@@ -153,8 +153,9 @@ public class MetadataExporterValidationSuite extends TestCase
             // check that 6 new files have been added
             assertEquals("Should have 6 files in the Delta. Check the ReleaseDB content that is in " + releaseDBPath, 6, latestRelease.getDeltaXmlFilenames().size());
             
-            // check that "EO_EUM_DAT_MULT_MAPSSI.xml" is in the list of modified files
-            assertTrue("Delta should contain EO_EUM_DAT_MULT_MAPSSI.xml as it has been modified" , latestRelease.getDeltaXmlFilenames().contains("Z_EO_EUM_DAT_MULT_MAPSSI_C_EUMS_20090901000000.xml"));
+            // check that "EO_EUM_DAT_MULT_MAPSSI_currentdate.xml" is in the list of modified files
+            
+            assertTrue("Bad name (expect something like Z_EO_EUM_DAT_GOES_SAE_C_EUMS_CurrentDate.xml). Check the ReleaseDB content that is in " + releaseDBPath, ((String) latestRelease.getDeltaXmlFilenames().get(0)).startsWith("Z_EO_EUM_DAT_GOES_SAE_C_EUMS_"));
             
             // nothing in deleted just modifications
             assertEquals("Should have nothing in delete dir. Check the ReleaseDB content that is in " + releaseDBPath, 0, latestRelease.getDeltaDeletedFilenames().size());

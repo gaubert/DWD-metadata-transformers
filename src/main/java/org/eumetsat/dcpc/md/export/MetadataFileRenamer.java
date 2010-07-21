@@ -40,31 +40,36 @@ import org.slf4j.LoggerFactory;
  * - It renames the file to the string value and <code>.xml</code> extension.
  */
 public class MetadataFileRenamer
-{  
-    public final static Logger logger = LoggerFactory.getLogger(MetadataFileRenamer.class);
-    
+{
+    public final static Logger                  logger              = LoggerFactory
+                                                                            .getLogger(MetadataFileRenamer.class);
+
     private static final SimpleNamespaceContext ms_NamespaceContext = new SimpleNamespaceContext();
-    
+
     // TODO To be put in a configuration file with the namespaces
-    private static final String ms_XPathGetName = "gmd:MD_Metadata/gmd:fileIdentifier/gco:CharacterString";
-    
-    private static final String ms_XPathGetDate = "gmd:MD_Metadata/gmd:dateStamp/gco:Date";
-   
+    private static final String                 ms_XPathGetName     = "gmd:MD_Metadata/gmd:fileIdentifier/gco:CharacterString";
+
+    private static final String                 ms_XPathGetDate     = "gmd:MD_Metadata/gmd:dateStamp/gco:Date";
+
     static
     {
-        ms_NamespaceContext.addNamespace("gmd", "http://www.isotc211.org/2005/gmd");
-        ms_NamespaceContext.addNamespace("gco", "http://www.isotc211.org/2005/gco");
-        ms_NamespaceContext.addNamespace("gmi", "http://www.isotc211.org/2005/gmi");
+        ms_NamespaceContext.addNamespace("gmd",
+                "http://www.isotc211.org/2005/gmd");
+        ms_NamespaceContext.addNamespace("gco",
+                "http://www.isotc211.org/2005/gco");
+        ms_NamespaceContext.addNamespace("gmi",
+                "http://www.isotc211.org/2005/gmi");
         ms_NamespaceContext.addNamespace("gml", "http://www.opengis.net/gml");
-        ms_NamespaceContext.addNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
-        
+        ms_NamespaceContext.addNamespace("xsi",
+                "http://www.w3.org/2001/XMLSchema-instance");
+
     }
-    
+
     // list of XML metadata files within the input directory
-    private File[] oListFiles      = null;
+    private File[]                              oListFiles          = null;
     // string path of the inputDirectory
-    private String strInputDirPath = null;
-    
+    private String                              strInputDirPath     = null;
+
     /**
      * Create a new object of <code>RenameMetadataFiles</code> class, and
      * extract the list of XML files at the input directory
@@ -85,101 +90,109 @@ public class MetadataFileRenamer
     }
 
     /**
-     * Iterates through the list of files, get name with XPath and rename
-     * it as of <code><fileIdenfitifier></code> element.
-     * @throws Exception 
+     * Iterates through the list of files, get name with XPath and rename it as
+     * of <code><fileIdenfitifier></code> element.
+     * 
+     * @throws Exception
      */
     public void processFiles() throws Exception
     {
         String mdName = null;
-        File   newFile  = null;
-        Date   modDate  = null; 
-        
+        File newFile = null;
         for (File file : this.oListFiles)
         {
             mdName = this.extractNameFromXML(file);
-            modDate  = this.extractDate(file);
-            
-            //System.out.println("Extracted name: " + fileName);
+
+            // System.out.println("Extracted name: " + fileName);
 
             if (mdName != null)
-            { 
-                // follow this filename pattern Z_EO_EUM_DAT_MSG_HRSEVIRI_C_EUMS_20090831000000.xml
-                newFile = new File(this.strInputDirPath + File.separator + "Z_" + mdName + "_C_EUMS_" + DateUtil.dateToString(modDate, DateUtil.ms_DELETEDATEFORMAT) + ".xml");
-                //System.out.println("new File: " + newFile.toString());
-                
-                FileUtils.moveFile(file, newFile);          
+            {
+                newFile = new File(this.strInputDirPath + File.separator + "Z_"
+                        + mdName + "_C_EUMS" + ".xml");
+                // System.out.println("new File: " + newFile.toString());
+
+                FileUtils.moveFile(file, newFile);
             }
         }
     }
-    
+
     /**
      * Get the metadata name without the wmo URI stuff
+     * 
      * @param aFile
-     * @return the string 
+     * @return the string
      * @throws Exception
      */
     public String extractNameFromXML(File aFile) throws Exception
-    {        
-        
+    {
+
         // preconditions
         if (aFile == null)
             throw new Exception("Error invalid File");
-        
+
         XPathExtractor xpathExtractor = new XPathExtractor();
-        
+
         xpathExtractor.setXPathExpression(ms_XPathGetName, ms_NamespaceContext);
-        
+
         String result = xpathExtractor.evaluateAsString(aFile);
-        
-        String [] strs = result.split("::");
-        
-        //should have 2 elements in the list otherwise error;
-        
+
+        String[] strs = result.split("::");
+
+        // should have 2 elements in the list otherwise error;
+
         if (strs.length != 2)
         {
-            throw new Exception("Error. Cannot properly extract the EUMETSAT identifier from " + result);
+            throw new Exception(
+                    "Error. Cannot properly extract the EUMETSAT identifier from "
+                            + result);
         }
-        
+
         return strs[1];
     }
-     
+
     /**
      * Return the EOPortalFileIdentifier from a WMOFilename
+     * 
      * @param aWMOFilename
      * @return
      * @throws Exception
      */
-    public static String extractFileIdentifierFromWMOFilename(String aWMOFilename) throws Exception
+    public static String extractFileIdentifierFromWMOFilename(
+            String aWMOFilename) throws Exception
     {
         String[] dummys = aWMOFilename.split("_C_EUMS");
         if (dummys.length != 2)
         {
-            throw new Exception("Error cannot extract the EOPortal fileIdentifier from " + aWMOFilename + ". aWMOFilename.split(\"C_EUMS\") = " + ((dummys.length != 0) ? dummys : "null") );
+            throw new Exception(
+                    "Error cannot extract the EOPortal fileIdentifier from "
+                            + aWMOFilename
+                            + ". aWMOFilename.split(\"C_EUMS\") = "
+                            + ((dummys.length != 0) ? dummys : "null"));
         }
-        
+
         return dummys[0].substring(2);
     }
-    
+
     /**
      * Get the Metadata Date
+     * 
      * @param aFile
      * @return
      * @throws Exception
      */
     public Date extractDate(File aFile) throws Exception
-    {         
+    {
         // preconditions
         if (aFile == null)
             throw new Exception("Error invalid File");
-        
+
         XPathExtractor xpathExtractor = new XPathExtractor();
-        
+
         xpathExtractor.setXPathExpression(ms_XPathGetDate, ms_NamespaceContext);
-        
+
         String result = xpathExtractor.evaluateAsString(aFile);
-        
-        return DateUtil.createDate(result, DateUtil.ms_MDDATEFORMAT);     
+
+        return DateUtil.createDate(result, DateUtil.ms_MDDATEFORMAT);
     }
 
     /**
