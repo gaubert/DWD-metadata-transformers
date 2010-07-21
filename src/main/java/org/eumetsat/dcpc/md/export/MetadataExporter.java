@@ -65,13 +65,18 @@ public class MetadataExporter
     {
         return this.m_ReleaseDB;
     }
+    
+    public void createExport(String aMetadataSourcePath) throws Exception
+    {
+        this.createExport(aMetadataSourcePath, null);
+    }
 
     /**
      * 
      * @param aMetadataSourcePath
      * @throws Exception
      */
-    public void createExport(String aMetadataSourcePath) throws Exception
+    public void createExport(String aMetadataSourcePath, String aOutputDir) throws Exception
     {
         File topTempDir = FileSystem.createTempDirectory("temp-",
                 this.m_WorkingDir);
@@ -120,13 +125,17 @@ public class MetadataExporter
             {
                 logger.info("********* Create New Release *********");
                 this.m_ReleaseDB.add(newRelease);
+                
+                // expose Delta
+                if (aOutputDir != null)
+                   this.m_ReleaseDB.getLatestRelease().exportReleaseDeltaTo(aOutputDir);
             }
             else
             {
                 logger.info("********* No New Release *********");
             }
 
-            // expose Delta
+           
         }
         finally
         {

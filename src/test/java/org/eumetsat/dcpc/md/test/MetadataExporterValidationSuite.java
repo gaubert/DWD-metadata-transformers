@@ -90,6 +90,7 @@ public class MetadataExporterValidationSuite extends TestCase
     {
         String releaseDBPath      = "H:/ReleasesDB";
         String workingDir         = "H:/WorkingDir";
+        String outputDir          = "H:/OutputDir";
         String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/xslt/eum2isoapFull_v4.xsl";
         String R1 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R1";
         String R2 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R2";
@@ -106,11 +107,11 @@ public class MetadataExporterValidationSuite extends TestCase
             ReleaseDatabase db = exporter.getReleaseDatabase();
             
             // clean DB at the beginning of the scenario
-            //db.eraseReleaseDatabase();
+            db.eraseReleaseDatabase();
             
             System.out.println("********** Create Export from R1: (add 10 files) **********");
             
-            exporter.createExport(R1);  
+            exporter.createExport(R1, outputDir);  
             
             // Check that this is correct
             Release latestRelease = db.getLatestRelease();

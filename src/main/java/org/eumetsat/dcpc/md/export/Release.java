@@ -51,6 +51,7 @@ public class Release
 
     // Deleted file
     protected File             m_Deleted;
+    private   String m_Name;
 
     /**
      * Create a Release directory and its underneath structure
@@ -87,6 +88,7 @@ public class Release
      */
     public Release(File aReleaseTopDir) throws Exception
     {
+        m_Name = FilenameUtils.getBaseName(aReleaseTopDir.getName());
         m_ReleaseTopDir = aReleaseTopDir;
         init();
     }
@@ -315,6 +317,18 @@ public class Release
         });
 
         return (relevant_files.length > 0) ? true : false;
+    }
+    
+    public void exportReleaseDeltaTo(String aOutputDir) throws Exception
+    {
+        File outputDir = new File(aOutputDir);
+        
+        File finalDest = new File(outputDir + File.separator + "Release-" + this.m_Name);
+        
+        // try to create the Dirs
+        FileSystem.createDirs(finalDest);
+       
+        FileUtils.copyDirectory(this.m_Delta, finalDest); 
     }
 
     /**
