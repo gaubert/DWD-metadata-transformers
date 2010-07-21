@@ -192,6 +192,8 @@ public class MetadataExporter
             Set<String> newSet  = new HashSet<String>();
             
             /* calculate the delta
+             * It is important to understand that the UID is the MD_Metadata.fileidentifier and not the filename.
+             * Several modifications of the same metadata in the Release are not handled properly here (this should not happen but).
              * algorithm: 
              * for elemOld in old:
              *    if elemOld not in new:
@@ -223,7 +225,6 @@ public class MetadataExporter
                       
                       // add in newSet 
                       newSet.add(key);
-                      
                    }
                    
                    // remove from currSet in any case

@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 
-import org.eumetsat.dcpc.commons.DateFormatter;
+import org.eumetsat.dcpc.commons.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -146,7 +146,7 @@ public class ReleaseDatabase
         while (true)
         {
             
-            String inDBReleaseName = aReleaseDBTopDir + File.separator + DateFormatter.dateToString(new Date(), DateFormatter.ms_RELEASEDATEFORMAT);
+            String inDBReleaseName = aReleaseDBTopDir + File.separator + DateUtil.dateToString(new Date(), DateUtil.ms_RELEASEDATEFORMAT);
             
             cpt++;
             

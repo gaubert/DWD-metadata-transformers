@@ -25,7 +25,7 @@ import java.io.FilenameFilter;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
-import org.eumetsat.dcpc.commons.DateFormatter;
+import org.eumetsat.dcpc.commons.DateUtil;
 import org.eumetsat.dcpc.commons.xml.SimpleNamespaceContext;
 import org.eumetsat.dcpc.commons.xml.XPathExtractor;
 import org.slf4j.Logger;
@@ -105,7 +105,7 @@ public class MetadataFileRenamer
             if (mdName != null)
             { 
                 // follow this filename pattern Z_EO_EUM_DAT_MSG_HRSEVIRI_C_EUMS_20090831000000.xml
-                newFile = new File(this.strInputDirPath + File.separator + "Z_" + mdName + "_C_EUMS_" + DateFormatter.dateToString(modDate, DateFormatter.ms_DELETEDATEFORMAT) + ".xml");
+                newFile = new File(this.strInputDirPath + File.separator + "Z_" + mdName + "_C_EUMS_" + DateUtil.dateToString(modDate, DateUtil.ms_DELETEDATEFORMAT) + ".xml");
                 //System.out.println("new File: " + newFile.toString());
                 
                 FileUtils.moveFile(file, newFile);          
@@ -179,7 +179,7 @@ public class MetadataFileRenamer
         
         String result = xpathExtractor.evaluateAsString(aFile);
         
-        return DateFormatter.createDate(result, DateFormatter.ms_MDDATEFORMAT);     
+        return DateUtil.createDate(result, DateUtil.ms_MDDATEFORMAT);     
     }
 
     /**

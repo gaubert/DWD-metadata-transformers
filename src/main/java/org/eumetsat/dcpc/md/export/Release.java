@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.eumetsat.dcpc.commons.DateFormatter;
+import org.eumetsat.dcpc.commons.DateUtil;
 import org.eumetsat.dcpc.commons.FileSystem;
 import org.eumetsat.dcpc.commons.Pair;
 
@@ -137,7 +137,7 @@ public class Release
        
        else if (relevant_files.length == 0)
        {
-          deleted = new File(this.m_ReleaseTopDir + File.separator + DELETED + DateFormatter.dateToString(new Date(), DateFormatter.ms_DELETEDATEFORMAT) + DELETED_SUFFIX );
+          deleted = new File(this.m_ReleaseTopDir + File.separator + DELETED + DateUtil.dateToString(new Date(), DateUtil.ms_DELETEDATEFORMAT) + DELETED_SUFFIX );
        }
        else
        {
@@ -193,6 +193,8 @@ public class Release
        FileUtils.copyFileToDirectory(aFile, this.m_Result, true);
    }
    
+   
+   
    public void flagAsDeleted(String aFileIdentifier) throws Exception
    {
        RandomAccessFile deleted = new RandomAccessFile(m_Deleted, "rwd");
@@ -204,10 +206,11 @@ public class Release
    }
      
    /**
-    * Return the SrcMD5s info in a workable data structure.
-    * A HashMap<filename,MD5>
-    * @return the hashMap<EOPortal-fileIdentifier,Pair(MD5,MD5FileBasename)>
-    */
+   * Return the SrcMD5s info in a workable data structure: hashMap<EOPortal-fileIdentifier,Pair(MD5,MD5FileBasename)
+   * The EOPortal-fileIdentifier is the original fileIdentifier. For example EO_EUM_DAT_GOES_GWW
+   * MD5FileBasename is the filename Z_EO_EUM_DAT_GOES_GWW_C_EUMS_20100512000000
+   * @return the hashMap<EOPortal-fileIdentifier,Pair(MD5,MD5FileBasename)>
+   */
    public HashMap<String,Pair<String,String>> getSrcMD5s() throws Exception
    {
        HashMap<String, Pair<String,String>> hMap = new HashMap<String, Pair<String, String> >();
@@ -252,6 +255,10 @@ public class Release
        return (relevant_files.length > 0) ? true : false;
    }
    
+   /**
+    * Return the list of xml files in the Delta
+    * @return List of xml filenames
+    */
    public ArrayList<String> getDeltaXmlFilenames()
    {
        // get list of MD5 files
@@ -266,6 +273,11 @@ public class Release
        return new ArrayList<String>(Arrays.asList(relevant_files));
    }
    
+   /**
+    * Get the list of deleted filenames from the deleted file
+    * @return
+    * @throws Exception
+    */
    public ArrayList<String> getDeltaDeletedFilenames() throws Exception
    {
        ArrayList<String> result = new ArrayList<String>();
