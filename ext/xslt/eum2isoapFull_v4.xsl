@@ -32,8 +32,33 @@
 	    <xsl:element name="gco:{local-name()}">urn:x-wmo:md:int.eumetsat::<xsl:value-of select="normalize-space(.)"/></xsl:element>
   </xsl:template>
   
-  <!-- Add content only after <gmd:hierarchyLevel> -->
+  <!-- Add content hierarchyLevelName after <gmd:hierarchyLevel> -->
   <xsl:template mode="after" match="gmd:hierarchyLevel"><xsl:element name="gmd:hierarchyLevelName"><xsl:element name="gco:CharacterString">Observation_Sat</xsl:element></xsl:element></xsl:template>
+  
+  <!-- Add content gmd:distributionInfo before <gmd:identificationInfo> --> 
+  <xsl:template mode="after" match="gmd:identificationInfo">
+   <gmd:distributionInfo xmlns="http://www.isotc211.org/2005/gmd">
+    <gmd:MD_Distribution>
+    <gmd:transferOptions>
+      <gmd:MD_DigitalTransferOptions>
+        <gmd:onLine>
+          <gmd:CI_OnlineResource>
+            <gmd:linkage>
+              <gmd:URL>http://vnavigator.eumetsat.int/discovery/Start/Explore/DirectExtended.do?EOResourceIdentifier=<xsl:value-of select="//gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code/gco:CharacterString"/></gmd:URL>
+            </gmd:linkage>
+            <gmd:protocol>
+              <gco:CharacterString>http</gco:CharacterString>
+            </gmd:protocol>
+            <gmd:name>
+              <gco:CharacterString>EUMETSAT, Product Navigator</gco:CharacterString>
+            </gmd:name>
+          </gmd:CI_OnlineResource>
+        </gmd:onLine>
+      </gmd:MD_DigitalTransferOptions>
+    </gmd:transferOptions>
+  </gmd:MD_Distribution>
+ </gmd:distributionInfo>
+ </xsl:template>
   
   <!-- map MD_Metadata, different namespace and child element order -->
   <xsl:template match="gmi:MI_Metadata">
