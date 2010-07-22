@@ -7,7 +7,9 @@
                               xmlns:gmd="http://www.isotc211.org/2005/gmd">
 
   <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no"/>
-  <!-- By default, copy all nodes unchanged -->
+  
+  <!-- constant version of xslt program -->
+  <xsl:variable name="version" select='"4.1-20100722-10h20m32s"' />
   
   <!-- strip EUMETSAT Extensions -->
   
@@ -18,9 +20,8 @@
   <xsl:template match="gmi:MI_Metadata/@xsi:type"/>
   
   <!-- strip schema location-->
-  <xsl:template match="@xsi:schemaLocation">
-  </xsl:template>
-
+  <xsl:template match="@xsi:schemaLocation"/>
+ 
   <!-- strip gmd:distributionInfo -->
   <xsl:template match="gmd:distributionInfo"/>
   
@@ -75,6 +76,10 @@
 	<xsl:value-of select="normalize-space(.)"/>
   </xsl:template>
   
+  <!-- template for the attributes -->
+  <xsl:template match="@*">
+	 <xsl:attribute name="{normalize-space(name())}"><xsl:value-of select="."/></xsl:attribute>
+  </xsl:template>
   
   <!-- Boiler Plate + modify template when it start with gmd and clean namespaces -->
   <xsl:template match="*">

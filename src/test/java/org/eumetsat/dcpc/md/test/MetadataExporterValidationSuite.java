@@ -1,97 +1,28 @@
 package org.eumetsat.dcpc.md.test;
 
 import java.io.File;
-import java.io.FileOutputStream;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.eumetsat.dcpc.commons.DateUtil;
 import org.eumetsat.dcpc.md.export.MetadataExporter;
 import org.eumetsat.dcpc.md.export.Release;
 import org.eumetsat.dcpc.md.export.ReleaseDatabase;
-import org.eumetsat.dcpc.md.export.XsltProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.ximpleware.AutoPilot;
-import com.ximpleware.VTDGen;
-import com.ximpleware.VTDNav;
-import com.ximpleware.XMLModifier;
 
 public class MetadataExporterValidationSuite extends TestCase
 {
     public final static String TEST_DIR = "H:/Dev/ecli-workspace/DWD-metadata-transformers/src/test/resources";
     public final static Logger logger = LoggerFactory.getLogger(MetadataExporterValidationSuite.class);
-    
-    public void ztestXSLTTransformation()
-    {
-        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/xslt/eum2isoapFull_v4.xsl";
-        String file2Transform     = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/metadata/eo-portal-metadata/1.xml";
-        String outputDir          = "H:";
         
-        // do the transformations
-        XsltProcessor xsltTransformer;
-        try
-        {
-            xsltTransformer = new XsltProcessor(new File(xsltFile), new File(outputDir));
-        
-        
-            // do xslt transformation
-            xsltTransformer.processFile(new File(file2Transform), true);
-        }
-        catch (Exception e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-    
-    public void ztestVTD_Modif()
-    {
-        try 
-        {
-            // open a file and read the content into a byte array
-            VTDGen vg = new VTDGen();
-            if (vg.parseFile("H:/Z_EO_EUM_DAT_GOES_GWW_C_EUMS_20100512000000.xml", true)){
-                VTDNav vn = vg.getNav();
-                File fo = new File("H:/Z_EO_EUM_DAT_GOES_GWW_C_EUMS_20100512000000.xml");
-                FileOutputStream fos = new FileOutputStream(fo);
-                AutoPilot ap = new AutoPilot(vn);
-                
-                ap.declareXPathNameSpace("gmd", "http://www.isotc211.org/2005/gmd");
-                ap.declareXPathNameSpace("gco", "http://www.isotc211.org/2005/gco");
-                ap.declareXPathNameSpace("gmi", "http://www.isotc211.org/2005/gmi");
-                ap.declareXPathNameSpace("gml", "http://www.opengis.net/gml");
-                ap.declareXPathNameSpace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
-                
-                XMLModifier xm = new XMLModifier(vn);
-                
-                ap.selectXPath("/gmd:MD_Metadata/gmd:dateStamp/gco:Date/text()");
-                
-                int i = -1;
-                while((i=ap.evalXPath())!=-1)
-                {
-                    xm.updateToken(i,DateUtil.dateToString(DateUtil.getUTCCurrentTime(), DateUtil.ms_ISODATEFORMAT));
-                }
-                xm.output(fos);
-                fos.close();
-            }
-             }
-             catch (Exception e){
-                 System.out.println(" Exception "+e);
-                 // TODO Auto-generated catch block
-                 e.printStackTrace();
-             }
-    }
-    
     public void testScenario1()
     {
         String releaseDBPath      = "H:/ReleasesDB";
         String workingDir         = "H:/WorkingDir";
         String outputDir          = "H:/OutputDir";
-        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/xslt/eum2isoapFull_v4.xsl";
+        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/xslt/eum2isoapFull_v4.1.xsl";
         String R1 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R1";
         String R2 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R2";
         String R3 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R3";
@@ -107,7 +38,7 @@ public class MetadataExporterValidationSuite extends TestCase
             ReleaseDatabase db = exporter.getReleaseDatabase();
             
             // clean DB at the beginning of the scenario
-            db.eraseReleaseDatabase();
+            //db.eraseReleaseDatabase();
             
             System.out.println("********** Create Export from R1: (add 10 files) **********");
             
@@ -204,11 +135,11 @@ public class MetadataExporterValidationSuite extends TestCase
         }
     }
     
-    public void ztestLargeScaleScenario()
+    public void testLargeScaleScenario()
     {
         String releaseDBPath      = "H:/ReleasesDB";
         String workingDir         = "H:/WorkingDir";
-        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/xslt/eum2isoapFull_v4.xsl";
+        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/xslt/eum2isoapFull_v4.1.xsl";
         String source             = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/metadata/eo-portal-metadata";
         String empty              = TEST_DIR + File.separatorChar + "scenario-2" + File.separatorChar + "empty";
         
