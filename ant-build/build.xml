@@ -1,0 +1,80 @@
+<!-- =====================================================================       -->
+<!-- File build.xml                                                              -->
+<!--                                                                             -->
+<!-- Purpose: build file for the Eumetsat MDExporter                             -->
+<!--                                                                             -->
+<!--  Guillaume Aubert (guillaume.aubert@eumetsat.int)                           -->
+<!-- =====================================================================       -->
+
+<project name="MDExporter" default="usage" basedir="..">
+
+  <import description="build-internal-tasks" file="./build-internal-tasks.xml"/>
+ 	
+  <!-- =================================================================== -->
+  <!-- No operation                                                        -->
+  <!-- =================================================================== -->
+<target name="noop" description="do nothing">
+  <echo message="mdexp.bin = ${mdexp.bin}"/>
+  <echo message="mdexp.doc = ${mdexp.doc}"/>
+</target>
+	
+
+  <!-- =================================================================== -->
+  <!-- Help on usage                                                       -->
+  <!-- =================================================================== -->
+<target name="usage">
+	<echo >	--------------- ${Name} ${version} (${build}) ---------------
+	
+	 available targets are:"
+	
+	   build                               --> compile the source code
+	   install                             --> install into /tmp/mdexp-export
+	   clean                               --> clean up the build directory
+	   clean-all                           --> clean up build and tarball directories
+	   usage                               --> this help page ...
+	
+	 See the comments inside the build.xml file for more details.
+    </echo>
+  </target>
+
+
+  <target name="build" depends="_compile-classes"/>
+	
+  <!-- ================================================================== -->
+  <!-- install                                                          -->
+  <!-- ================================================================== -->
+  <target name="install">
+    
+	<!-- create the root directory for this release -->
+	<property name="root" value="/tmp/md-exporter"/>
+	  
+	<antcall target="_build-distrib">
+       <param name="dir" value="${root}"/>
+	</antcall>
+  	
+  </target>
+	
+  <!-- ================================================================== -->
+  <!-- Cleaning                                                           -->
+  <!-- ================================================================== -->
+  <target name="clean-all">
+  	<antcall target="clean"></antcall>
+    <delete dir="${mdexp.tar}"/> 
+  </target>
+  
+  <target name="clean">
+    <delete dir="${mdexp.classes}"/>
+    <delete dir="${mdexp.api}"/>
+    <delete dir="${mdexp.dist}"/>
+    <delete dir="${mdexp.lib}"/>
+    <delete dir="${mdexp.run}"/>
+    <delete dir="${mdexp.log}"/>
+    <delete dir="${mdexp.audit}"/>
+  	<delete dir="${mdexp.war}"/>
+  	<delete dir="${mdexp.sar}"/>
+  	<delete dir="${mdexp.ear}"/>
+  	<delete dir="${mdexp.jsp}"/>
+	<delete dir="${mdexp.javadocs}"/>
+  </target>
+
+</project>

@@ -1,0 +1,73 @@
+#!/bin/sh
+#
+# (c) Copyright EUMETSAT 2010
+# (a) guillaume.aubert@eumetsat.int
+#
+###########################################################
+## Part 1: You may want to change some of these definitions
+###########################################################
+
+##########################
+## MDEXPORTER home directory
+##########################
+MDEXPORTER_HOME=..
+
+########################
+## Java optional options
+########################
+JAVA_OPTS="-Xms64m -Xmx256m"
+#JAVA_OPTS="-Xms64m -Xmx256m -Xdebug -Xrunjdwp:transport=dt_socket,address=7000,server=y,suspend=n"
+#JAVA_OPTS=""
+
+########################
+## Java Env
+########################
+if [ ! -f "$JAVA_HOME/bin/java" ]; then
+   $echo "Please add $JAVA_HOMEin your env. JAVA_HOME needs to point a JAVA 1.6 JVM or further"
+   exit 1
+fi
+java=$JAVA_HOME/bin/java
+
+#################################
+## if DATAREPOSITORY_HOME is relative,
+## build the absolute path
+#################################
+D=`dirname "$MDEXPORTER_HOME"`
+B=`basename "$MDEXPORTER_HOME"`
+MDEXPORTER_HOME="`cd \"$D\" 2>/dev/null && pwd || echo \"$D\"`/$B"
+
+#echo $MDEXPORTER_HOME
+
+########################
+## set distribution dirs
+########################
+lib=$MDEXPORTER_HOME/lib
+
+#######################################################################
+## Part 2: You probably don't want to change anything beyond this point
+#######################################################################
+
+#########################################
+## Set the starter classpath
+## if will be different for a cygwin prog
+#########################################
+if uname | grep -i cygwin > /dev/null; then
+  # windows world so change path to win path for libs and separator is ;
+  for n in `find $lib/*.jar`; do
+     STARTERPATH=$STARTERPATH";"`cygpath --windows $n`
+  done
+else
+  # any other unix separator is ;
+  for n in `find $lib/*.jar`; do
+       STARTERPATH=$STARTERPATH":"$n
+  done
+fi
+
+###################
+## Add java options
+###################
+#JAVA_OPTS=$JAVA_OPTS" -Dlog4j.configuration=file://$conf/log4j.properties"
+
+
+java $JAVA_OPTS \
+      -cp "$STARTERPATH" org.eumetsat.dcpc.md.export.CMDRunner $*

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+export CLASSPATH=../libs/groovy-all-1.5.4.jar:$CLASSPATH
+
+sh ../tools/bin/ant $*

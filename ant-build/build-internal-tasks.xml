@@ -1,0 +1,90 @@
+<!-- =====================================================================       -->
+<!-- File build.xml                                                              -->
+<!--                                                                             -->
+<!-- Purpose: build file for the Eumetsat MDExporter                             -->
+<!--                                                                             -->
+<!--  Guillaume Aubert (guillaume.aubert@eumetsat.int)                           -->
+<!-- =====================================================================       -->
+
+
+<project name="MDExporter-internal-tasks" default="" basedir="..">
+
+	<import description="build-properties" file="./build-properties.xml"/>
+		
+        
+	<!-- =================================================================== -->
+	<!-- The initalization for all                                           -->
+	<!-- =================================================================== -->
+	<target name="_init">
+	  <mkdir dir="${mdexp.classes}"/>
+	  <mkdir dir="${mdexp.lib}"/>
+	  <mkdir dir="${mdexp.dist}"/>
+	</target>
+  
+  <!-- =================================================================== -->
+  <!-- Compile all class files                                             -->
+  <!-- =================================================================== -->
+     <target name="_compile-classes" depends="_init">
+     	  <javac destdir="${mdexp.classes}"
+     		     optimize="${javac.optimize}"
+     		     debug="${javac.debug}"
+     		     verbose="${javac.verbose}"
+     		     deprecation="${javac.deprecation}"
+     		     includeJavaRuntime="${javac.include.java.runtime}"
+     		     failonerror="${javac.fail.onerror}"
+     	  	includeantruntime="off">
+     		  <src path="${mdexp.src}"/>
+     		  <classpath refid="mdexp.classpath"/>
+     	   </javac>
+     	   <!--<copy todir="${vmc.classes}">
+	          <fileset dir="${vmc.src}">
+	             <include name="de/**/*.xml"/>
+	          </fileset>
+	       </copy>-->
+	  </target>
+	
+
+	
+	<!-- =================================================================== -->
+    <!-- Build mdexp-export.jar                                     -->
+    <!-- =================================================================== -->	
+	<target name="_mdexp-export-jar" depends="_compile-classes">
+	     <jar destfile="${mdexp.lib}/mdexp-export.jar">
+			<fileset dir="${mdexp.classes}">
+				<include name="org/**" />
+			</fileset>
+		  </jar>
+	</target>
+	
+	<!-- =================================================================== -->
+	<!-- Build dist                                     -->
+	<!-- =================================================================== -->	
+	<target name="_build-distrib" depends="_mdexp-export-jar">
+		
+		<!-- root dir where the dist is going to be built -->
+		<property name="root" value="${dir}"/>
+		 	
+		<!-- scripts info -->
+		<copy todir="${dir}/bin">
+			<fileset dir="${mdexp.etc}/scripts">
+				<include name="md-exporter"/>
+			</fileset>
+		</copy>
+			
+		<!-- lib info -->
+		<copy todir="${dir}/lib">
+		    <!-- ext jars -->
+			<fileset dir="${mdexp.libs}">
+				<include name="*.jar"/>
+			</fileset>
+		    <!-- produced jars -->
+		    <fileset dir="${mdexp.build}/lib">
+			   <include name="mdexp-export.jar"/>
+			</fileset>
+		</copy>
+		
+		<chmod file="${dir}/bin/md-exporter" perm="ugo+wrx"/>
+		
+	</target>
+	
+</project>

@@ -22,8 +22,8 @@ public class MetadataExporterUnitTestSuite extends TestCase
     
     public void testXSLTTransformation()
     {
-        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/xslt/eum2isoapFull_v4.1.xsl";
-        String file2Transform     = "H:/Dev/ecli-workspace/DWD-metadata-transformers/ext/metadata/eo-portal-metadata/1.xml";
+        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/etc/xslt/eum2isoapFull_v4.1.xsl";
+        String file2Transform     = "H:/Dev/ecli-workspace/DWD-metadata-transformers/etc/metadata/eo-portal-metadata/1.xml";
         String outputDir          = "H:";
         
         // do the transformations
