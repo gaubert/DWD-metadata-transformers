@@ -103,6 +103,12 @@ public class Release
                                 : false;
                     }
                 });
+        
+        if (relevant_dirs == null)
+        {
+            throw new Exception(
+                    "Error. " + m_ReleaseTopDir + " is not a directory");
+        }
 
         if (relevant_dirs.length != 2)
         {

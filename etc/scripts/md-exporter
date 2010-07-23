@@ -12,6 +12,12 @@
 ##########################
 MDEXPORTER_HOME=..
 
+#############################
+## To activate some debugging 
+## set it to yes
+#############################
+#MD_DEBUG=yes
+
 ########################
 ## Java optional options
 ########################
@@ -66,7 +72,8 @@ fi
 ###################
 ## Add java options
 ###################
-#JAVA_OPTS=$JAVA_OPTS" -Dlog4j.configuration=file://$conf/log4j.properties"
+JAVA_OPTS=$JAVA_OPTS" -Dmd.debug=$MD_DEBUG"
+JAVA_OPTS=$JAVA_OPTS" -Dlog4j.configuration=file://$lib/log4j.properties"
 
 
 java $JAVA_OPTS \
