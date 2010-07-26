@@ -5,11 +5,12 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_18"/>
 	<classpathentry kind="lib" path="libs/saxon9he.jar"/>
 	<classpathentry kind="lib" path="libs/slf4j-api-1.6.1.jar"/>
-	<classpathentry kind="lib" path="libs/slf4j-simple-1.6.1.jar"/>
 	<classpathentry kind="lib" path="libs/commons-io-1.4.jar"/>
 	<classpathentry kind="lib" path="libs/vtd-xml.jar"/>
 	<classpathentry kind="lib" path="libs/joda-time-1.6.jar"/>
 	<classpathentry kind="lib" path="libs/jopt-simple-3.2.jar"/>
+	<classpathentry kind="lib" path="libs/slf4j-log4j12-1.6.1.jar"/>
+	<classpathentry kind="lib" path="libs/log4j-1.2.16.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

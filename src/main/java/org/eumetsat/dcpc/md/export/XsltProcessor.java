@@ -114,7 +114,7 @@ public class XsltProcessor
 
         if (!this.m_XsltFile.exists())
         {
-            throw new Exception("Error: " + this.m_XsltFile.getPath()
+            throw new Exception(this.m_XsltFile.getPath()
                     + " XSLT file doesn't exist");
         }
 
@@ -125,7 +125,7 @@ public class XsltProcessor
         {
             if (!this.m_OutputDir.mkdir())
             {
-                throw new Exception("Error: Cannot create " + this.m_OutputDir);
+                throw new Exception("Cannot create " + this.m_OutputDir);
             }
         }
     }
@@ -147,7 +147,7 @@ public class XsltProcessor
         // Create if it doesn't exist
         if (!aFile2Process.exists())
         {
-            throw new Exception("Error: " + aFile2Process + " doesn't exist");
+            throw new Exception(aFile2Process + " doesn't exist");
         }
 
         logger.debug("Transform files using XSLT 1.0.");
@@ -175,7 +175,7 @@ public class XsltProcessor
         }
         catch (TransformerConfigurationException e)
         {
-            System.out.println("Error, see exception");
+            System.out.println("See exception");
             e.printStackTrace();
         }
         catch (TransformerException e)
@@ -215,7 +215,7 @@ public class XsltProcessor
             }
         });
 
-        logger.debug("Found {} XML files to process.", files2Process.length);
+        logger.info("Processing {} XML files.", files2Process.length);
 
         logger.debug("Transform files using XSLT 1.0.");
 
@@ -240,11 +240,6 @@ public class XsltProcessor
                     transformFile(file, trans, this.m_OutputDir);
                 }
                 cpt++;
-                System.out.print(".");
-                if ((cpt % 80) == 0)
-                {
-                    System.out.println();
-                }
             }
         }
         catch (TransformerConfigurationException e)
@@ -255,10 +250,6 @@ public class XsltProcessor
         catch (TransformerException e)
         {
             e.printStackTrace();
-        }
-        finally
-        {
-            System.out.println();
         }
     }
 
@@ -301,7 +292,7 @@ public class XsltProcessor
             }
             catch (SaxonApiException e)
             {
-                System.out.println("Error, see exception");
+                System.out.println("See exception");
                 e.printStackTrace();
             }
         }

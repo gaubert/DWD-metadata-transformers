@@ -48,6 +48,7 @@ MDEXPORTER_HOME="`cd \"$D\" 2>/dev/null && pwd || echo \"$D\"`/$B"
 ## set distribution dirs
 ########################
 lib=$MDEXPORTER_HOME/lib
+conf=$MDEXPORTER_HOME/conf
 
 #######################################################################
 ## Part 2: You probably don't want to change anything beyond this point
@@ -73,7 +74,7 @@ fi
 ## Add java options
 ###################
 JAVA_OPTS=$JAVA_OPTS" -Dmd.debug=$MD_DEBUG"
-JAVA_OPTS=$JAVA_OPTS" -Dlog4j.configuration=file://$lib/log4j.properties"
+JAVA_OPTS=$JAVA_OPTS" -Dlog4j.configuration=file://$conf/log4j.properties"
 
 
 java $JAVA_OPTS \

@@ -135,7 +135,7 @@ public class MetadataExporterValidationSuite extends TestCase
         }
     }
     
-    public void testLargeScaleScenario()
+    public void ztestLargeScaleScenario()
     {
         String releaseDBPath      = "H:/ReleasesDB";
         String workingDir         = "H:/WorkingDir";

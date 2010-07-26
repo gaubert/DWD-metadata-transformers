@@ -41,7 +41,7 @@ public class FileSystem
         }
         catch (Exception ignored)
         {
-            logger.error("Error ", ignored);
+            logger.error("Cannot deleteDirs", ignored);
         }
     }
 
@@ -71,7 +71,7 @@ public class FileSystem
         }
         catch (Exception ignored)
         {
-            logger.error("Error ", ignored);
+            logger.error("Cannot deleteDirs ", ignored);
         }
     }
 

@@ -106,17 +106,15 @@ public class Release
         
         if (relevant_dirs == null)
         {
-            throw new Exception(
-                    "Error. " + m_ReleaseTopDir + " is not a directory");
+            throw new Exception(m_ReleaseTopDir + " is not a directory");
         }
 
         if (relevant_dirs.length != 2)
         {
             throw new Exception(
-                    "Error. "
-                            + m_ReleaseTopDir
-                            + " doesn't seem to be a Release directory as it doesn't contain "
-                            + MD5_FILES + " ," + XML_FILES + " and" + DELTA);
+                            m_ReleaseTopDir
+                            + " is not a Release directory as it doesn't contain a "
+                            + DELTA + " dir and a " + SOURCE + " dir.");
         }
 
         // preload src info
@@ -149,7 +147,7 @@ public class Release
 
         if (relevant_files.length > 1)
         {
-            throw new Exception("Error more than one deleted file in "
+            throw new Exception("More than one deleted file in "
                     + this.m_Delta);
         }
 

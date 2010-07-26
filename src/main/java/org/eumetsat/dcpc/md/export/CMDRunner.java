@@ -8,6 +8,9 @@ import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import joptsimple.OptionException;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -29,6 +32,9 @@ public class CMDRunner
     static boolean DEBUG_ON = false;
     
     static final OptionParser parser = new OptionParser();
+    
+    public final static Logger     logger               = LoggerFactory.getLogger(CMDRunner.class);
+
     
     static final String LINE_SEP = System.getProperty("line.separator");
     
@@ -218,10 +224,13 @@ public class CMDRunner
             md_Exporter.createExport( ((File) aArguments.get("in")).getAbsolutePath(), 
                                       ((File) aArguments.get("out")).getAbsolutePath() );
         }
-        catch (Exception e)
+        catch (Throwable e)
         {
-            System.out.println("Error: " + e.getMessage());
-            e.printStackTrace();
+            //System.out.println("Error: " + e.getMessage());
+            //e.printStackTrace();
+            CMDRunner.logger.error(e.getMessage()); 
+            CMDRunner.logger.error("Set the log levels to DEBUG to have more info.");
+            CMDRunner.logger.debug("Stack Trace of the error",e);
             System.exit(2);
             
         }
@@ -231,7 +240,7 @@ public class CMDRunner
     
     public static void setDebugInfo()
     {
-        System.out.println("MD DEBUG = " + System.getProperty("md.debug") );
+        //System.out.println("MD DEBUG = " + System.getProperty("md.debug") );
         
         if (System.getProperty("md.debug", "no").equalsIgnoreCase("yes"))
         {

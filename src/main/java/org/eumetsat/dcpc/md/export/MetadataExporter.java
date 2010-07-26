@@ -27,7 +27,7 @@ public class MetadataExporter
     protected File                 m_XsltFilePath;
 
     public final static Logger     logger               = LoggerFactory
-                                                                .getLogger(ReleaseDatabase.class);
+                                                                .getLogger(MetadataExporter.class);
 
     protected static final boolean TEMP_DIR_DELETION_ON = true;
 
@@ -94,7 +94,7 @@ public class MetadataExporter
             FileSystem.createDirs(xmlDir);
             FileSystem.createDirs(MD5Dir);
 
-            logger.info("********* Do XSLT Transformations *********");
+            logger.info("------------ Do XSLT Transformations ------------");
 
             // do the transformations
             XsltProcessor xsltTransformer = new XsltProcessor(
@@ -104,18 +104,18 @@ public class MetadataExporter
             xsltTransformer.processFiles(new File(aMetadataSourcePath),
                     prettyPrint);
 
-            logger.info("********* Rename Files *********");
+            logger.info("------------ Rename Files            ------------");
             // rename files
             MetadataFileRenamer rn = new MetadataFileRenamer(xmlDir);
 
             rn.processFiles();
 
-            logger.info("********* Calculate MD5s *********");
+            logger.info("------------ Calculate MD5s          ------------");
 
             // calculate MD5s
             calculateMD5s(xmlDir, MD5Dir);
 
-            logger.info("********* Calculate Delta *********");
+            logger.info("------------ Calculate Delta         ------------");
 
             // calculate Delta from previous Release
             Release newRelease = calculateDelta(topTempDir, xmlDir, MD5Dir);
@@ -123,16 +123,19 @@ public class MetadataExporter
             // move in ReleaseDB if non empty
             if (newRelease.hasADelta())
             {
-                logger.info("********* Create New Release *********");
-                this.m_ReleaseDB.add(newRelease);
+                Release latest = this.m_ReleaseDB.add(newRelease);
+                logger.info("Created release {} in ReleaseDB.", latest.getName());
                 
                 // expose Delta
                 if (aOutputDir != null)
-                   this.m_ReleaseDB.getLatestRelease().exportReleaseDeltaTo(aOutputDir);
+                {
+                   logger.info("Export release {} to {}.", latest.getName(), aOutputDir);
+                   latest.exportReleaseDeltaTo(aOutputDir);
+                }
             }
             else
             {
-                logger.info("********* No New Release *********");
+                logger.info("No new release.");
             }
 
            
@@ -162,7 +165,12 @@ public class MetadataExporter
                 return name.endsWith(".xml");
             }
         });
+        
+        if (files2Process == null)
+            throw new Exception("Cannot calculate MD5s. InputDir " + aInputDir.getPath() + " doesn't exist");
 
+        logger.info("Creating {} MD5 files.", files2Process.length);
+        
         String outputFilename;
         for (File file : files2Process)
         {
@@ -243,10 +251,12 @@ public class MetadataExporter
                     if (!prev.get(key).equals(curr.get(key)))
                     {
                         // md5 different so the file has been updated
-                        logger.info(
+                        logger.debug(
                                 "MD5 Differents for {}. old:[{}], new:[{}]",
                                 new String[] { key, prev.get(key).getKey(),
                                         curr.get(key).getKey() });
+                        
+                        logger.info("{} metadata has been modified", key);
 
                         // add in newSet
                         newSet.add(key);

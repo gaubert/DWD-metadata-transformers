@@ -64,7 +64,7 @@ public class XMLInjector
         }
         else
         {
-            throw new Exception("Error. Cannot read the XML file "
+            throw new Exception("Cannot read the XML file "
                     + aInputFilePath);
         }
 

@@ -86,7 +86,7 @@ public class MetadataFileRenamer
                 return name.endsWith(".xml");
             }
         });
-        logger.info("{} files to rename ", this.oListFiles.length);
+        logger.info("Renaming {} files.", this.oListFiles.length);
     }
 
     /**
@@ -184,7 +184,7 @@ public class MetadataFileRenamer
     {
         // preconditions
         if (aFile == null)
-            throw new Exception("Error invalid File");
+            throw new Exception("Invalid File");
 
         XPathExtractor xpathExtractor = new XPathExtractor();
 

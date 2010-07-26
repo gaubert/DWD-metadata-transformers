@@ -70,7 +70,7 @@ public class ReleaseDatabase
         // load Releases
         File[] files = m_RDBRootDir.listFiles();
 
-        logger.info("Loaded {} Release dirs", files.length);
+        logger.info("Loading {} Release dirs in the ReleaseDB.", files.length);
 
         // sort by name ascending
         Arrays.sort(files, new Comparator<File>() {
@@ -218,7 +218,7 @@ public class ReleaseDatabase
                 .inquireNewReleasePathIn(this.m_ReleaseDBRootDirPath));
 
         if (!aRelease.getRootDir().renameTo(inDBReleaseName))
-            throw new Exception("Error could not add the Release"
+            throw new Exception("Could not add the Release"
                     + aRelease.getName() + " in the Database");
 
         // add the new Release in the list of R and in its associated index

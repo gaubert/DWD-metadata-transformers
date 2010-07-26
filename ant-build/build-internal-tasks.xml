@@ -64,6 +64,13 @@
 		<!-- root dir where the dist is going to be built -->
 		<property name="root" value="${dir}"/>
 		 	
+		<!-- conf info -->
+		<copy todir="${dir}/conf">
+			<fileset dir="${mdexp.etc}/conf">
+				<include name="log4j.properties"/>
+			</fileset>
+		</copy>
+		
 		<!-- scripts info -->
 		<copy todir="${dir}/bin">
 			<fileset dir="${mdexp.etc}/scripts">
