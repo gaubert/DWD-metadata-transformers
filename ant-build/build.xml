@@ -30,7 +30,8 @@
 	   build                                                   --> compile the source code
 	   install [-Dout=\"output dir\" (default=/tmp/md-export)  --> install into /tmp/mdexp-export
 	   build-bin-tarball [-Dout=\"output dir\"]                --> build binary tarball distribution
-	   build-src-tarball                                       --> build src tarball distribution
+	   build-src-tarball [-Dout=\"output dir\"]                --> build src tarball distribution
+	   validation-tests                                        --> run the validation tests suite
 	   clean                                                   --> clean up the build directory
 	   clean-all                                               --> clean up build and tarball dirs
 	   usage                                                   --> this help page ...
@@ -72,7 +73,7 @@
 		<!-- create the root directory for this release -->
 		<property name="root" value="${mdexp.dist}/${mdexp.name}-v${mdexp.version}"/>
   	
-  	    <!-- conditional propery for tarballdir -->
+  	    <!-- conditional property for tarballdir -->
   	  	<condition property="outtarballdir" value="${out}" else="${mdexp.tar}">
   	  	    <isset property="out" />
   	  	</condition>
@@ -109,31 +110,39 @@
 		<!-- create the root directory for this release -->
 		<property name="root" value="${mdexp.dist}/${mdexp.name}-v${mdexp.version}-src"/>
   	
-  	    <!-- conditional propery for tarballdir -->
+  	    <!-- conditional property for tarballdir -->
   	  	<condition property="outtarballdir" value="${out}" else="${mdexp.tar}">
   	  	    <isset property="out" />
   	  	</condition>
-                
-		<!-- build distribution in the dist directory -->
-		<antcall target="_build-distrib">
-	          <param name="dir" value="${root}"/>
-	     </antcall>
-		
+               
 		<!-- build a tar -->
         <tar tarfile="${mdexp.tar}/${mdexp.name}-v${mdexp.version}-src.tar" longfile="gnu">
-		      <tarfileset dir="${mdexp.project}">
-		        <!--<include name="${mdexp.suite}/${vmc.node.name}-v${vmc.node.version}/**"/>-->
-		        <exclude name="${mdexp.dist}/${mdexp.name}-v${mdexp.version}/bin/md-exporter"/>
+		      <tarfileset dir=".">
+		        <exclude name="build/**"/>
+		      	<exclude name=".git/**"/>
+		      	<exclude name=".gitignore"/>
+		      	<exclude name=".gradle/**"/>
+		      	<exclude name="classes/**"/>
 		      </tarfileset>
 	    </tar>
 	
-		<gzip src="${mdexp.tar}/${mdexp.name}-v${mdexp.version}.tar"
-		          zipfile="${outtarballdir}/${mdexp.name}-v${mdexp.version}.tar.gz"/>
-		    <delete file="${mdexp.tar}/${mdexp.name}-v${mdexp.version}.tar"/>
+		<gzip src="${mdexp.tar}/${mdexp.name}-v${mdexp.version}-src.tar"
+		          zipfile="${outtarballdir}/${mdexp.name}-v${mdexp.version}-src.tar.gz"/>
+		    <delete file="${mdexp.tar}/${mdexp.name}-v${mdexp.version}-src.tar"/>
   	
-  	   <echo message="tarball ${outtarballdir}/${mdexp.name}-v${mdexp.version}.tar.gz is ready."/>
+  	   <echo message="tarball ${outtarballdir}/${mdexp.name}-v${mdexp.version}-src.tar.gz is ready."/>
 	     
   </target>
+	
+	<target name="validation-tests" depends="_compile-classes">
+       <junit haltonerror="true" haltonfailure="true" fork="false" showoutput="true">
+       	     <classpath refid="mdexp.test.env"/>
+       	     <sysproperty key="project.dir" value=".."/>
+       	     <sysproperty key="log4j.configuration" value="../etc/conf/log4j.properties"/>
+             <test name="org.eumetsat.dcpc.md.test.MetadataExporterValidationSuite" />
+       </junit>
+		       
+</target>
 	
   <!-- ================================================================== -->
   <!-- Cleaning                                                           -->

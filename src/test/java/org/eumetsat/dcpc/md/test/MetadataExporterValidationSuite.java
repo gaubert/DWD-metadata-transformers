@@ -6,6 +6,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.apache.commons.io.FileUtils;
+import org.eumetsat.dcpc.commons.FileSystem;
 import org.eumetsat.dcpc.md.export.MetadataExporter;
 import org.eumetsat.dcpc.md.export.Release;
 import org.eumetsat.dcpc.md.export.ReleaseDatabase;
@@ -14,15 +16,25 @@ import org.slf4j.LoggerFactory;
 
 public class MetadataExporterValidationSuite extends TestCase
 {
-    public final static String TEST_DIR = "H:/Dev/ecli-workspace/DWD-metadata-transformers/src/test/resources";
+    
     public final static Logger logger = LoggerFactory.getLogger(MetadataExporterValidationSuite.class);
-        
+    public static String PROJ_DIR = null;        
+    static
+    {
+        PROJ_DIR = System.getProperty("project.dir",".");
+        System.out.println("Project dir = " + new File(PROJ_DIR).getAbsolutePath());
+    }
+    
+    public final static String TEST_DIR = PROJ_DIR + "/src/test/resources";
+    
     public void testScenario1()
     {
-        String releaseDBPath      = "H:/ReleasesDB";
-        String workingDir         = "H:/WorkingDir";
-        String outputDir          = "H:/OutputDir";
-        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/etc/xslt/eum2iso_v4.1.xsl";
+        
+        
+        String releaseDBPath      = "/tmp/ReleasesDB";
+        String workingDir         = "/tmp/WorkingDir";
+        String outputDir          = "/tmp/OutputDir";
+        String xsltFile           = PROJ_DIR + "/etc/xslt/eum2iso_v4.1.xsl";
         String R1 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R1";
         String R2 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R2";
         String R3 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R3";
@@ -31,8 +43,15 @@ public class MetadataExporterValidationSuite extends TestCase
         String R6 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R6";
         String R7 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R7";
         
+        
+        
+        
         try
-        {         
+        {     
+            FileSystem.createDirs(releaseDBPath);
+            FileSystem.createDirs(workingDir);
+            FileSystem.createDirs(outputDir);
+            
             MetadataExporter exporter = new MetadataExporter(releaseDBPath, workingDir);
             
             exporter.setXsltFile(xsltFile);
@@ -139,13 +158,17 @@ public class MetadataExporterValidationSuite extends TestCase
     
     public void testScenario3()
     {
-        String releaseDBPath      = "H:/ReleasesDB";
-        String workingDir         = "H:/WorkingDir";
-        String outputDir          = "H:/OutputDir";
+        String releaseDBPath      = "/tmp/ReleasesDB";
+        String workingDir         = "/tmp/WorkingDir";
+        String outputDir          = "/tmp/OutputDir";
         String R1 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R1";
        
         try
         {         
+            FileSystem.createDirs(releaseDBPath);
+            FileSystem.createDirs(workingDir);
+            FileSystem.createDirs(outputDir);
+            
             MetadataExporter exporter = new MetadataExporter(releaseDBPath, workingDir);
             
             exporter.createExport(R1, outputDir, false);  
@@ -161,15 +184,18 @@ public class MetadataExporterValidationSuite extends TestCase
     
     public void testLargeScaleScenario()
     {
-        String releaseDBPath      = "H:/ReleasesDB";
-        String workingDir         = "H:/WorkingDir";
-        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/etc/xslt/eum2iso_v4.1.xsl";
-        String source             = "H:/Dev/ecli-workspace/DWD-metadata-transformers/etc/metadata/eo-portal-metadata";
+        String releaseDBPath      = "/tmp/ReleasesDB";
+        String workingDir         = "/tmp/WorkingDir";
+        String xsltFile           = PROJ_DIR + "/etc/xslt/eum2iso_v4.1.xsl";
+        String source             = PROJ_DIR + "/etc/metadata/eo-portal-metadata";
         String empty              = TEST_DIR + File.separatorChar + "scenario-2" + File.separatorChar + "empty";
         
         
         try
         {         
+            FileSystem.createDirs(releaseDBPath);
+            FileSystem.createDirs(workingDir);
+            
             MetadataExporter exporter = new MetadataExporter(releaseDBPath, workingDir);
             
             exporter.setXsltFile(xsltFile);

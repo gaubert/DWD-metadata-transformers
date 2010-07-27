@@ -30,6 +30,7 @@
   <property name="mdexp.etc"         value="etc"/>
   <property name="mdexp.libs"        value="libs"/>
   <property name="mdexp.src"         value="src"/>
+  <property name="mdexp.conf"        value="${mdexp.etc}/conf"/>
 	
   <property name="mdexp.name"         value="md-exporter"/>
   <property name="mdexp.version"      value="0.8"/>
@@ -41,6 +42,7 @@
   <property name="mdexp.run"          value="${mdexp.build}/run"/>
   <property name="mdexp.log"          value="${mdexp.build}/log"/>
   <property name="mdexp.lib"          value="${mdexp.build}/lib"/>
+  
   <property name="mdexp.tar"          value="${mdexp.build}/tar"/>
 	
   <!-- set external classpath -->
