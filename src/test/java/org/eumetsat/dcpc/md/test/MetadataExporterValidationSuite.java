@@ -33,16 +33,18 @@ public class MetadataExporterValidationSuite extends TestCase
         
         try
         {         
-            MetadataExporter exporter = new MetadataExporter(xsltFile, releaseDBPath, workingDir);
+            MetadataExporter exporter = new MetadataExporter(releaseDBPath, workingDir);
+            
+            exporter.setXsltFile(xsltFile);
             
             ReleaseDatabase db = exporter.getReleaseDatabase();
             
             // clean DB at the beginning of the scenario
-            //db.eraseReleaseDatabase();
+            db.eraseReleaseDatabase();
             
             System.out.println("********** Create Export from R1: (add 10 files) **********");
             
-            exporter.createExport(R1, outputDir);  
+            exporter.createExport(R1, outputDir, false);  
             
             // Check that this is correct
             Release latestRelease = db.getLatestRelease();
@@ -53,7 +55,7 @@ public class MetadataExporterValidationSuite extends TestCase
             System.out.println("********** Create Export from R2: (delete 5 files) **********");
             
             // delete 5 files
-            exporter.createExport(R2);  
+            exporter.createExport(R2, true);  
             
             // Check that this is correct
             latestRelease = db.getLatestRelease();
@@ -64,7 +66,7 @@ public class MetadataExporterValidationSuite extends TestCase
             System.out.println("********** Create Export from R3: (modify 1 file) **********");
             
             // modify a file
-            exporter.createExport(R3);  
+            exporter.createExport(R3, true);  
             
             // Check that this is correct
             latestRelease = db.getLatestRelease();
@@ -77,7 +79,7 @@ public class MetadataExporterValidationSuite extends TestCase
             System.out.println("********** Create Export from R4: (add 5 files, modify 1) **********");
             
             // put back 5 original files. Result is 5 new files and a modified one : 6 files in results and EO_EUM_DAT_MULT_MAPSSI.xml is modified again
-            exporter.createExport(R4);  
+            exporter.createExport(R4, true);  
             
             // Check that this is correct
             latestRelease = db.getLatestRelease();
@@ -95,7 +97,7 @@ public class MetadataExporterValidationSuite extends TestCase
             System.out.println("********** Create Export from R5: (back to previous version) **********");
             
             // put back 5 original files. Result is 5 new files and a modified one : 6 files in results and EO_EUM_DAT_MULT_MAPSSI.xml is modified again
-            exporter.createExport(R5); 
+            exporter.createExport(R5, true); 
             
             // Check that this is correct
             latestRelease = db.getLatestRelease();
@@ -106,7 +108,7 @@ public class MetadataExporterValidationSuite extends TestCase
             System.out.println("********** Create Export from R6: (no changes) **********");
             
             // put back 5 original files. Result is 5 new files and a modified one : 6 files in results and EO_EUM_DAT_MULT_MAPSSI.xml is modified again
-            exporter.createExport(R6);  
+            exporter.createExport(R6, true);  
             
             // Check that this is correct
             Release previous  = latestRelease;
@@ -118,7 +120,7 @@ public class MetadataExporterValidationSuite extends TestCase
             System.out.println("********** Create Export from R7: (delete 10 files to empty DB) **********");
             
             //delete 10 files
-            exporter.createExport(R7);  
+            exporter.createExport(R7, true);  
             
             // Check that this is correct
             latestRelease = db.getLatestRelease();
@@ -135,7 +137,29 @@ public class MetadataExporterValidationSuite extends TestCase
         }
     }
     
-    public void ztestLargeScaleScenario()
+    public void testScenario3()
+    {
+        String releaseDBPath      = "H:/ReleasesDB";
+        String workingDir         = "H:/WorkingDir";
+        String outputDir          = "H:/OutputDir";
+        String R1 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R1";
+       
+        try
+        {         
+            MetadataExporter exporter = new MetadataExporter(releaseDBPath, workingDir);
+            
+            exporter.createExport(R1, outputDir, false);  
+            fail("The sanity check should fail");
+        }
+        catch(Exception e)
+        {
+            assertTrue("The sanity check should fail but another error occured.", e.getMessage().contains(" doesn't seem to be a transformed file. Please check"));
+        }
+        
+        
+    }
+    
+    public void testLargeScaleScenario()
     {
         String releaseDBPath      = "H:/ReleasesDB";
         String workingDir         = "H:/WorkingDir";
@@ -146,7 +170,9 @@ public class MetadataExporterValidationSuite extends TestCase
         
         try
         {         
-            MetadataExporter exporter = new MetadataExporter(xsltFile, releaseDBPath, workingDir);
+            MetadataExporter exporter = new MetadataExporter(releaseDBPath, workingDir);
+            
+            exporter.setXsltFile(xsltFile);
             
             ReleaseDatabase db = exporter.getReleaseDatabase();
             
@@ -156,7 +182,7 @@ public class MetadataExporterValidationSuite extends TestCase
             
             System.out.println("********** Create Export from eo portal source (359 files) **********");
             
-            exporter.createExport(source);  
+            exporter.createExport(source, true);  
             
             // Check that this is correct
             Release latestRelease = db.getLatestRelease();
@@ -166,7 +192,7 @@ public class MetadataExporterValidationSuite extends TestCase
             
             System.out.println("********** Create Second Export (empty database) **********");
             
-            exporter.createExport(empty);  
+            exporter.createExport(empty, true);  
             
             // Check that this is correct
             latestRelease = db.getLatestRelease();

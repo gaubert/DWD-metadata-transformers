@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.eumetsat.dcpc.commons.Checksummer;
 import org.eumetsat.dcpc.commons.FileSystem;
@@ -25,6 +26,7 @@ public class MetadataExporter
     protected ReleaseDatabase      m_ReleaseDB;
     protected File                 m_WorkingDir;
     protected File                 m_XsltFilePath;
+    protected boolean              m_NoXslt = true; // default to true
 
     public final static Logger     logger               = LoggerFactory
                                                                 .getLogger(MetadataExporter.class);
@@ -38,22 +40,26 @@ public class MetadataExporter
      *            The Root Path for the ReleaseDB
      * @throws Exception
      */
-    public MetadataExporter(String aXsltFilePath, String aReleaseDBRootDirPath,
+    public MetadataExporter(String aReleaseDBRootDirPath,
             String aWorkingDirPath) throws Exception
     {
-
-        m_XsltFilePath = new File(aXsltFilePath);
-
-        if (!m_XsltFilePath.exists())
-            throw new FileNotFoundException("Xslt File " + aXsltFilePath
-                    + " doesn't exist");
-
         m_ReleaseDB = new ReleaseDatabase(aReleaseDBRootDirPath);
 
         FileSystem.createDirs(aWorkingDirPath);
 
         m_WorkingDir = new File(aWorkingDirPath);
 
+    }
+    
+    public void setXsltFile(String aXsltFilePath) throws FileNotFoundException
+    {
+        m_XsltFilePath = new File(aXsltFilePath);
+
+        if (!m_XsltFilePath.exists())
+            throw new FileNotFoundException("Xslt File " + aXsltFilePath
+                    + " doesn't exist");
+        
+        m_NoXslt = false;
     }
 
     /**
@@ -66,17 +72,19 @@ public class MetadataExporter
         return this.m_ReleaseDB;
     }
     
-    public void createExport(String aMetadataSourcePath) throws Exception
+    public void createExport(String aMetadataSourcePath, boolean aNoCheck) throws Exception
     {
-        this.createExport(aMetadataSourcePath, null);
+        this.createExport(aMetadataSourcePath, null, aNoCheck);
     }
 
     /**
      * 
-     * @param aMetadataSourcePath
+     * @param aMetadataSourcePath Input Dir
+     * @param aOutputDir  Output Dir
+     * @param aNoCheck    to checkor not the metadata
      * @throws Exception
      */
-    public void createExport(String aMetadataSourcePath, String aOutputDir) throws Exception
+    public void createExport(String aMetadataSourcePath, String aOutputDir, boolean aNoCheck) throws Exception
     {
         File topTempDir = FileSystem.createTempDirectory("temp-",
                 this.m_WorkingDir);
@@ -94,20 +102,33 @@ public class MetadataExporter
             FileSystem.createDirs(xmlDir);
             FileSystem.createDirs(MD5Dir);
 
-            logger.info("------------ Do XSLT Transformations ------------");
-
-            // do the transformations
-            XsltProcessor xsltTransformer = new XsltProcessor(
-                    this.m_XsltFilePath, xmlDir);
-
-            // do xslt transformation
-            xsltTransformer.processFiles(new File(aMetadataSourcePath),
-                    prettyPrint);
-
-            logger.info("------------ Rename Files            ------------");
+            if (! m_NoXslt)
+            {
+                logger.info("------------ Do XSLT Transformations ------------");
+            
+                // do the transformations
+                XsltProcessor xsltTransformer = new XsltProcessor(
+                        this.m_XsltFilePath, xmlDir);
+    
+                // do xslt transformation
+                xsltTransformer.processFiles(new File(aMetadataSourcePath),
+                        prettyPrint);
+            }
+            else
+            {
+                FileUtils.copyDirectory(new File(aMetadataSourcePath), xmlDir);
+            }
+            
             // rename files
             MetadataFileRenamer rn = new MetadataFileRenamer(xmlDir);
+            
+            // add sanity check to be sure that we are using transformed files
+            // check that the files are XSLT transformed files
+            if (! aNoCheck)
+               rn.doSanityCheck(2);
 
+            logger.info("------------ Rename Files            ------------");
+            
             rn.processFiles();
 
             logger.info("------------ Calculate MD5s          ------------");
@@ -137,8 +158,6 @@ public class MetadataExporter
             {
                 logger.info("No new release.");
             }
-
-           
         }
         finally
         {

@@ -96,6 +96,10 @@ public class CMDRunner
        OptionSpec<Void> help       = parser.acceptsAll( asList( "h", "help"), "show usage description" );
        
        OptionSpec<Void> version    = parser.acceptsAll( asList( "v", "version"), "application version" );
+       
+       OptionSpec<Void> noxsltT    = parser.acceptsAll( asList( "n", "no-xslt-trans"), "do not perform the xslt transformation" );
+       
+       OptionSpec<Void> nocheck    = parser.acceptsAll( asList( "s", "no-check"), "do not check that files have been transformed" );
               
        OptionSpec<File> xslt       = parser.acceptsAll( asList( "x", "xslt"), "xslt file" )
                                           .withRequiredArg()
@@ -163,19 +167,38 @@ public class CMDRunner
                throw new IllegalArgumentException("Error: Need more arguments. " + indir + " option is missing." + CMDRunner.LINE_SEP);
            }
            
-           // optional arguments
-           if (options.has(xslt))
+           // check if we need to do the sanity check
+           if (options.has(nocheck))
            {
-               arguments.put("xslt", options.valueOf(xslt));
+               arguments.put("nocheck", true);
            }
            else
            {
-               //set it to the default value
-               // default val is $MDEXPORTER_HOME/xslt/eum2iso_v4.1.xsl
-               File xsltF = new File(getMDHome() + File.separatorChar + "xslt" + File.separatorChar + "eum2iso_v4.1.xsl");
-               arguments.put("xslt", xsltF );
-               logger.info("The default Xslt file will be used (" + xsltF.getAbsolutePath() + ")."  );
-               
+               arguments.put("nocheck", false);
+           }
+           
+           // check if we need to do the xslt trans
+           if (options.has(noxsltT))
+           {
+               arguments.put("noxslt", true);
+           }
+           else
+           {
+               arguments.put("noxslt", false);
+               // optional arguments
+               if (options.has(xslt))
+               {
+                   arguments.put("xslt", options.valueOf(xslt));
+               }
+               else
+               {
+                   //set it to the default value
+                   // default val is $MDEXPORTER_HOME/xslt/eum2iso_v4.1.xsl
+                   File xsltF = new File(getMDHome() + File.separatorChar + "xslt" + File.separatorChar + "eum2iso_v4.1.xsl");
+                   arguments.put("xslt", xsltF );
+                   logger.info("The default Xslt file will be used (" + xsltF.getAbsolutePath() + ")."  );
+                   
+               }
            }
            
            if (options.has(workingdir))
@@ -243,12 +266,16 @@ public class CMDRunner
     {
         try
         {
-            MetadataExporter md_Exporter = new MetadataExporter( ((File) aArguments.get("xslt")).getAbsolutePath()
-                                                               , ((File) aArguments.get("rdb")).getAbsolutePath()
+            MetadataExporter md_Exporter = new MetadataExporter( 
+                                                               ((File) aArguments.get("rdb")).getAbsolutePath()
                                                                , ((File) aArguments.get("workingdir")).getAbsolutePath());
             
+            if ( ! ((Boolean) aArguments.get("noxslt")).booleanValue() )
+                md_Exporter.setXsltFile(((File) aArguments.get("xslt")).getAbsolutePath());
+            
             md_Exporter.createExport( ((File) aArguments.get("in")).getAbsolutePath(), 
-                                      ((File) aArguments.get("out")).getAbsolutePath() );
+                                      ((File) aArguments.get("out")).getAbsolutePath(),
+                                      ((Boolean) aArguments.get("nocheck")).booleanValue());
         }
         catch (Throwable e)
         {

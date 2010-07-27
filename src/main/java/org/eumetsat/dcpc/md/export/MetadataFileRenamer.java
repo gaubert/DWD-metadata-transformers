@@ -88,6 +88,34 @@ public class MetadataFileRenamer
         });
         logger.info("Renaming {} files.", this.oListFiles.length);
     }
+    
+    /**
+     * checkt that the files are XSLT transformed files
+     * @param aNbOfFilesToCheck
+     * @throws Exception
+     */
+    public void doSanityCheck(int aNbOfFilesToCheck) throws Exception
+    {
+        XPathExtractor xpathExtractor = new XPathExtractor();
+
+        xpathExtractor.setXPathExpression(ms_XPathGetName, ms_NamespaceContext);
+
+        logger.debug("Perform Sanity Check");
+        
+        int cpt = 0;
+        for (File file : oListFiles)
+        {
+            if (xpathExtractor.evaluateAsString(file) == null)
+            {
+                throw new Exception("The file " + file.getAbsolutePath() + " doesn't seem to be a transformed file. Please check.");
+            }
+            
+            cpt++;
+            
+            if (cpt >= aNbOfFilesToCheck)
+                return;
+        }
+    }
 
     /**
      * Iterates through the list of files, get name with XPath and rename it as
@@ -135,7 +163,10 @@ public class MetadataFileRenamer
         xpathExtractor.setXPathExpression(ms_XPathGetName, ms_NamespaceContext);
 
         String result = xpathExtractor.evaluateAsString(aFile);
-
+        
+        if (result == null)
+            throw new Exception("cannot extract the metadata fileIdentifier from " + aFile.getAbsolutePath() + " with the following XPath expression [" + ms_XPathGetName + "] ");
+        
         String[] strs = result.split("::");
 
         // should have 2 elements in the list otherwise error;
@@ -191,6 +222,10 @@ public class MetadataFileRenamer
         xpathExtractor.setXPathExpression(ms_XPathGetDate, ms_NamespaceContext);
 
         String result = xpathExtractor.evaluateAsString(aFile);
+        
+        if (result == null)
+            throw new Exception("cannot extract the metadata dateStamp from " + aFile.getAbsolutePath() + " with the following XPath expression [" + ms_XPathGetDate + "] ");
+        
 
         return DateUtil.createDate(result, DateUtil.ms_MDDATEFORMAT);
     }
