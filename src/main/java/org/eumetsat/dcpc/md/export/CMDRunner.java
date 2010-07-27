@@ -64,7 +64,11 @@ public class CMDRunner
         // write usage
         try
         {
-            writer.write("Usage: md-exporter [--version] [--help] --in <input-dir> --out <output-dir> --xslt <xslt-file> ");
+            writer.write("Usage: md-exporter --in <input-dir> --out <output-dir> ");
+            writer.newLine();
+            writer.write("                   [--xslt <xslt-file>] [--workdir <working-dir>]");
+            writer.newLine();
+            writer.write("                   [--version] [--help]");
             writer.newLine();
             writer.newLine();
             writer.flush();
@@ -89,27 +93,32 @@ public class CMDRunner
     {
        HashMap<String, Object> arguments = new HashMap<String, Object>();   
        
-       OptionSpec<Void> help      = parser.acceptsAll( asList( "h", "help"), "show usage description" );
+       OptionSpec<Void> help       = parser.acceptsAll( asList( "h", "help"), "show usage description" );
        
-       OptionSpec<Void> version   = parser.acceptsAll( asList( "v", "version"), "application version" );
+       OptionSpec<Void> version    = parser.acceptsAll( asList( "v", "version"), "application version" );
               
-       OptionSpec<File> xslt      = parser.acceptsAll( asList( "x", "xslt") )
+       OptionSpec<File> xslt       = parser.acceptsAll( asList( "x", "xslt"), "xslt file" )
                                           .withRequiredArg()
                                           .ofType( File.class )
                                           .describedAs("xslt file")
-                                          .defaultsTo( new File("H:/xslt.file") );
+                                          .defaultsTo( new File("$MDEXPORTER_HOME/xslt/eum2iso_v4.1.xsl") );
        
-       OptionSpec<File> outdir    = parser.acceptsAll( asList("o", "out"), "output directory")
+       OptionSpec<File> outdir     = parser.acceptsAll( asList("o", "out"), "output directory")
                                           .withRequiredArg()
                                           .ofType( File.class ).describedAs("output-dir");
        
-       OptionSpec<File> indir    = parser.acceptsAll( asList("i", "in"), "input dir with files to transform" )
+       OptionSpec<File> indir      = parser.acceptsAll( asList("i", "in"), "input dir with files to transform" )
                                          .withRequiredArg()
                                          .ofType( File.class ).describedAs("input-dir");
        
-       OptionSpec<File> rdbdir   = parser.acceptsAll( asList("r", "rdb"), "Release Database Top Directory" )
+       OptionSpec<File> rdbdir     = parser.acceptsAll( asList("r", "rdb"), "Release Database Top Directory" )
                                          .withRequiredArg()
                                          .ofType( File.class ).describedAs("release-dir");
+       
+       OptionSpec<File> workingdir = parser.acceptsAll( asList("w", "workdir"), "Working Directory" )
+                                           .withRequiredArg()
+                                           .ofType( File.class ).describedAs("work-dir")
+                                           .defaultsTo( new File("/tmp"));
        
        try 
        {
@@ -124,15 +133,6 @@ public class CMDRunner
            {
                usage(System.out);
                System.exit(0);
-           }
-           
-           if (options.has(xslt))
-           {
-               arguments.put("xslt", options.valueOf(xslt));
-           }
-           else
-           {
-               throw new IllegalArgumentException("Error: Need more arguments. " + xslt + " option is missing." + CMDRunner.LINE_SEP);
            }
            
            if (options.has(outdir))
@@ -162,6 +162,32 @@ public class CMDRunner
            {
                throw new IllegalArgumentException("Error: Need more arguments. " + indir + " option is missing." + CMDRunner.LINE_SEP);
            }
+           
+           // optional arguments
+           if (options.has(xslt))
+           {
+               arguments.put("xslt", options.valueOf(xslt));
+           }
+           else
+           {
+               //set it to the default value
+               // default val is $MDEXPORTER_HOME/xslt/eum2iso_v4.1.xsl
+               File xsltF = new File(getMDHome() + File.separatorChar + "xslt" + File.separatorChar + "eum2iso_v4.1.xsl");
+               arguments.put("xslt", xsltF );
+               logger.info("The default Xslt file will be used (" + xsltF.getAbsolutePath() + ")."  );
+               
+           }
+           
+           if (options.has(workingdir))
+           {
+               arguments.put("workingdir", options.valueOf(workingdir));
+           }
+           else
+           {
+               //set it to the default value
+               arguments.put("workingdir", new File("/tmp"));
+           }
+           
        }
        catch ( OptionException expected ) 
        {
@@ -219,7 +245,7 @@ public class CMDRunner
         {
             MetadataExporter md_Exporter = new MetadataExporter( ((File) aArguments.get("xslt")).getAbsolutePath()
                                                                , ((File) aArguments.get("rdb")).getAbsolutePath()
-                                                               , new File("/tmp").getAbsolutePath());
+                                                               , ((File) aArguments.get("workingdir")).getAbsolutePath());
             
             md_Exporter.createExport( ((File) aArguments.get("in")).getAbsolutePath(), 
                                       ((File) aArguments.get("out")).getAbsolutePath() );
@@ -240,13 +266,22 @@ public class CMDRunner
     
     public static void setDebugInfo()
     {
-        //System.out.println("MD DEBUG = " + System.getProperty("md.debug") );
-        
         if (System.getProperty("md.debug", "no").equalsIgnoreCase("yes"))
         {
             System.out.println("Debug activated");
             DEBUG_ON = true;
         }
+    }
+    
+    public static String getMDHome()
+    {
+        String home;
+        if (! (home = System.getProperty("md.home", "")).equals("") )
+        {
+            return home;
+        }
+        
+        return null;
     }
     
     

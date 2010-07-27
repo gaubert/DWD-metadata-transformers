@@ -71,6 +71,13 @@
 			</fileset>
 		</copy>
 		
+		<!-- xslt info -->
+		<copy todir="${dir}/xslt">
+			<fileset dir="${mdexp.etc}/xslt">
+				<include name="eum2iso_v4.1.xsl"/>
+			</fileset>
+		</copy>
+		
 		<!-- scripts info -->
 		<copy todir="${dir}/bin">
 			<fileset dir="${mdexp.etc}/scripts">

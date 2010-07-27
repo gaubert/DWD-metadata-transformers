@@ -22,7 +22,7 @@ public class MetadataExporterValidationSuite extends TestCase
         String releaseDBPath      = "H:/ReleasesDB";
         String workingDir         = "H:/WorkingDir";
         String outputDir          = "H:/OutputDir";
-        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/etc/xslt/eum2isoapFull_v4.1.xsl";
+        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/etc/xslt/eum2iso_v4.1.xsl";
         String R1 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R1";
         String R2 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R2";
         String R3 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R3";
@@ -139,7 +139,7 @@ public class MetadataExporterValidationSuite extends TestCase
     {
         String releaseDBPath      = "H:/ReleasesDB";
         String workingDir         = "H:/WorkingDir";
-        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/etc/xslt/eum2isoapFull_v4.1.xsl";
+        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/etc/xslt/eum2iso_v4.1.xsl";
         String source             = "H:/Dev/ecli-workspace/DWD-metadata-transformers/etc/metadata/eo-portal-metadata";
         String empty              = TEST_DIR + File.separatorChar + "scenario-2" + File.separatorChar + "empty";
         

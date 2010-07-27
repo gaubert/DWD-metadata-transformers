@@ -10,7 +10,9 @@
 ##########################
 ## MDEXPORTER home directory
 ##########################
-MDEXPORTER_HOME=..
+#default value
+_MDEXPORTER_HOME=..
+MDEXPORTER_HOME=${MDEXPORTER_HOME:-$_MDEXPORTER_HOME}
 
 #############################
 ## To activate some debugging 
@@ -29,7 +31,7 @@ JAVA_OPTS="-Xms64m -Xmx256m"
 ## Java Env
 ########################
 if [ ! -f "$JAVA_HOME/bin/java" ]; then
-   $echo "Please add $JAVA_HOMEin your env. JAVA_HOME needs to point a JAVA 1.6 JVM or further"
+   echo "Please add $JAVA_HOMEin your env. JAVA_HOME needs to point to a JAVA 1.6 JVM or further"
    exit 1
 fi
 java=$JAVA_HOME/bin/java
@@ -54,6 +56,14 @@ conf=$MDEXPORTER_HOME/conf
 ## Part 2: You probably don't want to change anything beyond this point
 #######################################################################
 
+########################
+## check dirs
+########################
+if [ ! -d "$lib" -o  ! -d "$conf" ]; then
+   echo "The env var MDEXPORTER_HOME=$MDEXPORTER_HOME is not set correclty. Please set it to the metadata exporter HOME dir."
+   exit 1
+fi
+
 #########################################
 ## Set the starter classpath
 ## if will be different for a cygwin prog
@@ -67,11 +77,16 @@ if uname | grep -i cygwin > /dev/null; then
   #change the path for conf to be windows paths
   conf=`cygpath --windows $conf`
 
+  #change MDEXPORTER_HOME to a win compliant path before to pass as an argument for the VM
+  MD_HOME=`cygpath --windows $MDEXPORTER_HOME`
+
 else
   # any other unix separator is ;
   for n in `find $lib/*.jar`; do
        STARTERPATH=$STARTERPATH":"$n
   done
+
+  MD_HOME=$MDEXPORTER_HOME
 fi
 
 ###########################
@@ -87,8 +102,9 @@ fi
 ###################
 ## Add java options
 ###################
+JAVA_OPTS=$JAVA_OPTS" -Dmd.home=$MD_HOME"
 JAVA_OPTS=$JAVA_OPTS" -Dmd.debug=$MD_DEBUG"
-JAVA_OPTS=$JAVA_OPTS" -Dtest.debug=$log_debug"
+JAVA_OPTS=$JAVA_OPTS" -Dmd.log.debug=$log_debug"
 JAVA_OPTS=$JAVA_OPTS" -Dlog4j.configuration=file:/$conf/log4j.properties"
 
 
