@@ -27,11 +27,13 @@
 	
 	 available targets are:"
 	
-	   build                               --> compile the source code
-	   install                             --> install into /tmp/mdexp-export
-	   clean                               --> clean up the build directory
-	   clean-all                           --> clean up build and tarball directories
-	   usage                               --> this help page ...
+	   build                                                   --> compile the source code
+	   install [-Dout=\"output dir\" (default=/tmp/md-export)  --> install into /tmp/mdexp-export
+	   build-bin-tarball [-Dout=\"output dir\"]                --> build binary tarball distribution
+	   build-src-tarball                                       --> build src tarball distribution
+	   clean                                                   --> clean up the build directory
+	   clean-all                                               --> clean up build and tarball dirs
+	   usage                                                   --> this help page ...
 	
 	 See the comments inside the build.xml file for more details.
     </echo>
@@ -46,12 +48,91 @@
   <target name="install">
     
 	<!-- create the root directory for this release -->
-	<property name="root" value="/tmp/md-exporter"/>
+	<!--<property name="root" value="/tmp/md-exporter"/>-->
+  	
+  	<!-- conditional propery -->
+  	<condition property="root" value="${out}" else="/tmp/md-exporter">
+  	    <isset property="out" />
+  	</condition>
+  	
+  	<echo message="install into ${root}"/>
 	  
 	<antcall target="_build-distrib">
        <param name="dir" value="${root}"/>
 	</antcall>
   	
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- make bin-distribution                                               -->
+  <!-- =================================================================== -->
+  <target name="build-bin-tarball" depends="clean">
+		
+		
+		<!-- create the root directory for this release -->
+		<property name="root" value="${mdexp.dist}/${mdexp.name}-v${mdexp.version}"/>
+  	
+  	    <!-- conditional propery for tarballdir -->
+  	  	<condition property="outtarballdir" value="${out}" else="${mdexp.tar}">
+  	  	    <isset property="out" />
+  	  	</condition>
+                
+		<!-- build distribution in the dist directory -->
+		<antcall target="_build-distrib">
+	          <param name="dir" value="${root}"/>
+	     </antcall>
+		
+		<!-- build a tar -->
+        <tar tarfile="${mdexp.tar}/${mdexp.name}-v${mdexp.version}.tar" longfile="gnu">
+		      <tarfileset dir="${mdexp.dist}" mode="740">
+		        <include name="${mdexp.dist}/${mdexp.name}-v${mdexp.version}/bin/md-exporter"/>
+		      </tarfileset>
+		      <tarfileset dir="${mdexp.dist}">
+		        <!--<include name="${mdexp.suite}/${vmc.node.name}-v${vmc.node.version}/**"/>-->
+		        <exclude name="${mdexp.dist}/${mdexp.name}-v${mdexp.version}/bin/md-exporter"/>
+		      </tarfileset>
+	    </tar>
+	
+		<gzip src="${mdexp.tar}/${mdexp.name}-v${mdexp.version}.tar"
+		          zipfile="${outtarballdir}/${mdexp.name}-v${mdexp.version}.tar.gz"/>
+		    <delete file="${mdexp.tar}/${mdexp.name}-v${mdexp.version}.tar"/>
+  	
+  	   <echo message="tarball ${outtarballdir}/${mdexp.name}-v${mdexp.version}.tar.gz is ready."/>
+     
+  </target>
+	
+  <!-- =================================================================== -->
+  <!-- make src-distribution                                               -->
+  <!-- =================================================================== -->
+  <target name="build-src-tarball" depends="clean">
+  	
+		<!-- create the root directory for this release -->
+		<property name="root" value="${mdexp.dist}/${mdexp.name}-v${mdexp.version}-src"/>
+  	
+  	    <!-- conditional propery for tarballdir -->
+  	  	<condition property="outtarballdir" value="${out}" else="${mdexp.tar}">
+  	  	    <isset property="out" />
+  	  	</condition>
+                
+		<!-- build distribution in the dist directory -->
+		<antcall target="_build-distrib">
+	          <param name="dir" value="${root}"/>
+	     </antcall>
+		
+		<!-- build a tar -->
+        <tar tarfile="${mdexp.tar}/${mdexp.name}-v${mdexp.version}-src.tar" longfile="gnu">
+		      <tarfileset dir="${mdexp.project}">
+		        <!--<include name="${mdexp.suite}/${vmc.node.name}-v${vmc.node.version}/**"/>-->
+		        <exclude name="${mdexp.dist}/${mdexp.name}-v${mdexp.version}/bin/md-exporter"/>
+		      </tarfileset>
+	    </tar>
+	
+		<gzip src="${mdexp.tar}/${mdexp.name}-v${mdexp.version}.tar"
+		          zipfile="${outtarballdir}/${mdexp.name}-v${mdexp.version}.tar.gz"/>
+		    <delete file="${mdexp.tar}/${mdexp.name}-v${mdexp.version}.tar"/>
+  	
+  	   <echo message="tarball ${outtarballdir}/${mdexp.name}-v${mdexp.version}.tar.gz is ready."/>
+	     
   </target>
 	
   <!-- ================================================================== -->

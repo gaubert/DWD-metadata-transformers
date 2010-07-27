@@ -15,10 +15,6 @@
   <!-- general -->
   <property name="Name" value="mdexp"/>
   <property name="name" value="mdexp"/>
-
-    <!--Set deployment paths-->
-  <property name="mdexp.suite.root"     value="/tmp/simdat"/>
-
   
   <!-- compiler -->
   <property name="javac.target" value="1.5"/>
@@ -34,6 +30,9 @@
   <property name="mdexp.etc"         value="etc"/>
   <property name="mdexp.libs"        value="libs"/>
   <property name="mdexp.src"         value="src"/>
+	
+  <property name="mdexp.name"         value="md-exporter"/>
+  <property name="mdexp.version"      value="0.8"/>
 	
 	
   <!-- build file system -->

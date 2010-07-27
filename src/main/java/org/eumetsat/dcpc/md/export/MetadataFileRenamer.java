@@ -226,7 +226,6 @@ public class MetadataFileRenamer
         if (result == null)
             throw new Exception("cannot extract the metadata dateStamp from " + aFile.getAbsolutePath() + " with the following XPath expression [" + ms_XPathGetDate + "] ");
         
-
         return DateUtil.createDate(result, DateUtil.ms_MDDATEFORMAT);
     }
 

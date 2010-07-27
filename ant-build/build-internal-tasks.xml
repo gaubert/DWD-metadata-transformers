@@ -36,11 +36,6 @@
      		  <src path="${mdexp.src}"/>
      		  <classpath refid="mdexp.classpath"/>
      	   </javac>
-     	   <!--<copy todir="${vmc.classes}">
-	          <fileset dir="${vmc.src}">
-	             <include name="de/**/*.xml"/>
-	          </fileset>
-	       </copy>-->
 	  </target>
 	
 

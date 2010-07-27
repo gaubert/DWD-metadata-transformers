@@ -44,7 +44,7 @@ D=`dirname "$MDEXPORTER_HOME"`
 B=`basename "$MDEXPORTER_HOME"`
 MDEXPORTER_HOME="`cd \"$D\" 2>/dev/null && pwd || echo \"$D\"`/$B"
 
-#echo $MDEXPORTER_HOME
+#echo "MDEXPORTER_HOME is in $MDEXPORTER_HOME"
 
 ########################
 ## set distribution dirs
