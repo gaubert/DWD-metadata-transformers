@@ -16,7 +16,7 @@ MDEXPORTER_HOME=..
 ## To activate some debugging 
 ## set it to yes
 #############################
-#MD_DEBUG=yes
+MD_DEBUG=no
 
 ########################
 ## Java optional options
@@ -63,6 +63,10 @@ if uname | grep -i cygwin > /dev/null; then
   for n in `find $lib/*.jar`; do
      STARTERPATH=$STARTERPATH";"`cygpath --windows $n`
   done
+
+  #change the path for conf to be windows paths
+  conf=`cygpath --windows $conf`
+
 else
   # any other unix separator is ;
   for n in `find $lib/*.jar`; do
@@ -70,11 +74,22 @@ else
   done
 fi
 
+###########################
+## check if MD_DEBUG is set
+###########################
+if [ $MD_DEBUG == "yes" -o $MD_DEBUG == "YES" ]; then
+ log_debug=DEBUG
+else
+ log_debug=INFO
+fi
+
+
 ###################
 ## Add java options
 ###################
 JAVA_OPTS=$JAVA_OPTS" -Dmd.debug=$MD_DEBUG"
-JAVA_OPTS=$JAVA_OPTS" -Dlog4j.configuration=file://$conf/log4j.properties"
+JAVA_OPTS=$JAVA_OPTS" -Dtest.debug=$log_debug"
+JAVA_OPTS=$JAVA_OPTS" -Dlog4j.configuration=file:/$conf/log4j.properties"
 
 
 java $JAVA_OPTS \
