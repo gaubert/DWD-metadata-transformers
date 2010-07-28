@@ -6,7 +6,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.apache.commons.io.FileUtils;
 import org.eumetsat.dcpc.commons.FileSystem;
 import org.eumetsat.dcpc.md.export.MetadataExporter;
 import org.eumetsat.dcpc.md.export.Release;
