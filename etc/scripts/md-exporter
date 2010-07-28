@@ -80,6 +80,9 @@ if uname | grep -i cygwin > /dev/null; then
   #change MDEXPORTER_HOME to a win compliant path before to pass as an argument for the VM
   MD_HOME=`cygpath --windows $MDEXPORTER_HOME`
 
+  #issue on windows file:/ must have one slash
+  LOG4J_CONF="file:/$conf/log4j.properties"
+
 else
   # any other unix separator is ;
   for n in `find $lib/*.jar`; do
@@ -87,12 +90,15 @@ else
   done
 
   MD_HOME=$MDEXPORTER_HOME
+
+  #issue on unix file:// must have 2 slashes
+  LOG4J_CONF="file://$conf/log4j.properties"
 fi
 
 ###########################
 ## check if MD_DEBUG is set
 ###########################
-if [ $MD_DEBUG == "yes" -o $MD_DEBUG == "YES" ]; then
+if [ $MD_DEBUG = "yes" -o $MD_DEBUG = "YES" ]; then
  log_debug=DEBUG
 else
  log_debug=INFO
@@ -105,7 +111,7 @@ fi
 JAVA_OPTS=$JAVA_OPTS" -Dmd.home=$MD_HOME"
 JAVA_OPTS=$JAVA_OPTS" -Dmd.debug=$MD_DEBUG"
 JAVA_OPTS=$JAVA_OPTS" -Dmd.log.debug=$log_debug"
-JAVA_OPTS=$JAVA_OPTS" -Dlog4j.configuration=$conf/log4j.properties"
+JAVA_OPTS=$JAVA_OPTS" -Dlog4j.configuration=$LOG4J_CONF"
 
 
 java $JAVA_OPTS \

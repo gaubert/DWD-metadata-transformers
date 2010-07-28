@@ -92,6 +92,14 @@
 			</fileset>
 		</copy>
 		
+		<!-- test data -->
+		<copy todir="${dir}/test">
+		    <!-- some xml files -->
+			<fileset dir="${mdexp.src}/test/resources/scenario-1/R1">
+				<include name="*.xml"/>
+			</fileset>
+		</copy>
+		
 		<chmod file="${dir}/bin/md-exporter" perm="ugo+wrx"/>
 		
 	</target>

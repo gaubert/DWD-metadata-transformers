@@ -1,5 +1,6 @@
 #!/bin/sh
 
-export ANT_HOME=./etc
+ANT_HOME=./etc
+export ANT_HOME
 
 sh $ANT_HOME/bin/ant $*

@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 import org.eumetsat.dcpc.commons.DateUtil;
+import org.eumetsat.dcpc.commons.FileSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,8 +54,8 @@ public class ReleaseDatabase
 
         if (!m_RDBRootDir.exists())
         {
-            throw new FileNotFoundException(m_ReleaseDBRootDirPath
-                    + " does not exist");
+            logger.info(m_RDBRootDir + " doesn't exit. try to create it.");
+            FileSystem.createDirs(m_RDBRootDir);
         }
 
         if (!m_RDBRootDir.isDirectory())

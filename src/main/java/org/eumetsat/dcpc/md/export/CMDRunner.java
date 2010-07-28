@@ -64,7 +64,7 @@ public class CMDRunner
         // write usage
         try
         {
-            writer.write("Usage: md-exporter --in <input-dir> --out <output-dir> ");
+            writer.write("Usage: md-exporter --in <input-dir> --out <output-dir> --rdb <release-database>");
             writer.newLine();
             writer.write("                   [--xslt <xslt-file>] [--workdir <working-dir>]");
             writer.newLine();
@@ -164,7 +164,7 @@ public class CMDRunner
            }
            else
            {
-               throw new IllegalArgumentException("Error: Need more arguments. " + indir + " option is missing." + CMDRunner.LINE_SEP);
+               throw new IllegalArgumentException("Error: Need more arguments. " + rdbdir + " option is missing." + CMDRunner.LINE_SEP);
            }
            
            // check if we need to do the sanity check
