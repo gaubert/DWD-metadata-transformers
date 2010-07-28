@@ -75,6 +75,17 @@ public class CMDRunner
         
             parser.printHelpOn(aOut);
             writer.newLine();
+            writer.write("Set the env variable MD_DEBUG to yes to activate the debugging info.");
+            writer.newLine();
+            writer.newLine();
+            
+            writer.write("Examples:");
+            writer.newLine();
+            writer.write("Using the test dir as the source dir and creating the ReleaseDatabase in /tmp/RDB.");
+            writer.newLine();
+            writer.write("$>./md-exporter --in ../test --out /tmp/res --rdb /tmp/RDB");
+            writer.newLine();
+            writer.write("Run it twice to see no changes the second time.");
             writer.flush();
             
         }

@@ -1,2 +1,128 @@
-create project
-add TCE machine access
+1) Installing the Metadata Exporter
+-----------------------------------
+
+go to MD_EXPORT_PROJECT_HOME/ant-build
+
+$>cd MD_EXPORT_PROJECT_HOME/ant-build
+$>./build
+Buildfile: H:\Dev\ecli-workspace\DWD-metadata-transformers\ant-build\build.xml
+
+usage:
+     [echo]     --------------- mdexp ${version} (${build}) ---------------
+     [echo]     
+     [echo]      available targets are:"
+     [echo]     
+     [echo]        build                                                   --> compile the source code
+     [echo]        install [-Dout=\"output dir\" (default=/tmp/md-export)  --> install into /tmp/mdexp-export
+     [echo]        build-bin-tarball [-Dout=\"output dir\"]                --> build binary tarball distribution
+     [echo]        build-src-tarball [-Dout=\"output dir\"]                --> build src tarball distribution
+     [echo]        validation-tests                                        --> run the validation tests suite
+     [echo]        clean                                                   --> clean up the build directory
+     [echo]        clean-all                                               --> clean up build and tarball dirs
+     [echo]        usage                                                   --> this help page ...
+     [echo]     
+     [echo]      See the comments inside the build.xml file for more details.
+     [echo]     
+
+BUILD SUCCESSFUL
+Total time: 1 second
+
+1.1) Build Source tarball
+-------------------------
+
+$>./build build-src-tarball -Dout=/tmp/mysources
+
+Create a tarball of the project
+
+1.2) Build binary tarball
+-------------------------
+
+Create a binary tarball that can be deployed on any unix (cygwin) machine.
+
+$>./build build-bin-tarball -Dout=/tmp/binary-dists
+
+1.4) Run the Validation Tests
+-----------------------------
+
+$>./build validation-tests
+Buildfile: H:\Dev\ecli-workspace\DWD-metadata-transformers\ant-build\build.xml
+
+_init:
+
+_compile-classes:
+    [javac] Compiling 17 source files to H:\Dev\ecli-workspace\DWD-metadata-transformers\build\classes
+
+validation-tests:
+    [junit] Project dir = H:\Dev\ecli-workspace\DWD-metadata-transformers\ant-build\..
+    [junit] log4j:WARN No appenders could be found for logger (org.eumetsat.dcpc.md.export.ReleaseDatabase).
+    [junit] log4j:WARN Please initialize the log4j system properly.
+    [junit] log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+    [junit] ********** Create Export from R1: (add 10 files) **********
+    [junit] ********** Create Export from R2: (delete 5 files) **********
+    [junit] ********** Create Export from R3: (modify 1 file) **********
+    [junit] ********** Create Export from R4: (add 5 files, modify 1) **********
+    [junit] ********** Create Export from R5: (back to previous version) **********
+    [junit] ********** Create Export from R6: (no changes) **********
+    [junit] ********** Create Export from R7: (delete 10 files to empty DB) **********
+    [junit] ********** ERASE ****************
+    [junit] ********** Create Export from eo portal source (359 files) **********
+    [junit] ********** Create Second Export (empty database) **********
+
+BUILD SUCCESSFUL
+Total time: 1 minute 03 seconds
+
+1.3) Deploy application in a given dir
+
+$>./build install (to deploy the application in a given dir)
+Buildfile: H:\Dev\ecli-workspace\DWD-metadata-transformers\ant-build\build.xml
+
+install:
+     [echo] install into /tmp/ins-md-exporter
+
+_init:
+
+_compile-classes:
+    [javac] Compiling 17 source files to H:\Dev\ecli-workspace\DWD-metadata-transformers\build\classes
+
+_mdexp-export-jar:
+      [jar] Warning: org\eumetsat\dcpc\commons\Checksummer.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\commons\DateUtil.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\commons\FileSystem.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\commons\Pair.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\commons\XmlPrettyPrinter.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\commons\xml\SimpleNamespaceContext.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\commons\xml\XMLInjector.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\commons\xml\XPathExtractor.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\export\CMDRunner.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\export\MetadataExporter$1.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\export\MetadataExporter.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\export\MetadataFileRenamer$1.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\export\MetadataFileRenamer.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\export\Release$1.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\export\Release$2.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\export\Release$3.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\export\Release$4.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\export\Release$5.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\export\Release$6.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\export\Release.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\export\ReleaseDatabase$1.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\export\ReleaseDatabase.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\export\XsltProcessor$1.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\export\XsltProcessor.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\test\CMDRunnerTestSuite.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\test\MetadataExporterUnitTestSuite.class modified in the future.
+      [jar] Warning: org\eumetsat\dcpc\md\test\MetadataExporterValidationSuite.class modified in the future.
+      [jar] Building jar: H:\Dev\ecli-workspace\DWD-metadata-transformers\build\lib\mdexp-export.jar
+
+_build-distrib:
+     [copy] Copying 1 file to H:\tmp\ins-md-exporter\conf
+     [copy] Copying 1 file to H:\tmp\ins-md-exporter\xslt
+     [copy] Copying 1 file to H:\tmp\ins-md-exporter\bin
+     [copy] Warning: mdexp-export.jar modified in the future.
+     [copy] Copying 10 files to H:\tmp\ins-md-exporter\lib
+     [copy] Copying 10 files to H:\tmp\ins-md-exporter\test
+
+BUILD SUCCESSFUL
+Total time: 8 seconds
+
+
