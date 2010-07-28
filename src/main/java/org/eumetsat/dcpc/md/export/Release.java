@@ -37,7 +37,7 @@ public class Release
     public final static String SRC_MD5S       = SOURCE + File.separator
                                                       + MD5_FILES;
 
-    public final static String DELETED_PREFIX = "deleted.EUMETSAT.";
+    public final static String DELETED_PREFIX = "deleted.eumetsat.";
     // DELETED Path
     public final static String DELETED        = DELTA + File.separator
                                                       + DELETED_PREFIX;
