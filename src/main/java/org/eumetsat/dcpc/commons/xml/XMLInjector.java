@@ -27,7 +27,62 @@ public class XMLInjector
     {
 
     }
+    
+    public static void changeNodeNameAndContent(String aInputFilePath, 
+                                                String aOutputFilePath, 
+                                                String aXPathNodeExpr, 
+                                                String aNewNodeName, 
+                                                String aNewContentStr, 
+                                                Map<String, String> aNameSpaces) throws Exception
+    {
+        // open a file and read the content into a byte array
+        VTDGen vg = new VTDGen();
+        if (vg.parseFile(aInputFilePath, true))
+        {
+            VTDNav vn = vg.getNav();
 
+            File fo = new File(aOutputFilePath);
+
+            FileOutputStream fos = new FileOutputStream(fo);
+
+            AutoPilot ap  = new AutoPilot(vn);
+
+            // add Namespaces
+            for (String key : aNameSpaces.keySet())
+            {
+                ap.declareXPathNameSpace(key, aNameSpaces.get(key));
+            }
+
+            XMLModifier xm = new XMLModifier(vn);
+
+            // change value
+            ap.selectXPath(aXPathNodeExpr + "/text()");
+
+            int i = -1;
+            while ((i = ap.evalXPath()) != -1)
+            {
+                xm.updateToken(i, aNewContentStr);
+            }
+            
+            //change Node Name
+            ap.selectXPath(aXPathNodeExpr);
+
+            i = -1;
+            while ((i = ap.evalXPath()) != -1)
+            {
+                xm.updateElementName(aNewNodeName);
+            }
+            
+            xm.output(fos);
+            fos.close();
+        }
+        else
+        {
+            throw new Exception("Cannot read the XML file "
+                    + aInputFilePath);
+        }
+    }
+    
     public static void injectStringIntoNode(String aInputFilePath,
             String aOutputFilePath, String aXPathExpr, String aValue,
             Map<String, String> aNameSpaces) throws Exception
@@ -42,7 +97,7 @@ public class XMLInjector
 
             FileOutputStream fos = new FileOutputStream(fo);
 
-            AutoPilot ap = new AutoPilot(vn);
+            AutoPilot ap  = new AutoPilot(vn);
 
             // add Namespaces
             for (String key : aNameSpaces.keySet())
@@ -52,13 +107,15 @@ public class XMLInjector
 
             XMLModifier xm = new XMLModifier(vn);
 
-            ap.selectXPath("/gmd:MD_Metadata/gmd:dateStamp/gco:Date/text()");
+            // change value
+            ap.selectXPath(aXPathExpr);
 
             int i = -1;
             while ((i = ap.evalXPath()) != -1)
             {
                 xm.updateToken(i, aValue);
             }
+            
             xm.output(fos);
             fos.close();
         }

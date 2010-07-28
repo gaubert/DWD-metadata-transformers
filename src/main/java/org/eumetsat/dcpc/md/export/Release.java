@@ -231,11 +231,12 @@ public class Release
         Date utcD = DateUtil.getUTCCurrentTime();
 
         // modify file n the fly (overwrite existing file)
-        XMLInjector.injectStringIntoNode(aFile.getAbsolutePath(), aFile
-                .getAbsolutePath(),
-                "/gmd:MD_Metadata/gmd:dateStamp/gco:Date/text()", DateUtil
-                        .dateToString(utcD, DateUtil.ms_ISODATEFORMAT),
-                XMLInjector.NAMESPACES);
+        XMLInjector.changeNodeNameAndContent(aFile.getAbsolutePath(),
+                                             aFile.getAbsolutePath(), 
+                                             "/gmd:MD_Metadata/gmd:dateStamp/gco:Date", 
+                                             "gco:DateTime", 
+                                             DateUtil.dateToString(utcD, DateUtil.ms_ISODATEFORMAT), 
+                                             XMLInjector.NAMESPACES);
 
         // copy file to the Delta Directory
         FileUtils.copyFileToDirectory(aFile, this.m_Delta, true);
