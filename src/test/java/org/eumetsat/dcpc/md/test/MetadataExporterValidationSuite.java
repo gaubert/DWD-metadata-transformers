@@ -7,6 +7,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.eumetsat.dcpc.commons.FileSystem;
+import org.eumetsat.dcpc.md.export.CMDRunner;
 import org.eumetsat.dcpc.md.export.MetadataExporter;
 import org.eumetsat.dcpc.md.export.Release;
 import org.eumetsat.dcpc.md.export.ReleaseDatabase;
@@ -26,7 +27,7 @@ public class MetadataExporterValidationSuite extends TestCase
     
     public final static String TEST_DIR = PROJ_DIR + "/src/test/resources";
     
-    public void testScenario1()
+    public void ztestScenario1()
     {
         
         
@@ -232,6 +233,16 @@ public class MetadataExporterValidationSuite extends TestCase
             e.printStackTrace();
             fail("See Exception Stack Trace");
         }
+    }
+    
+    public void testFullTestWithDownload()
+    {
+        String xsltFile           = PROJ_DIR + "/etc/xslt/eum2iso_v4.1.xsl";
+        String [] args = new String[] { "-out", "H:/tmp", "-rdb" , "H:/tmp/RDB" , "-xslt", xsltFile};
+        
+        CMDRunner.main(args);
+        
+        
     }
     
     public static Test suite() 

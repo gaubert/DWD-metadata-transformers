@@ -1,13 +1,20 @@
 package org.eumetsat.dcpc.md.fetcher;
 
+import org.eumetsat.dcpc.commons.Unzipper;
+
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.apache.commons.io.IOUtils;
+import org.eumetsat.dcpc.commons.FileSystem;
+import org.eumetsat.dcpc.md.export.CMDRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -21,14 +28,30 @@ public class ProdNavMDFetcher
     public final static String P1XPATH     = "//div[@id='contentLoginBox']/form";
     public final static String LFILESXPATH = "//div[@class='mainWrapper']/form[@id='EOExportForm']/div[@id='backups']/ul[@class='zip']/li/a";
     public final static String ORIGINALURL = "http://vnavigator.eumetsat.int/discovery/Start/Admin/Quick.do";
+    private File m_WorkingDir;
+    
+    public final static Logger     logger               = LoggerFactory.getLogger(CMDRunner.class);
 
-    public ProdNavMDFetcher()
+    public ProdNavMDFetcher(String aWorkingDirPath) throws IOException
     {
+        FileSystem.createDirs(aWorkingDirPath);
+
+        m_WorkingDir = new File(aWorkingDirPath);
+
     }
 
-    public void fetch(String aOutputPath, File aWorkingDirectory)
-            throws Exception
+    /**
+     * Fetch an export from the product navigator. 
+     * @return OutputDir where the retrieved zip file has been cracked.
+     * @throws Exception
+     */
+    public File fetch() throws Exception
     {
+        logger.info("------------ Export and Download Data from ProdNav ------------");
+        logger.info("This could take few minutes.");
+        
+        File topTempDir = FileSystem.createTempDirectory("download-",this.m_WorkingDir);
+        
         HtmlSubmitInput button;
         HtmlForm form;
         HtmlPage page;
@@ -36,6 +59,8 @@ public class ProdNavMDFetcher
         SortedSet<String> afterSet = new TreeSet<String>();
         List<?> fileList;
         String url2download;
+        
+        
 
         final WebClient webClient = new WebClient();
 
@@ -139,12 +164,16 @@ public class ProdNavMDFetcher
 
         InputStream in = dataPage.getWebResponse().getContentAsStream();
 
-        FileOutputStream fOut = new FileOutputStream(aOutputPath);
+        File destination = new File(topTempDir + File.separator + "downloaded_data.zip");
+        FileOutputStream fOut = new FileOutputStream(destination);
 
         IOUtils.copy(in, fOut);
 
-        System.out.println("Copied in "
-                + new File(aOutputPath).getAbsolutePath());
+        logger.info("Retrieved {} from the Product Navigator.", destination.getName());
+        logger.debug("Full Path {}." + destination.getAbsolutePath());
+        
+        //unzip it there
+        return Unzipper.unzip(destination.getAbsolutePath());
 
     }
 }
