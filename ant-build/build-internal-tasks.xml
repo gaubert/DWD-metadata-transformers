@@ -63,6 +63,7 @@
 		<copy todir="${dir}/conf">
 			<fileset dir="${mdexp.etc}/conf">
 				<include name="log4j.properties"/>
+				<include name="md-exporter.conf"/>
 			</fileset>
 		</copy>
 		
@@ -77,6 +78,7 @@
 		<copy todir="${dir}/bin">
 			<fileset dir="${mdexp.etc}/scripts">
 				<include name="md-exporter"/>
+				<include name="obfuscate"/>
 			</fileset>
 		</copy>
 			
@@ -86,11 +88,16 @@
 			<fileset dir="${mdexp.libs}">
 				<include name="*.jar"/>
 			</fileset>
+			<!-- copy htmlunit deps -->
+			<fileset dir="${mdexp.libs}/htmlunitdeps">
+				<include name="*.jar"/>
+			</fileset>
 		    <!-- produced jars -->
 		    <fileset dir="${mdexp.build}/lib">
 			   <include name="mdexp-export.jar"/>
 			</fileset>
 		</copy>
+	
 		
 		<!-- test data -->
 		<copy todir="${dir}/test">

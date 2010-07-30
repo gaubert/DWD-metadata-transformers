@@ -86,7 +86,7 @@ public class MetadataFileRenamer
                 return name.endsWith(".xml");
             }
         });
-        logger.info("Renaming {} files.", this.oListFiles.length);
+        
     }
     
     /**
@@ -127,6 +127,9 @@ public class MetadataFileRenamer
     {
         String mdName = null;
         File newFile = null;
+        
+        logger.info("Renaming {} files.", this.oListFiles.length);
+        
         for (File file : this.oListFiles)
         {
             mdName = this.extractNameFromXML(file);

@@ -29,7 +29,7 @@ import static java.util.Arrays.asList;
  */
 public class CMDRunner
 {
-    static final String VERSION ="v0.9";
+    static final String VERSION ="v0.9.5";
     
     static boolean DEBUG_ON = false;
     
@@ -68,7 +68,7 @@ public class CMDRunner
         // write usage
         try
         {
-            writer.write("Usage: md-exporter --in <input-dir> --out <output-dir> --rdb <release-database>");
+            writer.write("Usage: md-exporter --out <output-dir> --rdb <release-database> [--in <input-dir>]");
             writer.newLine();
             writer.write("                   [--xslt <xslt-file>] [--workdir <working-dir>]");
             writer.newLine();
@@ -85,11 +85,17 @@ public class CMDRunner
             
             writer.write("Examples:");
             writer.newLine();
-            writer.write("Using the test dir as the source dir and creating the ReleaseDatabase in /tmp/RDB.");
+            writer.write("1) Using the test dir as the source dir and creating the ReleaseDatabase in /tmp/RDB.");
             writer.newLine();
             writer.write("$>./md-exporter --in ../test --out /tmp/res --rdb /tmp/RDB");
             writer.newLine();
             writer.write("Run it twice to see no changes the second time.");
+            writer.newLine();
+            writer.newLine();
+            writer.write("2) Download the data from the Product Navigator and create the Release");
+            writer.newLine();
+            writer.write("$>./md-exporter --out /tmp/res --rdb /tmp/RDB");
+            writer.newLine();
             writer.flush();
             
         }
@@ -108,25 +114,25 @@ public class CMDRunner
     {
        HashMap<String, Object> arguments = new HashMap<String, Object>();   
        
-       OptionSpec<Void> help       = parser.acceptsAll( asList( "h", "help"), "show usage description" );
+       OptionSpec<Void> help       = parser.acceptsAll( asList( "h", "help"), "show usage description." );
        
-       OptionSpec<Void> version    = parser.acceptsAll( asList( "v", "version"), "application version" );
+       OptionSpec<Void> version    = parser.acceptsAll( asList( "v", "version"), "application version." );
        
-       OptionSpec<Void> noxsltT    = parser.acceptsAll( asList( "n", "no-xslt-trans"), "do not perform the xslt transformation" );
+       OptionSpec<Void> noxsltT    = parser.acceptsAll( asList( "n", "no-xslt-trans"), "do not perform the xslt transformation." );
        
-       OptionSpec<Void> nocheck    = parser.acceptsAll( asList( "s", "no-check"), "do not check that files have been transformed" );
+       OptionSpec<Void> nocheck    = parser.acceptsAll( asList( "s", "no-check"), "do not check that files have been transformed." );
               
-       OptionSpec<File> xslt       = parser.acceptsAll( asList( "x", "xslt"), "xslt file" )
+       OptionSpec<File> xslt       = parser.acceptsAll( asList( "x", "xslt"), "xslt file." )
                                           .withRequiredArg()
                                           .ofType( File.class )
                                           .describedAs("xslt file")
                                           .defaultsTo( new File("$MDEXPORTER_HOME/xslt/eum2iso_v4.1.xsl") );
        
-       OptionSpec<File> outdir     = parser.acceptsAll( asList("o", "out"), "output directory")
+       OptionSpec<File> outdir     = parser.acceptsAll( asList("o", "out"), "output directory.")
                                           .withRequiredArg()
                                           .ofType( File.class ).describedAs("output-dir");
        
-       OptionSpec<File> indir      = parser.acceptsAll( asList("i", "in"), "input dir with files to transform" )
+       OptionSpec<File> indir      = parser.acceptsAll( asList("i", "in"), "input dir with files to transform. No  -in forces the tool to download the data from the prod nav." )
                                          .withRequiredArg()
                                          .ofType( File.class ).describedAs("input-dir");
        
@@ -328,10 +334,13 @@ public class CMDRunner
         {
             // delete the temporary directory in any case
             if (TEMP_DIR_DELETION_ON && (workingDir != null) )
+            {
+                CMDRunner.logger.info("------------ Cleaning Working Dir     ----------");
                 FileSystem.deleteDirs(workingDir);
+            }
         }
         
-        
+        System.exit(0);
     }
     
     public static void setDebugInfo()

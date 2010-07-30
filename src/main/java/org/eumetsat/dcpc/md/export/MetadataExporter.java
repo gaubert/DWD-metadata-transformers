@@ -91,80 +91,71 @@ public class MetadataExporter
 
         boolean prettyPrint = true;
 
-        try
+        
+        File tempDir = new File(topTempDir + File.separator + "temp");
+        File xmlDir = new File(tempDir.getAbsolutePath() + File.separator
+                + Release.XML_FILES);
+        File MD5Dir = new File(tempDir.getAbsolutePath() + File.separator
+                + Release.MD5_FILES);
+
+        FileSystem.createDirs(xmlDir);
+        FileSystem.createDirs(MD5Dir);
+
+        if (! m_NoXslt)
         {
-            File tempDir = new File(topTempDir + File.separator + "temp");
-            File xmlDir = new File(tempDir.getAbsolutePath() + File.separator
-                    + Release.XML_FILES);
-            File MD5Dir = new File(tempDir.getAbsolutePath() + File.separator
-                    + Release.MD5_FILES);
+            logger.info("------------ Do XSLT Transformations ------------");
+        
+            // do the transformations
+            XsltProcessor xsltTransformer = new XsltProcessor(
+                    this.m_XsltFilePath, xmlDir);
 
-            FileSystem.createDirs(xmlDir);
-            FileSystem.createDirs(MD5Dir);
+            // do xslt transformation
+            xsltTransformer.processFiles(new File(aMetadataSourcePath),
+                    prettyPrint);
+        }
+        else
+        {
+            FileUtils.copyDirectory(new File(aMetadataSourcePath), xmlDir);
+        }
+        
+        // rename files
+        MetadataFileRenamer rn = new MetadataFileRenamer(xmlDir);
+        
+        // add sanity check to be sure that we are using transformed files
+        // check that the files are XSLT transformed files
+        if (! aNoCheck)
+           rn.doSanityCheck(2);
 
-            if (! m_NoXslt)
-            {
-                logger.info("------------ Do XSLT Transformations ------------");
+        logger.info("------------ Rename Files            ------------");
+        
+        rn.processFiles();
+
+        logger.info("------------ Calculate MD5s          ------------");
+
+        // calculate MD5s
+        calculateMD5s(xmlDir, MD5Dir);
+
+        logger.info("------------ Calculate Delta         ------------");
+
+        // calculate Delta from previous Release
+        Release newRelease = calculateDelta(topTempDir, xmlDir, MD5Dir);
+
+        // move in ReleaseDB if non empty
+        if (newRelease.hasADelta())
+        {
+            Release latest = this.m_ReleaseDB.add(newRelease);
+            logger.info("Created release {} in ReleaseDB.", latest.getName());
             
-                // do the transformations
-                XsltProcessor xsltTransformer = new XsltProcessor(
-                        this.m_XsltFilePath, xmlDir);
-    
-                // do xslt transformation
-                xsltTransformer.processFiles(new File(aMetadataSourcePath),
-                        prettyPrint);
-            }
-            else
+            // expose Delta
+            if (aOutputDir != null)
             {
-                FileUtils.copyDirectory(new File(aMetadataSourcePath), xmlDir);
-            }
-            
-            // rename files
-            MetadataFileRenamer rn = new MetadataFileRenamer(xmlDir);
-            
-            // add sanity check to be sure that we are using transformed files
-            // check that the files are XSLT transformed files
-            if (! aNoCheck)
-               rn.doSanityCheck(2);
-
-            logger.info("------------ Rename Files            ------------");
-            
-            rn.processFiles();
-
-            logger.info("------------ Calculate MD5s          ------------");
-
-            // calculate MD5s
-            calculateMD5s(xmlDir, MD5Dir);
-
-            logger.info("------------ Calculate Delta         ------------");
-
-            // calculate Delta from previous Release
-            Release newRelease = calculateDelta(topTempDir, xmlDir, MD5Dir);
-
-            // move in ReleaseDB if non empty
-            if (newRelease.hasADelta())
-            {
-                Release latest = this.m_ReleaseDB.add(newRelease);
-                logger.info("Created release {} in ReleaseDB.", latest.getName());
-                
-                // expose Delta
-                if (aOutputDir != null)
-                {
-                   logger.info("Export release {} to {}.", latest.getName(), aOutputDir);
-                   latest.exportReleaseDeltaTo(aOutputDir);
-                }
-            }
-            else
-            {
-                logger.info("No new release.");
+               logger.info("Export release {} to {}.", latest.getName(), aOutputDir);
+               latest.exportReleaseDeltaTo(aOutputDir);
             }
         }
-        finally
+        else
         {
-
-            // delete the temporary directory in any case
-            if (TEMP_DIR_DELETION_ON)
-                FileSystem.deleteDirs(topTempDir);
+            logger.info("No new release.");
         }
     }
 

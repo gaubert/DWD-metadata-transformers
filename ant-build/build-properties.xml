@@ -33,7 +33,7 @@
   <property name="mdexp.conf"        value="${mdexp.etc}/conf"/>
 	
   <property name="mdexp.name"         value="md-exporter"/>
-  <property name="mdexp.version"      value="0.9"/>
+  <property name="mdexp.version"      value="0.9.5"/>
 	
 	
   <!-- build file system -->
@@ -50,11 +50,19 @@
     <fileset dir="${mdexp.libs}">
       <include name="*.jar"/>
     </fileset>
+  	<!-- add htmlunit dependencies -->
+  	<fileset dir="${mdexp.libs}/htmlunitdeps">
+  	  	      <include name="*.jar"/>
+  	</fileset>
   </path>
   <!-- class use to execute test.env -->
   <path id="mdexp.test.env">
   	<fileset dir="${mdexp.libs}">
   	      <include name="*.jar"/>
+  	</fileset>
+  	<!-- add htmlunit dependencies -->
+  	<fileset dir="${mdexp.libs}/htmlunitdeps">
+  	  	      <include name="*.jar"/>
   	</fileset>
   	<pathelement path="${mdexp.classes}"/>
   </path>
