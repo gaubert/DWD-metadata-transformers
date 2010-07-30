@@ -8,6 +8,8 @@ import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eumetsat.dcpc.commons.FileSystem;
+import org.eumetsat.dcpc.md.fetcher.ProdNavMDFetcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,6 +39,8 @@ public class CMDRunner
 
     
     static final String LINE_SEP = System.getProperty("line.separator");
+    
+    protected static final boolean TEMP_DIR_DELETION_ON = true;
     
     public static void version(OutputStream aOut)
     {
@@ -163,10 +167,12 @@ public class CMDRunner
            if (options.has(indir))
            {
                arguments.put("in", options.valueOf(indir));
+               arguments.put("download", false);
            }
            else
            {
-               throw new IllegalArgumentException("Error: Need more arguments. " + indir + " option is missing." + CMDRunner.LINE_SEP);
+               //throw new IllegalArgumentException("Error: Need more arguments. " + indir + " option is missing." + CMDRunner.LINE_SEP);
+               arguments.put("download", true);
            }
            
            if (options.has(rdbdir))
@@ -272,19 +278,39 @@ public class CMDRunner
     /**
      * Run the program
      * @param aArguments
+     * @throws IOException 
      */
-    public static void runWith(Map<String, Object> aArguments)
+    public static void runWith(Map<String, Object> aArguments) 
     {
+        //create a temporary working dir for the run
+        // it will be deleted once the run is finished
+        File workingDir = null; 
+        
         try
         {
+            File inDir;
+            
+            workingDir = FileSystem.createTempDirectory("mdexport-run-",((File) aArguments.get("workingdir")));
+            
             MetadataExporter md_Exporter = new MetadataExporter( 
                                                                ((File) aArguments.get("rdb")).getAbsolutePath()
-                                                               , ((File) aArguments.get("workingdir")).getAbsolutePath());
+                                                               , workingDir.getAbsolutePath() );
+            
+            // check if we need to download the data from the portal first
+            if ( ((Boolean) aArguments.get("download")).booleanValue())
+            {
+                ProdNavMDFetcher pNavFetcher = new ProdNavMDFetcher(workingDir.getAbsolutePath());
+                inDir = pNavFetcher.fetch();   
+            }
+            else
+            {
+                inDir = ((File) aArguments.get("in"));
+            }
             
             if ( ! ((Boolean) aArguments.get("noxslt")).booleanValue() )
                 md_Exporter.setXsltFile(((File) aArguments.get("xslt")).getAbsolutePath());
             
-            md_Exporter.createExport( ((File) aArguments.get("in")).getAbsolutePath(), 
+            md_Exporter.createExport( inDir.getAbsolutePath(), 
                                       ((File) aArguments.get("out")).getAbsolutePath(),
                                       ((Boolean) aArguments.get("nocheck")).booleanValue());
         }
@@ -297,6 +323,12 @@ public class CMDRunner
             CMDRunner.logger.debug("Stack Trace of the error",e);
             System.exit(2);
             
+        }
+        finally
+        {
+            // delete the temporary directory in any case
+            if (TEMP_DIR_DELETION_ON && (workingDir != null) )
+                FileSystem.deleteDirs(workingDir);
         }
         
         

@@ -26,6 +26,7 @@
 	<classpathentry kind="lib" path="libs/htmlunitdeps/xalan-2.7.1.jar"/>
 	<classpathentry kind="lib" path="libs/htmlunitdeps/xercesImpl-2.9.1.jar"/>
 	<classpathentry kind="lib" path="libs/htmlunitdeps/xml-apis-1.3.04.jar"/>
+	<classpathentry kind="lib" path="libs/shakra-config-1.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

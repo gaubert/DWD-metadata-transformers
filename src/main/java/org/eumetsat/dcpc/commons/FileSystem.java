@@ -29,15 +29,18 @@ public class FileSystem
         try
         {
             File[] files = path.listFiles();
-            for (int i = 0; i < files.length; ++i)
+            if (files != null)
             {
-                if (files[i].isDirectory())
+                for (int i = 0; i < files.length; ++i)
                 {
-                    deleteDirs(files[i]);
+                    if (files[i].isDirectory())
+                    {
+                        deleteDirs(files[i]);
+                    }
+                    files[i].delete();
                 }
-                files[i].delete();
+                path.delete();
             }
-            path.delete();
         }
         catch (Exception ignored)
         {
