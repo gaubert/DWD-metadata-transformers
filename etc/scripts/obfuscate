@@ -3,6 +3,8 @@
 # (c) Copyright EUMETSAT 2010
 # (a) guillaume.aubert@eumetsat.int
 #
+#  obfuscate util
+#
 ###########################################################
 ## Part 1: You may want to change some of these definitions
 ###########################################################
@@ -13,12 +15,6 @@
 #default value
 _MDEXPORTER_HOME=..
 MDEXPORTER_HOME=${MDEXPORTER_HOME:-$_MDEXPORTER_HOME}
-
-#############################
-## To activate some debugging 
-## set it to yes
-#############################
-MD_DEBUG=no
 
 ########################
 ## Java optional options
@@ -74,14 +70,8 @@ if uname | grep -i cygwin > /dev/null; then
      STARTERPATH=$STARTERPATH";"`cygpath --windows $n`
   done
 
-  #change the path for conf to be windows paths
-  conf=`cygpath --windows $conf`
-
   #change MDEXPORTER_HOME to a win compliant path before to pass as an argument for the VM
   MD_HOME=`cygpath --windows $MDEXPORTER_HOME`
-
-  #issue on windows file:/ must have one slash
-  LOG4J_CONF="file:/$conf/log4j.properties"
 
 else
   # any other unix separator is ;
@@ -91,29 +81,14 @@ else
 
   MD_HOME=$MDEXPORTER_HOME
 
-  #issue on unix file:// must have 2 slashes
-  LOG4J_CONF="file://$conf/log4j.properties"
-fi
-
-###########################
-## check if MD_DEBUG is set
-###########################
-if [ $MD_DEBUG = "yes" -o $MD_DEBUG = "YES" ]; then
- log_debug_level=DEBUG
-else
- log_debug_level=INFO
 fi
 
 
 ###################
 ## Add java options
 ###################
-JAVA_OPTS=$JAVA_OPTS" -Dmd.home=$MD_HOME"
-JAVA_OPTS=$JAVA_OPTS" -Dconfig.path=$conf/md-exporter.conf"
-JAVA_OPTS=$JAVA_OPTS" -Dmd.debug=$MD_DEBUG"
-JAVA_OPTS=$JAVA_OPTS" -Dmd.log.debug=$log_debug_level"
-JAVA_OPTS=$JAVA_OPTS" -Dlog4j.configuration=$LOG4J_CONF"
+#JAVA_OPTS=$JAVA_OPTS" -Dmd.home=$MD_HOME"
 
 
 java $JAVA_OPTS \
-      -cp "$STARTERPATH" org.eumetsat.dcpc.md.export.CMDRunner $*
+      -cp "$STARTERPATH" org.eumetsat.dcpc.commons.Obfuscator $*

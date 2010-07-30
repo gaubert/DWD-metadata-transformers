@@ -21,9 +21,6 @@ public class Unzipper
      */
     public static File unzip(String zipFile) throws ZipException, IOException
     {
-
-        System.out.println(zipFile);
-        ;
         int BUFFER = 2048;
         File file = new File(zipFile);
 

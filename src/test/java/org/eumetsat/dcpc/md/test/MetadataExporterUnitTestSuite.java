@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import junit.framework.TestCase;
 
 import org.eumetsat.dcpc.commons.DateUtil;
+import org.eumetsat.dcpc.commons.Obfuscator;
 import org.eumetsat.dcpc.md.export.XsltProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,5 +80,16 @@ public class MetadataExporterUnitTestSuite extends TestCase
                  // TODO Auto-generated catch block
                  e.printStackTrace();
              }
+    }
+    
+    public void testObfuscation()
+    {
+        String in = "yffffffff";
+        String out;
+        out = Obfuscator.obfuscate(in.trim());
+        
+        out = Obfuscator.deobfuscate(out);
+        
+        assertEquals(in,out);
     }
 }

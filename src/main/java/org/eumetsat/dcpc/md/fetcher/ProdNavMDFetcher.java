@@ -1,5 +1,7 @@
 package org.eumetsat.dcpc.md.fetcher;
 
+import org.eumetsat.dcpc.commons.Obfuscator;
+import org.eumetsat.dcpc.commons.Pair;
 import org.eumetsat.dcpc.commons.Unzipper;
 
 import java.io.File;
@@ -13,6 +15,7 @@ import java.util.TreeSet;
 import org.apache.commons.io.IOUtils;
 import org.eumetsat.dcpc.commons.FileSystem;
 import org.eumetsat.dcpc.md.export.CMDRunner;
+import org.shakra.common.config.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +23,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 
@@ -27,8 +31,9 @@ public class ProdNavMDFetcher
 {
     public final static String P1XPATH     = "//div[@id='contentLoginBox']/form";
     public final static String LFILESXPATH = "//div[@class='mainWrapper']/form[@id='EOExportForm']/div[@id='backups']/ul[@class='zip']/li/a";
-    public final static String ORIGINALURL = "http://vnavigator.eumetsat.int/discovery/Start/Admin/Quick.do";
-    private File m_WorkingDir;
+    private File       m_WorkingDir;
+    private boolean    m_Obfuscated;
+    
     
     public final static Logger     logger               = LoggerFactory.getLogger(CMDRunner.class);
 
@@ -37,7 +42,28 @@ public class ProdNavMDFetcher
         FileSystem.createDirs(aWorkingDirPath);
 
         m_WorkingDir = new File(aWorkingDirPath);
-
+        
+        m_Obfuscated = Config.booleanAt("ProdNavMDFetcher","obfuscated",true);
+    }
+    
+    private Pair<String, String> getCredentials() throws Exception
+    {
+        String log;
+        String pass;
+        
+        if ( (log  = Config.at("ProdNavMDFetcher","login", null)) == null)
+            throw new Exception("Cannot find in the configuration file a login key in the group [ProdNavMDFetcher]");
+        
+        if ( (pass = Config.at("ProdNavMDFetcher","password", null)) == null)
+            throw new Exception("Cannot find in the configuration file a password key in the group [ProdNavMDFetcher]");
+       
+        if (this.m_Obfuscated)
+        {
+            // decode password
+            pass = Obfuscator.deobfuscate(pass);
+        }
+        
+        return new Pair<String, String>(log, pass);
     }
 
     /**
@@ -46,8 +72,8 @@ public class ProdNavMDFetcher
      * @throws Exception
      */
     public File fetch() throws Exception
-    {
-        logger.info("------------ Export and Download Data from ProdNav ------------");
+    {              
+        logger.info("------------ Export Data from ProdNav ----------");
         logger.info("This could take few minutes.");
         
         File topTempDir = FileSystem.createTempDirectory("download-",this.m_WorkingDir);
@@ -55,10 +81,12 @@ public class ProdNavMDFetcher
         HtmlSubmitInput button;
         HtmlForm form;
         HtmlPage page;
+        HtmlInput hInput;
         SortedSet<String> beforeSet = new TreeSet<String>();
         SortedSet<String> afterSet = new TreeSet<String>();
         List<?> fileList;
         String url2download;
+        String url;
         
         
 
@@ -73,9 +101,14 @@ public class ProdNavMDFetcher
         webClient.setActiveXNative(false);
         webClient.setAppletEnabled(false);
         webClient.setPrintContentOnFailingStatusCode(true);
-
+        
+        if ( (url = Config.at("ProdNavMDFetcher", "url", null)) == null)
+            throw new Exception("Cannot find in the configuration file a login key in the group [ProdNavMDFetcher]");
+       
+        logger.debug("Starting URL {}." + url);
+        
         // Get the first page
-        page = webClient.getPage(ORIGINALURL);
+        page = webClient.getPage(url);
 
         // get list of all divs
         List<?> oList = page.getByXPath(P1XPATH);
@@ -83,7 +116,7 @@ public class ProdNavMDFetcher
         if (oList.size() != 1)
         {
             throw new Exception("Error cannot find " + P1XPATH + " in "
-                    + ORIGINALURL);
+                    + url);
         }
 
         // Get the form that we are dealing with and within that form,
@@ -91,14 +124,20 @@ public class ProdNavMDFetcher
         form = (HtmlForm) oList.get(0);
 
         button = form.getInputByName("submit");
+        
+        Pair<String, String> cred = this.getCredentials();
 
         // set login and password
-        form.getInputByName("user").setValueAttribute("aubert");
-        form.getInputByName("password").setValueAttribute("garruk25");
+        // need to be verbose otherwise non supported by java 1.5 (deferencement issue)
+        hInput = form.getInputByName("user");
+        hInput.setValueAttribute(cred.getKey());
+        hInput = form.getInputByName("password");
+        hInput.setValueAttribute(cred.getValue());
 
         // Now submit the form by clicking the button and get back the admin
         // page
-        page = form.getInputByName("submit").click();
+        hInput = form.getInputByName("submit");
+        page = hInput.click();
 
         // check that it is ok
         // System.out.println("Export Page " + page.asText());

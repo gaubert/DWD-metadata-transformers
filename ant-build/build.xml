@@ -135,10 +135,12 @@
   </target>
 	
 	<target name="validation-tests" depends="_compile-classes">
+	   
        <junit haltonerror="true" haltonfailure="true" fork="false" showoutput="true">
        	     <classpath refid="mdexp.test.env"/>
        	     <sysproperty key="project.dir" value=".."/>
-       	     <sysproperty key="log4j.configuration" value="../etc/conf/log4j.properties"/>
+       	     <sysproperty key="log4j.configuration" value="file:../etc/conf/log4j.properties"/>
+       	     <sysproperty key="config.path" value="../etc/conf/md-exporter.conf"/>
              <test name="org.eumetsat.dcpc.md.test.MetadataExporterValidationSuite" />
        </junit>
 		       
