@@ -1,4 +1,4 @@
-package org.eumetsat.dcpc.commons.xml;
+package org.eumetsat.eoportal.dcpc.commons.xml;
 
 import java.io.File;
 

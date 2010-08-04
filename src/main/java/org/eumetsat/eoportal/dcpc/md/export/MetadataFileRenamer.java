@@ -18,16 +18,16 @@
  *   1  Martinez    30/04/2010  Initial version.
  */
 
-package org.eumetsat.dcpc.md.export;
+package org.eumetsat.eoportal.dcpc.md.export;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
-import org.eumetsat.dcpc.commons.DateUtil;
-import org.eumetsat.dcpc.commons.xml.SimpleNamespaceContext;
-import org.eumetsat.dcpc.commons.xml.XPathExtractor;
+import org.eumetsat.eoportal.dcpc.commons.DateUtil;
+import org.eumetsat.eoportal.dcpc.commons.xml.SimpleNamespaceContext;
+import org.eumetsat.eoportal.dcpc.commons.xml.XPathExtractor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,8 +1,5 @@
-package org.eumetsat.dcpc.md.fetcher;
+package org.eumetsat.eoportal.dcpc.md.fetcher;
 
-import org.eumetsat.dcpc.commons.Obfuscator;
-import org.eumetsat.dcpc.commons.Pair;
-import org.eumetsat.dcpc.commons.Unzipper;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,9 +10,12 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.apache.commons.io.IOUtils;
-import org.eumetsat.dcpc.commons.FileSystem;
-import org.eumetsat.dcpc.md.export.CMDRunner;
-import org.shakra.common.config.Config;
+import org.eumetsat.eoportal.dcpc.commons.FileSystem;
+import org.eumetsat.eoportal.dcpc.commons.Obfuscator;
+import org.eumetsat.eoportal.dcpc.commons.Pair;
+import org.eumetsat.eoportal.dcpc.commons.Unzipper;
+import org.eumetsat.eoportal.dcpc.md.export.CMDRunner;
+import org.eumetsat.eoportal.dcpc.commons.conf.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

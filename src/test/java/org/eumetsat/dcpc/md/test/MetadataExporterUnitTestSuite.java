@@ -5,9 +5,9 @@ import java.io.FileOutputStream;
 
 import junit.framework.TestCase;
 
-import org.eumetsat.dcpc.commons.DateUtil;
-import org.eumetsat.dcpc.commons.Obfuscator;
-import org.eumetsat.dcpc.md.export.XsltProcessor;
+import org.eumetsat.eoportal.dcpc.commons.DateUtil;
+import org.eumetsat.eoportal.dcpc.commons.Obfuscator;
+import org.eumetsat.eoportal.dcpc.md.export.XsltProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

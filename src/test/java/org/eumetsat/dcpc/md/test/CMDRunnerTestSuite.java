@@ -1,6 +1,6 @@
 package org.eumetsat.dcpc.md.test;
 
-import org.eumetsat.dcpc.md.export.CMDRunner;
+import org.eumetsat.eoportal.dcpc.md.export.CMDRunner;
 
 import junit.framework.TestCase;
 

@@ -1,4 +1,4 @@
-package org.eumetsat.dcpc.commons;
+package org.eumetsat.eoportal.dcpc.commons;
 
 import java.text.FieldPosition;
 import java.text.SimpleDateFormat;

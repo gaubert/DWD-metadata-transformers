@@ -91,4 +91,4 @@ fi
 
 
 java $JAVA_OPTS \
-      -cp "$STARTERPATH" org.eumetsat.dcpc.commons.Obfuscator $*
+      -cp "$STARTERPATH" org.eumetsat.eoportal.dcpc.commons.Obfuscator $*

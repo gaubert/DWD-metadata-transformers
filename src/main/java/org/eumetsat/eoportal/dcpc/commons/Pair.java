@@ -1,4 +1,4 @@
-package org.eumetsat.dcpc.commons;
+package org.eumetsat.eoportal.dcpc.commons;
 
 public class Pair<TYPEA, TYPEB> implements Comparable<Pair<TYPEA, TYPEB>>
 {

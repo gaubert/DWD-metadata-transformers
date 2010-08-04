@@ -1,4 +1,4 @@
-package org.eumetsat.dcpc.commons;
+package org.eumetsat.eoportal.dcpc.commons;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -31,7 +31,7 @@ public class Obfuscator
     
     public static void usage(OutputStream aOut) throws IOException
     {
-        aOut.write(new String("Usage: obfuscator [-h] string\n\n").getBytes());
+        aOut.write(new String("Usage: obfuscate [-h] string\n\n").getBytes());
         aOut.write(new String("Obfuscate a string (as required for the Product Navigator password).\n\n").getBytes());
         aOut.write(new String("Options:\n").getBytes());
         aOut.write(new String("--------\n").getBytes());

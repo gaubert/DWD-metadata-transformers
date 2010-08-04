@@ -20,7 +20,7 @@
  *   1  Martinez	10/05/2010  Initial version.
  */
 
-package org.eumetsat.dcpc.md.export;
+package org.eumetsat.eoportal.dcpc.md.export;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -45,7 +45,7 @@ import net.sf.saxon.s9api.XsltCompiler;
 import net.sf.saxon.s9api.XsltExecutable;
 import net.sf.saxon.s9api.XsltTransformer;
 
-import org.eumetsat.dcpc.commons.XmlPrettyPrinter;
+import org.eumetsat.eoportal.dcpc.commons.XmlPrettyPrinter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

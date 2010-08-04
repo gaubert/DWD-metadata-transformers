@@ -6,11 +6,11 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.eumetsat.dcpc.commons.FileSystem;
-import org.eumetsat.dcpc.md.export.CMDRunner;
-import org.eumetsat.dcpc.md.export.MetadataExporter;
-import org.eumetsat.dcpc.md.export.Release;
-import org.eumetsat.dcpc.md.export.ReleaseDatabase;
+import org.eumetsat.eoportal.dcpc.commons.FileSystem;
+import org.eumetsat.eoportal.dcpc.md.export.CMDRunner;
+import org.eumetsat.eoportal.dcpc.md.export.MetadataExporter;
+import org.eumetsat.eoportal.dcpc.md.export.Release;
+import org.eumetsat.eoportal.dcpc.md.export.ReleaseDatabase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,4 +1,4 @@
-package org.eumetsat.dcpc.md.export;
+package org.eumetsat.eoportal.dcpc.md.export;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,8 +8,8 @@ import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eumetsat.dcpc.commons.FileSystem;
-import org.eumetsat.dcpc.md.fetcher.ProdNavMDFetcher;
+import org.eumetsat.eoportal.dcpc.commons.FileSystem;
+import org.eumetsat.eoportal.dcpc.md.fetcher.ProdNavMDFetcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -147,6 +147,13 @@ public class CMDRunner
        
        try 
        {
+           // no args passed so print usage and quit in error
+           if (args == null || args.length == 0)
+           {
+               usage(System.out);
+               System.exit(1);
+           }
+           
            OptionSet options = parser.parse(args);
            
            if (options.has(version))
