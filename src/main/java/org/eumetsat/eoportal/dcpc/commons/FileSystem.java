@@ -1,4 +1,4 @@
-package org.eumetsat.dcpc.commons;
+package org.eumetsat.eoportal.dcpc.commons;
 
 import java.io.File;
 import java.io.FileFilter;

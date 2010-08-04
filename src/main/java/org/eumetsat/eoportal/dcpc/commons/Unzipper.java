@@ -1,4 +1,4 @@
-package org.eumetsat.dcpc.commons;
+package org.eumetsat.eoportal.dcpc.commons;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

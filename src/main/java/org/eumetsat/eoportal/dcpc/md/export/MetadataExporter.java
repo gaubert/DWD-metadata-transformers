@@ -1,4 +1,4 @@
-package org.eumetsat.dcpc.md.export;
+package org.eumetsat.eoportal.dcpc.md.export;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,9 +9,9 @@ import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.eumetsat.dcpc.commons.Checksummer;
-import org.eumetsat.dcpc.commons.FileSystem;
-import org.eumetsat.dcpc.commons.Pair;
+import org.eumetsat.eoportal.dcpc.commons.Checksummer;
+import org.eumetsat.eoportal.dcpc.commons.FileSystem;
+import org.eumetsat.eoportal.dcpc.commons.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -266,7 +266,7 @@ public class MetadataExporter
                                 new String[] { key, prev.get(key).getKey(),
                                         curr.get(key).getKey() });
                         
-                        logger.info("{} metadata has been modified", key);
+                        logger.info("{} metadata has been modified.", key);
 
                         // add in newSet
                         newSet.add(key);
@@ -288,7 +288,7 @@ public class MetadataExporter
 
                 // get the basename from curr HashMap
                 basename = curr.get(name).getValue();
-
+                
                 tempRelease.addFileInDeltaResult(new File(aTempXmlDir
                         + File.separator + basename + ".xml"));
             }
@@ -296,6 +296,7 @@ public class MetadataExporter
             // add files in deleted
             for (String name : deletedSet)
             {
+                logger.info("{} metadata has been deleted.", name);
                 tempRelease.flagAsDeleted(name);
             }
         }

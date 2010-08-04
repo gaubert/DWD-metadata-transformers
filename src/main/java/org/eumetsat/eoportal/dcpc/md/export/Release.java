@@ -1,4 +1,4 @@
-package org.eumetsat.dcpc.md.export;
+package org.eumetsat.eoportal.dcpc.md.export;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -11,10 +11,10 @@ import java.util.HashMap;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.eumetsat.dcpc.commons.DateUtil;
-import org.eumetsat.dcpc.commons.FileSystem;
-import org.eumetsat.dcpc.commons.Pair;
-import org.eumetsat.dcpc.commons.xml.XMLInjector;
+import org.eumetsat.eoportal.dcpc.commons.DateUtil;
+import org.eumetsat.eoportal.dcpc.commons.FileSystem;
+import org.eumetsat.eoportal.dcpc.commons.Pair;
+import org.eumetsat.eoportal.dcpc.commons.xml.XMLInjector;
 
 /**
  * Represent a Release

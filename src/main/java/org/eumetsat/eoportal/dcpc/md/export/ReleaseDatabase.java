@@ -1,4 +1,4 @@
-package org.eumetsat.dcpc.md.export;
+package org.eumetsat.eoportal.dcpc.md.export;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,8 +9,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 
-import org.eumetsat.dcpc.commons.DateUtil;
-import org.eumetsat.dcpc.commons.FileSystem;
+import org.eumetsat.eoportal.dcpc.commons.DateUtil;
+import org.eumetsat.eoportal.dcpc.commons.FileSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

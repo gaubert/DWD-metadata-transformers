@@ -116,4 +116,4 @@ JAVA_OPTS=$JAVA_OPTS" -Dlog4j.configuration=$LOG4J_CONF"
 
 
 java $JAVA_OPTS \
-      -cp "$STARTERPATH" org.eumetsat.dcpc.md.export.CMDRunner $*
+      -cp "$STARTERPATH" org.eumetsat.eoportal.dcpc.md.export.CMDRunner $*
