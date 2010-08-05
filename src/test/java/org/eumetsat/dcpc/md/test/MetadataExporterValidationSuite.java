@@ -46,8 +46,9 @@ public class MetadataExporterValidationSuite extends TestCase
         String R6 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R6";
         String R7 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R7";
         
-        
-        
+        System.out.println("*****************************************");
+        System.out.println("********** VALIDATION SCENARIO **********");
+        System.out.println("*****************************************");
         
         try
         {     
@@ -109,9 +110,18 @@ public class MetadataExporterValidationSuite extends TestCase
             // check that 6 new files have been added
             assertEquals("Should have 6 files in the Delta. Check the ReleaseDB content that is in " + releaseDBPath, 6, latestRelease.getDeltaXmlFilenames().size());
             
-            // check that "EO_EUM_DAT_MULT_MAPSSI_currentdate.xml" is in the list of modified files
+            //check that Z_EO_EUM_DAT_GOES_SAE_C_EUMS is amongst the metadata elements
             
-            assertTrue("Bad name (expect something like Z_EO_EUM_DAT_GOES_SAE_C_EUMS_CurrentDate.xml). Check the ReleaseDB content that is in " + releaseDBPath, ((String) latestRelease.getDeltaXmlFilenames().get(0)).startsWith("Z_EO_EUM_DAT_GOES_SAE_C_EUMS_"));
+            boolean ok = false;
+            for (String fnames : latestRelease.getDeltaXmlFilenames())
+            {
+                if (fnames.startsWith("Z_EO_EUM_DAT_GOES_SAE_C_EUMS_"))
+                {
+                    ok = true;
+                }
+            }
+            
+            assertTrue("Bad name (expect something like Z_EO_EUM_DAT_GOES_SAE_C_EUMS_CurrentDate.xml). Check the ReleaseDB content that is in " + releaseDBPath, ok);
             
             // nothing in deleted just modifications
             assertEquals("Should have nothing in delete dir. Check the ReleaseDB content that is in " + releaseDBPath, 0, latestRelease.getDeltaDeletedFilenames().size());
@@ -157,6 +167,12 @@ public class MetadataExporterValidationSuite extends TestCase
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        finally
+        {
+            FileSystem.deleteDirs(releaseDBPath);
+            FileSystem.deleteDirs(workingDir);
+            FileSystem.deleteDirs(outputDir);
+        }
     }
     
     /**
@@ -168,7 +184,11 @@ public class MetadataExporterValidationSuite extends TestCase
         String workingDir         = "/tmp/WorkingDir";
         String outputDir          = "/tmp/OutputDir";
         String R1 = TEST_DIR + File.separatorChar + "scenario-1" + File.separatorChar + "R1";
-       
+        
+        System.out.println("*****************************************");
+        System.out.println("********** SANITYCHECK SCENARIO **********");
+        System.out.println("*****************************************");
+        
         try
         {         
             FileSystem.createDirs(releaseDBPath);
@@ -188,7 +208,7 @@ public class MetadataExporterValidationSuite extends TestCase
         
     }
     
-    public void ztestLargeScaleScenario()
+    public void testLargeScaleScenario()
     {
         String releaseDBPath      = "/tmp/ReleasesDB";
         String workingDir         = "/tmp/WorkingDir";
@@ -196,6 +216,9 @@ public class MetadataExporterValidationSuite extends TestCase
         String source             = PROJ_DIR + "/etc/metadata/eo-portal-metadata";
         String empty              = TEST_DIR + File.separatorChar + "scenario-2" + File.separatorChar + "empty";
         
+        System.out.println("*****************************************");
+        System.out.println("********** LARGESCALE SCENARIO **********");
+        System.out.println("*****************************************");
         
         try
         {         
@@ -219,7 +242,7 @@ public class MetadataExporterValidationSuite extends TestCase
             // Check that this is correct
             Release latestRelease = db.getLatestRelease();
             
-            // We should have 10 files
+            // We should have 350 files
             assertTrue("Should have more than 350 files in Delta. Check the ReleaseDB content that is in " + releaseDBPath, latestRelease.getDeltaXmlFilenames().size() > 350);
             
             System.out.println("********** Create Second Export (empty database) **********");
@@ -230,7 +253,7 @@ public class MetadataExporterValidationSuite extends TestCase
             latestRelease = db.getLatestRelease();
             
             // We should have 359 files deleted
-            assertEquals("Should have more than 350 files in Delta. Check the ReleaseDB content that is in " + releaseDBPath, latestRelease.getDeltaDeletedFilenames().size() > 350);
+            assertTrue("Should have more than 350 files in Delta. Check the ReleaseDB content that is in " + releaseDBPath, latestRelease.getDeltaDeletedFilenames().size() > 350);
             
             db.eraseReleaseDatabase();
         }  
@@ -238,6 +261,12 @@ public class MetadataExporterValidationSuite extends TestCase
         {
             e.printStackTrace();
             fail("See Exception Stack Trace");
+        }
+        finally
+        {
+            // delete ReleaseDB
+            //FileSystem.deleteDirs(releaseDBPath);
+            FileSystem.deleteDirs(workingDir);
         }
     }
     
@@ -247,9 +276,21 @@ public class MetadataExporterValidationSuite extends TestCase
     public void testFullTestWithDownload()
     {
         String xsltFile           = PROJ_DIR + "/etc/xslt/eum2iso_v4.1.xsl";
-        String [] args = new String[] { "-out", "H:/tmp", "-rdb" , "H:/tmp/RDB" , "-xslt", xsltFile};
+        String [] args = new String[] { "-out", "/tmp/out", "-rdb" , "/tmp/RDB" , "-xslt", xsltFile};
         
-        CMDRunner.main(args);
+        System.out.println("*****************************************");
+        System.out.println("*********** DOWNLOAD SCENARIO ***********");
+        System.out.println("*****************************************");
+        
+        try
+        {
+          CMDRunner.main(args);
+        }
+        finally
+        {
+            FileSystem.deleteDirs("/tmp/out");
+            FileSystem.deleteDirs("/tmp/RDB");
+        }
         
         
     }

@@ -18,14 +18,22 @@ import com.ximpleware.XMLModifier;
 
 public class MetadataExporterUnitTestSuite extends TestCase
 {
-    public final static String TEST_DIR = "H:/Dev/ecli-workspace/DWD-metadata-transformers/src/test/resources";
     public final static Logger logger = LoggerFactory.getLogger(MetadataExporterUnitTestSuite.class);
+    
+    public static String PROJ_DIR = null;        
+    static
+    {
+        PROJ_DIR = System.getProperty("project.dir",".");
+        System.out.println("Project dir = " + new File(PROJ_DIR).getAbsolutePath());
+    }
+    
+    public final static String TEST_DIR = PROJ_DIR + "/src/test/resources";
     
     public void testXSLTTransformation()
     {
-        String xsltFile           = "H:/Dev/ecli-workspace/DWD-metadata-transformers/etc/xslt/eum2isoapFull_v4.1.xsl";
-        String file2Transform     = "H:/Dev/ecli-workspace/DWD-metadata-transformers/etc/metadata/eo-portal-metadata/1.xml";
-        String outputDir          = "H:";
+        String xsltFile           = PROJ_DIR + "/etc/xslt/eum2iso_v4.1.xsl";
+        String file2Transform     = PROJ_DIR + "/etc/metadata/eo-portal-metadata/1.xml";
+        String outputDir          = "/tmp";
         
         // do the transformations
         XsltProcessor xsltTransformer;
@@ -50,9 +58,9 @@ public class MetadataExporterUnitTestSuite extends TestCase
         {
             // open a file and read the content into a byte array
             VTDGen vg = new VTDGen();
-            if (vg.parseFile("H:/Z_EO_EUM_DAT_GOES_GWW_C_EUMS_20100512000000.xml", true)){
+            if (vg.parseFile("/tmp/Z_EO_EUM_DAT_GOES_GWW_C_EUMS_20100512000000.xml", true)){
                 VTDNav vn = vg.getNav();
-                File fo = new File("H:/Z_EO_EUM_DAT_GOES_GWW_C_EUMS_20100512000000.xml");
+                File fo = new File("/tmp/Z_EO_EUM_DAT_GOES_GWW_C_EUMS_20100512000000.xml");
                 FileOutputStream fos = new FileOutputStream(fo);
                 AutoPilot ap = new AutoPilot(vn);
                 

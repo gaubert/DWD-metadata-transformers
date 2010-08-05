@@ -6,9 +6,9 @@ import junit.framework.TestCase;
 
 public class CMDRunnerTestSuite extends TestCase
 {
-    public void ztestMissingArguments()
+    public void testMissingArguments()
     {
-        String [] args = new String[] { "-x", "H:/tmp", "-o", "A:/b"};
+        String [] args = new String[] { "-x", "/tmp", "-o", "/b/c"};
         
         try
         {
@@ -26,7 +26,7 @@ public class CMDRunnerTestSuite extends TestCase
     
     public void testWithDownload()
     {
-        String [] args = new String[] { "-out", "H:/tmp", "-rdb" , "H:/tmp/RDB" };
+        String [] args = new String[] { "-out", "/tmp", "-rdb" , "/tmp/RDB" };
         
         CMDRunner.main(args);
         

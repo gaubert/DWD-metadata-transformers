@@ -161,9 +161,9 @@ public class Config
 
     static public void bootStrap()
     {
-        // do nothing (create to forced the Conf object to load the Configuation
+        // do nothing (create to forced the Config object to load the Configuation
         // file)
-        groups();
+        groupNames();
     }
 
     // ~ Constructors
@@ -235,30 +235,7 @@ public class Config
     // ~ Methods
     // ----------------------------------------------------------------
 
-    /**
-     * return key from Group group as a long
-     * 
-     * @param group
-     *            Group
-     * @param key
-     *            key
-     * @param defaultValue
-     *            default value returned if there is no key with such a name in
-     *            the conf file
-     * 
-     * @return the value as a logn
-     */
-    public static long longAt(String group, String key, long defaultValue)
-    {
-        try
-        {
-            return Long.parseLong(_removeDoubleQuote(at(group, key)));
-        }
-        catch (Exception e)
-        {
-            return defaultValue;
-        }
-    }
+    
 
     /**
      * create a new group named group
@@ -282,7 +259,7 @@ public class Config
 
         Hashtable<Object, Object> temp;
 
-        if ((temp = at(group)) == null)
+        if ((temp = getGroup(group)) == null)
         {
             add(group);
             add(group, key, value);
@@ -333,7 +310,7 @@ public class Config
      */
     public static InputStream InputStreamAt(String group, String key)
     {
-        String s = at(group, key);
+        String s = getAsString(group, key);
 
         if (s != null)
         {
@@ -355,6 +332,31 @@ public class Config
         return null;
 
     }
+    
+    /**
+     * return key from Group group as a long
+     * 
+     * @param group
+     *            Group
+     * @param key
+     *            key
+     * @param defaultValue
+     *            default value returned if there is no key with such a name in
+     *            the conf file
+     * 
+     * @return the value as a logn
+     */
+    public static long getAsLong(String group, String key, long defaultValue)
+    {
+        try
+        {
+            return Long.parseLong(_removeDoubleQuote(getAsString(group, key)));
+        }
+        catch (Exception e)
+        {
+            return defaultValue;
+        }
+    }
 
     /**
      * Return the group named group
@@ -362,74 +364,25 @@ public class Config
      * @param group
      *            to be returned
      * 
-     * @return group as a Hashtable
+     * @return group as a Hashtable<Object,Object>
      */
-    public static Hashtable<Object, Object> at(String group)
+    public static Hashtable<Object, Object> getGroup(String group)
     {
         return _groupTable.get(group);
     }
 
     /**
-     * 
-     * @param group
-     * @return
-     */
-    public static String valuesOf(String group)
-    {
-        return valuesOf(at(group));
-    }
-
-    /**
-     * 
-     * @param values
-     * @return
-     */
-    public static String valuesOf(Hashtable<Object, Object> values)
-    {
-        Vector<String> vector = new Vector<String>();
-
-        if (values != null && !values.isEmpty())
-        {
-            Enumeration<Object> keys = values.keys();
-
-            while (keys.hasMoreElements())
-            {
-                String key = (String) keys.nextElement();
-                String value = (String) values.get(key);
-
-                if (value.startsWith("\"") && value.endsWith("\"")
-                        && (value.length() > 1))
-                {
-                    value = value.substring(1, value.length() - 1);
-                }
-
-                vector.add(key + "=\"" + value + "\"");
-            }
-        }
-
-        Collections.sort(vector);
-        String data = new String();
-
-        for (int i = 0; i < vector.size(); i++)
-        {
-            data = data.concat(vector.elementAt(i) + "\n");
-        }
-
-        return data;
-    }
-
-    /**
-     * 
+     * Return the group named group
      * @param group
      * @param defaultValue
-     * @return
+     * @return group as a Hashtable<Object,Object>
      */
-    public static Hashtable<Object, Object> at(String group,
+    public static Hashtable<Object, Object> getGroup(String group,
             Hashtable<Object, Object> defaultValue)
     {
         Hashtable<Object, Object> result;
 
-        return (result = at(group)) == null ? defaultValue : result;
+        return (result = getGroup(group)) == null ? defaultValue : result;
     }
 
     /**
@@ -438,11 +391,11 @@ public class Config
      * @param key
      * @return
      */
-    public static String at(String group, String key)
+    public static String getAsString(String group, String key)
     {
         Hashtable<Object, Object> temp;
 
-        if (((temp = at(group)) != null) && temp.containsKey(key))
+        if (((temp = getGroup(group)) != null) && temp.containsKey(key))
         {
             return (String) temp.get(key);
         }
@@ -457,11 +410,11 @@ public class Config
      * @param defaultValue
      * @return
      */
-    public static String at(String group, String key, String defaultValue)
+    public static String getAsString(String group, String key, String defaultValue)
     {
         String value;
 
-        if ((value = at(group, key)) == null)
+        if ((value = getAsString(group, key)) == null)
         {
             return defaultValue;
         }
@@ -470,12 +423,12 @@ public class Config
     }
 
     /**
-     * 
-     * @return
+     * return group names
+     * @return group names in a Vector
      */
-    public static Vector<Object> groups()
+    public static Vector<String> groupNames()
     {
-        Vector<Object> temp = new Vector<Object>();
+        Vector<String> temp = new Vector<String>();
         Enumeration<String> e = _groupTable.keys();
 
         while (e.hasMoreElements())
@@ -484,73 +437,7 @@ public class Config
         return temp;
     }
 
-    /**
-     * 
-     * @param group
-     * @return
-     */
-    public static Hashtable<Object, Object> valuesAt(String group)
-    {
-        Hashtable<Object, Object> response = new Hashtable<Object, Object>();
-        Hashtable<Object, Object> temp;
-
-        if ((temp = at(group)) != null)
-        {
-            Enumeration<Object> e = temp.keys();
-
-            while (e.hasMoreElements())
-            {
-                String name = (String) e.nextElement();
-                response.put(name, valuesAt(group, name));
-            }
-        }
-
-        return response;
-    }
-
-    /**
-     * 
-     * @param group
-     * @param key
-     * @return
-     */
-    public static Vector<String> valuesAt(String group, String key)
-    {
-        Vector<String> params = null;
-        String values;
-
-        if ((values = at(group, key)) != null)
-        {
-            params = new Vector<String>();
-
-            StringTokenizer tokens = new StringTokenizer(values, ",");
-
-            while (tokens.hasMoreElements())
-                params.addElement(tokens.nextToken());
-        }
-
-        return params;
-    }
-
-    /**
-     * 
-     * @param group
-     * @param key
-     * @return
-     */
-    public static String[] stringsAt(String group, String key)
-    {
-        Vector<String> vector = valuesAt(group, key);
-        String[] result = null;
-
-        if (vector != null)
-        {
-            result = new String[vector.size()];
-            vector.copyInto(result);
-        }
-
-        return result;
-    }
+   
 
     /**
      * transform the comma separated params in a Set
@@ -623,7 +510,7 @@ public class Config
     {
         try
         {
-            String bool = _removeDoubleQuote(at(group, key)).toLowerCase();
+            String bool = _removeDoubleQuote(getAsString(group, key)).toLowerCase();
             return bool.equals("true") || bool.equals("yes");
         }
         catch (Exception e)
@@ -644,7 +531,7 @@ public class Config
     {
         String command;
 
-        if ((command = Config.at(group, key)) == null)
+        if ((command = Config.getAsString(group, key)) == null)
         {
             return null;
         }
@@ -694,7 +581,7 @@ public class Config
         for (int i = 0; i < _exports.size(); i++)
         {
             String group = (String) _exports.elementAt(i);
-            exports.put(group, at(group));
+            exports.put(group, getGroup(group));
         }
 
         return exports;
@@ -726,16 +613,123 @@ public class Config
      * @param defaultValue
      * @return
      */
-    public static int intAt(String group, String key, int defaultValue)
+    public static int getIntAs(String group, String key, int defaultValue)
     {
         try
         {
-            return Integer.parseInt(_removeDoubleQuote(at(group, key)));
+            return Integer.parseInt(_removeDoubleQuote(getAsString(group, key)));
         }
         catch (Exception e)
         {
             return defaultValue;
         }
+    }
+    
+    /**
+     * 
+     * @param group
+     * @param key
+     * @param defaultValue
+     * @return
+     */
+    public static short getAsShort(String group, String key, short defaultValue)
+    {
+        try
+        {
+            return Short.parseShort(_removeDoubleQuote(getAsString(group, key)));
+        }
+        catch (Exception e)
+        {
+            return defaultValue;
+        }
+    }
+    
+    /**
+     * Return the non empty string or null if empty
+     * @param group
+     * @param key
+     * @return non empty string or null if empty
+     */
+    public static String notEmptyStringAt(String group, String key)
+    {
+        String value;
+
+        if (((value = getAsString(group, key)) != null) && (value.length() > 0))
+        {
+            return value;
+        }
+
+        return null;
+    }
+
+    /**
+     * Return the non empty string or else the default value
+     * @param group
+     * @param key
+     * @param defaultValue
+     * @return
+     */
+    public static String notEmptyStringAt(String group, String key,
+            String defaultValue)
+    {
+        String value;
+
+        if (((value = getAsString(group, key)) != null) && (value.length() > 0))
+        {
+            return value;
+        }
+
+        return defaultValue;
+    }
+    
+    /**
+     * 
+     * @param group
+     * @return
+     */
+    @SuppressWarnings("unused")
+    private static String valuesOf(String group)
+    {
+        return valuesOf(getGroup(group));
+    }
+
+    /**
+     * 
+     * @param values
+     * @return
+     */
+    private static String valuesOf(Hashtable<Object, Object> values)
+    {
+        Vector<String> vector = new Vector<String>();
+
+        if (values != null && !values.isEmpty())
+        {
+            Enumeration<Object> keys = values.keys();
+
+            while (keys.hasMoreElements())
+            {
+                String key = (String) keys.nextElement();
+                String value = (String) values.get(key);
+
+                if (value.startsWith("\"") && value.endsWith("\"")
+                        && (value.length() > 1))
+                {
+                    value = value.substring(1, value.length() - 1);
+                }
+
+                vector.add(key + "=\"" + value + "\"");
+            }
+        }
+
+        Collections.sort(vector);
+        String data = new String();
+
+        for (int i = 0; i < vector.size(); i++)
+        {
+            data = data.concat(vector.elementAt(i) + "\n");
+        }
+
+        return data;
     }
 
     /**
@@ -756,23 +750,55 @@ public class Config
         return value;
     }
 
+   
+    
+    /**
+     * 
+     * @param group
+     * @return
+     */
+    @SuppressWarnings("unused")
+    private static Hashtable<Object, Object> valuesAt(String group)
+    {
+        Hashtable<Object, Object> response = new Hashtable<Object, Object>();
+        Hashtable<Object, Object> temp;
+
+        if ((temp = getGroup(group)) != null)
+        {
+            Enumeration<Object> e = temp.keys();
+
+            while (e.hasMoreElements())
+            {
+                String name = (String) e.nextElement();
+                response.put(name, valuesAt(group, name));
+            }
+        }
+
+        return response;
+    }
+
     /**
      * 
      * @param group
      * @param key
-     * @param defaultValue
      * @return
      */
-    public static short shortAt(String group, String key, short defaultValue)
+    private static Vector<String> valuesAt(String group, String key)
     {
-        try
+        Vector<String> params = null;
+        String values;
+
+        if ((values = getAsString(group, key)) != null)
         {
-            return Short.parseShort(_removeDoubleQuote(at(group, key)));
+            params = new Vector<String>();
+
+            StringTokenizer tokens = new StringTokenizer(values, ",");
+
+            while (tokens.hasMoreElements())
+                params.addElement(tokens.nextToken());
         }
-        catch (Exception e)
-        {
-            return defaultValue;
-        }
+
+        return params;
     }
 
     /**
@@ -909,43 +935,7 @@ public class Config
         }
     }
 
-    /**
-     * 
-     * @param group
-     * @param key
-     * @return
-     */
-    public static String notEmptyStringAt(String group, String key)
-    {
-        String value;
-
-        if (((value = at(group, key)) != null) && (value.length() > 0))
-        {
-            return value;
-        }
-
-        return null;
-    }
-
-    /**
-     * 
-     * @param group
-     * @param key
-     * @param defaultValue
-     * @return
-     */
-    public static String notEmptyStringAt(String group, String key,
-            String defaultValue)
-    {
-        String value;
-
-        if (((value = at(group, key)) != null) && (value.length() > 0))
-        {
-            return value;
-        }
-
-        return defaultValue;
-    }
+   
 
     /**
      * 
@@ -958,7 +948,7 @@ public class Config
         if (force
                 || System.getProperty(_FQCN + "debug", "false").equals("true"))
         {
-            System.err.println("Conf: " + message);
+            System.err.println("Config: " + message);
 
             if (e != null)
             {
@@ -974,7 +964,7 @@ public class Config
      * @param value
      * @return
      */
-    public static String getValue(String value)
+    private static String getValue(String value)
     {
         if (value == null)
         {
@@ -1003,7 +993,7 @@ public class Config
                                         .length() > 2)) ? callMethod(toResolv
                                         .substring(1, toResolv.length() - 2))
                                         : ("${" + toResolv.substring(1) + "}")))
-                                : (((at = at(toResolv.substring(1, index),
+                                : (((at = getAsString(toResolv.substring(1, index),
                                         toResolv.substring(index + 1, toResolv
                                                 .length() - 1))) != null) ? at
                                         : "${" + toResolv.substring(1) + "}"))
@@ -1020,7 +1010,7 @@ public class Config
      * @return
      */
     @SuppressWarnings("unchecked")
-    public static String callMethod(String name)
+    private static String callMethod(String name)
     {
         int index = name.lastIndexOf(".");
 
@@ -1073,7 +1063,7 @@ public class Config
         /**
          * 
          */
-        public void destroy()
+        public void shutdown()
         {
             _run = false;
         }

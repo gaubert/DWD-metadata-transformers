@@ -33,6 +33,7 @@
      		     includeJavaRuntime="${javac.include.java.runtime}"
      		     failonerror="${javac.fail.onerror}"
      	  	includeantruntime="off">
+     	      <compilerarg line="-Xlint:deprecation"/>
      		  <src path="${mdexp.src}"/>
      		  <classpath refid="mdexp.classpath"/>
      	   </javac>
@@ -104,6 +105,27 @@
 		    <!-- some xml files -->
 			<fileset dir="${mdexp.src}/test/resources/scenario-1/R1">
 				<include name="*.xml"/>
+			</fileset>
+			<fileset dir="${mdexp.src}/test/resources/scenario-1/R2">
+				<include name="*.xml"/>
+			</fileset>
+			<fileset dir="${mdexp.src}/test/resources/scenario-1/R3">
+				<include name="*.xml"/>
+			</fileset>
+			<fileset dir="${mdexp.src}/test/resources/scenario-1/R4">
+				<include name="*.xml"/>
+			</fileset>
+			<fileset dir="${mdexp.src}/test/resources/scenario-1/R5">
+				<include name="*.xml"/>
+			</fileset>
+			<fileset dir="${mdexp.src}/test/resources/scenario-1/R6">
+					<include name="*.xml"/>
+			</fileset>
+			<fileset dir="${mdexp.src}/test/resources/scenario-1/R7">
+				<include name="*.xml"/>
+			</fileset>
+			<fileset dir="${mdexp.src}/test/resources/scenario-2/empty">
+					<include name="*"/>
 			</fileset>
 		</copy>
 		
