@@ -51,10 +51,10 @@ public class ProdNavMDFetcher
         String log;
         String pass;
         
-        if ( (log  = Config.at("ProdNavMDFetcher","login", null)) == null)
+        if ( (log  = Config.getAsString("ProdNavMDFetcher","login", null)) == null)
             throw new Exception("Cannot find in the configuration file a login key in the group [ProdNavMDFetcher]");
         
-        if ( (pass = Config.at("ProdNavMDFetcher","password", null)) == null)
+        if ( (pass = Config.getAsString("ProdNavMDFetcher","password", null)) == null)
             throw new Exception("Cannot find in the configuration file a password key in the group [ProdNavMDFetcher]");
        
         if (this.m_Obfuscated)
@@ -102,7 +102,7 @@ public class ProdNavMDFetcher
         webClient.setAppletEnabled(false);
         webClient.setPrintContentOnFailingStatusCode(true);
         
-        if ( (url = Config.at("ProdNavMDFetcher", "url", null)) == null)
+        if ( (url = Config.getAsString("ProdNavMDFetcher", "url", null)) == null)
             throw new Exception("Cannot find in the configuration file a login key in the group [ProdNavMDFetcher]");
        
         logger.debug("Starting URL {}." + url);

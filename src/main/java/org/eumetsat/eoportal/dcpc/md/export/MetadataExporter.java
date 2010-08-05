@@ -191,6 +191,29 @@ public class MetadataExporter
             Checksummer.doMD5Checksum(file, new File(outputFilename));
         }
     }
+    
+    /**
+     * Used to print the different created, modified and deleted files
+     * @param aMsg
+     * @param aNbFile
+     */
+    private void cleverPrinting(String aMsg,int aNbFile)
+    {
+       // print only the first 10 files after it is too much 
+        if (aNbFile < 10)
+        {
+          logger.info(aMsg);
+        }
+        else if (aNbFile == 10)
+        {
+          logger.info("Too many files. Stop polluting the output.");   
+          logger.debug(aMsg);
+        }
+        else
+        {
+           logger.debug(aMsg);
+        }
+    }
 
     /**
      * generate the delta dataset that will be exported to the GISC
@@ -220,6 +243,14 @@ public class MetadataExporter
         {
             // Copy XML into Delta/Result
             tempRelease.addInDeltaResult(aTempXmlDir);
+            
+            int         nbCreated  = 0;
+            for (String filename : tempRelease.getDeltaXmlFilenames())
+            {
+                this.cleverPrinting(Release.getIDFromReleaseFile(filename) + " metadata is new.", nbCreated);
+                
+                nbCreated++;
+            }
         }
         else
         {
@@ -229,9 +260,12 @@ public class MetadataExporter
             HashMap<String, Pair<String, String>> curr = tempRelease
                     .getSrcMD5s();
 
-            Set<String> currSet = new HashSet<String>();
+            Set<String> currSet    = new HashSet<String>();
             Set<String> deletedSet = new HashSet<String>();
-            Set<String> newSet = new HashSet<String>();
+            Set<String> newSet     = new HashSet<String>();
+            int         nbDeleted  = 0;
+            int         nbCreated  = 0;
+            int         nbModified = 0;
 
             /*
              * calculate the delta It is important to understand that the UID is
@@ -266,12 +300,16 @@ public class MetadataExporter
                                 new String[] { key, prev.get(key).getKey(),
                                         curr.get(key).getKey() });
                         
-                        logger.info("{} metadata has been modified.", key);
-
-                        // add in newSet
+                        this.cleverPrinting(key + " metadata has been modified.", nbModified);
+                        
+                        nbModified++;
+                        
+                        // add in newSet because it has been modified
                         newSet.add(key);
+                        
+                        
                     }
-
+                    
                     // remove from currSet in any case
                     currSet.remove(key);
                 }
@@ -279,6 +317,14 @@ public class MetadataExporter
 
             // elems left in currSet are new and need to be added to newSet
             newSet.addAll(currSet);
+            
+            // print elems left in currSet which are the new ones
+            for (String name : currSet)
+            {
+                this.cleverPrinting(name + " metadata is new.", nbCreated);
+                
+                nbCreated++;
+            }
 
             String basename;
             // copy newSet in Delta/Files
@@ -296,8 +342,14 @@ public class MetadataExporter
             // add files in deleted
             for (String name : deletedSet)
             {
-                logger.info("{} metadata has been deleted.", name);
+                this.cleverPrinting(name + " metadata has been deleted.", nbDeleted);
+                nbDeleted++;
                 tempRelease.flagAsDeleted(name);
+            }
+            
+            if (nbCreated+nbModified+nbDeleted != 0)
+            {
+              logger.info("Delta Summary: " + nbCreated + " new - " + nbModified + " modified - " + nbDeleted + " deleted.");
             }
         }
 

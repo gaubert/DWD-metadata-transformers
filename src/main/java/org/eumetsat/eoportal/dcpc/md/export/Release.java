@@ -15,6 +15,8 @@ import org.eumetsat.eoportal.dcpc.commons.DateUtil;
 import org.eumetsat.eoportal.dcpc.commons.FileSystem;
 import org.eumetsat.eoportal.dcpc.commons.Pair;
 import org.eumetsat.eoportal.dcpc.commons.xml.XMLInjector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Represent a Release
@@ -51,7 +53,9 @@ public class Release
 
     // Deleted file
     protected File             m_Deleted;
-    private   String m_Name;
+    private   String           m_Name;
+    
+    public final static Logger     logger               = LoggerFactory.getLogger(Release.class);
 
     /**
      * Create a Release directory and its underneath structure
@@ -80,6 +84,26 @@ public class Release
     {
         FileUtils.deleteDirectory(aRelease.getRootDir());
     }
+    
+    public static String getIDFromReleaseFile(String aFilename)
+    {
+        try
+        {
+            File f = new File(aFilename);
+            String[] shards = f.getName().split("C_EUMS");
+        
+            return shards[0].substring(2);
+        }
+        catch(Throwable e)
+        {
+            //in case of error log it and return the aFilename as it isn't curcial
+            logger.debug(aFilename);
+        }
+        
+        return aFilename;
+          
+    }
+    
 
     /**
      * Constructor
@@ -364,6 +388,8 @@ public class Release
     public ArrayList<String> getDeltaDeletedFilenames() throws Exception
     {
         ArrayList<String> result = new ArrayList<String>();
+        
+        logger.debug("Look for deleted files in {}", m_Deleted.getAbsolutePath());
 
         if (m_Deleted.exists())
         {
@@ -382,6 +408,8 @@ public class Release
             }
 
         }
+        
+        logger.debug("Found {} deleted files",result.size());
 
         return result;
     }

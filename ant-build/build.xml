@@ -137,6 +137,7 @@
 	<target name="validation-tests" depends="_compile-classes">
 	   
        <junit haltonerror="true" haltonfailure="true" fork="false" showoutput="true">
+       	     <formatter type="brief" usefile="false"/>
        	     <classpath refid="mdexp.test.env"/>
        	     <sysproperty key="project.dir" value=".."/>
        	     <sysproperty key="log4j.configuration" value="file:../etc/conf/log4j.properties"/>
@@ -150,8 +151,7 @@
   <!-- Cleaning                                                           -->
   <!-- ================================================================== -->
   <target name="clean-all">
-  	<antcall target="clean"></antcall>
-    <delete dir="${mdexp.tar}"/> 
+  	<antcall target="clean"/>
   </target>
   
   <target name="clean">
@@ -161,6 +161,7 @@
     <delete dir="${mdexp.lib}"/>
     <delete dir="${mdexp.run}"/>
     <delete dir="${mdexp.log}"/>
+  	<delete dir="${mdexp.tar}"/> 
     <delete dir="${mdexp.audit}"/>
   	<delete dir="${mdexp.war}"/>
   	<delete dir="${mdexp.sar}"/>
