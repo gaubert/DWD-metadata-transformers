@@ -6,4 +6,4 @@ rem
 rem Copyright (c) 2010 EUMETSAT  All Rights Reserved
 rem -------------------------------------------------------------------------
 
-..\bin\ant.bat %1
+.\etc\bin\ant.bat %1

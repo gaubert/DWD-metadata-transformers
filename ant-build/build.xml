@@ -67,7 +67,7 @@
   <!-- =================================================================== -->
   <!-- make bin-distribution                                               -->
   <!-- =================================================================== -->
-  <target name="build-bin-tarball" depends="">
+  <target name="build-bin-tarball" depends="clean">
 		
 		
 		<!-- create the root directory for this release -->
