@@ -27,6 +27,7 @@
   
   <!-- global file system -->
   <property name="mdexp.build"       value="build"/>
+  <property name="mdexp.ant-build"   value="ant-build"/>
   <property name="mdexp.etc"         value="etc"/>
   <property name="mdexp.libs"        value="libs"/>
   <property name="mdexp.src"         value="src"/>

@@ -63,7 +63,7 @@ public class MetadataExporterValidationSuite extends TestCase
             ReleaseDatabase db = exporter.getReleaseDatabase();
             
             // clean DB at the beginning of the scenario
-            //db.eraseReleaseDatabase();
+            db.eraseReleaseDatabase();
             
             System.out.println("********** Create Export from R1: (add 10 files) **********");
             
@@ -176,6 +176,24 @@ public class MetadataExporterValidationSuite extends TestCase
     }
     
     /**
+     * Largescale scenario with download from the portal
+     */
+    public void testFullTestWithDownload()
+    {
+        String xsltFile           = PROJ_DIR + "/etc/xslt/eum2iso_v4.1.xsl";
+        String [] args = new String[] { "-out", "/tmp/md-exporter-download-sc/out", "-rdb" , "/tmp/md-exporter-download-sc/RDB" , "-xslt", xsltFile};
+        
+        System.out.println("*****************************************");
+        System.out.println("*********** DOWNLOAD SCENARIO ***********");
+        System.out.println("*****************************************");
+        
+        
+        System.out.println("Please Clean the working Directory /tmp/md-exporter-download-sc");
+        CMDRunner.main(args);  
+        
+    }
+    
+    /**
      * Failing sanity check
      */
     public void testScenario3()
@@ -197,12 +215,21 @@ public class MetadataExporterValidationSuite extends TestCase
             
             MetadataExporter exporter = new MetadataExporter(releaseDBPath, workingDir);
             
+            exporter.getReleaseDatabase();
+            
             exporter.createExport(R1, outputDir, false);  
             fail("The sanity check should fail");
         }
         catch(Exception e)
         {
             assertTrue("The sanity check should fail but another error occured.", e.getMessage().contains(" doesn't seem to be a transformed file. Please check"));
+        }
+        finally
+        {
+            // delete ReleaseDB
+            FileSystem.deleteDirs(releaseDBPath);
+            FileSystem.deleteDirs(workingDir);
+            FileSystem.deleteDirs(outputDir);
         }
         
         
@@ -265,34 +292,9 @@ public class MetadataExporterValidationSuite extends TestCase
         finally
         {
             // delete ReleaseDB
-            //FileSystem.deleteDirs(releaseDBPath);
+            FileSystem.deleteDirs(releaseDBPath);
             FileSystem.deleteDirs(workingDir);
         }
-    }
-    
-    /**
-     * Largescale scenario with download from the portal
-     */
-    public void testFullTestWithDownload()
-    {
-        String xsltFile           = PROJ_DIR + "/etc/xslt/eum2iso_v4.1.xsl";
-        String [] args = new String[] { "-out", "/tmp/out", "-rdb" , "/tmp/RDB" , "-xslt", xsltFile};
-        
-        System.out.println("*****************************************");
-        System.out.println("*********** DOWNLOAD SCENARIO ***********");
-        System.out.println("*****************************************");
-        
-        try
-        {
-          CMDRunner.main(args);
-        }
-        finally
-        {
-            FileSystem.deleteDirs("/tmp/out");
-            FileSystem.deleteDirs("/tmp/RDB");
-        }
-        
-        
     }
     
     public static Test suite() 

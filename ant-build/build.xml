@@ -67,7 +67,7 @@
   <!-- =================================================================== -->
   <!-- make bin-distribution                                               -->
   <!-- =================================================================== -->
-  <target name="build-bin-tarball" depends="clean">
+  <target name="build-bin-tarball" depends="">
 		
 		
 		<!-- create the root directory for this release -->
@@ -117,6 +117,9 @@
                
 		<!-- build a tar -->
         <tar tarfile="${mdexp.tar}/${mdexp.name}-v${mdexp.version}-src.tar" longfile="gnu">
+        	  <tarfileset dir="${mdexp.ant-build}" mode="740">
+        		<include name="${mdexp.ant-build}/build"/>
+        	  </tarfileset>
 		      <tarfileset dir=".">
 		        <exclude name="build/**"/>
 		      	<exclude name=".git/**"/>
