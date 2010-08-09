@@ -19,6 +19,7 @@
 	  <mkdir dir="${mdexp.classes}"/>
 	  <mkdir dir="${mdexp.lib}"/>
 	  <mkdir dir="${mdexp.dist}"/>
+	  <mkdir dir="${mdexp.tar}}"/>
 	</target>
   
   <!-- =================================================================== -->
