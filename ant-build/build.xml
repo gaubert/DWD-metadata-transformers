@@ -145,7 +145,7 @@
        	     <sysproperty key="project.dir" value=".."/>
        	     <sysproperty key="log4j.configuration" value="file:../etc/conf/log4j.properties"/>
        	     <sysproperty key="config.path" value="../etc/conf/md-exporter.conf"/>
-             <test name="org.eumetsat.dcpc.md.test.MetadataExporterValidationSuite" />
+             <test name="org.eumetsat.eoportal.dcpc.md.test.MetadataExporterValidationSuite" />
        </junit>
 		       
 </target>
