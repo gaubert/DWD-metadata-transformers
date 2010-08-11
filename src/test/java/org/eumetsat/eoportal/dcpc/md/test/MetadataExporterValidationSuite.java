@@ -254,6 +254,7 @@ public class MetadataExporterValidationSuite extends TestCase
         {         
             FileSystem.createDirs(releaseDBPath);
             FileSystem.createDirs(workingDir);
+            FileSystem.createDirs(empty);
             
             MetadataExporter exporter = new MetadataExporter(releaseDBPath, workingDir);
             

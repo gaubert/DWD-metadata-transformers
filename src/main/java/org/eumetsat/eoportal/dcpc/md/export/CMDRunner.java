@@ -29,7 +29,7 @@ import static java.util.Arrays.asList;
  */
 public class CMDRunner
 {
-    static final String VERSION ="v0.9.7";
+    static final String VERSION ="v0.9.8";
     
     static boolean DEBUG_ON = false;
     
@@ -116,7 +116,7 @@ public class CMDRunner
        
        OptionSpec<Void> help       = parser.acceptsAll( asList( "h", "help"), "show usage description." );
        
-       OptionSpec<Void> version    = parser.acceptsAll( asList( "v", "version"), "application version." );
+       OptionSpec<Void> version    = parser.acceptsAll( asList( "v", "version"), "Display version number only." );
        
        OptionSpec<Void> noxsltT    = parser.acceptsAll( asList( "n", "no-xslt-trans"), "do not perform the xslt transformation." );
        
@@ -159,6 +159,7 @@ public class CMDRunner
            if (options.has(version))
            {
                version(System.out);
+               System.exit(0);
            }
            
            if (options.has(help))
