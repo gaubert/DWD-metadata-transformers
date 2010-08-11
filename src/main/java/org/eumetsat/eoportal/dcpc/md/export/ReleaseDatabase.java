@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 
+import org.apache.commons.io.FileUtils;
 import org.eumetsat.eoportal.dcpc.commons.DateUtil;
 import org.eumetsat.eoportal.dcpc.commons.FileSystem;
 import org.slf4j.Logger;
@@ -28,7 +29,7 @@ public class ReleaseDatabase
 
     public ReleaseDatabase(String aReleaseDBRootDirPath) throws Exception
     {
-        m_ReleaseDBRootDirPath = aReleaseDBRootDirPath;
+        m_ReleaseDBRootDirPath = new File(aReleaseDBRootDirPath).getAbsolutePath();
 
         _loadDB();
     }
@@ -217,10 +218,12 @@ public class ReleaseDatabase
     {
         File inDBReleaseName = new File(ReleaseDatabase
                 .inquireNewReleasePathIn(this.m_ReleaseDBRootDirPath));
+        
+        logger.debug("inDBReleaseName = " + inDBReleaseName.getAbsolutePath());
+        
+        logger.debug("release root dir =" + aRelease.getRootDir());
 
-        if (!aRelease.getRootDir().renameTo(inDBReleaseName))
-            throw new Exception("Could not add the Release"
-                    + aRelease.getName() + " in the Database");
+        FileUtils.moveDirectory(aRelease.getRootDir(), inDBReleaseName);
 
         // add the new Release in the list of R and in its associated index
         Release inDBRelease = new Release(inDBReleaseName);

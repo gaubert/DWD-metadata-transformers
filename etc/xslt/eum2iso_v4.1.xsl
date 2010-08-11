@@ -8,6 +8,10 @@
 
   <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no"/>
   
+  <!-- parameters passed to the XSLT -->
+  <xsl:param name="portal_url"/>
+  <xsl:param name="identifier_prefix"/>
+  
   <!-- constant version of xslt program -->
   <xsl:variable name="version" select='"4.1-20100722-10h20m32s"' />
   
@@ -30,7 +34,7 @@
 
   <!-- modify the fileIdentifier to build the wmo identifier -->
   <xsl:template match="gmd:fileIdentifier/gco:CharacterString">
-	    <xsl:element name="gco:{local-name()}">urn:x-wmo:md:int.eumetsat::<xsl:value-of select="normalize-space(.)"/></xsl:element>
+	    <xsl:element name="gco:{local-name()}"><xsl:value-of select="$identifier_prefix"/><xsl:value-of select="normalize-space(.)"/></xsl:element>
   </xsl:template>
   
   <!-- Add content hierarchyLevelName after <gmd:hierarchyLevel> -->
@@ -45,7 +49,7 @@
         <gmd:onLine>
           <gmd:CI_OnlineResource>
             <gmd:linkage>
-              <gmd:URL>http://vnavigator.eumetsat.int/discovery/Start/Explore/DirectExtended.do?EOResourceIdentifier=<xsl:value-of select="//gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code/gco:CharacterString"/></gmd:URL>
+              <gmd:URL><xsl:value-of select="$portal_url"/>=<xsl:value-of select="//gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code/gco:CharacterString"/></gmd:URL>
             </gmd:linkage>
             <gmd:protocol>
               <gco:CharacterString>http</gco:CharacterString>

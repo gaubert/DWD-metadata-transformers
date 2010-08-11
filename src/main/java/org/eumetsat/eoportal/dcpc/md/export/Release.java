@@ -14,6 +14,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.eumetsat.eoportal.dcpc.commons.DateUtil;
 import org.eumetsat.eoportal.dcpc.commons.FileSystem;
 import org.eumetsat.eoportal.dcpc.commons.Pair;
+import org.eumetsat.eoportal.dcpc.commons.conf.Config;
 import org.eumetsat.eoportal.dcpc.commons.xml.XMLInjector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -286,7 +287,7 @@ public class Release
         // Seek to end of file
         deleted.seek(m_Deleted.length());
 
-        deleted.writeBytes(aFileIdentifier + "\n");
+        deleted.writeBytes(Config.getAsString("XSLT", "identifier_prefix","urn:x-wmo:md:int.eumetsat::")+ aFileIdentifier + "\n");
         deleted.close();
     }
 

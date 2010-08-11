@@ -46,6 +46,7 @@ import net.sf.saxon.s9api.XsltExecutable;
 import net.sf.saxon.s9api.XsltTransformer;
 
 import org.eumetsat.eoportal.dcpc.commons.XmlPrettyPrinter;
+import org.eumetsat.eoportal.dcpc.commons.conf.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -75,6 +76,9 @@ public class XsltProcessor
 
     // The directory where results will be generated
     private File                  m_OutputDir     = null;
+    
+    // XSLT Transformer
+    private Transformer           m_XsltTrans     = null;
 
     // The prefix that will be applied to the transformed filename (default: no
     // prefix)
@@ -128,6 +132,17 @@ public class XsltProcessor
                 throw new Exception("Cannot create " + this.m_OutputDir);
             }
         }
+        
+        createXSLTTransformer();
+        
+    }
+    
+    private void createXSLTTransformer() throws Exception
+    {
+        // create an instance of TransformerFactory
+        TransformerFactory transFact = TransformerFactory.newInstance();
+        
+        this.m_XsltTrans = transFact.newTransformer(new StreamSource(this.m_XsltFile));
     }
 
     /**
@@ -151,40 +166,15 @@ public class XsltProcessor
         }
 
         logger.debug("Transform files using XSLT 1.0.");
-
-        Source xsltSource = new StreamSource(this.m_XsltFile);
-
-        // create an instance of TransformerFactory
-        TransformerFactory transFact = TransformerFactory.newInstance();
-        Transformer trans;
-
-        try
+        
+        if (aPrettyPrint)
         {
-            trans = transFact.newTransformer(xsltSource);
-
-            if (aPrettyPrint)
-            {
-                transformAndPrettyPrintFile(aFile2Process, trans,
-                        this.m_OutputDir);
-            }
-            else
-            {
-                transformFile(aFile2Process, trans, this.m_OutputDir);
-            }
-
+            transformAndPrettyPrintFile(aFile2Process, this.m_XsltTrans,
+                    this.m_OutputDir);
         }
-        catch (TransformerConfigurationException e)
+        else
         {
-            System.out.println("See exception");
-            e.printStackTrace();
-        }
-        catch (TransformerException e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
-            System.out.println();
+            transformFile(aFile2Process, this.m_XsltTrans, this.m_OutputDir);
         }
     }
 
@@ -219,25 +209,18 @@ public class XsltProcessor
 
         logger.debug("Transform files using XSLT 1.0.");
 
-        Source xsltSource = new StreamSource(this.m_XsltFile);
-
-        // create an instance of TransformerFactory
-        TransformerFactory transFact = TransformerFactory.newInstance();
-        Transformer trans;
-
         try
         {
-            trans = transFact.newTransformer(xsltSource);
             int cpt = 0;
             for (File file : files2Process)
             {
                 if (aPrettyPrint)
                 {
-                    transformAndPrettyPrintFile(file, trans, this.m_OutputDir);
+                    transformAndPrettyPrintFile(file, this.m_XsltTrans, this.m_OutputDir);
                 }
                 else
                 {
-                    transformFile(file, trans, this.m_OutputDir);
+                    transformFile(file, this.m_XsltTrans, this.m_OutputDir);
                 }
                 cpt++;
             }
@@ -347,6 +330,9 @@ public class XsltProcessor
 
         try
         {
+            xsltTransformer.setParameter("portal_url", Config.getAsString("XSLT", "portal_url","http://vnavigator.eumetsat.int/discovery/Start/Explore/DirectExtended.do?EOResourceIdentifier"));
+            xsltTransformer.setParameter("identifier_prefix", Config.getAsString("XSLT", "identifier_prefix","urn:x-wmo:md:int.eumetsat::"));
+            
             xsltTransformer.transform(xmlSource, result);
 
             FileOutputStream oFile = new FileOutputStream(outputFileName);
