@@ -34,7 +34,7 @@
   <property name="mdexp.conf"        value="${mdexp.etc}/conf"/>
 	
   <property name="mdexp.name"         value="md-exporter"/>
-  <property name="mdexp.version"      value="0.9.8"/>
+  <property name="mdexp.version"      value="0.9.8.1"/>
 	
 	
   <!-- build file system -->

@@ -29,7 +29,7 @@ import static java.util.Arrays.asList;
  */
 public class CMDRunner
 {
-    static final String VERSION ="v0.9.8";
+    static final String VERSION ="v0.9.8.1";
     
     static boolean DEBUG_ON = false;
     
@@ -118,9 +118,9 @@ public class CMDRunner
        
        OptionSpec<Void> version    = parser.acceptsAll( asList( "v", "version"), "Display version number only." );
        
-       OptionSpec<Void> noxsltT    = parser.acceptsAll( asList( "n", "no-xslt-trans"), "do not perform the xslt transformation." );
+       OptionSpec<Void> noxsltT    = parser.acceptsAll( asList( "n", "no-xslt-trans"), "do not perform the xslt transformation. The input files must have already been transformed." );
        
-       OptionSpec<Void> nocheck    = parser.acceptsAll( asList( "s", "no-check"), "do not check that files have been transformed." );
+       OptionSpec<Void> nocheck    = parser.acceptsAll( asList( "s", "no-check"), "do not check that files have been transformed with xslt." );
               
        OptionSpec<File> xslt       = parser.acceptsAll( asList( "x", "xslt"), "xslt file." )
                                           .withRequiredArg()
