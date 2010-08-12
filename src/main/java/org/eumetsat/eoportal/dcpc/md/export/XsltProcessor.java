@@ -133,7 +133,7 @@ public class XsltProcessor
             }
         }
         
-        createXSLTTransformer();
+        this.createXSLTTransformer();
         
     }
     
@@ -204,35 +204,42 @@ public class XsltProcessor
                 return name.endsWith(".xml");
             }
         });
-
-        logger.info("Processing {} XML files.", files2Process.length);
-
-        logger.debug("Transform files using XSLT 1.0.");
-
-        try
+        
+        if ( (files2Process == null) || files2Process.length == 0)
         {
-            int cpt = 0;
-            for (File file : files2Process)
+            logger.info("No XML files to process.");  
+        }
+        else
+        {
+            logger.info("Processing {} XML files.", files2Process.length);
+    
+            logger.debug("Transform files using XSLT 1.0.");
+    
+            try
             {
-                if (aPrettyPrint)
+                int cpt = 0;
+                for (File file : files2Process)
                 {
-                    transformAndPrettyPrintFile(file, this.m_XsltTrans, this.m_OutputDir);
+                    if (aPrettyPrint)
+                    {
+                        transformAndPrettyPrintFile(file, this.m_XsltTrans, this.m_OutputDir);
+                    }
+                    else
+                    {
+                        transformFile(file, this.m_XsltTrans, this.m_OutputDir);
+                    }
+                    cpt++;
                 }
-                else
-                {
-                    transformFile(file, this.m_XsltTrans, this.m_OutputDir);
-                }
-                cpt++;
             }
-        }
-        catch (TransformerConfigurationException e)
-        {
-            System.out.println("Error, see exception");
-            e.printStackTrace();
-        }
-        catch (TransformerException e)
-        {
-            e.printStackTrace();
+            catch (TransformerConfigurationException e)
+            {
+                System.out.println("Error, see exception");
+                e.printStackTrace();
+            }
+            catch (TransformerException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 

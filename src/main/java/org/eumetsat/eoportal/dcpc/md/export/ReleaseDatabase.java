@@ -72,7 +72,7 @@ public class ReleaseDatabase
         // load Releases
         File[] files = m_RDBRootDir.listFiles();
 
-        logger.info("Loading {} Release dirs in the ReleaseDB.", files.length);
+        logger.info("Scanning {} Release dirs in the ReleaseDB.", files.length);
 
         // sort by name ascending
         Arrays.sort(files, new Comparator<File>() {
