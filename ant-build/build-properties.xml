@@ -6,7 +6,7 @@
 <!--  Guillaume Aubert (guillaume.aubert@eumetsat.int)                           -->
 <!-- =====================================================================       -->
 
-<project name="MDExporter-properties" default="" basedir="..">
+<project name="WIS-MDExporter-properties" default="" basedir="..">
 
   <!-- ===================================================================   -->
   <!-- Constant values                                                       -->
@@ -32,11 +32,11 @@
   <property name="mdexp.libs"        value="libs"/>
   <property name="mdexp.src"         value="src"/>
   <property name="mdexp.conf"        value="${mdexp.etc}/conf"/>
-	
-  <property name="mdexp.name"         value="md-exporter"/>
-  <property name="mdexp.version"      value="0.9.8.1"/>
-	
-	
+        
+  <property name="mdexp.name"         value="WIS_MD_Exporter_SU"/>
+  <property name="mdexp.version"      value="1.00"/>
+        
+        
   <!-- build file system -->
   <property name="mdexp.classes"      value="${mdexp.build}/classes"/>
   <property name="mdexp.dist"         value="${mdexp.build}/dist"/>
@@ -45,27 +45,27 @@
   <property name="mdexp.lib"          value="${mdexp.build}/lib"/>
   
   <property name="mdexp.tar"          value="${mdexp.build}/tar"/>
-	
+        
   <!-- set external classpath -->
   <path id="mdexp.classpath">
     <fileset dir="${mdexp.libs}">
       <include name="*.jar"/>
     </fileset>
-  	<!-- add htmlunit dependencies -->
-  	<fileset dir="${mdexp.libs}/htmlunitdeps">
-  	  	      <include name="*.jar"/>
-  	</fileset>
+        <!-- add htmlunit dependencies -->
+        <fileset dir="${mdexp.libs}/htmlunitdeps">
+                      <include name="*.jar"/>
+        </fileset>
   </path>
   <!-- class use to execute test.env -->
   <path id="mdexp.test.env">
-  	<fileset dir="${mdexp.libs}">
-  	      <include name="*.jar"/>
-  	</fileset>
-  	<!-- add htmlunit dependencies -->
-  	<fileset dir="${mdexp.libs}/htmlunitdeps">
-  	  	      <include name="*.jar"/>
-  	</fileset>
-  	<pathelement path="${mdexp.classes}"/>
+        <fileset dir="${mdexp.libs}">
+              <include name="*.jar"/>
+        </fileset>
+        <!-- add htmlunit dependencies -->
+        <fileset dir="${mdexp.libs}/htmlunitdeps">
+                      <include name="*.jar"/>
+        </fileset>
+        <pathelement path="${mdexp.classes}"/>
   </path>
   
 </project>

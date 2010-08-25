@@ -7,131 +7,131 @@
 <!-- =====================================================================       -->
 
 
-<project name="MDExporter-internal-tasks" default="" basedir="..">
+<project name="WIS-MDExporter-internal-tasks" default="" basedir="..">
 
-	<import description="build-properties" file="./build-properties.xml"/>
-		
+        <import description="build-properties" file="./build-properties.xml"/>
+                
         
-	<!-- =================================================================== -->
-	<!-- The initalization for all                                           -->
-	<!-- =================================================================== -->
-	<target name="_init">
-	  <mkdir dir="${mdexp.classes}"/>
-	  <mkdir dir="${mdexp.lib}"/>
-	  <mkdir dir="${mdexp.dist}"/>
-	  <mkdir dir="${mdexp.tar}"/>
-	</target>
+        <!-- =================================================================== -->
+        <!-- The initalization for all                                           -->
+        <!-- =================================================================== -->
+        <target name="_init">
+          <mkdir dir="${mdexp.classes}"/>
+          <mkdir dir="${mdexp.lib}"/>
+          <mkdir dir="${mdexp.dist}"/>
+          <mkdir dir="${mdexp.tar}"/>
+        </target>
   
   <!-- =================================================================== -->
   <!-- Compile all class files                                             -->
   <!-- =================================================================== -->
      <target name="_compile-classes" depends="_init">
-     	  <javac destdir="${mdexp.classes}"
-     		     optimize="${javac.optimize}"
-     		     debug="${javac.debug}"
-     		     verbose="${javac.verbose}"
-     		     deprecation="${javac.deprecation}"
-     		     includeJavaRuntime="${javac.include.java.runtime}"
-     		     failonerror="${javac.fail.onerror}"
-     	  	includeantruntime="off">
-     	      <compilerarg line="-Xlint:deprecation"/>
-     		  <src path="${mdexp.src}"/>
-     		  <classpath refid="mdexp.classpath"/>
-     	   </javac>
-	  </target>
-	
+          <javac destdir="${mdexp.classes}"
+                     optimize="${javac.optimize}"
+                     debug="${javac.debug}"
+                     verbose="${javac.verbose}"
+                     deprecation="${javac.deprecation}"
+                     includeJavaRuntime="${javac.include.java.runtime}"
+                     failonerror="${javac.fail.onerror}"
+                includeantruntime="off">
+              <compilerarg line="-Xlint:deprecation"/>
+                  <src path="${mdexp.src}"/>
+                  <classpath refid="mdexp.classpath"/>
+           </javac>
+          </target>
+        
 
-	
-	<!-- =================================================================== -->
+        
+        <!-- =================================================================== -->
     <!-- Build mdexp-export.jar                                     -->
-    <!-- =================================================================== -->	
-	<target name="_mdexp-export-jar" depends="_compile-classes">
-	     <jar destfile="${mdexp.lib}/mdexp-export.jar">
-			<fileset dir="${mdexp.classes}">
-				<include name="org/**" />
-			</fileset>
-		  </jar>
-	</target>
-	
-	<!-- =================================================================== -->
-	<!-- Build dist                                     -->
-	<!-- =================================================================== -->	
-	<target name="_build-distrib" depends="_mdexp-export-jar">
-		
-		<!-- root dir where the dist is going to be built -->
-		<property name="root" value="${dir}"/>
-		 	
-		<!-- conf info -->
-		<copy todir="${dir}/conf">
-			<fileset dir="${mdexp.etc}/conf">
-				<include name="log4j.properties"/>
-				<include name="md-exporter.conf"/>
-			</fileset>
-		</copy>
-		
-		<!-- xslt info -->
-		<copy todir="${dir}/xslt">
-			<fileset dir="${mdexp.etc}/xslt">
-				<include name="eum2iso_v4.1.xsl"/>
-			</fileset>
-		</copy>
-		
-		<!-- scripts info -->
-		<copy todir="${dir}/bin">
-			<fileset dir="${mdexp.etc}/scripts">
-				<include name="md-exporter"/>
-				<include name="obfuscate"/>
-			</fileset>
-		</copy>
-			
-		<!-- lib info -->
-		<copy todir="${dir}/lib">
-		    <!-- ext jars -->
-			<fileset dir="${mdexp.libs}">
-				<include name="*.jar"/>
-			</fileset>
-			<!-- copy htmlunit deps -->
-			<fileset dir="${mdexp.libs}/htmlunitdeps">
-				<include name="*.jar"/>
-			</fileset>
-		    <!-- produced jars -->
-		    <fileset dir="${mdexp.build}/lib">
-			   <include name="mdexp-export.jar"/>
-			</fileset>
-		</copy>
-	
-		
-		<!-- test data -->
-		<copy todir="${dir}/test">
-		    <!-- some xml files -->
-			<fileset dir="${mdexp.src}/test/resources/scenario-1/R1">
-				<include name="*.xml"/>
-			</fileset>
-			<fileset dir="${mdexp.src}/test/resources/scenario-1/R2">
-				<include name="*.xml"/>
-			</fileset>
-			<fileset dir="${mdexp.src}/test/resources/scenario-1/R3">
-				<include name="*.xml"/>
-			</fileset>
-			<fileset dir="${mdexp.src}/test/resources/scenario-1/R4">
-				<include name="*.xml"/>
-			</fileset>
-			<fileset dir="${mdexp.src}/test/resources/scenario-1/R5">
-				<include name="*.xml"/>
-			</fileset>
-			<fileset dir="${mdexp.src}/test/resources/scenario-1/R6">
-					<include name="*.xml"/>
-			</fileset>
-			<fileset dir="${mdexp.src}/test/resources/scenario-1/R7">
-				<include name="*.xml"/>
-			</fileset>
-			<fileset dir="${mdexp.src}/test/resources/scenario-2/empty">
-					<include name="*"/>
-			</fileset>
-		</copy>
-		
-		<chmod file="${dir}/bin/md-exporter" perm="ugo+wrx"/>
-		
-	</target>
-	
+    <!-- =================================================================== -->        
+        <target name="_mdexp-export-jar" depends="_compile-classes">
+             <jar destfile="${mdexp.lib}/mdexp-export.jar">
+                        <fileset dir="${mdexp.classes}">
+                                <include name="org/**" />
+                        </fileset>
+                  </jar>
+        </target>
+        
+        <!-- =================================================================== -->
+        <!-- Build dist                                     -->
+        <!-- =================================================================== -->    
+        <target name="_build-distrib" depends="_mdexp-export-jar">
+                
+                <!-- root dir where the dist is going to be built -->
+                <property name="root" value="${dir}"/>
+                        
+                <!-- conf info -->
+                <copy todir="${dir}/conf">
+                        <fileset dir="${mdexp.etc}/conf">
+                                <include name="log4j.properties"/>
+                                <include name="md-exporter.conf"/>
+                        </fileset>
+                </copy>
+                
+                <!-- xslt info -->
+                <copy todir="${dir}/xslt">
+                        <fileset dir="${mdexp.etc}/xslt">
+                                <include name="eum2iso_v4.1.xsl"/>
+                        </fileset>
+                </copy>
+                
+                <!-- scripts info -->
+                <copy todir="${dir}/bin">
+                        <fileset dir="${mdexp.etc}/scripts">
+                                <include name="md-exporter"/>
+                                <include name="obfuscate"/>
+                        </fileset>
+                </copy>
+                        
+                <!-- lib info -->
+                <copy todir="${dir}/lib">
+                    <!-- ext jars -->
+                        <fileset dir="${mdexp.libs}">
+                                <include name="*.jar"/>
+                        </fileset>
+                        <!-- copy htmlunit deps -->
+                        <fileset dir="${mdexp.libs}/htmlunitdeps">
+                                <include name="*.jar"/>
+                        </fileset>
+                    <!-- produced jars -->
+                    <fileset dir="${mdexp.build}/lib">
+                           <include name="mdexp-export.jar"/>
+                        </fileset>
+                </copy>
+        
+                
+                <!-- test data -->
+                <copy todir="${dir}/test">
+                    <!-- some xml files -->
+                        <fileset dir="${mdexp.src}/test/resources/scenario-1/R1">
+                                <include name="*.xml"/>
+                        </fileset>
+                        <fileset dir="${mdexp.src}/test/resources/scenario-1/R2">
+                                <include name="*.xml"/>
+                        </fileset>
+                        <fileset dir="${mdexp.src}/test/resources/scenario-1/R3">
+                                <include name="*.xml"/>
+                        </fileset>
+                        <fileset dir="${mdexp.src}/test/resources/scenario-1/R4">
+                                <include name="*.xml"/>
+                        </fileset>
+                        <fileset dir="${mdexp.src}/test/resources/scenario-1/R5">
+                                <include name="*.xml"/>
+                        </fileset>
+                        <fileset dir="${mdexp.src}/test/resources/scenario-1/R6">
+                                        <include name="*.xml"/>
+                        </fileset>
+                        <fileset dir="${mdexp.src}/test/resources/scenario-1/R7">
+                                <include name="*.xml"/>
+                        </fileset>
+                        <fileset dir="${mdexp.src}/test/resources/scenario-2/empty">
+                                        <include name="*"/>
+                        </fileset>
+                </copy>
+                
+                <chmod file="${dir}/bin/md-exporter" perm="ugo+wrx"/>
+                
+        </target>
+        
 </project>
