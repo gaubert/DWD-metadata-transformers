@@ -6,10 +6,10 @@
 <!--  Guillaume Aubert (guillaume.aubert@eumetsat.int)                           -->
 <!-- =====================================================================       -->
 
-<project name="MDExporter" default="usage" basedir="..">
+<project name="WIS-MDExporter" default="usage" basedir="..">
 
   <import description="build-internal-tasks" file="./build-internal-tasks.xml"/>
- 	
+        
   <!-- =================================================================== -->
   <!-- No operation                                                        -->
   <!-- =================================================================== -->
@@ -17,160 +17,154 @@
   <echo message="mdexp.bin = ${mdexp.bin}"/>
   <echo message="mdexp.doc = ${mdexp.doc}"/>
 </target>
-	
+        
 
   <!-- =================================================================== -->
   <!-- Help on usage                                                       -->
   <!-- =================================================================== -->
 <target name="usage">
-	<echo >	--------------- ${Name} ${version} (${build}) ---------------
-	
-	 available targets are:"
-	
-	   build                                                   --> compile the source code
-	   install [-Dout=\"output dir\" (default=/tmp/md-export)  --> install into /tmp/mdexp-export
-	   build-bin-tarball [-Dout=\"output dir\"]                --> build binary tarball distribution
-	   build-src-tarball [-Dout=\"output dir\"]                --> build src tarball distribution
-	   validation-tests                                        --> run the validation tests suite
-	   clean                                                   --> clean up the build directory
-	   clean-all                                               --> clean up build and tarball dirs
-	   usage                                                   --> this help page ...
-	
-	 See the comments inside the build.xml file for more details.
+        <echo > --------------- ${Name} ${version} (${build}) ---------------
+        
+         available targets are:"
+        
+           build                                                   --> compile the source code
+           install [-Dout=\"output dir\" (default=/tmp/md-export)  --> install into /tmp/mdexp-export
+           build-bin-tarball [-Dout=\"output dir\"]                --> build binary tarball distribution
+           build-src-tarball [-Dout=\"output dir\"]                --> build src tarball distribution
+           validation-tests                                        --> run the validation tests suite
+           clean                                                   --> clean up the build directory
+           clean-all                                               --> clean up build and tarball dirs
+           usage                                                   --> this help page ...
+        
+         See the comments inside the build.xml file for more details.
     </echo>
   </target>
 
 
   <target name="build" depends="_compile-classes"/>
-	
+        
   <!-- ================================================================== -->
   <!-- install                                                          -->
   <!-- ================================================================== -->
   <target name="install">
     
-	<!-- create the root directory for this release -->
-	<!--<property name="root" value="/tmp/md-exporter"/>-->
-  	
-  	<!-- conditional propery -->
-  	<condition property="root" value="${out}" else="/tmp/md-exporter">
-  	    <isset property="out" />
-  	</condition>
-  	
-  	<echo message="install into ${root}"/>
-	  
-	<antcall target="_build-distrib">
+        <!-- create the root directory for this release -->
+        <!--<property name="root" value="/tmp/md-exporter"/>-->
+        
+        <!-- conditional propery -->
+        <condition property="root" value="${out}" else="/tmp/md-exporter">
+            <isset property="out" />
+        </condition>
+        
+        <echo message="install into ${root}"/>
+          
+        <antcall target="_build-distrib">
        <param name="dir" value="${root}"/>
-	</antcall>
-  	
+        </antcall>
+        
   </target>
 
   <!-- =================================================================== -->
   <!-- make bin-distribution                                               -->
   <!-- =================================================================== -->
   <target name="build-bin-tarball" depends="clean">
-		
-		
-		<!-- create the root directory for this release -->
-		<property name="root" value="${mdexp.dist}/${mdexp.name}-v${mdexp.version}"/>
-  	
-  	    <!-- conditional property for tarballdir -->
-  	  	<condition property="outtarballdir" value="${out}" else="${mdexp.tar}">
-  	  	    <isset property="out" />
-  	  	</condition>
                 
-		<!-- build distribution in the dist directory -->
-		<antcall target="_build-distrib">
-	          <param name="dir" value="${root}"/>
-	     </antcall>
-		
-		<!-- build a tar -->
-        <tar tarfile="${mdexp.tar}/${mdexp.name}-v${mdexp.version}.tar" longfile="gnu">
-		      <tarfileset dir="${mdexp.dist}" mode="740">
-		        <include name="${mdexp.dist}/${mdexp.name}-v${mdexp.version}/bin/md-exporter"/>
-		      </tarfileset>
-		      <tarfileset dir="${mdexp.dist}">
-		        <!--<include name="${mdexp.suite}/${vmc.node.name}-v${vmc.node.version}/**"/>-->
-		        <exclude name="${mdexp.dist}/${mdexp.name}-v${mdexp.version}/bin/md-exporter"/>
-		      </tarfileset>
-	    </tar>
-	
-		<gzip src="${mdexp.tar}/${mdexp.name}-v${mdexp.version}.tar"
-		          zipfile="${outtarballdir}/${mdexp.name}-v${mdexp.version}.tar.gz"/>
-		    <delete file="${mdexp.tar}/${mdexp.name}-v${mdexp.version}.tar"/>
-  	
-  	   <echo message="tarball ${outtarballdir}/${mdexp.name}-v${mdexp.version}.tar.gz is ready."/>
+                
+                <!-- create the root directory for this release -->
+                <property name="root" value="${mdexp.dist}/${mdexp.name}_${mdexp.version}"/>
+        
+            <!-- conditional property for tarballdir -->
+                <condition property="outtarballdir" value="${out}" else="${mdexp.tar}">
+                    <isset property="out" />
+                </condition>
+                
+                <!-- build distribution in the dist directory -->
+                <antcall target="_build-distrib">
+                  <param name="dir" value="${root}"/>
+             </antcall>
+                
+                <!-- build a tar -->
+        <tar tarfile="${mdexp.tar}/${mdexp.name}_${mdexp.version}.tar" longfile="gnu">
+                      <tarfileset dir="${mdexp.dist}" mode="740">
+                        <include name="${mdexp.dist}/${mdexp.name}_${mdexp.version}/bin/md-exporter"/>
+                      </tarfileset>
+                      <tarfileset dir="${mdexp.dist}">
+                        <!--<include name="${mdexp.suite}/${vmc.node.name}-v${vmc.node.version}/**"/>-->
+                        <exclude name="${mdexp.dist}/${mdexp.name}_${mdexp.version}/bin/md-exporter"/>
+                      </tarfileset>
+            </tar>
+        
+                <gzip src="${mdexp.tar}/${mdexp.name}_${mdexp.version}.tar"
+                          zipfile="${outtarballdir}/${mdexp.name}_${mdexp.version}.tar.gz"/>
+                    <delete file="${mdexp.tar}/${mdexp.name}_${mdexp.version}.tar"/>
+        
+           <echo message="tarball ${outtarballdir}/${mdexp.name}_${mdexp.version}.tar.gz is ready."/>
      
   </target>
-	
+        
   <!-- =================================================================== -->
   <!-- make src-distribution                                               -->
   <!-- =================================================================== -->
   <target name="build-src-tarball" depends="clean">
-  	
-		<!-- create the root directory for this release -->
-		<property name="root" value="${mdexp.dist}/${mdexp.name}-v${mdexp.version}-src"/>
-  	
-  	    <!-- conditional property for tarballdir -->
-  	  	<condition property="outtarballdir" value="${out}" else="${mdexp.tar}">
-  	  	    <isset property="out" />
-  	  	</condition>
+        
+                <!-- create the root directory for this release -->
+                <property name="root" value="${mdexp.dist}/${mdexp.name}_${mdexp.version}-src"/>
+        
+            <!-- conditional property for tarballdir -->
+                <condition property="outtarballdir" value="${out}" else="${mdexp.tar}">
+                    <isset property="out" />
+                </condition>
                
-		<!-- build a tar -->
-        <tar tarfile="${mdexp.tar}/${mdexp.name}-v${mdexp.version}-src.tar" longfile="gnu">
-        	  <tarfileset dir="${mdexp.ant-build}" mode="740">
-        		<include name="${mdexp.ant-build}/build"/>
-        	  </tarfileset>
-		      <tarfileset dir=".">
-		        <exclude name="build/**"/>
-		      	<exclude name=".git/**"/>
-		      	<exclude name=".gitignore"/>
-		      	<exclude name=".gradle/**"/>
-		      	<exclude name="classes/**"/>
-		      </tarfileset>
-	    </tar>
-	
-		<gzip src="${mdexp.tar}/${mdexp.name}-v${mdexp.version}-src.tar"
-		          zipfile="${outtarballdir}/${mdexp.name}-v${mdexp.version}-src.tar.gz"/>
-		    <delete file="${mdexp.tar}/${mdexp.name}-v${mdexp.version}-src.tar"/>
-  	
-  	   <echo message="tarball ${outtarballdir}/${mdexp.name}-v${mdexp.version}-src.tar.gz is ready."/>
-	     
+                <!-- build a tar -->
+                <mkdir dir="${mdexp.tar}"/>
+        <tar tarfile="${mdexp.tar}/${mdexp.name}_${mdexp.version}-src.tar" longfile="gnu">
+                  <tarfileset dir="${mdexp.ant-build}" mode="740">
+                        <include name="${mdexp.ant-build}/build"/>
+                  </tarfileset>
+                      <tarfileset dir=".">
+                        <exclude name="build/**"/>
+                        <exclude name=".git/**"/>
+                        <exclude name=".gitignore"/>
+                        <exclude name=".gradle/**"/>
+                        <exclude name="classes/**"/>
+                      </tarfileset>
+            </tar>
+        
+                <gzip src="${mdexp.tar}/${mdexp.name}_${mdexp.version}-src.tar"
+                          zipfile="${outtarballdir}/${mdexp.name}_${mdexp.version}-src.tar.gz"/>
+                    <delete file="${mdexp.tar}/${mdexp.name}_${mdexp.version}-src.tar"/>
+        
+           <echo message="tarball ${outtarballdir}/${mdexp.name}_${mdexp.version}-src.tar.gz is ready."/>
+             
   </target>
-	
-	<target name="validation-tests" depends="_compile-classes">
-	   
+        
+        <target name="validation-tests" depends="_compile-classes">
+           
        <junit haltonerror="true" haltonfailure="true" fork="false" showoutput="true">
-       	     <formatter type="brief" usefile="false"/>
-       	     <classpath refid="mdexp.test.env"/>
-       	     <sysproperty key="project.dir" value=".."/>
-       	     <sysproperty key="log4j.configuration" value="file:../etc/conf/log4j.properties"/>
-       	     <sysproperty key="config.path" value="../etc/conf/md-exporter.conf"/>
+             <formatter type="brief" usefile="false"/>
+             <classpath refid="mdexp.test.env"/>
+             <sysproperty key="project.dir" value=".."/>
+             <sysproperty key="log4j.configuration" value="file:../etc/conf/log4j.properties"/>
+             <sysproperty key="config.path" value="../etc/conf/md-exporter.conf"/>
              <test name="org.eumetsat.eoportal.dcpc.md.test.MetadataExporterValidationSuite" />
        </junit>
-		       
+                       
 </target>
-	
+        
   <!-- ================================================================== -->
   <!-- Cleaning                                                           -->
   <!-- ================================================================== -->
   <target name="clean-all">
-  	<antcall target="clean"/>
+        <antcall target="clean"/>
   </target>
   
   <target name="clean">
     <delete dir="${mdexp.classes}"/>
-    <delete dir="${mdexp.api}"/>
     <delete dir="${mdexp.dist}"/>
     <delete dir="${mdexp.lib}"/>
     <delete dir="${mdexp.run}"/>
     <delete dir="${mdexp.log}"/>
-  	<delete dir="${mdexp.tar}"/> 
-    <delete dir="${mdexp.audit}"/>
-  	<delete dir="${mdexp.war}"/>
-  	<delete dir="${mdexp.sar}"/>
-  	<delete dir="${mdexp.ear}"/>
-  	<delete dir="${mdexp.jsp}"/>
-	<delete dir="${mdexp.javadocs}"/>
+        <delete dir="${mdexp.tar}"/> 
   </target>
 
 </project>
