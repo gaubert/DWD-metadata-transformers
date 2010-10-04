@@ -349,11 +349,36 @@ public class Release
         return (relevant_files.length > 0) ? true : false;
     }
     
+    /**
+     * Do not create the Release-Name dir by default
+     * @param aOutputDir
+     * @throws Exception
+     */
     public void exportReleaseDeltaTo(String aOutputDir) throws Exception
+    {
+        exportReleaseDeltaTo(aOutputDir, false);
+    }
+    
+    /**
+     * exportReleasaeDelta
+     * @param aOutputDir        OutputDir where the data should be exported
+     * @param aCreateReleaseDir Boolean indicating if a Release dir needs to be created or not
+     * @throws Exception
+     */
+    public void exportReleaseDeltaTo(String aOutputDir, boolean aCreateReleaseDir) throws Exception
     {
         File outputDir = new File(aOutputDir);
         
-        File finalDest = new File(outputDir + File.separator + "Release-" + this.m_Name);
+        File finalDest = null;
+        
+        if (aCreateReleaseDir)
+        {
+            finalDest = new File(outputDir + File.separator + "Release-" + this.m_Name);
+        }
+        else
+        {
+            finalDest = outputDir;
+        }
         
         // try to create the Dirs
         FileSystem.createDirs(finalDest);
