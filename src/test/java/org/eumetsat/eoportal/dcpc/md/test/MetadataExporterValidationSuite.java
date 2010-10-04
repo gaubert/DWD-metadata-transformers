@@ -186,13 +186,15 @@ public class MetadataExporterValidationSuite extends TestCase
         String xsltFile           = PROJ_DIR + "/etc/xslt/eum2iso_v4.1.xsl";
         String [] args = new String[] { "-out", "/tmp/md-exporter-download-sc/out", "-rdb" , "/tmp/md-exporter-download-sc/RDB" , "-xslt", xsltFile};
         
+        
         System.out.println("*****************************************");
         System.out.println("*********** DOWNLOAD SCENARIO ***********");
         System.out.println("*****************************************");
         
+        FileSystem.deleteDirs("/tmp/md-exporter-download-sc/out");
         
         System.out.println("Please Clean the working Directory /tmp/md-exporter-download-sc");
-        CMDRunner.main(args);  
+        CMDRunner.main(args, false);  
         
     }
     

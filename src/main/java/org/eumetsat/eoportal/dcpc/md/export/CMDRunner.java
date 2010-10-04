@@ -29,7 +29,7 @@ import static java.util.Arrays.asList;
  */
 public class CMDRunner
 {
-    static final String VERSION ="v1.0";
+    static final String VERSION ="v1.01";
     
     static boolean DEBUG_ON = false;
     
@@ -294,12 +294,12 @@ public class CMDRunner
      * @param aArguments
      * @throws IOException 
      */
-    public static void runWith(Map<String, Object> aArguments) 
+    public static int runWith(Map<String, Object> aArguments) 
     {
         //create a temporary working dir for the run
         // it will be deleted once the run is finished
         File workingDir = null; 
-        
+        int errCode     = 2;
         try
         {
             File inDir;
@@ -327,6 +327,10 @@ public class CMDRunner
             md_Exporter.createExport( inDir.getAbsolutePath(), 
                                       ((File) aArguments.get("out")).getAbsolutePath(),
                                       ((Boolean) aArguments.get("nocheck")).booleanValue());
+            
+            
+            errCode = 0;
+            
         }
         catch (Throwable e)
         {
@@ -335,7 +339,8 @@ public class CMDRunner
             CMDRunner.logger.error(e.getMessage()); 
             CMDRunner.logger.error("Set the log levels to DEBUG to have more info.");
             CMDRunner.logger.debug("Stack Trace of the error",e);
-            System.exit(2);
+            // leave on error
+            errCode = 2;
             
         }
         finally
@@ -348,7 +353,7 @@ public class CMDRunner
             }
         }
         
-        System.exit(0);
+        return errCode;  
     }
     
     public static void setDebugInfo()
@@ -371,8 +376,7 @@ public class CMDRunner
         return null;
     }
     
-    
-    public static void main(String[] args)
+    public static int main(String[] args, boolean aExitOnError)
     {
         setDebugInfo();
         
@@ -381,6 +385,23 @@ public class CMDRunner
         if (DEBUG_ON)
             printArguments(arguments, System.out);
         
-        runWith(arguments);  
+        int errCode = runWith(arguments);
+        
+        if (aExitOnError)
+        {
+           System.exit(errCode);
+        }
+        
+        return errCode;
+    }
+    
+    
+    /**
+     * run main program and exit on error by default
+     * @param args
+     */
+    public static void main(String[] args)
+    {
+       main(args, true);
     }
 }
