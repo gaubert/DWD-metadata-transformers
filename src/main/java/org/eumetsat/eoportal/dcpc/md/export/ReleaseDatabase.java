@@ -29,7 +29,8 @@ public class ReleaseDatabase
 
     public ReleaseDatabase(String aReleaseDBRootDirPath) throws Exception
     {
-        m_ReleaseDBRootDirPath = new File(aReleaseDBRootDirPath).getAbsolutePath();
+        m_ReleaseDBRootDirPath = new File(aReleaseDBRootDirPath)
+                .getAbsolutePath();
 
         _loadDB();
     }
@@ -218,9 +219,9 @@ public class ReleaseDatabase
     {
         File inDBReleaseName = new File(ReleaseDatabase
                 .inquireNewReleasePathIn(this.m_ReleaseDBRootDirPath));
-        
+
         logger.debug("inDBReleaseName = " + inDBReleaseName.getAbsolutePath());
-        
+
         logger.debug("release root dir =" + aRelease.getRootDir());
 
         FileUtils.moveDirectory(aRelease.getRootDir(), inDBReleaseName);

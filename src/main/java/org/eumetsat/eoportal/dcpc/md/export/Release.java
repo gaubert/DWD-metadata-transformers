@@ -54,9 +54,10 @@ public class Release
 
     // Deleted file
     protected File             m_Deleted;
-    private   String           m_Name;
-    
-    public final static Logger     logger               = LoggerFactory.getLogger(Release.class);
+    private String             m_Name;
+
+    public final static Logger logger         = LoggerFactory
+                                                      .getLogger(Release.class);
 
     /**
      * Create a Release directory and its underneath structure
@@ -85,26 +86,26 @@ public class Release
     {
         FileUtils.deleteDirectory(aRelease.getRootDir());
     }
-    
+
     public static String getIDFromReleaseFile(String aFilename)
     {
         try
         {
             File f = new File(aFilename);
             String[] shards = f.getName().split("C_EUMS");
-        
+
             return shards[0].substring(2);
         }
-        catch(Throwable e)
+        catch (Throwable e)
         {
-            //in case of error log it and return the aFilename as it isn't curcial
+            // in case of error log it and return the aFilename as it isn't
+            // curcial
             logger.debug(aFilename);
         }
-        
+
         return aFilename;
-          
+
     }
-    
 
     /**
      * Constructor
@@ -128,7 +129,7 @@ public class Release
                                 : false;
                     }
                 });
-        
+
         if (relevant_dirs == null)
         {
             throw new Exception(m_ReleaseTopDir + " is not a directory");
@@ -136,10 +137,9 @@ public class Release
 
         if (relevant_dirs.length != 2)
         {
-            throw new Exception(
-                            m_ReleaseTopDir
-                            + " is not a Release directory as it doesn't contain a "
-                            + DELTA + " dir and a " + SOURCE + " dir.");
+            throw new Exception(m_ReleaseTopDir
+                    + " is not a Release directory as it doesn't contain a "
+                    + DELTA + " dir and a " + SOURCE + " dir.");
         }
 
         // preload src info
@@ -172,8 +172,7 @@ public class Release
 
         if (relevant_files.length > 1)
         {
-            throw new Exception("More than one deleted file in "
-                    + this.m_Delta);
+            throw new Exception("More than one deleted file in " + this.m_Delta);
         }
 
         else if (relevant_files.length == 0)
@@ -256,12 +255,10 @@ public class Release
         Date utcD = DateUtil.getUTCCurrentTime();
 
         // modify file n the fly (overwrite existing file)
-        XMLInjector.changeNodeNameAndContent(aFile.getAbsolutePath(),
-                                             aFile.getAbsolutePath(), 
-                                             "/gmd:MD_Metadata/gmd:dateStamp/gco:Date", 
-                                             "gco:DateTime", 
-                                             DateUtil.dateToString(utcD, DateUtil.ms_ISODATEFORMAT), 
-                                             XMLInjector.NAMESPACES);
+        XMLInjector.changeNodeNameAndContent(aFile.getAbsolutePath(), aFile
+                .getAbsolutePath(), "/gmd:MD_Metadata/gmd:dateStamp/gco:Date",
+                "gco:DateTime", DateUtil.dateToString(utcD,
+                        DateUtil.ms_ISODATEFORMAT), XMLInjector.NAMESPACES);
 
         // copy file to the Delta Directory
         FileUtils.copyFileToDirectory(aFile, this.m_Delta, true);
@@ -287,7 +284,9 @@ public class Release
         // Seek to end of file
         deleted.seek(m_Deleted.length());
 
-        deleted.writeBytes(Config.getAsString("XSLT", "identifier_prefix","urn:x-wmo:md:int.eumetsat::")+ aFileIdentifier + "\n");
+        deleted.writeBytes(Config.getAsString("XSLT", "identifier_prefix",
+                "urn:x-wmo:md:int.eumetsat::")
+                + aFileIdentifier + "\n");
         deleted.close();
     }
 
@@ -348,9 +347,10 @@ public class Release
 
         return (relevant_files.length > 0) ? true : false;
     }
-    
+
     /**
      * Do not create the Release-Name dir by default
+     * 
      * @param aOutputDir
      * @throws Exception
      */
@@ -358,32 +358,37 @@ public class Release
     {
         exportReleaseDeltaTo(aOutputDir, false);
     }
-    
+
     /**
      * exportReleasaeDelta
-     * @param aOutputDir        OutputDir where the data should be exported
-     * @param aCreateReleaseDir Boolean indicating if a Release dir needs to be created or not
+     * 
+     * @param aOutputDir
+     *            OutputDir where the data should be exported
+     * @param aCreateReleaseDir
+     *            Boolean indicating if a Release dir needs to be created or not
      * @throws Exception
      */
-    public void exportReleaseDeltaTo(String aOutputDir, boolean aCreateReleaseDir) throws Exception
+    public void exportReleaseDeltaTo(String aOutputDir,
+            boolean aCreateReleaseDir) throws Exception
     {
         File outputDir = new File(aOutputDir);
-        
+
         File finalDest = null;
-        
+
         if (aCreateReleaseDir)
         {
-            finalDest = new File(outputDir + File.separator + "Release-" + this.m_Name);
+            finalDest = new File(outputDir + File.separator + "Release-"
+                    + this.m_Name);
         }
         else
         {
             finalDest = outputDir;
         }
-        
+
         // try to create the Dirs
         FileSystem.createDirs(finalDest);
-       
-        FileUtils.copyDirectory(this.m_Delta, finalDest); 
+
+        FileUtils.copyDirectory(this.m_Delta, finalDest);
     }
 
     /**
@@ -414,8 +419,9 @@ public class Release
     public ArrayList<String> getDeltaDeletedFilenames() throws Exception
     {
         ArrayList<String> result = new ArrayList<String>();
-        
-        logger.debug("Look for deleted files in {}", m_Deleted.getAbsolutePath());
+
+        logger.debug("Look for deleted files in {}", m_Deleted
+                .getAbsolutePath());
 
         if (m_Deleted.exists())
         {
@@ -434,8 +440,8 @@ public class Release
             }
 
         }
-        
-        logger.debug("Found {} deleted files",result.size());
+
+        logger.debug("Found {} deleted files", result.size());
 
         return result;
     }

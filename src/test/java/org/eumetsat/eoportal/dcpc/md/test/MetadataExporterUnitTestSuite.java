@@ -8,6 +8,7 @@ import junit.framework.TestCase;
 import org.eumetsat.eoportal.dcpc.commons.DateUtil;
 import org.eumetsat.eoportal.dcpc.commons.Obfuscator;
 import org.eumetsat.eoportal.dcpc.md.export.XsltProcessor;
+import org.eumetsat.eoportal.dcpc.md.fetcher.ProdNavMDWCSFetcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +30,7 @@ public class MetadataExporterUnitTestSuite extends TestCase
     
     public final static String TEST_DIR = PROJ_DIR + "/src/test/resources";
     
-    public void testXSLTTransformation()
+    public void ztestXSLTTransformation()
     {
         String xsltFile           = PROJ_DIR + "/etc/xslt/eum2iso_v4.1.xsl";
         String file2Transform     = PROJ_DIR + "/etc/metadata/eo-portal-metadata/1.xml";
@@ -52,7 +53,7 @@ public class MetadataExporterUnitTestSuite extends TestCase
         }
     }
     
-    public void testVTD_Modif()
+    public void ztestVTD_Modif()
     {
         try 
         {
@@ -90,7 +91,7 @@ public class MetadataExporterUnitTestSuite extends TestCase
              }
     }
     
-    public void testObfuscation()
+    public void ztestObfuscation()
     {
         String in = "yffffffff";
         String out;
@@ -99,5 +100,19 @@ public class MetadataExporterUnitTestSuite extends TestCase
         out = Obfuscator.deobfuscate(out);
         
         assertEquals(in,out);
+    }
+    
+    public void testProdNavWCSFetcher()
+    {   try
+        {
+            ProdNavMDWCSFetcher wcsFetcher = new ProdNavMDWCSFetcher("H:/CSW-Results");
+       
+            wcsFetcher.fetch();
+        }
+        catch (Exception e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }
