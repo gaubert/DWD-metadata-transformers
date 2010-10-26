@@ -1,0 +1,5 @@
+<GetRecords xmlns="http://www.opengis.net/cat/csw/2.0.2" service="CSW" resultType="results" outputFormat="application/xml" outputSchema="http://www.isotc211.org/2005/gmi" startPosition="1" maxRecords="100000">
+    <Query typeNames="gmd:MD_Metadata">
+        <ElementSetName typeNames="gmd:MD_Metadata">full</ElementSetName>
+    </Query>
+</GetRecords>
