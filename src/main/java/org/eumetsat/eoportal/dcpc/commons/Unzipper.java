@@ -14,6 +14,7 @@ public class Unzipper
 {
     /**
      * Return the OutputDir where it has been unzipped.
+     * 
      * @param zipFile
      * @return OutputDir where it has been unzipped.
      * @throws ZipException
@@ -29,7 +30,7 @@ public class Unzipper
 
         File outputDir = new File(newPath);
         outputDir.mkdir();
-        
+
         Enumeration<?> zipFileEntries = zip.entries();
 
         // Process each entry
@@ -74,7 +75,7 @@ public class Unzipper
                 unzip(destFile.getAbsolutePath());
             }
         }
-        
+
         return outputDir;
     }
 }

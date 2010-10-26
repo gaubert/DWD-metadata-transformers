@@ -27,13 +27,11 @@ public class XMLInjector
     {
 
     }
-    
-    public static void changeNodeNameAndContent(String aInputFilePath, 
-                                                String aOutputFilePath, 
-                                                String aXPathNodeExpr, 
-                                                String aNewNodeName, 
-                                                String aNewContentStr, 
-                                                Map<String, String> aNameSpaces) throws Exception
+
+    public static void changeNodeNameAndContent(String aInputFilePath,
+            String aOutputFilePath, String aXPathNodeExpr, String aNewNodeName,
+            String aNewContentStr, Map<String, String> aNameSpaces)
+            throws Exception
     {
         // open a file and read the content into a byte array
         VTDGen vg = new VTDGen();
@@ -45,7 +43,7 @@ public class XMLInjector
 
             FileOutputStream fos = new FileOutputStream(fo);
 
-            AutoPilot ap  = new AutoPilot(vn);
+            AutoPilot ap = new AutoPilot(vn);
 
             // add Namespaces
             for (String key : aNameSpaces.keySet())
@@ -63,8 +61,8 @@ public class XMLInjector
             {
                 xm.updateToken(i, aNewContentStr);
             }
-            
-            //change Node Name
+
+            // change Node Name
             ap.selectXPath(aXPathNodeExpr);
 
             i = -1;
@@ -72,17 +70,16 @@ public class XMLInjector
             {
                 xm.updateElementName(aNewNodeName);
             }
-            
+
             xm.output(fos);
             fos.close();
         }
         else
         {
-            throw new Exception("Cannot read the XML file "
-                    + aInputFilePath);
+            throw new Exception("Cannot read the XML file " + aInputFilePath);
         }
     }
-    
+
     public static void injectStringIntoNode(String aInputFilePath,
             String aOutputFilePath, String aXPathExpr, String aValue,
             Map<String, String> aNameSpaces) throws Exception
@@ -97,7 +94,7 @@ public class XMLInjector
 
             FileOutputStream fos = new FileOutputStream(fo);
 
-            AutoPilot ap  = new AutoPilot(vn);
+            AutoPilot ap = new AutoPilot(vn);
 
             // add Namespaces
             for (String key : aNameSpaces.keySet())
@@ -115,14 +112,13 @@ public class XMLInjector
             {
                 xm.updateToken(i, aValue);
             }
-            
+
             xm.output(fos);
             fos.close();
         }
         else
         {
-            throw new Exception("Cannot read the XML file "
-                    + aInputFilePath);
+            throw new Exception("Cannot read the XML file " + aInputFilePath);
         }
 
     }

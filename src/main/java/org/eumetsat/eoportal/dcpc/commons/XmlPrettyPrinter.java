@@ -2,6 +2,7 @@ package org.eumetsat.eoportal.dcpc.commons;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -141,5 +142,19 @@ public class XmlPrettyPrinter
         org.w3c.dom.Document doc = builder.parse(is);
         is.close();
         return doc;
+    }
+
+    public static void main(String[] args)
+    {
+        try
+        {
+            OutputStream out = new FileOutputStream(args[1]);
+            XmlPrettyPrinter.prettyPrint(args[0], out);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error while pretty Printing");
+            e.printStackTrace(System.out);
+        }
     }
 }

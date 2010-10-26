@@ -26,7 +26,9 @@ public class MetadataExporter
     protected ReleaseDatabase      m_ReleaseDB;
     protected File                 m_WorkingDir;
     protected File                 m_XsltFilePath;
-    protected boolean              m_NoXslt = true; // default to true
+    protected boolean              m_NoXslt             = true;                                    // default
+                                                                                                    // to
+                                                                                                    // true
 
     public final static Logger     logger               = LoggerFactory
                                                                 .getLogger(MetadataExporter.class);
@@ -40,8 +42,8 @@ public class MetadataExporter
      *            The Root Path for the ReleaseDB
      * @throws Exception
      */
-    public MetadataExporter(String aReleaseDBRootDirPath,
-            String aWorkingDirPath) throws Exception
+    public MetadataExporter(String aReleaseDBRootDirPath, String aWorkingDirPath)
+            throws Exception
     {
         m_ReleaseDB = new ReleaseDatabase(aReleaseDBRootDirPath);
 
@@ -50,7 +52,7 @@ public class MetadataExporter
         m_WorkingDir = new File(aWorkingDirPath);
 
     }
-    
+
     public void setXsltFile(String aXsltFilePath) throws FileNotFoundException
     {
         m_XsltFilePath = new File(aXsltFilePath);
@@ -58,7 +60,7 @@ public class MetadataExporter
         if (!m_XsltFilePath.exists())
             throw new FileNotFoundException("Xslt File " + aXsltFilePath
                     + " doesn't exist");
-        
+
         m_NoXslt = false;
     }
 
@@ -71,27 +73,31 @@ public class MetadataExporter
     {
         return this.m_ReleaseDB;
     }
-    
-    public void createExport(String aMetadataSourcePath, boolean aNoCheck) throws Exception
+
+    public void createExport(String aMetadataSourcePath, boolean aNoCheck)
+            throws Exception
     {
         this.createExport(aMetadataSourcePath, null, aNoCheck);
     }
 
     /**
      * 
-     * @param aMetadataSourcePath Input Dir
-     * @param aOutputDir  Output Dir
-     * @param aNoCheck    to checkor not the metadata
+     * @param aMetadataSourcePath
+     *            Input Dir
+     * @param aOutputDir
+     *            Output Dir
+     * @param aNoCheck
+     *            to checkor not the metadata
      * @throws Exception
      */
-    public void createExport(String aMetadataSourcePath, String aOutputDir, boolean aNoCheck) throws Exception
+    public void createExport(String aMetadataSourcePath, String aOutputDir,
+            boolean aNoCheck) throws Exception
     {
         File topTempDir = FileSystem.createTempDirectory("temp-",
                 this.m_WorkingDir);
 
         boolean prettyPrint = true;
 
-        
         File tempDir = new File(topTempDir + File.separator + "temp");
         File xmlDir = new File(tempDir.getAbsolutePath() + File.separator
                 + Release.XML_FILES);
@@ -101,10 +107,10 @@ public class MetadataExporter
         FileSystem.createDirs(xmlDir);
         FileSystem.createDirs(MD5Dir);
 
-        if (! m_NoXslt)
+        if (!m_NoXslt)
         {
             logger.info("------------ Do XSLT Transformations ------------");
-        
+
             // do the transformations
             XsltProcessor xsltTransformer = new XsltProcessor(
                     this.m_XsltFilePath, xmlDir);
@@ -117,17 +123,17 @@ public class MetadataExporter
         {
             FileUtils.copyDirectory(new File(aMetadataSourcePath), xmlDir);
         }
-        
+
         // rename files
         MetadataFileRenamer rn = new MetadataFileRenamer(xmlDir);
-        
+
         // add sanity check to be sure that we are using transformed files
         // check that the files are XSLT transformed files
-        if (! aNoCheck)
-           rn.doSanityCheck(2);
+        if (!aNoCheck)
+            rn.doSanityCheck(2);
 
         logger.info("------------ Rename Files            ------------");
-        
+
         rn.processFiles();
 
         logger.info("------------ Calculate MD5s          ------------");
@@ -145,12 +151,13 @@ public class MetadataExporter
         {
             Release latest = this.m_ReleaseDB.add(newRelease);
             logger.info("Created release {} in ReleaseDB.", latest.getName());
-            
+
             // expose Delta
             if (aOutputDir != null)
             {
-               logger.info("Export release {} to {}.", latest.getName(), aOutputDir);
-               latest.exportReleaseDeltaTo(aOutputDir);
+                logger.info("Export release {} to {}.", latest.getName(),
+                        aOutputDir);
+                latest.exportReleaseDeltaTo(aOutputDir);
             }
         }
         else
@@ -175,12 +182,13 @@ public class MetadataExporter
                 return name.endsWith(".xml");
             }
         });
-        
+
         if (files2Process == null)
-            throw new Exception("Cannot calculate MD5s. InputDir " + aInputDir.getPath() + " doesn't exist");
+            throw new Exception("Cannot calculate MD5s. InputDir "
+                    + aInputDir.getPath() + " doesn't exist");
 
         logger.info("Creating {} MD5 files.", files2Process.length);
-        
+
         String outputFilename;
         for (File file : files2Process)
         {
@@ -191,27 +199,28 @@ public class MetadataExporter
             Checksummer.doMD5Checksum(file, new File(outputFilename));
         }
     }
-    
+
     /**
      * Used to print the different created, modified and deleted files
+     * 
      * @param aMsg
      * @param aNbFile
      */
-    private void cleverPrinting(String aMsg,int aNbFile)
+    private void cleverPrinting(String aMsg, int aNbFile)
     {
-       // print only the first 10 files after it is too much 
+        // print only the first 10 files after it is too much
         if (aNbFile < 10)
         {
-          logger.info(aMsg);
+            logger.info(aMsg);
         }
         else if (aNbFile == 10)
         {
-          logger.info("Too many files. Stop polluting the output.");   
-          logger.debug(aMsg);
+            logger.info("Too many files. Stop polluting the output.");
+            logger.debug(aMsg);
         }
         else
         {
-           logger.debug(aMsg);
+            logger.debug(aMsg);
         }
     }
 
@@ -243,12 +252,13 @@ public class MetadataExporter
         {
             // Copy XML into Delta/Result
             tempRelease.addInDeltaResult(aTempXmlDir);
-            
-            int         nbCreated  = 0;
+
+            int nbCreated = 0;
             for (String filename : tempRelease.getDeltaXmlFilenames())
             {
-                this.cleverPrinting(Release.getIDFromReleaseFile(filename) + " metadata is new.", nbCreated);
-                
+                this.cleverPrinting(Release.getIDFromReleaseFile(filename)
+                        + " metadata is new.", nbCreated);
+
                 nbCreated++;
             }
         }
@@ -260,12 +270,12 @@ public class MetadataExporter
             HashMap<String, Pair<String, String>> curr = tempRelease
                     .getSrcMD5s();
 
-            Set<String> currSet    = new HashSet<String>();
+            Set<String> currSet = new HashSet<String>();
             Set<String> deletedSet = new HashSet<String>();
-            Set<String> newSet     = new HashSet<String>();
-            int         nbDeleted  = 0;
-            int         nbCreated  = 0;
-            int         nbModified = 0;
+            Set<String> newSet = new HashSet<String>();
+            int nbDeleted = 0;
+            int nbCreated = 0;
+            int nbModified = 0;
 
             /*
              * calculate the delta It is important to understand that the UID is
@@ -299,17 +309,17 @@ public class MetadataExporter
                                 "MD5 Differents for {}. old:[{}], new:[{}]",
                                 new String[] { key, prev.get(key).getKey(),
                                         curr.get(key).getKey() });
-                        
-                        this.cleverPrinting(key + " metadata has been modified.", nbModified);
-                        
+
+                        this.cleverPrinting(key
+                                + " metadata has been modified.", nbModified);
+
                         nbModified++;
-                        
+
                         // add in newSet because it has been modified
                         newSet.add(key);
-                        
-                        
+
                     }
-                    
+
                     // remove from currSet in any case
                     currSet.remove(key);
                 }
@@ -317,12 +327,12 @@ public class MetadataExporter
 
             // elems left in currSet are new and need to be added to newSet
             newSet.addAll(currSet);
-            
+
             // print elems left in currSet which are the new ones
             for (String name : currSet)
             {
                 this.cleverPrinting(name + " metadata is new.", nbCreated);
-                
+
                 nbCreated++;
             }
 
@@ -334,7 +344,7 @@ public class MetadataExporter
 
                 // get the basename from curr HashMap
                 basename = curr.get(name).getValue();
-                
+
                 tempRelease.addFileInDeltaResult(new File(aTempXmlDir
                         + File.separator + basename + ".xml"));
             }
@@ -342,14 +352,18 @@ public class MetadataExporter
             // add files in deleted
             for (String name : deletedSet)
             {
-                this.cleverPrinting(name + " metadata has been deleted.", nbDeleted);
+                this.cleverPrinting(name + " metadata has been deleted.",
+                        nbDeleted);
                 nbDeleted++;
                 tempRelease.flagAsDeleted(name);
             }
-            
-            if (nbCreated+nbModified+nbDeleted != 0)
+
+            if (nbCreated + nbModified + nbDeleted != 0)
             {
-              logger.info("Delta Summary: " + nbCreated + " new - " + nbModified + " modified - " + nbDeleted + " deleted.");
+                logger
+                        .info("Delta Summary: " + nbCreated + " new - "
+                                + nbModified + " modified - " + nbDeleted
+                                + " deleted.");
             }
         }
 

@@ -56,18 +56,14 @@ public class Config
      */
     private static boolean                                      _exportSystem                  = false;
 
-    
     private static Properties                                   _properties                    = null;
 
-    
-    private static ConfigurationMonitor                                   _survey                        = null;
+    private static ConfigurationMonitor                         _survey                        = null;
 
-    
     private static Hashtable<Object, Object>                    _defines                       = null;
 
     private static String                                       _filePath                      = null;
 
-    
     private static String                                       _FQCN                          = Config.class
                                                                                                        .getName()
                                                                                                        + ".";
@@ -161,7 +157,8 @@ public class Config
 
     static public void bootStrap()
     {
-        // do nothing (create to forced the Config object to load the Configuation
+        // do nothing (create to forced the Config object to load the
+        // Configuation
         // file)
         groupNames();
     }
@@ -172,8 +169,9 @@ public class Config
     /**
      * Constructor
      * 
-     * @param aStream the config stream
-     *            
+     * @param aStream
+     *            the config stream
+     * 
      */
     public Config(InputStream aStream)
     {
@@ -234,8 +232,6 @@ public class Config
 
     // ~ Methods
     // ----------------------------------------------------------------
-
-    
 
     /**
      * create a new group named group
@@ -332,7 +328,7 @@ public class Config
         return null;
 
     }
-    
+
     /**
      * return key from Group group as a long
      * 
@@ -373,6 +369,7 @@ public class Config
 
     /**
      * Return the group named group
+     * 
      * @param group
      * @param defaultValue
      * @return group as a Hashtable<Object,Object>
@@ -410,7 +407,8 @@ public class Config
      * @param defaultValue
      * @return
      */
-    public static String getAsString(String group, String key, String defaultValue)
+    public static String getAsString(String group, String key,
+            String defaultValue)
     {
         String value;
 
@@ -424,6 +422,7 @@ public class Config
 
     /**
      * return group names
+     * 
      * @return group names in a Vector
      */
     public static Vector<String> groupNames()
@@ -436,8 +435,6 @@ public class Config
 
         return temp;
     }
-
-   
 
     /**
      * transform the comma separated params in a Set
@@ -510,7 +507,8 @@ public class Config
     {
         try
         {
-            String bool = _removeDoubleQuote(getAsString(group, key)).toLowerCase();
+            String bool = _removeDoubleQuote(getAsString(group, key))
+                    .toLowerCase();
             return bool.equals("true") || bool.equals("yes");
         }
         catch (Exception e)
@@ -617,14 +615,15 @@ public class Config
     {
         try
         {
-            return Integer.parseInt(_removeDoubleQuote(getAsString(group, key)));
+            return Integer
+                    .parseInt(_removeDoubleQuote(getAsString(group, key)));
         }
         catch (Exception e)
         {
             return defaultValue;
         }
     }
-    
+
     /**
      * 
      * @param group
@@ -636,16 +635,18 @@ public class Config
     {
         try
         {
-            return Short.parseShort(_removeDoubleQuote(getAsString(group, key)));
+            return Short
+                    .parseShort(_removeDoubleQuote(getAsString(group, key)));
         }
         catch (Exception e)
         {
             return defaultValue;
         }
     }
-    
+
     /**
      * Return the non empty string or null if empty
+     * 
      * @param group
      * @param key
      * @return non empty string or null if empty
@@ -664,6 +665,7 @@ public class Config
 
     /**
      * Return the non empty string or else the default value
+     * 
      * @param group
      * @param key
      * @param defaultValue
@@ -681,7 +683,7 @@ public class Config
 
         return defaultValue;
     }
-    
+
     /**
      * 
      * @param group
@@ -750,8 +752,6 @@ public class Config
         return value;
     }
 
-   
-    
     /**
      * 
      * @param group
@@ -802,11 +802,11 @@ public class Config
     }
 
     /**
-    * 
-    * @param reload
-    * @param aConfStream
-    * @throws Exception
-    */
+     * 
+     * @param reload
+     * @param aConfStream
+     * @throws Exception
+     */
     private static void _loadConfig(boolean reload, InputStream aConfStream)
             throws Exception
     {
@@ -935,8 +935,6 @@ public class Config
         }
     }
 
-   
-
     /**
      * 
      * @param message
@@ -993,9 +991,9 @@ public class Config
                                         .length() > 2)) ? callMethod(toResolv
                                         .substring(1, toResolv.length() - 2))
                                         : ("${" + toResolv.substring(1) + "}")))
-                                : (((at = getAsString(toResolv.substring(1, index),
-                                        toResolv.substring(index + 1, toResolv
-                                                .length() - 1))) != null) ? at
+                                : (((at = getAsString(toResolv.substring(1,
+                                        index), toResolv.substring(index + 1,
+                                        toResolv.length() - 1))) != null) ? at
                                         : "${" + toResolv.substring(1) + "}"))
                         + getValue(tag.substring(end + 1));
             }

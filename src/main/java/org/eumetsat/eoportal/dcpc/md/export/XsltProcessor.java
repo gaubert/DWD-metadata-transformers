@@ -76,7 +76,7 @@ public class XsltProcessor
 
     // The directory where results will be generated
     private File                  m_OutputDir     = null;
-    
+
     // XSLT Transformer
     private Transformer           m_XsltTrans     = null;
 
@@ -132,17 +132,18 @@ public class XsltProcessor
                 throw new Exception("Cannot create " + this.m_OutputDir);
             }
         }
-        
+
         this.createXSLTTransformer();
-        
+
     }
-    
+
     private void createXSLTTransformer() throws Exception
     {
         // create an instance of TransformerFactory
         TransformerFactory transFact = TransformerFactory.newInstance();
-        
-        this.m_XsltTrans = transFact.newTransformer(new StreamSource(this.m_XsltFile));
+
+        this.m_XsltTrans = transFact.newTransformer(new StreamSource(
+                this.m_XsltFile));
     }
 
     /**
@@ -166,7 +167,7 @@ public class XsltProcessor
         }
 
         logger.debug("Transform files using XSLT 1.0.");
-        
+
         if (aPrettyPrint)
         {
             transformAndPrettyPrintFile(aFile2Process, this.m_XsltTrans,
@@ -204,17 +205,17 @@ public class XsltProcessor
                 return name.endsWith(".xml");
             }
         });
-        
-        if ( (files2Process == null) || files2Process.length == 0)
+
+        if ((files2Process == null) || files2Process.length == 0)
         {
-            logger.info("No XML files to process.");  
+            logger.info("No XML files to process.");
         }
         else
         {
             logger.info("Processing {} XML files.", files2Process.length);
-    
+
             logger.debug("Transform files using XSLT 1.0.");
-    
+
             try
             {
                 int cpt = 0;
@@ -222,7 +223,8 @@ public class XsltProcessor
                 {
                     if (aPrettyPrint)
                     {
-                        transformAndPrettyPrintFile(file, this.m_XsltTrans, this.m_OutputDir);
+                        transformAndPrettyPrintFile(file, this.m_XsltTrans,
+                                this.m_OutputDir);
                     }
                     else
                     {
@@ -337,9 +339,18 @@ public class XsltProcessor
 
         try
         {
-            xsltTransformer.setParameter("portal_url", Config.getAsString("XSLT", "portal_url","http://vnavigator.eumetsat.int/discovery/Start/Explore/DirectExtended.do?EOResourceIdentifier"));
-            xsltTransformer.setParameter("identifier_prefix", Config.getAsString("XSLT", "identifier_prefix","urn:x-wmo:md:int.eumetsat::"));
-            
+            xsltTransformer
+                    .setParameter(
+                            "portal_url",
+                            Config
+                                    .getAsString(
+                                            "XSLT",
+                                            "portal_url",
+                                            "http://vnavigator.eumetsat.int/discovery/Start/Explore/DirectExtended.do?EOResourceIdentifier"));
+            xsltTransformer.setParameter("identifier_prefix", Config
+                    .getAsString("XSLT", "identifier_prefix",
+                            "urn:x-wmo:md:int.eumetsat::"));
+
             xsltTransformer.transform(xmlSource, result);
 
             FileOutputStream oFile = new FileOutputStream(outputFileName);
