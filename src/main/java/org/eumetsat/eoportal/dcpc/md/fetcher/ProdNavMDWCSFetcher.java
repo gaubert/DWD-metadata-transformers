@@ -1,5 +1,6 @@
 package org.eumetsat.eoportal.dcpc.md.fetcher;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -17,18 +18,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ximpleware.AutoPilot;
-import com.ximpleware.FastLongBuffer;
-import com.ximpleware.NavException;
-import com.ximpleware.ParseException;
 import com.ximpleware.VTDGen;
 import com.ximpleware.VTDNav;
-import com.ximpleware.XPathEvalException;
-import com.ximpleware.XPathParseException;
 
-public class ProdNavMDWCSFetcher
+public class ProdNavMDWCSFetcher implements ProdNavFetcher
 {
     public static Map<String, String> NAMESPACES = new HashMap<String, String>();
 
+    public static int HTTP_OK    = 200;
+    public static int BUFFERSIZE = 1024*1024*2;
+    
     static
     {
         NAMESPACES.put("gmd", "http://www.isotc211.org/2005/gmd");
@@ -45,34 +44,61 @@ public class ProdNavMDWCSFetcher
     
     private static String ms_MD_XPATH_EXPR = "//gmi:MI_Metadata";
     
-    public ProdNavMDWCSFetcher(String aWorkingDirPath) throws IOException
+    public ProdNavMDWCSFetcher() throws IOException
     {
-        FileSystem.createDirs(aWorkingDirPath);
-
-        m_WorkingDir = new File(aWorkingDirPath);
+        m_WorkingDir = null;
     }
     
-    private File get_data() throws Exception
+    private File get_data(File aTempDir) throws Exception
     {  
-        PostMethod post = new PostMethod("http://vnavigator.eumetsat.int:80/soapServices/CSWStartup");
+        String url = Config.getAsString("ProdNavMDCSWFetcher", "url", "http://vnavigator.eumetsat.int:80/soapServices/CSWStartup");
+        
+        logger.info("Get Data from OGC CSW server (url=" + url + " )");
+        
+        PostMethod post = new PostMethod(url);
         
         //String agent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/534.3 (KHTML, like Gecko) Chrome/6.0.472.63 Safari/534.3";
         
         // Request content will be retrieved directly
         // from the input stream
-        RequestEntity entity = new FileRequestEntity(new File("H:/WCS/csw_getrecords.xml"), "text/xml; charset=ISO-8859-1");
+        File csw_request = new File(Config.getAsString("ProdNavMDCSWFetcher", "csw_file", "../conf/csw_getrecords.xml"));
+        
+        RequestEntity entity = new FileRequestEntity(csw_request, "text/xml; charset=ISO-8859-1");
+        
         post.setRequestEntity(entity);
         // Get HTTP client
         HttpClient httpclient = new HttpClient();
         // Execute request
+        
+  
+        File outputFile = new File(aTempDir + File.separator + "post_response.xml");
+        
         try 
         {
             int result = httpclient.executeMethod(post);
             // Display status code
-            System.out.println("Response status code: " + result);
-            // Display response
-            System.out.println("Response body: ");
-            System.out.println(post.getResponseBodyAsString());
+            logger.debug("HTTP Response status code: " + result);
+            
+            if (result == HTTP_OK)
+            {
+                BufferedInputStream in = new BufferedInputStream(post.getResponseBodyAsStream(),BUFFERSIZE);
+                FileOutputStream out = new FileOutputStream(outputFile);
+                
+                // 2 MegaBytes buffer used
+                byte [] buffer = new byte[BUFFERSIZE];
+                int bytesRead = 0;
+                while ( (bytesRead = in.read(buffer, 0, BUFFERSIZE))!= -1 )
+                {
+                    out.write(buffer, 0, bytesRead);
+                }
+                
+                in.close();
+                out.close();
+            }
+            else
+            {
+                throw new Exception("Error when accessing WCS Product Navigator Interface (HTTP Response Code " + result + "). See logs for more info.");
+            }
         } 
         finally 
         {
@@ -80,7 +106,7 @@ public class ProdNavMDWCSFetcher
             post.releaseConnection();
         }
         
-        return null;
+        return outputFile;
     }
     
     /**
@@ -93,16 +119,13 @@ public class ProdNavMDWCSFetcher
         logger.info("------------ Export Data from ProdNav using WCS ----------");
         logger.info("This could take few minutes.");
 
-        this.get_data();
-        System.exit(1);
-        
-        
         File topTempDir = FileSystem.createTempDirectory("download-", this.m_WorkingDir);
 
-        
-        File f = new File("H:/WCS/res.txt");
-        FileInputStream fis =  new FileInputStream(f);
-        byte[] b = new byte[(int) f.length()];
+       
+        File xmlRecordsFile = this.get_data(topTempDir);
+ 
+        FileInputStream fis =  new FileInputStream(xmlRecordsFile);
+        byte[] b = new byte[(int) xmlRecordsFile.length()];
         fis.read(b);
 
         // output file containing fragments
@@ -138,8 +161,19 @@ public class ProdNavMDWCSFetcher
 
         fis.close();
         fos.close();
-
+        
+        //remove post response
+        xmlRecordsFile.delete();
        
-         return null;
+        // return inDir
+        return topTempDir;
+    }
+    
+    @Override
+    public void setWorkingDir(String aWorkingDirPath) throws Exception
+    {
+        FileSystem.createDirs(aWorkingDirPath);
+
+        m_WorkingDir = new File(aWorkingDirPath);
     }
 }

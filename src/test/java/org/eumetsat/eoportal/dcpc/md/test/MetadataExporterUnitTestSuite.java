@@ -8,7 +8,8 @@ import junit.framework.TestCase;
 import org.eumetsat.eoportal.dcpc.commons.DateUtil;
 import org.eumetsat.eoportal.dcpc.commons.Obfuscator;
 import org.eumetsat.eoportal.dcpc.md.export.XsltProcessor;
-import org.eumetsat.eoportal.dcpc.md.fetcher.ProdNavMDWCSFetcher;
+import org.eumetsat.eoportal.dcpc.md.fetcher.ProdNavFetcher;
+import org.eumetsat.eoportal.dcpc.md.fetcher.ProdNavFetcherFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -105,7 +106,7 @@ public class MetadataExporterUnitTestSuite extends TestCase
     public void testProdNavWCSFetcher()
     {   try
         {
-            ProdNavMDWCSFetcher wcsFetcher = new ProdNavMDWCSFetcher("H:/CSW-Results");
+            ProdNavFetcher wcsFetcher = ProdNavFetcherFactory.getFetcher("H:/CSW-Results");
        
             wcsFetcher.fetch();
         }

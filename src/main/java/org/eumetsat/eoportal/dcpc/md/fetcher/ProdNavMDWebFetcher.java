@@ -2,25 +2,17 @@ package org.eumetsat.eoportal.dcpc.md.fetcher;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpConnection;
-import org.apache.commons.httpclient.methods.FileRequestEntity;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.RequestEntity;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.eumetsat.eoportal.dcpc.commons.FileSystem;
 import org.eumetsat.eoportal.dcpc.commons.Obfuscator;
 import org.eumetsat.eoportal.dcpc.commons.Pair;
 import org.eumetsat.eoportal.dcpc.commons.Unzipper;
-import org.eumetsat.eoportal.dcpc.md.export.CMDRunner;
 import org.eumetsat.eoportal.dcpc.commons.conf.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +25,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 
-public class ProdNavMDWebFetcher
+public class ProdNavMDWebFetcher implements ProdNavFetcher
 {
     public final static String P1XPATH     = "//div[@id='contentLoginBox']/form";
     public final static String LFILESXPATH = "//div[@class='mainWrapper']/form[@id='EOExportForm']/div[@id='backups']/ul[@class='zip']/li/a";
@@ -43,13 +35,11 @@ public class ProdNavMDWebFetcher
     public final static Logger logger      = LoggerFactory
                                                    .getLogger(ProdNavMDWebFetcher.class);
 
-    public ProdNavMDWebFetcher(String aWorkingDirPath) throws IOException
+    public ProdNavMDWebFetcher() throws IOException
     {
-        FileSystem.createDirs(aWorkingDirPath);
+        m_WorkingDir = null;
 
-        m_WorkingDir = new File(aWorkingDirPath);
-
-        m_Obfuscated = Config.booleanAt("ProdNavMDFetcher", "obfuscated", true);
+        m_Obfuscated = Config.booleanAt("ProdNavMDWebFetcher", "obfuscated", true);
     }
 
     private Pair<String, String> getCredentials() throws Exception
@@ -57,11 +47,11 @@ public class ProdNavMDWebFetcher
         String log;
         String pass;
 
-        if ((log = Config.getAsString("ProdNavMDFetcher", "login", null)) == null)
+        if ((log = Config.getAsString("ProdNavMDWebFetcher", "login", null)) == null)
             throw new Exception(
                     "Cannot find in the configuration file a login key in the group [ProdNavMDFetcher]");
 
-        if ((pass = Config.getAsString("ProdNavMDFetcher", "password", null)) == null)
+        if ((pass = Config.getAsString("ProdNavMDWebFetcher", "password", null)) == null)
             throw new Exception(
                     "Cannot find in the configuration file a password key in the group [ProdNavMDFetcher]");
 
@@ -113,7 +103,7 @@ public class ProdNavMDWebFetcher
         webClient.setAppletEnabled(false);
         webClient.setPrintContentOnFailingStatusCode(true);
 
-        if ((url = Config.getAsString("ProdNavMDFetcher", "url", null)) == null)
+        if ((url = Config.getAsString("ProdNavMDWebFetcher", "url", null)) == null)
             throw new Exception(
                     "Cannot find in the configuration file a login key in the group [ProdNavMDFetcher]");
 
@@ -228,5 +218,13 @@ public class ProdNavMDWebFetcher
         // unzip it there
         return Unzipper.unzip(destination.getAbsolutePath());
 
+    }
+
+    @Override
+    public void setWorkingDir(String aWorkingDirPath) throws Exception
+    {
+        FileSystem.createDirs(aWorkingDirPath);
+
+        m_WorkingDir = new File(aWorkingDirPath);
     }
 }
