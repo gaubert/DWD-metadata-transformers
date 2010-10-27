@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eumetsat.eoportal.dcpc.commons.FileSystem;
-import org.eumetsat.eoportal.dcpc.md.fetcher.ProdNavMDWebFetcher;
+import org.eumetsat.eoportal.dcpc.md.fetcher.ProdNavFetcher;
+import org.eumetsat.eoportal.dcpc.md.fetcher.ProdNavFetcherFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -337,8 +338,7 @@ public class CMDRunner
             // check if we need to download the data from the portal first
             if (((Boolean) aArguments.get("download")).booleanValue())
             {
-                ProdNavMDWebFetcher pNavFetcher = new ProdNavMDWebFetcher(
-                        workingDir.getAbsolutePath());
+                ProdNavFetcher pNavFetcher = ProdNavFetcherFactory.getFetcher(workingDir.getAbsolutePath());
                 inDir = pNavFetcher.fetch();
             }
             else

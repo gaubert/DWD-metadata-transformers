@@ -66,6 +66,7 @@
                         <fileset dir="${mdexp.etc}/conf">
                                 <include name="log4j.properties"/>
                                 <include name="md-exporter.conf"/>
+                        	    <include name="csw_getrecords.xml"/>
                         </fileset>
                 </copy>
                 
