@@ -234,6 +234,10 @@ public class MetadataExporter
     public Release calculateDelta(File aTopTempDir, File aTempXmlDir,
             File aTempMD5Dir) throws Exception
     {
+        int nbDeleted = 0;
+        int nbCreated = 0;
+        int nbModified = 0;
+        
         // create a temp release
         File releaseTempDir = FileSystem.createTempDirectory("release-",
                 aTopTempDir);
@@ -253,7 +257,6 @@ public class MetadataExporter
             // Copy XML into Delta/Result
             tempRelease.addInDeltaResult(aTempXmlDir);
 
-            int nbCreated = 0;
             for (String filename : tempRelease.getDeltaXmlFilenames())
             {
                 this.cleverPrinting(Release.getIDFromReleaseFile(filename)
@@ -273,9 +276,7 @@ public class MetadataExporter
             Set<String> currSet = new HashSet<String>();
             Set<String> deletedSet = new HashSet<String>();
             Set<String> newSet = new HashSet<String>();
-            int nbDeleted = 0;
-            int nbCreated = 0;
-            int nbModified = 0;
+            
 
             /*
              * calculate the delta It is important to understand that the UID is
@@ -357,14 +358,14 @@ public class MetadataExporter
                 nbDeleted++;
                 tempRelease.flagAsDeleted(name);
             }
-
-            if (nbCreated + nbModified + nbDeleted != 0)
-            {
-                logger
-                        .info("Delta Summary: " + nbCreated + " new - "
-                                + nbModified + " modified - " + nbDeleted
-                                + " deleted.");
-            }
+        }
+        
+        if (nbCreated + nbModified + nbDeleted != 0)
+        {
+            logger
+                    .info("Delta Summary: " + nbCreated + " new - "
+                            + nbModified + " modified - " + nbDeleted
+                            + " deleted.");
         }
 
         return tempRelease;
