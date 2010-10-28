@@ -29,7 +29,7 @@ import static java.util.Arrays.asList;
  */
 public class CMDRunner
 {
-    static final String            VERSION              = "v1.01";
+    static final String            VERSION              = "v1.1";
 
     static boolean                 DEBUG_ON             = false;
 
