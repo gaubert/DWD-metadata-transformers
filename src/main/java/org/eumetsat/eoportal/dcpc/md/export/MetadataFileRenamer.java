@@ -142,9 +142,14 @@ public class MetadataFileRenamer
 
             if (mdName != null)
             {
+                // replace all : in _ as : is not supported in windows as a character filename
+                mdName = mdName.replaceAll(":", "_");
+                
                 newFile = new File(this.strInputDirPath + File.separator + "Z_"
                         + mdName + "_C_EUMS" + ".xml");
-                // System.out.println("new File: " + newFile.toString());
+                
+                //System.out.println("Previous File: " + file.toString());
+                //System.out.println("new File: " + newFile.toString());
 
                 FileUtils.moveFile(file, newFile);
             }

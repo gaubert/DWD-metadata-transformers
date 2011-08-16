@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 
 import junit.framework.TestCase;
 
+import org.apache.commons.io.FileUtils;
 import org.eumetsat.eoportal.dcpc.commons.DateUtil;
 import org.eumetsat.eoportal.dcpc.commons.Obfuscator;
 import org.eumetsat.eoportal.dcpc.md.export.XsltProcessor;
@@ -103,12 +104,33 @@ public class MetadataExporterUnitTestSuite extends TestCase
         assertEquals(in,out);
     }
     
-    public void testProdNavWCSFetcher()
+    public void ztestProdNavWCSFetcher()
     {   try
         {
             ProdNavFetcher wcsFetcher = ProdNavFetcherFactory.getFetcher("H:/CSW-Results");
        
             wcsFetcher.fetch();
+        }
+        catch (Exception e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    
+    public void testCopyfiles()
+    {   try
+        {
+           String mdName = "Z:EO:EUM:DAT:MFG:HRIADC_C_EUMS.xml";
+           // replace all : in _ as : is not supported in windows as a character filename
+           mdName = mdName.replaceAll(":", "_");
+           
+           File oldFile  = new File("H:" + File.separator + "tmp" + File.separator + "mdexport-run-10427344222846480652224464422156180" + File.separator + "temp-19593542864750925942224466615718561" + File.separator + "temp" + File.separator + "XML-Files" + File.separator + "metadata_1.xml");
+           File newFile  = new File("H:\\tmp\\mdexport-run-10427344222846480652224464422156180\\temp-19593542864750925942224466615718561\\temp\\XML-Files\\" + mdName);
+    
+           System.out.println("oldFile = " + oldFile);
+           System.out.println("newFile = " + newFile);
+           FileUtils.moveFile(oldFile, newFile);
         }
         catch (Exception e)
         {
