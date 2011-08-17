@@ -60,4 +60,23 @@ public class XPathExtractor
         return (result != null) ? ((Node) result).getTextContent() : null;
 
     }
+    
+    /**
+     * Evaluate Expression on the given XML file
+     * 
+     * @param aFile
+     * @return the result as a String or null if nothing as been found
+     * @throws Exception
+     */
+    public String evaluateAsString(String aXmlString) throws Exception
+    {
+        DocumentBuilder builder = _domFactory.newDocumentBuilder();
+
+        Document doc = builder.parse(aXmlString);
+
+        Object result = this._XPathExpr.evaluate(doc, XPathConstants.NODE);
+
+        return (result != null) ? ((Node) result).getTextContent() : null;
+
+    }
 }
