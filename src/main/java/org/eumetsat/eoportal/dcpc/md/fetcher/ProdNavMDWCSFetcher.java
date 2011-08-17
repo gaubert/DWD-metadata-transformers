@@ -12,6 +12,8 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.FileRequestEntity;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
+import org.apache.commons.httpclient.methods.StringRequestEntity;
+import org.apache.commons.io.FileUtils;
 import org.eumetsat.eoportal.dcpc.commons.FileSystem;
 import org.eumetsat.eoportal.dcpc.commons.conf.Config;
 import org.slf4j.Logger;
@@ -42,14 +44,16 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
     
     private File  m_WorkingDir;
     
-    private static String ms_MD_XPATH_EXPR = "//gmi:MI_Metadata";
+    private static String ms_MD_XPATH_EXPR    = "//gmi:MI_Metadata";
+    private static String ms_MD_MATCH_RECS    = "//csw:SearchResults@numberOfRecordsMatched";
+    private static String ms_MD_RETURNED_RECS = "//csw:SearchResults@numberOfRecordsReturned";
     
     public ProdNavMDWCSFetcher() throws IOException
     {
         m_WorkingDir = null;
     }
     
-    private File get_data(File aTempDir) throws Exception
+    private File old_get_data(File aTempDir) throws Exception
     {  
         String url = Config.getAsString("ProdNavMDCSWFetcher", "url", "http://vnavigator.eumetsat.int:80/soapServices/CSWStartup");
         
@@ -104,6 +108,95 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
         {
             // Release current connection to the connection pool once you are done
             post.releaseConnection();
+        }
+        
+        return outputFile;
+    }
+    
+    private File get_data(File aTempDir) throws Exception
+    {  
+        // Request content will be retrieved directly
+        // read the request file (It has got variables to be replaced)
+        File   CSWFile       = new File(Config.getAsString("ProdNavMDCSWFetcher", "csw_file", "../conf/csw_getrecords.xml"));
+        String CSWRequest    = FileUtils.readFileToString(CSWFile);
+        RequestEntity entity = null;
+        
+        int    begin        = 1;
+        int    end          = 50;
+        int    total        = 0;
+        int    Max          = 5000;
+        
+       
+        
+        
+        
+        String url = Config.getAsString("ProdNavMDCSWFetcher", "url", "http://vnavigator.eumetsat.int:80/soapServices/CSWStartup");
+        
+        logger.info("Get Data from OGC CSW server (url=" + url + " )");
+        
+        PostMethod post = new PostMethod(url);
+        
+        // Get HTTP client
+        HttpClient httpclient = new HttpClient();
+        
+        // Execute request
+        File outputFile = new File(aTempDir + File.separator + "post_response.xml");
+        
+        int result = -1;
+        
+        /*
+         * TODO:
+         *  - Send Request and get retrieved data in memory (limit the number of returned records to something resonable) maybe this can streamed ?
+         *  - XPath matchedRecords and returnedRecords (update begin and end)
+         *  - go to the records and save them in the file
+         *  - iterate over the records 
+         * 
+         */
+        
+        while (total < Max)
+        {
+        
+            try 
+            {
+                // update begin and end to fetch the following metadata records.
+                CSWRequest.replaceAll("$Begin", String.valueOf(begin));
+                CSWRequest.replaceAll("$End"  , String.valueOf(end));
+                
+                entity = new StringRequestEntity(CSWRequest, "text/xml", "charset=ISO-8859-1");
+                
+                // add the request
+                post.setRequestEntity(entity);
+                
+                result = httpclient.executeMethod(post);
+                // Display status code
+                logger.debug("HTTP Response status code: " + result);
+                
+                if (result == HTTP_OK)
+                {
+                    BufferedInputStream in = new BufferedInputStream(post.getResponseBodyAsStream(),BUFFERSIZE);
+                    FileOutputStream out = new FileOutputStream(outputFile);
+                    
+                    // 2 MegaBytes buffer used
+                    byte [] buffer = new byte[BUFFERSIZE];
+                    int bytesRead = 0;
+                    while ( (bytesRead = in.read(buffer, 0, BUFFERSIZE))!= -1 )
+                    {
+                        out.write(buffer, 0, bytesRead);
+                    }
+                    
+                    in.close();
+                    out.close();
+                }
+                else
+                {
+                    throw new Exception("Error when accessing WCS Product Navigator Interface (HTTP Response Code " + result + "). See logs for more info.");
+                }
+            } 
+            finally 
+            {
+                // Release current connection to the connection pool once you are done
+                post.releaseConnection();
+            }
         }
         
         return outputFile;
