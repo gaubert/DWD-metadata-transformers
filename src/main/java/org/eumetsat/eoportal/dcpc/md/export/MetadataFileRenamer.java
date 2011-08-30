@@ -44,7 +44,7 @@ public class MetadataFileRenamer
     public final static Logger                  logger              = LoggerFactory
                                                                             .getLogger(MetadataFileRenamer.class);
 
-    private static final SimpleNamespaceContext ms_NamespaceContext = new SimpleNamespaceContext();
+    public static final SimpleNamespaceContext ms_NamespaceContext = new SimpleNamespaceContext();
 
     // TODO To be put in a configuration file with the namespaces
     private static final String                 ms_XPathGetName     = "gmd:MD_Metadata/gmd:fileIdentifier/gco:CharacterString";
