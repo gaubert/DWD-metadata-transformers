@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,13 +16,20 @@ import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.io.FileUtils;
 import org.eumetsat.eoportal.dcpc.commons.FileSystem;
+import org.eumetsat.eoportal.dcpc.commons.Pair;
 import org.eumetsat.eoportal.dcpc.commons.conf.Config;
+import org.eumetsat.eoportal.dcpc.commons.xml.XPathExtractor;
+
+import org.eumetsat.eoportal.dcpc.md.export.MetadataFileRenamer; // for Namespace to be moved
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ximpleware.AutoPilot;
 import com.ximpleware.VTDGen;
 import com.ximpleware.VTDNav;
+
+
 
 public class ProdNavMDWCSFetcher implements ProdNavFetcher
 {
@@ -45,6 +53,7 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
     private File  m_WorkingDir;
     
     private static String ms_MD_XPATH_EXPR    = "//gmi:MI_Metadata";
+    
     private static String ms_MD_MATCH_RECS    = "//csw:SearchResults@numberOfRecordsMatched";
     private static String ms_MD_RETURNED_RECS = "//csw:SearchResults@numberOfRecordsReturned";
     
@@ -113,7 +122,25 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
         return outputFile;
     }
     
-    private File get_data(File aTempDir) throws Exception
+    /**
+     * Return info from the CSW Request
+     * @param aXmlFile
+     * @return Pair(nbRecordsReturned, TotalNumberOfRecordsMatched)
+     * @throws Exception
+     */
+    private Pair<String, String> getRecordInfo(File aXmlFile) throws Exception
+    {
+        XPathExtractor xpathExtractor = new XPathExtractor();
+
+        xpathExtractor.setXPathExpression(ms_MD_RETURNED_RECS, MetadataFileRenamer.ms_NamespaceContext);
+        
+        String returned = xpathExtractor.evaluateAsString(aXmlFile);
+        String total    = xpathExtractor.evaluateAsString(aXmlFile);
+        
+        return new Pair<String,String>(returned, total);
+    }
+    
+    private ArrayList<File> getData(File aTempDir) throws Exception
     {  
         // Request content will be retrieved directly
         // read the request file (It has got variables to be replaced)
@@ -121,14 +148,13 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
         String CSWRequest    = FileUtils.readFileToString(CSWFile);
         RequestEntity entity = null;
         
-        int    begin        = 1;
-        int    end          = 50;
-        int    total        = 0;
-        int    Max          = 5000;
+        int    begin           = 1;
+        int    end             = 50;
+        int    totalReceived   = 0;
+        int    max             = 5000;
+        int    nbFiles         = 0;
         
-       
-        
-        
+        ArrayList<File> outputFiles = new ArrayList<File>();
         
         String url = Config.getAsString("ProdNavMDCSWFetcher", "url", "http://vnavigator.eumetsat.int:80/soapServices/CSWStartup");
         
@@ -138,9 +164,6 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
         
         // Get HTTP client
         HttpClient httpclient = new HttpClient();
-        
-        // Execute request
-        File outputFile = new File(aTempDir + File.separator + "post_response.xml");
         
         int result = -1;
         
@@ -153,7 +176,7 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
          * 
          */
         
-        while (total < Max)
+        while (totalReceived < max)
         {
         
             try 
@@ -173,7 +196,11 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
                 
                 if (result == HTTP_OK)
                 {
-                    BufferedInputStream in = new BufferedInputStream(post.getResponseBodyAsStream(),BUFFERSIZE);
+                    // Execute request
+                    File outputFile = new File(aTempDir + File.separator + "post_response_file_" + String.valueOf(nbFiles) + ".xml");
+                    
+                    BufferedInputStream in = new BufferedInputStream(post.getResponseBodyAsStream(), BUFFERSIZE);
+                    
                     FileOutputStream out = new FileOutputStream(outputFile);
                     
                     // 2 MegaBytes buffer used
@@ -186,6 +213,21 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
                     
                     in.close();
                     out.close();
+                    
+                    // increment nb_files
+                    nbFiles++;
+                    
+                    // get record info
+                    Pair<String,String> recInfo = getRecordInfo(outputFile);
+                    
+                    // update max and totalReceived
+                    totalReceived += Integer.parseInt(recInfo.getKey());
+                    max = Integer.parseInt(recInfo.getValue());
+                    
+                    // Add outputFile in the files to parse
+                    outputFiles.add(outputFile);
+                    
+                    
                 }
                 else
                 {
@@ -199,7 +241,7 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
             }
         }
         
-        return outputFile;
+        return outputFiles;
     }
     
     /**
@@ -214,50 +256,51 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
 
         File topTempDir = FileSystem.createTempDirectory("download-", this.m_WorkingDir);
 
-       
-        File xmlRecordsFile = this.get_data(topTempDir);
+        ArrayList<File> xmlRecordsFiles = this.get_data(topTempDir);
  
-        FileInputStream fis =  new FileInputStream(xmlRecordsFile);
-        byte[] b = new byte[(int) xmlRecordsFile.length()];
-        fis.read(b);
-
-        // output file containing fragments
-        FileOutputStream fos = null;
-        int count = 0;
-        
-        // instantiate the parser
-        VTDGen vg = new VTDGen();
-        vg.setDoc(b);
-        vg.parse(true);  // set namespace awareness to true 
-        VTDNav vn = vg.getNav();
-        AutoPilot ap = new AutoPilot(vn);
-        
-        // add Namespaces
-        for (String key : NAMESPACES.keySet())
+        for (File aFile : xmlRecordsFiles)
         {
-            ap.declareXPathNameSpace(key, NAMESPACES.get(key));
+            FileInputStream fis =  new FileInputStream(aFile);
+            byte[] b = new byte[(int) aFile.length()];
+            fis.read(b);
+    
+            // output file containing fragments
+            FileOutputStream fos = null;
+            int count = 0;
+            
+            // instantiate the parser
+            VTDGen vg = new VTDGen();
+            vg.setDoc(b);
+            vg.parse(true);  // set namespace awareness to true 
+            VTDNav vn = vg.getNav();
+            AutoPilot ap = new AutoPilot(vn);
+            
+            // add Namespaces
+            for (String key : NAMESPACES.keySet())
+            {
+                ap.declareXPathNameSpace(key, NAMESPACES.get(key));
+            }
+            
+            // get to the SOAP header
+            ap.selectXPath(ms_MD_XPATH_EXPR);
+            logger.debug("expr string is " + ap.getExprString());
+            
+            while(ap.evalXPath()!= -1)
+            {
+                fos = new FileOutputStream(new File(topTempDir + File.separator + "metadata_" + count +".xml"));
+                long l = vn.getElementFragment();
+                int len = (int) (l>>32);
+                int offset = (int) l;
+                fos.write(b, offset, len); //write the fragment out into out.txt
+                count++;
+            }
+    
+            fis.close();
+            fos.close();
+            
+            //remove post response
+            aFile.delete();
         }
-        
-        // get to the SOAP header
-        ap.selectXPath(ms_MD_XPATH_EXPR);
-        logger.debug("expr string is " + ap.getExprString());
-        
-        while(ap.evalXPath()!= -1)
-        {
-            fos = new FileOutputStream(new File(topTempDir + File.separator + "metadata_" + count +".xml"));
-            long l = vn.getElementFragment();
-            int len = (int) (l>>32);
-            int offset = (int) l;
-            fos.write(b, offset, len); //write the fragment out into out.txt
-            count++;
-        }
-
-        fis.close();
-        fos.close();
-        
-        //remove post response
-        xmlRecordsFile.delete();
-       
         // return inDir
         return topTempDir;
     }
