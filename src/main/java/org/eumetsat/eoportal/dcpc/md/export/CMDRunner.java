@@ -376,7 +376,7 @@ public class CMDRunner
             {
                 CMDRunner.logger
                         .info("------------ Cleaning Working Dir     ----------");
-                FileSystem.deleteDirs(workingDir);
+                //FileSystem.deleteDirs(workingDir);
             }
         }
 
