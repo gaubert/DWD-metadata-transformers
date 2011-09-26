@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.methods.FileRequestEntity;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
@@ -35,8 +34,9 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
 {
     public static Map<String, String> NAMESPACES = new HashMap<String, String>();
 
-    public static int HTTP_OK    = 200;
-    public static int BUFFERSIZE = 1024*1024*2;
+    public static int HTTP_OK        = 200;
+    public static int BUFFERSIZE     = 1024*1024*2;
+    public static int REC_BATCH_SIZE = 70; // retrieve records by batch of X
     
     static
     {
@@ -54,72 +54,13 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
     
     private static String ms_MD_XPATH_EXPR    = "//gmi:MI_Metadata";
     
-    private static String ms_MD_MATCH_RECS    = "//csw:SearchResults@numberOfRecordsMatched";
-    private static String ms_MD_RETURNED_RECS = "//csw:SearchResults@numberOfRecordsReturned";
+    // to complete xpath expression //csw:GetRecordsResponse/SearchResults@numberOfRecordsMatched
+    private static String ms_MD_MATCH_RECS    = "//@numberOfRecordsMatched";
+    private static String ms_MD_RETURNED_RECS = "//@numberOfRecordsReturned";
     
     public ProdNavMDWCSFetcher() throws IOException
     {
         m_WorkingDir = null;
-    }
-    
-    private File old_get_data(File aTempDir) throws Exception
-    {  
-        String url = Config.getAsString("ProdNavMDCSWFetcher", "url", "http://vnavigator.eumetsat.int:80/soapServices/CSWStartup");
-        
-        logger.info("Get Data from OGC CSW server (url=" + url + " )");
-        
-        PostMethod post = new PostMethod(url);
-        
-        //String agent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/534.3 (KHTML, like Gecko) Chrome/6.0.472.63 Safari/534.3";
-        
-        // Request content will be retrieved directly
-        // from the input stream
-        File csw_request = new File(Config.getAsString("ProdNavMDCSWFetcher", "csw_file", "../conf/csw_getrecords.xml"));
-        
-        RequestEntity entity = new FileRequestEntity(csw_request, "text/xml; charset=ISO-8859-1");
-        
-        post.setRequestEntity(entity);
-        // Get HTTP client
-        HttpClient httpclient = new HttpClient();
-        // Execute request
-        
-  
-        File outputFile = new File(aTempDir + File.separator + "post_response.xml");
-        
-        try 
-        {
-            int result = httpclient.executeMethod(post);
-            // Display status code
-            logger.debug("HTTP Response status code: " + result);
-            
-            if (result == HTTP_OK)
-            {
-                BufferedInputStream in = new BufferedInputStream(post.getResponseBodyAsStream(),BUFFERSIZE);
-                FileOutputStream out = new FileOutputStream(outputFile);
-                
-                // 2 MegaBytes buffer used
-                byte [] buffer = new byte[BUFFERSIZE];
-                int bytesRead = 0;
-                while ( (bytesRead = in.read(buffer, 0, BUFFERSIZE))!= -1 )
-                {
-                    out.write(buffer, 0, bytesRead);
-                }
-                
-                in.close();
-                out.close();
-            }
-            else
-            {
-                throw new Exception("Error when accessing WCS Product Navigator Interface (HTTP Response Code " + result + "). See logs for more info.");
-            }
-        } 
-        finally 
-        {
-            // Release current connection to the connection pool once you are done
-            post.releaseConnection();
-        }
-        
-        return outputFile;
     }
     
     /**
@@ -135,7 +76,12 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
         xpathExtractor.setXPathExpression(ms_MD_RETURNED_RECS, MetadataFileRenamer.ms_NamespaceContext);
         
         String returned = xpathExtractor.evaluateAsString(aXmlFile);
+        
+        xpathExtractor.setXPathExpression(ms_MD_MATCH_RECS   , MetadataFileRenamer.ms_NamespaceContext);
+        
         String total    = xpathExtractor.evaluateAsString(aXmlFile);
+        
+        logger.debug("total:" + total + " returned:" + returned);
         
         return new Pair<String,String>(returned, total);
     }
@@ -144,23 +90,23 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
     {  
         // Request content will be retrieved directly
         // read the request file (It has got variables to be replaced)
-        File   CSWFile       = new File(Config.getAsString("ProdNavMDCSWFetcher", "csw_file", "../conf/csw_getrecords.xml"));
-        String CSWRequest    = FileUtils.readFileToString(CSWFile);
+        File   CSWFile           = new File(Config.getAsString("ProdNavMDCSWFetcher", "csw_file", "../conf/csw_getrecords.xml"));
+        String origCSWReq        = FileUtils.readFileToString(CSWFile);
+        String modCSWReq         = null;
         RequestEntity entity = null;
         
-        int    begin           = 1;
-        int    end             = 50;
+        int    begin           = 0;
+        int    end             = REC_BATCH_SIZE;
         int    totalReceived   = 0;
-        int    max             = 5000;
-        int    nbFiles         = 0;
+        int    max             = 5000; // max theorical at the moment
+        
+        int    nbFiles         = 0; // to name the different files
         
         ArrayList<File> outputFiles = new ArrayList<File>();
         
         String url = Config.getAsString("ProdNavMDCSWFetcher", "url", "http://vnavigator.eumetsat.int:80/soapServices/CSWStartup");
         
         logger.info("Get Data from OGC CSW server (url=" + url + " )");
-        
-        PostMethod post = new PostMethod(url);
         
         // Get HTTP client
         HttpClient httpclient = new HttpClient();
@@ -178,18 +124,19 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
         
         while (totalReceived < max)
         {
-        
-            try 
-            {
                 // update begin and end to fetch the following metadata records.
-                CSWRequest.replaceAll("$Begin", String.valueOf(begin));
-                CSWRequest.replaceAll("$End"  , String.valueOf(end));
+                modCSWReq = origCSWReq.replaceAll("\\$Begin", String.valueOf(begin));
+                modCSWReq = modCSWReq.replaceAll("\\$End"  , String.valueOf(REC_BATCH_SIZE)); // need to take the modCSWReq otherwise we loose the begin
+               
+                logger.info("CSWREQUEST: " + modCSWReq);
                 
-                entity = new StringRequestEntity(CSWRequest, "text/xml", "charset=ISO-8859-1");
+                entity = new StringRequestEntity(modCSWReq, "text/xml;charset=ISO-8859-1", null);
+                
+                PostMethod post = new PostMethod(url);
                 
                 // add the request
                 post.setRequestEntity(entity);
-                
+                 
                 result = httpclient.executeMethod(post);
                 // Display status code
                 logger.debug("HTTP Response status code: " + result);
@@ -213,32 +160,38 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
                     
                     in.close();
                     out.close();
+                                        
+                    // get record info
+                    Pair<String, String> recInfo = getRecordInfo(outputFile);
                     
-                    // increment nb_files
+                    // update max which is the number of files to retrieve
+                    // and totalReceived which is the number received so far
+                    int iReturned = Integer.parseInt(recInfo.getKey());
+                    int iMax      = Integer.parseInt(recInfo.getValue());
+                    
+                    logger.info("iReturned = " + iReturned);
+                    
+                    totalReceived += iReturned;
+                    max            = iMax;
+                    
+                    begin += iReturned;
+                    end    = begin + REC_BATCH_SIZE;
+                    
+                    // increment file
                     nbFiles++;
                     
-                    // get record info
-                    Pair<String,String> recInfo = getRecordInfo(outputFile);
+                    logger.info("So far read " + totalReceived + " over " + max);
                     
-                    // update max and totalReceived
-                    totalReceived += Integer.parseInt(recInfo.getKey());
-                    max = Integer.parseInt(recInfo.getValue());
+                    logger.info("begin=" + begin + " end=" +end);
                     
                     // Add outputFile in the files to parse
-                    outputFiles.add(outputFile);
-                    
+                    outputFiles.add(outputFile);           
                     
                 }
                 else
                 {
                     throw new Exception("Error when accessing WCS Product Navigator Interface (HTTP Response Code " + result + "). See logs for more info.");
                 }
-            } 
-            finally 
-            {
-                // Release current connection to the connection pool once you are done
-                post.releaseConnection();
-            }
         }
         
         return outputFiles;
@@ -256,7 +209,9 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
 
         File topTempDir = FileSystem.createTempDirectory("download-", this.m_WorkingDir);
 
-        ArrayList<File> xmlRecordsFiles = this.get_data(topTempDir);
+        ArrayList<File> xmlRecordsFiles = this.getData(topTempDir);
+        
+        logger.info("All files " + xmlRecordsFiles);
  
         for (File aFile : xmlRecordsFiles)
         {
@@ -299,8 +254,11 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
             fos.close();
             
             //remove post response
-            aFile.delete();
+            //aFile.delete();
         }
+        
+        System.exit(1);
+        
         // return inDir
         return topTempDir;
     }
