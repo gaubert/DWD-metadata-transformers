@@ -95,7 +95,7 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
         String modCSWReq         = null;
         RequestEntity entity = null;
         
-        int    begin           = 0;
+        int    begin           = 1;
         int    end             = REC_BATCH_SIZE;
         int    totalReceived   = 0;
         int    max             = 5000; // max theorical at the moment
@@ -213,6 +213,8 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
         
         logger.info("All files " + xmlRecordsFiles);
  
+        int count = 0; // to distinguish the different records.
+        
         for (File aFile : xmlRecordsFiles)
         {
             FileInputStream fis =  new FileInputStream(aFile);
@@ -221,7 +223,7 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
     
             // output file containing fragments
             FileOutputStream fos = null;
-            int count = 0;
+            
             
             // instantiate the parser
             VTDGen vg = new VTDGen();
@@ -254,10 +256,8 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
             fos.close();
             
             //remove post response
-            //aFile.delete();
+            aFile.delete();
         }
-        
-        System.exit(1);
         
         // return inDir
         return topTempDir;
