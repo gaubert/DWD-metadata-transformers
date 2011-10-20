@@ -3,3 +3,4 @@
 	        <ElementSetName typeNames="gmd:MD_Metadata">full</ElementSetName>
     </Query>
 </GetRecords>
+http://schemas.opengis.net/iso19115full
