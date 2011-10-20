@@ -64,6 +64,7 @@
   </gmd:MD_Distribution>
  </gmd:distributionInfo>
  </xsl:template>
+ 
   
   <!-- map MD_Metadata, different namespace and child element order -->
   <xsl:template match="gmi:MI_Metadata">

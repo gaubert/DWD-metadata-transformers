@@ -34,8 +34,8 @@ public class MetadataExporterUnitTestSuite extends TestCase
     
     public void ztestXSLTTransformation()
     {
-        String xsltFile           = PROJ_DIR + "/etc/xslt/eum2iso_v4.1.xsl";
-        String file2Transform     = PROJ_DIR + "/etc/metadata/eo-portal-metadata/1.xml";
+        String xsltFile           = PROJ_DIR + "/etc/xslt/eum2isoapFull.xsl";
+        String file2Transform     = PROJ_DIR + "/etc/metadata/eo-portal-metadata/metadata_1.xml";
         String outputDir          = "/tmp";
         
         // do the transformations
@@ -118,7 +118,7 @@ public class MetadataExporterUnitTestSuite extends TestCase
         }
     }
     
-    public void testCopyfiles()
+    public void ztestCopyfiles()
     {   try
         {
            String mdName = "Z:EO:EUM:DAT:MFG:HRIADC_C_EUMS.xml";
