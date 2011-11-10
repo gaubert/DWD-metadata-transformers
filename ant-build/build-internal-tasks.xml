@@ -74,6 +74,7 @@
                 <copy todir="${dir}/xslt">
                         <fileset dir="${mdexp.etc}/xslt">
                                 <include name="eum2iso_v4.1.xsl"/>
+        	                    <include name="eum2iso_v5.0.xsl"/>
                         </fileset>
                 </copy>
                 
