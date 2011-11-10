@@ -81,7 +81,7 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
         
         String total    = xpathExtractor.evaluateAsString(aXmlFile);
         
-        logger.debug("total:" + total + " returned:" + returned);
+        //logger.debug("total:" + total + " returned:" + returned);
         
         return new Pair<String,String>(returned, total);
     }
@@ -113,22 +113,13 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
         
         int result = -1;
         
-        /*
-         * TODO:
-         *  - Send Request and get retrieved data in memory (limit the number of returned records to something resonable) maybe this can streamed ?
-         *  - XPath matchedRecords and returnedRecords (update begin and end)
-         *  - go to the records and save them in the file
-         *  - iterate over the records 
-         * 
-         */
-        
         while (totalReceived < max)
         {
                 // update begin and end to fetch the following metadata records.
                 modCSWReq = origCSWReq.replaceAll("\\$Begin", String.valueOf(begin));
                 modCSWReq = modCSWReq.replaceAll("\\$End"  , String.valueOf(REC_BATCH_SIZE)); // need to take the modCSWReq otherwise we loose the begin
                
-                logger.info("CSWREQUEST: " + modCSWReq);
+                logger.debug("CSWREQUEST: " + modCSWReq);
                 
                 entity = new StringRequestEntity(modCSWReq, "text/xml;charset=ISO-8859-1", null);
                 
@@ -138,6 +129,7 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
                 post.setRequestEntity(entity);
                  
                 result = httpclient.executeMethod(post);
+                
                 // Display status code
                 logger.debug("HTTP Response status code: " + result);
                 
@@ -168,9 +160,7 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
                     // and totalReceived which is the number received so far
                     int iReturned = Integer.parseInt(recInfo.getKey());
                     int iMax      = Integer.parseInt(recInfo.getValue());
-                    
-                    logger.info("iReturned = " + iReturned);
-                    
+                  
                     totalReceived += iReturned;
                     max            = iMax;
                     
@@ -180,9 +170,9 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
                     // increment file
                     nbFiles++;
                     
-                    logger.info("So far read " + totalReceived + " over " + max);
+                    logger.info("Downloaded " + totalReceived + " records over " + max + " total");
                     
-                    logger.info("begin=" + begin + " end=" +end);
+                    logger.debug("begin=" + begin + " end=" +end);
                     
                     // Add outputFile in the files to parse
                     outputFiles.add(outputFile);           
@@ -211,8 +201,6 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
 
         ArrayList<File> xmlRecordsFiles = this.getData(topTempDir);
         
-        logger.info("All files " + xmlRecordsFiles);
- 
         int count = 0; // to distinguish the different records.
         
         for (File aFile : xmlRecordsFiles)

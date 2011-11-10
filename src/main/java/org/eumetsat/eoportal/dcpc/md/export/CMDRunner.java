@@ -29,7 +29,7 @@ import static java.util.Arrays.asList;
  */
 public class CMDRunner
 {
-    static final String            VERSION              = "v1.3";
+    static final String            VERSION              = "v1.4.1-101111";
 
     static boolean                 DEBUG_ON             = false;
 
@@ -139,7 +139,7 @@ public class CMDRunner
         OptionSpec<File> xslt = parser.acceptsAll(asList("x", "xslt"),
                 "xslt file.").withRequiredArg().ofType(File.class).describedAs(
                 "xslt file").defaultsTo(
-                new File("$MDEXPORTER_HOME/xslt/eum2iso_v4.1.xsl"));
+                new File("$MDEXPORTER_HOME/xslt/eum2iso_v5.0.xsl"));
 
         OptionSpec<File> outdir = parser.acceptsAll(asList("o", "out"),
                 "output directory.").withRequiredArg().ofType(File.class)
@@ -243,9 +243,9 @@ public class CMDRunner
                 else
                 {
                     // set it to the default value
-                    // default val is $MDEXPORTER_HOME/xslt/eum2iso_v4.1.xsl
+                    // default val is $MDEXPORTER_HOME/xslt/eum2iso_v5.0.xsl
                     File xsltF = new File(getMDHome() + File.separatorChar
-                            + "xslt" + File.separatorChar + "eum2iso_v4.1.xsl");
+                            + "xslt" + File.separatorChar + "eum2iso_v5.0.xsl");
                     arguments.put("xslt", xsltF);
                     logger.info("The default Xslt file will be used ("
                             + xsltF.getAbsolutePath() + ").");
@@ -376,7 +376,7 @@ public class CMDRunner
             {
                 CMDRunner.logger
                         .info("------------ Cleaning Working Dir     ----------");
-                //FileSystem.deleteDirs(workingDir);
+                FileSystem.deleteDirs(workingDir);
             }
         }
 

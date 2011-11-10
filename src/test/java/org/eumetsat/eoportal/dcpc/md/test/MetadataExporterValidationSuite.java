@@ -30,7 +30,7 @@ public class MetadataExporterValidationSuite extends TestCase
     /**
      * Test all different cases of updates and deletion
      */
-    public void ztestScenario1()
+    public void testScenario1()
     {
         
         
@@ -201,7 +201,7 @@ public class MetadataExporterValidationSuite extends TestCase
     /**
      * Failing sanity check
      */
-    public void ztestScenario3()
+    public void testScenario3()
     {
         String releaseDBPath      = "/tmp/ReleasesDB";
         String workingDir         = "/tmp/WorkingDir";
@@ -240,7 +240,7 @@ public class MetadataExporterValidationSuite extends TestCase
         
     }
     
-    public void ztestLargeScaleScenario()
+    public void testLargeScaleScenario()
     {
         String releaseDBPath      = "/tmp/ReleasesDB";
         String workingDir         = "/tmp/WorkingDir";
