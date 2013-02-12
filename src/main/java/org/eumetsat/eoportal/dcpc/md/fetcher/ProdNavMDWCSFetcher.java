@@ -114,7 +114,6 @@ public class ProdNavMDWCSFetcher implements ProdNavFetcher
         int result = -1;
         
         /*
-         * TODO:
          *  - Send Request and get retrieved data in memory (limit the number of returned records to something resonable) maybe this can streamed ?
          *  - XPath matchedRecords and returnedRecords (update begin and end)
          *  - go to the records and save them in the file
